@@ -1,10 +1,10 @@
 import './App.css';
-import WebcamComponent from '../Components/WebcamComponent'
+import CallPage from '../Pages/CallPage';
 
 function App() {
   return (
     <div className="App">
-      <WebcamComponent />
+      <CallPage />
     </div>
   );
 }
