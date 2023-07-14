@@ -84,6 +84,26 @@ cursive; */
     margin-right: 40px;
 }
 
+.login-navlinks {
+    transform:translateY(-13px);
+    font-family: 'Roboto Mono', monospace;
+    /* text-shadow: 2px 2px 2px black; */
+}
+
+.login-navlinks a {
+    text-decoration: none;
+    color: var(--cream);
+    justify-content: space-evenly;
+    margin-right: 50px;
+    padding: 7px;
+    border: 2px solid rgba(255, 255, 255, 0);
+}
+
+.login-navlink:hover{
+    color: var(--cream);
+    border: 2px solid var(--cream);
+}
+
 #mobile-navlinks a {
     text-decoration: none;
     color: black !important;
