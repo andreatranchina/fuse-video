@@ -1,6 +1,6 @@
 *{
   /* DARKMODE PALETTE */
-    --champagne: #f6e9cd;
+    --champagne: rgb(246, 233, 205);
     --cream: #f0fabc;
     --sunset: rgb(243, 203, 155);
     --dark-cyan: #2c8a86;
@@ -8,7 +8,7 @@
 
     /* LIGHTMODE PALETTE */
     --ultra-violet: #6D5A87ff;
-      --chinese-violet: #815B84ff;
+      --chinese-violet: rgb(129, 91, 132);
       --prussian-blue: #011a25;
       --teal: #44808Bff;
       --charcoal: #384B5Aff;
