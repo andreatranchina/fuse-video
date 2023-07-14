@@ -3,10 +3,10 @@ import { NavLink } from 'react-router-dom'
 import Box from '@mui/material/Box'
 import Fab from '@mui/material/Fab'
 import Tooltip from '@mui/material/Tooltip'
-import TranslateIcon from '.././icons/TranslateIcon'
-import JoinIcon from '.././icons/JoinIcon'
-import HostIcon from '.././icons/HostIcon'
-import CustomizeIcon from '.././icons/CustomizeIcon'
+import TranslateIcon from '../icons/TranslateIcon'
+import JoinIcon from '../icons/JoinIcon'
+import HostIcon from '../icons/HostIcon'
+import CustomizeIcon from '../icons/CustomizeIcon'
 import { useThemeContext } from "../../theme/ThemeContextProvider"
 
 const FloatingMenu = () => {
