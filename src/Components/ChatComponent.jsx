@@ -11,12 +11,16 @@ export const ChatBox = () => {
 
     ]);
 
-    const handleInput = () => {
+    const handleInput = (value) => {
+        setInput(value);
+    }
+
+    const handleSendMessage = () => {
 
         const newMessage = {
             position: 'right',
             type: 'text',
-            text: inputMessage,
+            text: input,
             date: new Date().toLocaleTimeString('en-US', {
                 hour: 'numeric',
                 minute: 'numeric',
@@ -24,7 +28,7 @@ export const ChatBox = () => {
         };
         
         setMessages((prevMessages) => [...prevMessages, newMessage]);
-        setInputMessage('');
+        setInput('');
     };
 
 
@@ -42,7 +46,7 @@ export const ChatBox = () => {
 
             <Input
                 placeholder="Send a message"
-                value={inputMessage}
+                value={input}
                 onChange={(event) => handleInput(event.target.value)}
                 rightButtons={<button onClick={handleSendMessage}>Send</button>}
             />

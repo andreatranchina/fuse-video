@@ -1,8 +1,10 @@
-import { WebcamComponent } from "../Components/WebcamComponent";
-import { ChatBox } from "../Components/ChatComponent";
+import Box from '@mui/material/Box'
+import { WebcamComponent } from "../components/WebcamComponent";
+import { ChatBox } from "../components/ChatComponent";
 
 function CallPage() {
     return (
+        <Box sx={{marginTop:'50px'}}>
         <div style={{ display: 'flex' }}>
             <div style={{ flex: 1 }}>
                 <WebcamComponent />
@@ -11,6 +13,7 @@ function CallPage() {
                 <ChatBox />
             </div>
         </div>
+        </Box>
     );
 }
 
