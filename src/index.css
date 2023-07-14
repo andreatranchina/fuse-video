@@ -1,3 +1,19 @@
+*{
+  /* DARKMODE PALETTE */
+    --champagne: #f6e9cd;
+    --cream: #f0fabc;
+    --sunset: rgb(243, 203, 155);
+    --dark-cyan: #2c8a86;
+    --magenta-haze: #822853;
+
+    /* LIGHTMODE PALETTE */
+    --ultra-violet: #6D5A87ff;
+      --chinese-violet: #815B84ff;
+      --prussian-blue: #011a25;
+      --teal: #44808Bff;
+      --charcoal: #384B5Aff;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
