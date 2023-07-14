@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import 'react-chat-elements/dist/main.css';
 import { ChatItem, MessageBox, Input } from 'react-chat-elements';
+import conferenceAvatar from '../Images/conference-512.jpg';
 
 export const ChatBox = () => {
     const [input, setInput] = useState('');
     const [messages, setMessages] = useState([]);
+    const [fileInput, setFileInput] = useState(null);
 
     const handleInput = (value) => {
         setInput(value);
@@ -29,14 +31,14 @@ export const ChatBox = () => {
         const fileList = event.target.files;
         const newMessages = Array.from(fileList).map((file) => {
             if (file && file.type.startsWith('image/')) {
-                const imageUrl = URL.createObjectURL(file);
+                const fileURL = URL.createObjectURL(file);
                 return {
                     position: 'right',
                     type: 'photo',
                     text: file.name,
                     file: {
                         name: file.name,
-                        url: imageUrl,
+                        url: fileURL,
                     },
                     date: new Date().toLocaleTimeString('en-US', {
                         hour: 'numeric',
@@ -57,7 +59,7 @@ export const ChatBox = () => {
             return (
                 <div>
                     <div>{message.text}</div>
-                    <img src={message.file.url} alt={message.text} style={styles.image} />
+                    <img src={message.file.url} alt={message.text} style={styles.media} />
                 </div>
             );
         }
@@ -66,13 +68,12 @@ export const ChatBox = () => {
     };
 
     const styles = {
-        image: {
+        media: {
             maxWidth: '100%',
             margin: 0,
         },
         messageBox: {
-            padding: '0px',
-
+            padding: '100px',
         },
         chatContainer: {
             flexDirection: 'column',
@@ -81,7 +82,11 @@ export const ChatBox = () => {
 
     return (
         <div style={styles.chatContainer}>
-            <ChatItem alt="Chat" title="Meeting Chat" />
+            <ChatItem
+                avatar={conferenceAvatar} // Set the avatar image
+                alt="Chat"
+                title="Meeting Chat"
+            />
 
             {messages.map((message, index) => (
                 <MessageBox
@@ -94,17 +99,26 @@ export const ChatBox = () => {
                 />
             ))}
 
-            <label>
-                Click or Drop Images:
-                <input type="file" accept="image/*" onChange={handleFileUpload} />
-            </label>
-
-            <Input
-                placeholder="Send a message"
-                value={input}
-                onChange={(event) => handleInput(event.target.value)}
-                rightButtons={<button onClick={handleSendMessage}>Send</button>}
-            />
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+                <Input
+                    placeholder="Send a message"
+                    value={input}
+                    onChange={(event) => handleInput(event.target.value)}
+                    rightButtons={
+                        <>
+                            <input
+                                type="file"
+                                accept="image/*"
+                                onChange={handleFileUpload}
+                                style={{ display: 'none' }}
+                                ref={setFileInput}
+                            />
+                            <button onClick={() => fileInput.click()}>Choose File</button>
+                            <button onClick={handleSendMessage}>Send</button>
+                        </>
+                    }
+                />
+            </div>
         </div>
     );
 };
