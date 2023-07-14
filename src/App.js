@@ -5,8 +5,9 @@ import {
   Route,
   RouterProvider
 } from 'react-router-dom'
-import { CssBaseline, ThemeProvider } from "@mui/material";
-import { useThemeContext } from "./theme/ThemeContextProvider";
+import { CssBaseline, ThemeProvider } from "@mui/material"
+import { useThemeContext } from "./theme/ThemeContextProvider"
+import { HelmetProvider } from 'react-helmet-async'
 import Home from './pages/Home'
 import Join from './pages/Join'
 import Host from './pages/Host'
@@ -37,12 +38,14 @@ function App() {
   const { theme } = useThemeContext()
 
   return (
-    <ThemeProvider theme={theme}>
+  <ThemeProvider theme={theme}>
     <CssBaseline/>
-      <div className="App">
-        <RouterProvider router={router}/>
-      </div>
-     </ThemeProvider>
+      <HelmetProvider>
+        <div className="App">
+          <RouterProvider router={router}/>
+        </div>
+      </HelmetProvider>
+  </ThemeProvider>
   );
 }
 
