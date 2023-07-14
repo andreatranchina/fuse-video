@@ -1,5 +1,5 @@
 import './App.css';
-import CallPage from '../Pages/CallPage';
+import CallPage from '../pages/CallPage';
 
 function App() {
   return (
