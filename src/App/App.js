@@ -11,6 +11,8 @@ import Home from '.././pages/Home'
 import Join from '.././pages/Join'
 import Host from '.././pages/Host'
 import CallPage from '.././pages/CallPage';
+import LoginPage from '.././pages/LoginPage';
+import SignUpPage from '.././pages/SignUpPage';
 import Translations from '.././pages/Translations'
 import Customizations from '.././pages/Customizations'
 import RootLayout from '.././layouts/RootLayout'
@@ -19,6 +21,8 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<RootLayout/>}>
       <Route index element={<Home/>}/>
+      <Route path="/login" element={<LoginPage/>}/>
+      <Route path="/signup" element={<SignUpPage/>}/>
       {/* <Route path="/join" element={<Join/>}/>
       <Route path="/host" element={<Host/>}> */}
       <Route path="/join" element={<CallPage/>}/>

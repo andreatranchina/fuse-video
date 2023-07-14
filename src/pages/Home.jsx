@@ -10,7 +10,7 @@ const Home = () => {
   const isSmallScreen = useMediaQuery("(max-width: 900px");
 
   return (
-     <Box id={mode === 'light' ? 'home-light' : 'home-dark'} sx={{pt:10}} >
+     <Box id={mode === 'light' ? 'home-light' : 'home-dark'} sx={{pt:10, justifyContent:'center', display:'flex'}}>
         Home
         {isSmallScreen ? 
             <div style={{position: 'fixed', left: '50%', bottom: '20px', transform: 'translate(-50%, -50%)',  margin: '0 auto'}}>
