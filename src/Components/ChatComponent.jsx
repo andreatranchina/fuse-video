@@ -2,14 +2,6 @@ import React, { useState } from 'react';
 import 'react-chat-elements/dist/main.css';
 import { ChatItem, MessageBox, Input } from 'react-chat-elements';
 
-const PhotoMessage = ({ position, text, date, file }) => (
-    <div className={`message-${position}`}>
-        <div>{text}</div>
-        <img src={file.url} alt={text} />
-        <div>{date}</div>
-    </div>
-);
-
 export const ChatBox = () => {
     const [input, setInput] = useState('');
     const [messages, setMessages] = useState([]);
@@ -60,34 +52,47 @@ export const ChatBox = () => {
         setMessages((prevMessages) => [...prevMessages, ...validNewMessages]);
     };
 
+    const renderMessageContent = (message) => {
+        if (message.type === 'photo') {
+            return (
+                <div>
+                    <div>{message.text}</div>
+                    <img src={message.file.url} alt={message.text} style={styles.image} />
+                </div>
+            );
+        }
+
+        return message.text;
+    };
+
+    const styles = {
+        image: {
+            maxWidth: '100%',
+            margin: 0,
+        },
+        messageBox: {
+            padding: '0px',
+
+        },
+        chatContainer: {
+            flexDirection: 'column',
+        },
+    };
+
     return (
-        <div>
+        <div style={styles.chatContainer}>
             <ChatItem alt="Chat" title="Meeting Chat" />
 
-            {messages.map((message, index) => {
-                if (message.type === 'photo') {
-                    return (
-                        <PhotoMessage
-                            position={message.position}
-                            text={message.text}
-                            date={message.date}
-                            file={message.file}
-                            key={index}
-                        />
-                    );
-                }
-
-                return (
-                    <MessageBox
-                        position={message.position}
-                        type={message.type}
-                        text={message.text}
-                        date={message.date}
-                        file={message.file}
-                        key={index}
-                    />
-                );
-            })}
+            {messages.map((message, index) => (
+                <MessageBox
+                    position={message.position}
+                    type={message.type}
+                    text={renderMessageContent(message)}
+                    date={message.date}
+                    key={index}
+                    containerStyle={styles.messageBox}
+                />
+            ))}
 
             <label>
                 Click or Drop Images:
