@@ -1,8 +1,18 @@
+import React, { useState } from 'react';
 import 'react-chat-elements/dist/main.css'
 import { ChatItem, MessageBox, Input } from 'react-chat-elements'
 /* import '../Images/chat-avatar.png' */
 
 export const ChatBox = () => {
+    
+    // Message storage
+    const [input, setInput] = useState('');
+    const [messages, setMessages] = useState([
+
+    ]);
+
+    
+
     return (
         <div>
             <ChatItem
