@@ -1,17 +1,14 @@
 import React from 'react'
-import { Box } from "@mui/material"
-import '../styles/home.css'
+import Box from '@mui/material/Box'
 import FloatingMenu from '../components/navbar/FloatingMenu';
-import { useThemeContext } from "../theme/ThemeContextProvider"
 import { useMediaQuery } from '@mui/material'
 
-const Home = () => {
-  const { mode } = useThemeContext();
-  const isSmallScreen = useMediaQuery("(max-width: 900px");
+const Translations = () => {
+     const isSmallScreen = useMediaQuery("(max-width: 900px");
 
   return (
-     <Box id={mode === 'light' ? 'home-light' : 'home-dark'} sx={{pt:10}} >
-        Home
+    <Box sx={{pt:10}}>
+        Translations
         {isSmallScreen ? 
             <div style={{position: 'fixed', left: '50%', bottom: '20px', transform: 'translate(-50%, -50%)',  margin: '0 auto'}}>
                 <FloatingMenu />
@@ -20,4 +17,4 @@ const Home = () => {
   )
 }
 
-export default Home
+export default Translations

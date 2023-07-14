@@ -1,0 +1,127 @@
+/* font-family: 'Akronim',
+cursive;
+font-family: 'Bungee Hairline',
+cursive;
+font-family: 'Caveat',
+cursive;
+font-family: 'Chela One',
+cursive;
+font-family: 'Codystar',
+cursive;
+font-family: 'Dekko',
+cursive;
+font-family: 'Fascinate',
+cursive;
+font-family: 'Kavivanar',
+cursive;
+font-family: 'Lexend Exa',
+sans-serif;
+font-family: 'Paprika',
+cursive;
+font-family: 'Playfair Display',
+serif;
+font-family: 'Poiret One',
+cursive;
+font-family: 'Train One',
+cursive; */
+#navbar{
+    display: flex;
+    margin: 0 auto;
+    z-index: 10;
+    border-width: 0.5rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    align-items: center;
+    padding: 5px;
+}
+.night-toggle {
+    width: 20%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.logo {
+    display: flex;
+}
+
+.logo svg {
+    position: relative;
+    animation-name: slide;
+    animation-duration: 1s;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+    margin-right: 10px;
+}
+
+.home-navlink {
+    width: 100%;
+    margin: auto;
+    text-shadow: 1px 1px 2px black;
+    padding-left: 10px;
+    align-items: center;
+}
+
+.home-navlink a {
+    text-decoration: none;
+    align-items: center;
+    color: var(--buff);
+}
+
+.side-navlinks {
+    justify-content: flex-end;
+    align-items: center;
+    font-weight:500;
+    font-family: 'Roboto Mono', monospace;
+    /* text-shadow: 2px 2px 2px black; */
+}
+
+.side-navlinks a {
+    text-decoration: none;
+    color: var(--buff);
+    justify-content: space-evenly;
+    margin-right: 40px;
+}
+
+#mobile-navlinks a {
+    text-decoration: none;
+    color: black !important;
+}
+
+#dropdown-button {
+    /* color: var(--buff) !important; */
+}
+
+
+.navlink:hover {
+    /* color: var(--bone);
+    border: 2px solid var(--bone); */
+    /* Change to your desired color on hover */
+}
+
+/* --garnet: #7E3035ff;
+  --liver: #62443Aff;
+  --buff: #E7B08Fff;
+  --burnt-umber: #7F2F2Aff;
+  --beaver: #977C69ff; */
+
+.navlink {
+    margin-right: 10px;
+    padding: 10px;
+    /* border: 2px solid var(--garnet); */
+}
+
+.navlink-text-large {
+    /* font-family: 'Bungee Hairline', cursive; */
+}
+
+@keyframes slide {
+    0% {
+        left: -100px;
+    }
+
+    100% {
+        left: 0;
+    }
+}
