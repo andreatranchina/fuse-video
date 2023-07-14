@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
 import { useMediaQuery } from '@mui/material';
+import { Helmet } from 'react-helmet-async'
 import SideNavLinks from '../components/navbar/SideNavLinks';
 import FuseLogo from '../components/navbar/FuseLogo';
 import SwitchLayout from '../components/navbar/SwitchLayout';
@@ -13,10 +14,17 @@ const RootLayout = () => {
 
   const navbarStyle = {
     backgroundColor: theme.palette.primary.main,
+    boxShadow: theme.palette.background.boxShadow
   };
 
   return (
-    <div>
+    <>
+    <Helmet>
+        <meta charSet="utf-8" />
+        <title>Fuse</title>
+        <link rel="icon" href="https://img.icons8.com/badges/48/000000/fuse-symbol.png" />
+        <meta name="description" content="Fuse video" />
+      </Helmet>
       <header>
         <nav id="navbar" style={navbarStyle}>
             <div className="home-navlink">
@@ -32,7 +40,7 @@ const RootLayout = () => {
       <main>
         <Outlet />
       </main>
-    </div>
+    </>
   );
 };
 
