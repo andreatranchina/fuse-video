@@ -20,40 +20,45 @@ export const me = () => {
     return async (dispatch) => {
         try {
           const res = await axios.get("http://localhost:8080/auth/me");
-          dispatch(getUser(res.data || defaultUser));
+          // dispatch(getUser(res.data || defaultUser));
+          dispatch(getUser(res.data));
         } catch (err) {
           console.error(err);
         }
     };
 }
 
-// export const auth = (email, password, method) => {
-//     return async (dispatch) => {
-//         let res;
-//         //method can be login or signup
-//         try {
-//           res = await axios.post(`http://localhost:8080/auth/${method}`, {
-//             email,
-//             password,
-//           });
-//         } catch (authError) {
-//           return dispatch(getUser({ error: authError }));
-//         }
+export const auth = (email, password, method, isAdmin) => {
+    return async (dispatch) => {
+      console.log("running auth thunk");
+        let res;
+        //method can be login or signup
+        try {
+          res = await axios.post(`http://localhost:8080/auth/${method}`, {
+            email,
+            password,
+            isAdmin,
+          });
+          console.log("res from /auth/signup: " + res);
+        } catch (authError) {
+          return dispatch(getUser({ error: authError }));
+        }
       
-//         try {
-//           dispatch(getUser(res.data));
-//           // history.push("/home");
-//         } catch (dispatchOrHistoryErr) {
-//           console.error(dispatchOrHistoryErr);
-//         }
-//       };
-// } 
+        try {
+          dispatch(getUser(res.data));
+          // history.push("/home");
+        } catch (dispatchOrHistoryErr) {
+          console.error(dispatchOrHistoryErr);
+        }
+      };
+} 
 
 export const logout = () => {
     return async (dispatch) => {
+      console.log("running logout thunk");
         try {
           await axios.post("http://localhost:8080/auth/logout");
-          dispatch(removeUser());
+          return dispatch(removeUser());
         } catch (err) {
           console.error(err);
         }
