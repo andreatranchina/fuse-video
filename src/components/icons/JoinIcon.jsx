@@ -2,11 +2,11 @@ import React from 'react'
 
 const JoinIcon = () => {
   return (
-    <div style={{transform:'translate(5px,8px)'}}>
+    <div style={{transform:'translate(5px,9px)'}}>
     <svg
           xmlns="http://www.w3.org/2000/svg"
-          width="52"
-          height="52"
+          width="48"
+          height="48"
           viewBox="0 0 256 256"
           style={{ fill: '#000000' }}
         >
