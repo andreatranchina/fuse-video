@@ -1,4 +1,3 @@
-import './App.css';
 import React, {useState, useEffect} from 'react';
 import ChatComponent from '../components/ChatComponent';
 
@@ -29,7 +28,7 @@ function CallPage() {
           <button onClick={joinRoom}>Join room</button>
         </div>
       ): (<div>
-        <Chat socket={socket} username={username} room={room}/>
+        <ChatComponent socket={socket} username={username} room={room}/>
         </div>
         )
           
