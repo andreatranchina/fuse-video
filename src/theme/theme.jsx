@@ -26,6 +26,9 @@ const getDesignTokens = (mode) => ({
             main: light[600],
           },
           divider: light[300],
+          button: {
+            main:light[100],
+          },
           background: {
             default: light[500],
             paper: light[700],

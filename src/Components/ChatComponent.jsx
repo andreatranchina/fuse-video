@@ -52,6 +52,21 @@ export const ChatBox = () => {
         const validNewMessages = newMessages.filter((message) => message !== null);
 
         setMessages((prevMessages) => [...prevMessages, ...validNewMessages]);
+        //Emit the file data to the server
+        // if (socket && fileInput && fileInput.files.length > 0){
+        //     const file = fileInput.files[0];
+        //     const reader = new FileReader();
+
+        //     reader.onload = (event) => {
+        //         const fileData = {
+        //             name: file.name,
+        //             type: file.type,
+        //             data: event.target.result,
+        //         };
+        //     socket.emit('send_message', {message : '', file: fileData, room:'<insert room name here>'})
+        //     }
+        //     reader.readAsDataURL(file)
+        // }
     };
 
     const renderMessageContent = (message) => {
