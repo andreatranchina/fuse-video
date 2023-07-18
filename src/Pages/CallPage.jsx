@@ -20,7 +20,7 @@ function CallPage() {
   }
 
   return (
-    <div className="callpage">
+    <div className="callPage">
       {!showChat? (
         <div className="joinChatContainer">
           <h3>Join chat</h3>
@@ -29,7 +29,7 @@ function CallPage() {
           <button onClick={joinRoom}>Join room</button>
         </div>
       ): (<div>
-        <ChatComponent socket={socket} username={username} room={room}/>
+        <Chat socket={socket} username={username} room={room}/>
         </div>
         )
           

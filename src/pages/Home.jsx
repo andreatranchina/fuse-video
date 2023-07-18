@@ -2,6 +2,7 @@ import React from 'react'
 import { Box } from "@mui/material"
 import '../styles/home.css'
 import FloatingMenu from '../components/navbar/FloatingMenu';
+import MobileSpeedDial from '../components/navbar/MobileSpeedDial';
 import { useThemeContext } from "../theme/ThemeContextProvider"
 import { useMediaQuery } from '@mui/material'
 
@@ -29,8 +30,12 @@ const Home = () => {
         {isLoggedIn? <h1>Successfully logged in!</h1> : <h1>Please signup or login!</h1>}
         <button onClick={handleLogOut}>Logout</button>
         {isSmallScreen ? 
-            <div style={{position: 'fixed', left: '50%', bottom: '20px', transform: 'translate(-50%, -50%)',  margin: '0 auto'}}>
+            <div style={{position: 'fixed', left: '50%', bottom: '20px', transform: 'translate(-50%, -20%)',  margin: '0 auto'}}>
                 <FloatingMenu />
+            </div> : <></>}
+            {isSmallScreen ? 
+            <div style={{position: 'fixed', left: '90%', bottom: '20px', margin: '0 auto'}}>
+                <MobileSpeedDial/>
             </div> : <></>}
     </Box>
   )

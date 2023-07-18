@@ -20,7 +20,7 @@ const RootLayout = () => {
 
   const loginStyle = { 
     display:'flex',
-    justifyContent:'flex-end',
+    justifyContent: isSmallScreen ? 'space-between' : 'flex-end',
     backgroundColor: theme.palette.background.login,
     paddingTop: '80px', color:'black'
   }
