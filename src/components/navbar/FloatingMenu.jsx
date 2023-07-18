@@ -14,7 +14,7 @@ const FloatingMenu = () => {
     const { theme } = useThemeContext();
 
     const floatingMenuStyle = {
-    backgroundColor: theme.palette.background.fab,
+    backgroundColor: theme.palette.background.fab.default,
   };
   return (
     <Box sx={{ '& > :not(style)': { m: 1 }, display:'flex', alignItems:'center' }}>

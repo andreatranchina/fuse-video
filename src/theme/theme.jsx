@@ -26,10 +26,16 @@ const getDesignTokens = (mode) => ({
             main: light[600],
           },
           divider: light[300],
+          button: {
+            main:light[100],
+          },
           background: {
             default: light[500],
             paper: light[700],
-            fab: light[700],
+            fab: {
+              default: light[700],
+              hover: light[700]
+            },
             login:light[600],
             boxShadow: '2px 2px 4px rgba(129, 91, 132, 0.6)',
           },
@@ -50,12 +56,15 @@ const getDesignTokens = (mode) => ({
           background: {
             default: dark[500],
             paper: dark[700],
-            fab: dark[400],
+            fab: {
+              default: dark[400],
+              hover: dark[400]
+            },
             login: dark[900],
             boxShadow: '2px 2px 4px rgba(246, 233, 205, 0.6)',
           },
           text: {
-            primary: dark[100],
+            primary: dark[50],
             secondary: dark[200],
           },
         }),
