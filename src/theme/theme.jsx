@@ -53,6 +53,9 @@ const getDesignTokens = (mode) => ({
             main: dark[600],
           },
           divider: dark[400],
+          button: {
+            main:dark[100],
+          },
           background: {
             default: dark[500],
             paper: dark[700],
