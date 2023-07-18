@@ -8,7 +8,7 @@ import { changeMessageLanguageThunk, fetchLanguagePreferencesThunk } from "../..
  
 const NativeTranslateSelect = () => {
     const dispatch = useDispatch()
-     const messageLanguage = useSelector((state) => state.translation.messageLanguage)
+     const messageLanguage = useSelector((state) => state.translations.messageLanguage)
 
   useEffect(() => {
     dispatch(fetchLanguagePreferencesThunk(2));

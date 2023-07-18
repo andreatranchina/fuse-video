@@ -16,7 +16,7 @@ const Translation = () => {
   const [translatedText, setTranslatedText] = useState('');
   const { theme } = useThemeContext();
   // const dispatch = useDispatch();
-  const messageLanguage = useSelector((state) => state.translation.messageLanguage)
+  const messageLanguage = useSelector((state) => state.translations.messageLanguage)
 
   const buttonStyle = {
     backgroundColor: theme.palette.button.main 
