@@ -4,7 +4,7 @@ import FormControl from '@mui/material/FormControl'
 import InputLabel from '@mui/material/InputLabel'
 import NativeSelect from '@mui/material/NativeSelect'
 import { useDispatch, useSelector } from 'react-redux'
-import { changeMessageLanguageThunk, fetchLanguagePreferencesThunk } from "../../redux/translation/translation.actions"
+import { changeMessageLanguageThunk, fetchLanguagePreferencesThunk } from "../../redux/translations/translation.actions"
  
 const NativeTranslateSelect = () => {
     const dispatch = useDispatch()
