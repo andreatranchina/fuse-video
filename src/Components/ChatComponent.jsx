@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import ScrollToBottom from "react-scroll-to-bottom";
+import '../styles/callpage.css'
 
 const ChatComponent = ({socket, username, room}) => {
     const [currentMessage, setCurrentMessage] = useState("");

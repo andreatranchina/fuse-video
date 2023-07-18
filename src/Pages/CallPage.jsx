@@ -1,4 +1,7 @@
 import React, {useState, useEffect} from 'react';
+import '../styles/callpage.css';
+
+
 import ChatComponent from '../components/ChatComponent';
 
 import io from "socket.io-client";
