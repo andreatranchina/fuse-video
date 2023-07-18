@@ -1,26 +1,41 @@
-import React, { useEffect, useMemo } from 'react'
-import Box from '@mui/material/Box'
-import { WebcamComponent } from "../components/WebcamComponent.jsx"
-import { ChatBox } from "../components/ChatComponent"
-import { io } from 'socket.io-client'
+import React, {useState, useEffect} from 'react';
+import ChatComponent from '../components/ChatComponent';
 
-const socket = io('http://localhost:8080');
+import io from "socket.io-client";
+const socket = io.connect("http://localhost:3001");
+
 
 function CallPage() {
+  const [username, setUsername] = useState("");
+  const [room, setRoom] = useState("");
+  const [showChat, setShowChat] = useState(false);
 
+  const joinRoom = () => {
+    if (username !=="" && room !==""){
+      socket.emit("join_room", room);
+      setShowChat(true);
 
-    return (
-        <Box sx={{marginTop:'50px'}}>
-        <div style={{ display: 'flex' }}>
-            <div style={{ flex: 1 }}>
-                <WebcamComponent socket={socket}/>
-            </div>
-            <div style={{ flex: 1 }}>
-                <ChatBox socket/>
-            </div>
+  }
+  }
+
+  return (
+    <div className="callPage">
+      {!showChat? (
+        <div className="joinChatContainer">
+          <h3>Join chat</h3>
+          <input type="text" placeholder="name" onChange={(e) => {setUsername(e.target.value)}}/>
+          <input type="text" placeholder="room ID" onChange={(e) => setRoom(e.target.value)}/>
+          <button onClick={joinRoom}>Join room</button>
         </div>
-        </Box>
-    );
+      ): (<div>
+        <ChatComponent socket={socket} username={username} room={room}/>
+        </div>
+        )
+          
+      }
+
+    </div>
+  );
 }
 
 export default CallPage;

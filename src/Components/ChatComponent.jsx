@@ -1,139 +1,64 @@
-import React, { useState } from 'react';
-import 'react-chat-elements/dist/main.css';
-import { ChatItem, MessageBox, Input } from 'react-chat-elements';
-import conferenceAvatar from '../Images/conference-512.jpg';
+import React, {useState, useEffect} from 'react'
+import ScrollToBottom from "react-scroll-to-bottom";
 
-export const ChatBox = () => {
-    const [input, setInput] = useState('');
-    const [messages, setMessages] = useState([]);
-    const [fileInput, setFileInput] = useState(null);
+const ChatComponent = ({socket, username, room}) => {
+    const [currentMessage, setCurrentMessage] = useState("");
+    const [messageList, setMessageList] = useState([]);
 
-    const handleInput = (value) => {
-        setInput(value);
-    };
-
-    const handleSendMessage = () => {
-        const newMessage = {
-            position: 'right',
-            type: 'text',
-            text: input,
-            date: new Date().toLocaleTimeString('en-US', {
-                hour: 'numeric',
-                minute: 'numeric',
-            }),
-        };
-
-        setMessages((prevMessages) => [...prevMessages, newMessage]);
-        setInput('');
-    };
-
-    const handleFileUpload = (event) => {
-        const fileList = event.target.files;
-        const newMessages = Array.from(fileList).map((file) => {
-            if (file && file.type.startsWith('image/')) {
-                const fileURL = URL.createObjectURL(file);
-                return {
-                    position: 'right',
-                    type: 'photo',
-                    text: file.name,
-                    file: {
-                        name: file.name,
-                        url: fileURL,
-                    },
-                    date: new Date().toLocaleTimeString('en-US', {
-                        hour: 'numeric',
-                        minute: 'numeric',
-                    }),
-                };
+    const sendMessage = async() => {
+        if(currentMessage) {
+            const messageData = {
+                room: room,
+                author: username,
+                message: currentMessage,
+                time: new Date(Date.now()).getHours() + " : " + new Date(Date.now()).getMinutes()
             }
-            return null;
-        });
 
-        const validNewMessages = newMessages.filter((message) => message !== null);
-
-        setMessages((prevMessages) => [...prevMessages, ...validNewMessages]);
-        //Emit the file data to the server
-        // if (socket && fileInput && fileInput.files.length > 0){
-        //     const file = fileInput.files[0];
-        //     const reader = new FileReader();
-
-        //     reader.onload = (event) => {
-        //         const fileData = {
-        //             name: file.name,
-        //             type: file.type,
-        //             data: event.target.result,
-        //         };
-        //     socket.emit('send_message', {message : '', file: fileData, room:'<insert room name here>'})
-        //     }
-        //     reader.readAsDataURL(file)
-        // }
-    };
-
-    const renderMessageContent = (message) => {
-        if (message.type === 'photo') {
-            return (
-                <div>
-                    <div>{message.text}</div>
-                    <img src={message.file.url} alt={message.text} style={styles.media} />
-                </div>
-            );
+            await socket.emit("send_message", messageData);
+            setMessageList((list) => [...list, messageData])
+            setCurrentMessage("");
         }
+    }
 
-        return message.text;
-    };
+    useEffect(() => {
+        socket.on("receive_message", (data) => {
+            // console.log(data);
+            setMessageList((list) => [...list, data]); //set to list from before with new data
+        })
 
-    const styles = {
-        media: {
-            maxWidth: '100%',
-            margin: 0,
-        },
-        messageBox: {
-            padding: '100px',
-        },
-        chatContainer: {
-            flexDirection: 'column',
-        },
-    };
+    }, [socket])
 
-    return (
-        <div style={styles.chatContainer}>
-            <ChatItem
-                avatar={conferenceAvatar} // Set the avatar image
-                alt="Chat"
-                title="Meeting Chat"
-            />
-
-            {messages.map((message, index) => (
-                <MessageBox
-                    position={message.position}
-                    type={message.type}
-                    text={renderMessageContent(message)}
-                    date={message.date}
-                    key={index}
-                    containerStyle={styles.messageBox}
-                />
-            ))}
-
-            <div style={{ display: 'flex', alignItems: 'center' }}>
-                <Input
-                    placeholder="Send a message"
-                    value={input}
-                    onChange={(event) => handleInput(event.target.value)}
-                    rightButtons={
-                        <>
-                            <input
-                                type="file"
-                                accept="image/*"
-                                onChange={handleFileUpload}
-                                style={{ display: 'none' }}
-                                ref={setFileInput}
-                            />
-                            <button onClick={() => fileInput.click()}>Choose File</button>
-                            <button onClick={handleSendMessage}>Send</button>
-                        </>
-                    }
-                />
-            </div>
+  return (
+    <div className="chat-window">
+        <div className="chat-header">
+            <p>Live chat</p>
         </div>
-    );
-};
+        <div className="chat-body">
+          <ScrollToBottom className="message-container">
+            {messageList.map((messageContent) => {
+                return (<div className="message" id={username === messageContent.author? "you" : "other"}>
+                        <div>
+                        <div className="message-content">
+                            <p>{messageContent.message}</p>
+                        </div>
+                        <div className="message-meta">
+                            <p id="time">{messageContent.time}</p>
+                            <p id="author">{messageContent.author}</p>
+                        </div>
+                        </div>
+                    </div>)
+            })}
+          </ScrollToBottom>
+        </div>
+        <div className="chat-footer">
+            <input type="text" placeholder="new message" value={currentMessage}
+                onChange={(e) => setCurrentMessage(e.target.value)}
+                onKeyDown={(e) => {e.key === "Enter" && sendMessage()}}               
+            />
+            <button onClick={sendMessage}>&#8658;</button>
+        </div>
+    </div>
+  )
+}
+
+export default ChatComponent
