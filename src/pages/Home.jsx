@@ -28,7 +28,7 @@ const Home = () => {
      <Box id={mode === 'light' ? 'home-light' : 'home-dark'} sx={{pt:10, justifyContent:'center', display:'flex'}}>
         Home
         {isLoggedIn? <h1>Successfully logged in!</h1> : <h1>Please signup or login!</h1>}
-        <button style={{height: '29px'}}onClick={handleLogOut}>Logout</button>
+        <button onClick={handleLogOut}>Logout</button>
         {isSmallScreen ? 
             <div style={{position: 'fixed', left: '50%', bottom: '20px', transform: 'translate(-50%, -20%)',  margin: '0 auto'}}>
                 <FloatingMenu />
