@@ -19,7 +19,7 @@ export const removeUser = () => {
 export const me = () => {
     return async (dispatch) => {
         try {
-          const res = await axios.get("http://localhost:8080/auth/me");
+          const res = await axios.get("http://localhost:3001/auth/me");
           // dispatch(getUser(res.data || defaultUser));
           dispatch(getUser(res.data));
         } catch (err) {
@@ -34,7 +34,7 @@ export const auth = (email, password, method, isAdmin) => {
         let res;
         //method can be login or signup
         try {
-          res = await axios.post(`http://localhost:8080/auth/${method}`, {
+          res = await axios.post(`http://localhost:3001/auth/${method}`, {
             email,
             password,
             isAdmin,
@@ -57,7 +57,8 @@ export const logout = () => {
     return async (dispatch) => {
       console.log("running logout thunk");
         try {
-          await axios.post("http://localhost:8080/auth/logout");
+          await axios.post("http://localhost:3001/auth/logout");
+          console.log("came back from axios logout")
           return dispatch(removeUser());
         } catch (err) {
           console.error(err);

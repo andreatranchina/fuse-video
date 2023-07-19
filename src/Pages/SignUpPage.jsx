@@ -37,7 +37,7 @@ const SignUpPage = () => {
         <button type="submit">Sign Up Now!</button>
         {error && error.response && <div> {error.response.data} </div>}
       </form>
-      <a href="http://localhost:8080/auth/google">Continue with Google</a>
+      <a href="http://localhost:3001/auth/google">Continue with Google</a>
     </div>
   )
 }
