@@ -16,10 +16,11 @@ function CallPage() {
   const [showChat, setShowChat] = useState(false);
 
   const joinRoom = () => {
-    if (username !=="" && room !==""){
+    if (username !== "" && title !== "" && description !== "" ){
+      
+      // Get room id from data base
       socket.emit("join_room", room);
       setShowChat(true);
-
   }
   }
 
@@ -28,8 +29,10 @@ function CallPage() {
       {!showChat? (
         <div className="joinChatContainer">
           <h3>Join chat</h3>
+          {/*Will not be here, user id will be used to set name */}
           <input type="text" placeholder="name" onChange={(e) => {setUsername(e.target.value)}}/>
-          <input type="text" placeholder="room ID" onChange={(e) => setRoom(e.target.value)}/>
+          <input type="text" placeholder="title" onChange={(e) => { setTitle(e.target.value) }} />
+          <input type="text" placeholder="description" onChange={(e) => { setDescription(e.target.value) }} />
           <button onClick={joinRoom}>Join room</button>
         </div>
       ): (<div>
