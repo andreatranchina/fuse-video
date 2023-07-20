@@ -9,13 +9,21 @@ const ChatComponent = ({socket, username, livestream}) => {
     const sendMessage = async() => {
         if(currentMessage) {
             const messageData = {
-                room: livestream,
+                livestream: livestream,
                 author: username,
                 message: currentMessage,
                 time: new Date(Date.now()).getHours() + " : " + new Date(Date.now()).getMinutes()
             }
-
-            await socket.emit("send_message", messageData);
+        try {
+            await axios.post('https://localhost:3001/api/messages', {
+                livestream_id: messageData.livestream, // Use the livestream ID as the 'livestream_id'
+                user_id: messageData.author, // Use the username as the 'user_id'
+                content: messageData.message, // Use the message content as the 'content'
+            });
+        } catch (error) {
+            console.log(error.message);
+        }
+        
             setMessageList((list) => [...list, messageData])
             setCurrentMessage("");
         }

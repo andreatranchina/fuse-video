@@ -2,7 +2,6 @@ import axios from "axios";
 
 import {POST_MESSAGE, FETCH_ALL_MESSAGES} from "./message.types";
 
-// Redux action for making new livestream row
 export const postMessage = (payload) => {
     return {
         type: POST_MESSAGE,
