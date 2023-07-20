@@ -28,7 +28,7 @@ const FloatingMenu = () => {
     <NavLink to="/host" className="navlink">
       <Tooltip title="Host" placement="top">
       <Fab sx={floatingMenuStyle} aria-label="host">
-        <HostIcon/>
+        <HostIcon width={'38px'} height={'38px'} />
       </Fab>
       </Tooltip>
     </NavLink>

@@ -34,7 +34,8 @@ const getDesignTokens = (mode) => ({
             paper: light[700],
             fab: {
               default: light[700],
-              hover: light[700]
+              upload: light[400],
+              hover: light[500]
             },
             login:light[600],
             boxShadow: '2px 2px 4px rgba(129, 91, 132, 0.6)',
@@ -61,7 +62,8 @@ const getDesignTokens = (mode) => ({
             paper: dark[700],
             fab: {
               default: dark[400],
-              hover: dark[400]
+              hover: dark[700],
+              upload:dark[800]
             },
             login: dark[900],
             boxShadow: '2px 2px 4px rgba(246, 233, 205, 0.6)',

@@ -1,5 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
+import Container from '@mui/material/Container'
 import Grid from '@mui/material/Grid'
 import Stack from '@mui/material/Stack'
 import UploadProfilePhoto from '../components/profileInfo/UploadProfilePhoto'
@@ -15,24 +16,48 @@ import Bio from '../components/bio/Bio'
 import Topics from '../components/bio/Topics'
 import EditInfoForm from '../components/bio/EditInfoForm'
 import StreamHistory from '../components/streamHistory/StreamHistory'
+import NowLive from '../components/profileInfo/NowLive'
+import { useMediaQuery } from '@mui/material'
 
 const ProfileInfoLayout = () => {
 
    const isLoggedIn = useSelector((state) => !!state.user.id);
+   const isSmallScreen = useMediaQuery('(max-width: 900px)');
 
   return (
      <Stack>
           {/* PROFILE PIC AND BIO */}
-            <Grid container sx={{backgroundColor:'red',color:'white', flexGrow: 1 }}>
-              <Grid item xs={4} sx={{backgroundColor:'green',color:'white', height:'55vh'}}>
-                <Grid container sx={{backgroundColor:'red', minHeight:'100%'}}>
-                    <UserBanner/>
-                    <UploadProfilePhoto/>
-                    <ProfilePhoto/>
-                    <Followers/>
-                    <UserLocation/>
-                    {isLoggedIn ? <EditProfile/> : <FollowProfile/>}
-                    {isLoggedIn ? <GoLiveButton/> : <MessageUser/>}
+            <Grid container sx={{color:'white', flexGrow: 1 }}>
+              <Grid item xs={4} sx={{color:'white', height:'55vh'}}>
+                <Grid container sx={{minHeight:'100%', justifyContent:'center', alignItems:'center'}}>
+                    <Grid item sx={{marginTop:'-40px'}}>
+                      <UserBanner/>
+                    </Grid>
+                    <Stack>
+                    <Grid item sx={{marginTop:'-100px'}}>
+                    {/* NEED TO PASS " IS LIVE " SO AS TO HAVE THE VIEWER JOIN THE LIVESTREAM */}
+                      {isLoggedIn ? (<UploadProfilePhoto/>) : (<NowLive/>)}
+                      <ProfilePhoto/>
+                    </Grid>
+                    <Grid item sx={{margin:'10px', transform:'translateY(-20px)'}}>
+                      <UserLocation/>
+                      <Followers/>
+                    </Grid>
+                    {/* The buttons should lay on top of one another if the screen gets to 900px and below until mobile screen size is reached*/}
+                      <Grid item sx={{ display: 'flex', justifyContent: 'center' }}>
+                {isSmallScreen ? (
+                  <Stack spacing={1} >
+                    {isLoggedIn ? <EditProfile /> : <FollowProfile />}
+                    {isLoggedIn ? <GoLiveButton /> : <MessageUser />}
+                  </Stack>
+                ) : (
+                  <>
+                    {isLoggedIn ? <EditProfile /> : <FollowProfile />}
+                    {isLoggedIn ? <GoLiveButton /> : <MessageUser />}
+                  </>
+                )}
+              </Grid>
+                    </Stack>
                 </Grid>
               </Grid>
               <Grid item xs={8} sx={{backgroundColor:'purple',color:'white'}}>
