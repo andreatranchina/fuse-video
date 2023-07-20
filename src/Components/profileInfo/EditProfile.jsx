@@ -4,12 +4,10 @@ import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 import { useThemeContext } from '../../theme/ThemeContextProvider'
 import EditIcon from '@mui/icons-material/Edit'
-import { useMediaQuery } from '@mui/material'
 
 const EditProfile= () => {
 
 	const { theme } = useThemeContext();
-    const isSmallScreen = useMediaQuery('(max-width: 900px)');
 
   const editButton = {
     backgroundColor:theme.palette.button.main,
@@ -21,14 +19,15 @@ const EditProfile= () => {
 	const editText = { 
 		fontFamily:`'Bungee Hairline', cursive`, 
 		fontWeight:'700',
-        marginRight:'8px'
+        marginRight:'8px',
+        color: theme.palette.text
 	}
 	
   return (
-    <Box sx={{backgroundColor:'black', marginRight:'10px'}}>
+    <Box sx={{marginRight:'10px'}}>
     	<Button sx={editButton}>
 			<Typography variant='subtitle2' sx={editText}>
-				Edit Profile
+				Edit Info
 				</Typography>
                 <EditIcon />
 			</Button>
