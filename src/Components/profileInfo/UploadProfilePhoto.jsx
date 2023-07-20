@@ -11,11 +11,11 @@ const UploadProfilePhoto = () => {
 
   const upload = {
     backgroundColor: theme.palette.background.fab.upload, width:'36px', height:'24px', 
-    transform:'translate(20px,40px)'
+    transform:'translate(57px,34px)'
   }
 
   return (
-    <Box sx={{backgroundColor:'pink'}}>
+    <Box>
       <Fab sx={upload}>
         <IconButton>
           <AddIcon sx={{color:'white'}}/>

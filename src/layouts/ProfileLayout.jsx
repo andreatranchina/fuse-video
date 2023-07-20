@@ -16,6 +16,7 @@ import Bio from '../components/bio/Bio'
 import Topics from '../components/bio/Topics'
 import EditInfoForm from '../components/bio/EditInfoForm'
 import StreamHistory from '../components/streamHistory/StreamHistory'
+import NowLive from '../components/profileInfo/NowLive'
 
 const ProfileInfoLayout = () => {
 
@@ -24,18 +25,19 @@ const ProfileInfoLayout = () => {
   return (
      <Stack>
           {/* PROFILE PIC AND BIO */}
-            <Grid container sx={{backgroundColor:'red',color:'white', flexGrow: 1 }}>
-              <Grid item xs={4} sx={{backgroundColor:'green',color:'white', height:'55vh'}}>
-                <Grid container sx={{backgroundColor:'red', minHeight:'100%', justifyContent:'center'}}>
-                    <Grid item sx={{marginBottom:'-100px'}}>
+            <Grid container sx={{color:'white', flexGrow: 1 }}>
+              <Grid item xs={4} sx={{color:'white', height:'55vh'}}>
+                <Grid container sx={{minHeight:'100%', justifyContent:'center', alignItems:'center'}}>
+                    <Grid item sx={{marginTop:'-40px'}}>
                       <UserBanner/>
                     </Grid>
                     <Stack>
-                    <Grid item>
-                      <UploadProfilePhoto/>
+                    <Grid item sx={{marginTop:'-100px'}}>
+                    {/* NEED TO PASS " IS LIVE " SO AS TO HAVE THE VIEWER JOIN THE LIVESTREAM */}
+                      {isLoggedIn ? (<UploadProfilePhoto/>) : (<NowLive/>)}
                       <ProfilePhoto/>
                     </Grid>
-                    <Grid item sx={{margin:'10px'}}>
+                    <Grid item sx={{margin:'10px', transform:'translateY(-20px)'}}>
                       <UserLocation/>
                       <Followers/>
                     </Grid>

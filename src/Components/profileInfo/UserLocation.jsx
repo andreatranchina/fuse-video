@@ -13,7 +13,7 @@ const UserLocation = () => {
   }
 
   return (
-    <Box sx={{display:'flex', backgroundColor:'grey', justifyContent: 'center'}}>
+    <Box sx={{display:'flex', justifyContent: 'center'}}>
       <Typography variant='subtitle1' sx={location}>
           Denver, CO
       </Typography>

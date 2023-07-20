@@ -29,7 +29,7 @@ const iconStyle = {
 }
 
 const actions = [
-  { icon: <div style={iconStyle}><HostIcon /></div>, name: 'Host' },
+  { icon: <div style={iconStyle}><HostIcon width={'38px'} height={'38px'} /></div>, name: 'Host' },
   { icon: <div style={iconStyle}><JoinIcon /></div>, name: 'Join' },
   { icon: <div style={iconStyle}><TranslateIcon /></div>, name: 'Discover' },
   { icon: <div style={iconStyle}><CustomizeIcon /></div>, name: 'Profile' },

@@ -13,7 +13,7 @@ const Followers = () => {
   }
 
   return (
-    <Box sx={{display:'flex', justifyContent: 'center', backgroundColor:'green'}}>
+    <Box sx={{display:'flex', justifyContent: 'center'}}>
       <Typography variant='subtitle2' sx={followers}>
         25.2K followers
       </Typography>
