@@ -33,10 +33,6 @@ const Home = () => {
             <div style={{position: 'fixed', left: '50%', bottom: '20px', transform: 'translate(-50%, -20%)',  margin: '0 auto'}}>
                 <FloatingMenu />
             </div> : <></>}
-            {isSmallScreen ? 
-            <div style={{position: 'fixed', left: '90%', bottom: '20px', margin: '0 auto'}}>
-                <MobileSpeedDial/>
-            </div> : <></>}
     </Box>
   )
 }

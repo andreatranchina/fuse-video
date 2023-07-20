@@ -8,6 +8,7 @@ import FuseLogo from '../components/navbar/FuseLogo';
 import SwitchLayout from '../components/navbar/SwitchLayout';
 import { useThemeContext } from "../theme/ThemeContextProvider";
 import '../styles/navbar.css';
+import MobileSpeedDial from '../components/navbar/MobileSpeedDial.jsx';
 
 const RootLayout = () => {
   const isSmallScreen = useMediaQuery("(max-width: 900px");
@@ -51,6 +52,12 @@ const RootLayout = () => {
       <main>
         <Outlet />
       </main>
+      <footer>
+        {isSmallScreen ? 
+            <div style={{position: 'fixed', left: '90%', bottom: '20px', margin: '0 auto'}}>
+                <MobileSpeedDial/>
+            </div> : <></>}
+      </footer>
     </>
   );
 };
