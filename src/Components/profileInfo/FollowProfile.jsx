@@ -10,6 +10,7 @@ const FollowProfile = () => {
 	const { theme } = useThemeContext();
 
 	const followButton = {
+		width: '119px',
 		backgroundColor:theme.palette.background.fab.upload,
 		'&:hover': {
       backgroundColor: theme.palette.background.fab.hover, color:'black' 

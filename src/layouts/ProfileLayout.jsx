@@ -17,10 +17,12 @@ import Topics from '../components/bio/Topics'
 import EditInfoForm from '../components/bio/EditInfoForm'
 import StreamHistory from '../components/streamHistory/StreamHistory'
 import NowLive from '../components/profileInfo/NowLive'
+import { useMediaQuery } from '@mui/material'
 
 const ProfileInfoLayout = () => {
 
    const isLoggedIn = useSelector((state) => !!state.user.id);
+   const isSmallScreen = useMediaQuery('(max-width: 900px)');
 
   return (
      <Stack>
@@ -41,10 +43,20 @@ const ProfileInfoLayout = () => {
                       <UserLocation/>
                       <Followers/>
                     </Grid>
-                      <Grid item sx={{display:'flex', justifyContent:'center'}}>
-                        {isLoggedIn ? <EditProfile/> : <FollowProfile/>}
-                        {isLoggedIn ? <GoLiveButton/> : <MessageUser/>}
-                      </Grid>
+                    {/* The buttons should lay on top of one another if the screen gets to 900px and below until mobile screen size is reached*/}
+                      <Grid item sx={{ display: 'flex', justifyContent: 'center' }}>
+                {isSmallScreen ? (
+                  <Stack spacing={1} >
+                    {isLoggedIn ? <EditProfile /> : <FollowProfile />}
+                    {isLoggedIn ? <GoLiveButton /> : <MessageUser />}
+                  </Stack>
+                ) : (
+                  <>
+                    {isLoggedIn ? <EditProfile /> : <FollowProfile />}
+                    {isLoggedIn ? <GoLiveButton /> : <MessageUser />}
+                  </>
+                )}
+              </Grid>
                     </Stack>
                 </Grid>
               </Grid>

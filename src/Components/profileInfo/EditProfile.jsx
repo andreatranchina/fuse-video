@@ -3,11 +3,13 @@ import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 import { useThemeContext } from '../../theme/ThemeContextProvider'
-import EditIcon from '@mui/icons-material/Edit';
+import EditIcon from '@mui/icons-material/Edit'
+import { useMediaQuery } from '@mui/material'
 
 const EditProfile= () => {
 
 	const { theme } = useThemeContext();
+    const isSmallScreen = useMediaQuery('(max-width: 900px)');
 
   const editButton = {
     backgroundColor:theme.palette.button.main,
