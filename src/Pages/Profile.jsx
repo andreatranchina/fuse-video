@@ -7,15 +7,9 @@ import ProfileInfoLayout from '../layouts/ProfileLayout'
 
 const Profile = () => {
   return (
-    <Box sx={{height:'100%', width:'100%', backgroundColor:'red'}}>
+    <Box sx={{height:'100%', width:'100%'}}>
     {/* SIDE BAR MESSAGING */}
-      <Grid container sx={{backgroundColor:'grey'}}>
-        {/* <Grid item xs={1} sm= {1} sx={{backgroundColor:'yellow', minHeight:'100vh'}}>
-            <GroupMessagesBar/>
-        </Grid>
-        <Grid item xs={2} sm= {1} sx={{backgroundColor:'blue',color:'white'}}>
-            <PrivateMessagesBar/>
-        </Grid> */}
+      <Grid container >
         <MessageBarLayout/>
         <Grid item xs={8} sm={9} md={10}>
           <ProfileInfoLayout/>
