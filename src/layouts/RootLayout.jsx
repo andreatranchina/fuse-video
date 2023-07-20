@@ -2,6 +2,8 @@ import React from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
 import { useMediaQuery } from '@mui/material';
 import { Helmet } from 'react-helmet-async'
+import { useSelector } from 'react-redux'
+import Stack from '@mui/material/Stack'
 import UserLogin from '../components/login/UserLogin.jsx'
 import SideNavLinks from '../components/navbar/SideNavLinks';
 import FuseLogo from '../components/navbar/FuseLogo';
@@ -9,10 +11,14 @@ import SwitchLayout from '../components/navbar/SwitchLayout';
 import { useThemeContext } from "../theme/ThemeContextProvider";
 import '../styles/navbar.css';
 import MobileSpeedDial from '../components/navbar/MobileSpeedDial.jsx';
+import PersonIcon from '@mui/icons-material/Person';
+
 
 const RootLayout = () => {
+  const isLoggedIn = useSelector((state) => !!state.user.id);
   const isSmallScreen = useMediaQuery("(max-width: 900px");
   const { theme } = useThemeContext();
+  
 
   const navbarStyle = {
     backgroundColor: theme.palette.primary.main,
@@ -24,6 +30,10 @@ const RootLayout = () => {
     justifyContent: isSmallScreen ? 'space-between' : 'flex-end',
     backgroundColor: theme.palette.background.login,
     paddingTop: '80px', color:'black'
+  }
+
+  const navlink = {
+    color: theme.palette.text.primary,
   }
 
   return (
@@ -42,12 +52,18 @@ const RootLayout = () => {
               </NavLink>
             </div>
             <div>
-              {isSmallScreen ? <SwitchLayout/> : <SideNavLinks/>}
+              {isSmallScreen ? 
+              <Stack direction='row'>
+                <NavLink to ="/profile" style={navlink}>
+                <PersonIcon sx={{width:'38px', height: '38px', marginRight: '20px'}}/>
+                </NavLink>
+                <SwitchLayout/>
+              </Stack> : <SideNavLinks/>}
             </div>
         </nav>
-        <nav id="login" style={loginStyle}>
+        {!isLoggedIn ? (<nav id="login" style={loginStyle}>
           <UserLogin/>
-        </nav>
+        </nav>) : ('')}
       </header>
       <main>
         <Outlet />
