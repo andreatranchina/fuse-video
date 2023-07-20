@@ -54,9 +54,9 @@ const RootLayout = () => {
             <div>
               {isSmallScreen ? 
               <Stack direction='row'>
-                <NavLink to ="/profile" style={navlink}>
+              {isLoggedIn ? (<NavLink to ="/profile" style={navlink}>
                 <PersonIcon sx={{width:'38px', height: '38px', marginRight: '20px'}}/>
-                </NavLink>
+                </NavLink>) : ('')}
                 <SwitchLayout/>
               </Stack> : <SideNavLinks/>}
             </div>
