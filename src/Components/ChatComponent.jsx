@@ -2,14 +2,14 @@ import React, {useState, useEffect} from 'react'
 import ScrollToBottom from "react-scroll-to-bottom";
 import '../styles/callpage.css'
 
-const ChatComponent = ({socket, username, room}) => {
+const ChatComponent = ({socket, username, livestream}) => {
     const [currentMessage, setCurrentMessage] = useState("");
     const [messageList, setMessageList] = useState([]);
 
     const sendMessage = async() => {
         if(currentMessage) {
             const messageData = {
-                room: room,
+                room: livestream,
                 author: username,
                 message: currentMessage,
                 time: new Date(Date.now()).getHours() + " : " + new Date(Date.now()).getMinutes()
