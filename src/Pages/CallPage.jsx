@@ -16,7 +16,7 @@ function CallPage() {
 
   const [title, setTitle] = useState("")
   const [description, setDescription] = useState("")
-  const [username, setUsername] = useState("");
+  const [user_id, setUserId] = useState("");
   const [livestreamId, setLivestreamId] = useState("");
   const [showChat, setShowChat] = useState(false);
 
@@ -53,7 +53,7 @@ function CallPage() {
           <button onClick={startLivestream}>Start Livestream</button>
         </div>
       ): (<div>
-          <ChatComponent socket={socket} username={username} room={livestreamId} />
+          <ChatComponent socket={socket} user_id={user_id} room={livestreamId} />
         </div>
         )
           

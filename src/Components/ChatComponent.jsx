@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import ScrollToBottom from "react-scroll-to-bottom";
 import '../styles/callpage.css'
 
-const ChatComponent = ({socket, username, livestream}) => {
+const ChatComponent = ({socket, user_id, livestream}) => {
     const [currentMessage, setCurrentMessage] = useState("");
     const [messageList, setMessageList] = useState([]);
 
@@ -10,15 +10,15 @@ const ChatComponent = ({socket, username, livestream}) => {
         if(currentMessage) {
             const messageData = {
                 livestream: livestream,
-                author: username,
+                user_id: user_id, // Set authors name using where user_id = __
                 message: currentMessage,
                 time: new Date(Date.now()).getHours() + " : " + new Date(Date.now()).getMinutes()
             }
         try {
             await axios.post('https://localhost:3001/api/messages', {
-                livestream_id: messageData.livestream, // Use the livestream ID as the 'livestream_id'
-                user_id: messageData.author, // Use the username as the 'user_id'
-                content: messageData.message, // Use the message content as the 'content'
+                livestream_id: messageData.livestream, 
+                user_id: messageData.user_id, 
+                content: messageData.message,
             });
         } catch (error) {
             console.log(error.message);
@@ -45,6 +45,7 @@ const ChatComponent = ({socket, username, livestream}) => {
         <div className="chat-body">
           <ScrollToBottom className="message-container">
             {messageList.map((messageContent) => {
+                                                    {/* Will be changed*/}
                 return (<div className="message" id={username === messageContent.author? "you" : "other"}>
                         <div>
                         <div className="message-content">
@@ -52,7 +53,8 @@ const ChatComponent = ({socket, username, livestream}) => {
                         </div>
                         <div className="message-meta">
                             <p id="time">{messageContent.time}</p>
-                            <p id="author">{messageContent.author}</p>
+                            {/* Will be instead where name where user_id == messageContent.user_id */}
+                            <p id="author">{messageContent.user_id}</p>
                         </div>
                         </div>
                     </div>)
