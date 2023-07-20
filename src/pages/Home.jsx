@@ -5,7 +5,6 @@ import FloatingMenu from '../components/navbar/FloatingMenu';
 import MobileSpeedDial from '../components/navbar/MobileSpeedDial';
 import { useThemeContext } from "../theme/ThemeContextProvider"
 import { useMediaQuery } from '@mui/material'
-
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
 import { logout } from '../redux/user/user.actions';

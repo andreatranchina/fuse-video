@@ -5,7 +5,7 @@ import IconButton from '@mui/material/IconButton'
 import AddIcon from '@mui/icons-material/Add'
 import { useThemeContext } from '../../theme/ThemeContextProvider'
 
-const UploadProfilePhoto = () => {
+const NowLive = () => {
 
   const { theme } = useThemeContext();
 
@@ -25,4 +25,4 @@ const UploadProfilePhoto = () => {
   )
 }
 
-export default UploadProfilePhoto
+export default NowLive
