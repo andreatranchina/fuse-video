@@ -60,6 +60,9 @@ export const logout = () => {
         try {
           await axios.post("http://localhost:3001/auth/logout");
           console.log("came back from axios logout")
+          
+          localStorage.removeItem("user");
+
           return dispatch(removeUser());
         } catch (err) {
           console.error(err);
