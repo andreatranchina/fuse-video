@@ -10,6 +10,7 @@ import { HelmetProvider } from 'react-helmet-async'
 import Home from '.././pages/Home'
 import Join from '.././pages/Join'
 import Host from '.././pages/Host'
+import HostPage from '../pages/HostPage'
 import CallPage from '.././pages/CallPage';
 import LoginPage from '.././pages/LoginPage';
 import SignUpPage from '.././pages/SignUpPage';
@@ -28,7 +29,7 @@ const router = createBrowserRouter(
       {/* <Route path="/join" element={<Join/>}/>
       <Route path="/host" element={<Host/>}> */}
       <Route path="/join" element={<CallPage/>}/>
-      <Route path="/host" element={<CallPage/>}>
+      <Route path="/host" element={<HostPage/>}>
         {/* <Route path="/golive"/> /host/golive
          <Route path="/schedule"/> /host/schedule <------- nested routes */}
       </Route>

@@ -13,11 +13,14 @@ export const postLivestream = (payload) => {
 export const postLivestreamThunk = (livestream) => {
     return async (dispatch) => {
         try {
-            const res = await axios.post("https://localhost:3001/api/livestreams", {
+            console.log("running thunk");
+            console.log("livestream in thunk: " + JSON.stringify(livestream));
+            const res = await axios.post("http://localhost:3001/api/livestreams", {
                 user_id: livestream.user_id,
                 title: livestream.title,
                 description: livestream.description,
             });
+            console.log("res in thunk: " + res)
             dispatch(postLivestream(res.data));
         }
         catch (error) {
@@ -36,7 +39,7 @@ export const fetchAllLivestreams = (payload) => {
 export const fetchAllLivestreamsThunk = (livestream) => {
     return async (dispatch) => {
         try {
-            const res = await axios.get("https://localhost:3001/api/livestreams");
+            const res = await axios.get("http://localhost:3001/api/livestreams");
             dispatch(fetchAllLivestreams(res.data));
         }
         catch (error) {
