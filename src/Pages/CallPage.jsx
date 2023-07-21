@@ -29,6 +29,7 @@ function CallPage() {
 
       const livestream = {
         // Pass in user_id
+        
         title,
         description,
       };
@@ -53,7 +54,7 @@ function CallPage() {
           <button onClick={startLivestream}>Start Livestream</button>
         </div>
       ): (<div>
-          <ChatComponent socket={socket} user_id={user_id} room={livestreamId} />
+          <ChatComponent socket={socket} user_id={user_id} livestream={livestreamId} />
         </div>
         )
           
