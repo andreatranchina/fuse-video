@@ -1,3 +1,8 @@
+import React, { useEffect } from "react";
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import { getUser } from "../redux/user/user.actions";
+
 import {
   createBrowserRouter,
   createRoutesFromElements,
@@ -44,7 +49,16 @@ const router = createBrowserRouter(
 
 function App() {
 
+  const dispatch = useDispatch();
   const { theme } = useThemeContext()
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      const user = JSON.parse(storedUser);
+      dispatch(getUser(user));
+    }
+  }, [dispatch]);
 
   return (
   <ThemeProvider theme={theme}>

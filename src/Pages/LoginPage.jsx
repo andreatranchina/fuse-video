@@ -18,6 +18,8 @@ const LoginPage = () => {
     // setPassword(event.target.password.value);
 
     dispatch(auth(email, password, "login"));
+    setEmail("");
+    setPassword("");
     navigate('/');
   }
 

@@ -47,6 +47,7 @@ export const auth = (email, password, method, isAdmin) => {
         try {
           dispatch(getUser(res.data));
           // history.push("/home");
+          localStorage.setItem("user", JSON.stringify(res.data)); 
         } catch (dispatchOrHistoryErr) {
           console.error(dispatchOrHistoryErr);
         }
