@@ -15,6 +15,7 @@ import LoginPage from '.././pages/LoginPage';
 import SignUpPage from '.././pages/SignUpPage';
 import Translations from '.././pages/Translations'
 import Customizations from '.././pages/Customizations'
+import Profile from '.././pages/Profile'
 import RootLayout from '.././layouts/RootLayout'
 
 const router = createBrowserRouter(
@@ -23,6 +24,7 @@ const router = createBrowserRouter(
       <Route index element={<Home/>}/>
       <Route path="/login" element={<LoginPage/>}/>
       <Route path="/signup" element={<SignUpPage/>}/>
+      <Route path="/profile" element={<Profile/>}/>
       {/* <Route path="/join" element={<Join/>}/>
       <Route path="/host" element={<Host/>}> */}
       <Route path="/join" element={<CallPage/>}/>

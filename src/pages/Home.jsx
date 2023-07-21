@@ -5,7 +5,6 @@ import FloatingMenu from '../components/navbar/FloatingMenu';
 import MobileSpeedDial from '../components/navbar/MobileSpeedDial';
 import { useThemeContext } from "../theme/ThemeContextProvider"
 import { useMediaQuery } from '@mui/material'
-
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
 import { logout } from '../redux/user/user.actions';
@@ -32,10 +31,6 @@ const Home = () => {
         {isSmallScreen ? 
             <div style={{position: 'fixed', left: '50%', bottom: '20px', transform: 'translate(-50%, -20%)',  margin: '0 auto'}}>
                 <FloatingMenu />
-            </div> : <></>}
-            {isSmallScreen ? 
-            <div style={{position: 'fixed', left: '90%', bottom: '20px', margin: '0 auto'}}>
-                <MobileSpeedDial/>
             </div> : <></>}
     </Box>
   )
