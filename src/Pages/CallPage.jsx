@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import '../styles/callpage.css';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { postLivestreamThunk } from '../redux/livestreams/livestream.actions';
 
 
@@ -17,10 +17,17 @@ function CallPage() {
   const [title, setTitle] = useState("")
   const [description, setDescription] = useState("")
   const [user_id, setUserId] = useState("");
+  const [username, setUsername]= useState("")
   const [livestreamId, setLivestreamId] = useState("");
   const [showChat, setShowChat] = useState(false);
+  const loggedInUser = useSelector((state) => state.user.defaultUser);
+
+  useEffect(() => {
+    console.log(loggedInUser);
+  }, []);
 
   const startLivestream = () => {
+
 
     // Get current user id from current session
     // Set username state based on user_id
@@ -29,7 +36,7 @@ function CallPage() {
 
       const livestream = {
         // Pass in user_id
-        
+        loggedInUser,
         title,
         description,
       };
@@ -54,7 +61,7 @@ function CallPage() {
           <button onClick={startLivestream}>Start Livestream</button>
         </div>
       ): (<div>
-          <ChatComponent socket={socket} user_id={user_id} livestream={livestreamId} />
+          <ChatComponent socket={socket} livestream={livestreamId} />
         </div>
         )
           

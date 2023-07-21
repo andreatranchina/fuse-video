@@ -1,11 +1,14 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect} from 'react'
+import { useSelector } from 'react-redux'
 import ScrollToBottom from "react-scroll-to-bottom";
 import '../styles/callpage.css'
+import axios from 'axios'
 
 const ChatComponent = ({socket, user_id, livestream}) => {
     const [currentMessage, setCurrentMessage] = useState("");
     const [messageList, setMessageList] = useState([]);
-
+    const loggedInUser = useSelector((state) => state.user.defaultUser);
+    
     const sendMessage = async() => {
         if(currentMessage) {
             const messageData = {
@@ -23,13 +26,14 @@ const ChatComponent = ({socket, user_id, livestream}) => {
         } catch (error) {
             console.log(error.message);
         }
-        
+            await socket.emit("send_message", messageData);
             setMessageList((list) => [...list, messageData])
             setCurrentMessage("");
         }
     }
 
     useEffect(() => {
+        console.log(loggedInUser);
         socket.on("receive_message", (data) => {
             // console.log(data);
             setMessageList((list) => [...list, data]); //set to list from before with new data
@@ -44,17 +48,17 @@ const ChatComponent = ({socket, user_id, livestream}) => {
         </div>
         <div className="chat-body">
           <ScrollToBottom className="message-container">
-            {messageList.map((messageContent) => {
+            {messageList.map((mes) => {
                                                     {/* Will be changed*/}
-                return (<div className="message" id={username === messageContent.author? "you" : "other"}>
+                return (<div className="message">
                         <div>
                         <div className="message-content">
-                            <p>{messageContent.message}</p>
+                            <p>{mes.message}</p>
                         </div>
                         <div className="message-meta">
-                            <p id="time">{messageContent.time}</p>
+                            <p id="time">{mes.time}</p>
                             {/* Will be instead where name where user_id == messageContent.user_id */}
-                            <p id="author">{messageContent.user_id}</p>
+                            <p id="author">{mes.user_id}</p>
                         </div>
                         </div>
                     </div>)
