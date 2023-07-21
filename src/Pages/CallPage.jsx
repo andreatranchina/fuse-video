@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import '../styles/callpage.css';
-
-
+import {useSelector, useDispatch} from 'react-redux';
+import {postLivestreamThunk} from "../redux/livestreams/livestream.actions";
 import ChatComponent from '../components/ChatComponent';
 
 import io from "socket.io-client";
@@ -14,6 +14,11 @@ function CallPage() {
   const [username, setUsername] = useState("");
   const [room, setRoom] = useState("");
   const [showChat, setShowChat] = useState(false);
+  const loggedInUser = useSelector((state) => state.user);
+
+  useEffect(() => {
+    console.log(loggedInUser);
+  }, [])
 
   const joinRoom = () => {
     if (username !=="" && room !==""){

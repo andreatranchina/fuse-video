@@ -11,9 +11,10 @@ export const postMessage = (payload) => {
 }
 
 export const postMessagesThunk = (message) => {
+    console.log("running post message thunk ");
     return async (dispatch) => {
         try {
-            const res = await axios.post("https://localhost:3001/api/messages", {
+            const res = await axios.post("http://localhost:3001/api/messages", {
                 livestream_id: message.livestream_id,
                 user_id: message.user_id,
                 content: message.content,
@@ -36,7 +37,7 @@ export const fetchAllMessages = (payload) => {
 export const fetchAllMessagesThunk = (message) => {
     return async (dispatch) => {
         try {
-            const res = await axios.get("https://localhost:3001/api/messages");
+            const res = await axios.get("http://localhost:3001/api/messages");
             dispatch(fetchAllMessages(res.data));
         }
         catch (error) {
