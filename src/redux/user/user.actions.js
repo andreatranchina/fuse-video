@@ -30,7 +30,6 @@ export const me = () => {
 
 export const auth = (email, password, method, isAdmin) => {
     return async (dispatch) => {
-      console.log("running auth thunk");
         let res;
         //method can be login or signup
         try {
@@ -39,7 +38,6 @@ export const auth = (email, password, method, isAdmin) => {
             password,
             isAdmin,
           });
-          console.log("res from /auth/signup: " + res);
         } catch (authError) {
           return dispatch(getUser({ error: authError }));
         }
@@ -55,7 +53,6 @@ export const auth = (email, password, method, isAdmin) => {
 
 export const logout = () => {
     return async (dispatch) => {
-      console.log("running logout thunk");
         try {
           await axios.post("http://localhost:3001/auth/logout");
           console.log("came back from axios logout")
