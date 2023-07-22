@@ -1,6 +1,7 @@
 import io from 'socket.io-client';
 import {store }from '../redux/store';
 import { setParticipants } from '../redux/livestreams/livestream.actions';
+import * as webRTC from './webRTC';
 
 let socket = null;
 
@@ -14,6 +15,26 @@ export const connectWithSocketIO = () => {
     socket.on("update-livestream", (data) => {
         const {participantsInLivestream} = data;
         store.dispatch(setParticipants(participantsInLivestream));
+    })
+
+    socket.on("prepare-connection", (data) => {
+        //second parameter indicates whether user is initiator of connection
+        webRTC.prepareNewPeerConnection(data.connectedUserSocketId, false);
+
+        //now prepare for connection, can inform user that joined that
+        //system is ready to initialize connection
+        socket.emit('initialize-connection', {connectedUserSocketId: data.connectedUserSocketId})
+
+    })
+
+    socket.on("connection-signal", (data) => {
+        webRTC.handleSignalingData(data);
+    })
+
+    socket.on("initialize-connection", (data) => {
+        const {connectedUserSocketId} = data;
+        //this time second parameter is true, because this is for the initiator = true
+        webRTC.prepareNewPeerConnection(connectedUserSocketId, true);
     })
 
     return socket;
@@ -36,4 +57,8 @@ export const joinLivestream = (fullName, livestreamCode) => {
     }
 
     socket.emit("join-livestream", data);
+}
+
+export const signalPeerData = (data) => {
+    socket.emit("connection-signal", data);
 }
