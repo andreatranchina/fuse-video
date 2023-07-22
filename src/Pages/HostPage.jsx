@@ -23,7 +23,7 @@ const HostPage = () => {
     }, [])
   
     const startLivestream = () => {
-        const v4Id = uuidv4();
+        const v4Id = uuidv4(); 
         console.log(v4Id);
         console.log("userID : " + loggedInUser.id);
 
