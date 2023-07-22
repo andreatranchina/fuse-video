@@ -1,10 +1,17 @@
-import React from 'react'
-import { useSelector } from 'react-redux';
+import React, {useEffect} from 'react'
+import { useSelector} from 'react-redux';
 import ChatComponent from '../components/ChatComponent';
+import * as webRTC from '../utils/webRTC';
 
 const LivestreamPage = ({socket}) => {
     const currentLivestream = useSelector((state) => state.livestreams.currentLivestream);
+    const isStreamer = useSelector((state) => state.livestreams.isStreamer);
     const loggedInUser = useSelector((state) => state.user);
+
+    useEffect(() => {
+        webRTC.initLivestreamConnection(isStreamer, loggedInUser.fullName, currentLivestream.code)
+
+    })
 
   return (
     <div style={{marginTop: "5rem"}}>

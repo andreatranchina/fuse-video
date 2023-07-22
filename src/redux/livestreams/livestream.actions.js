@@ -1,6 +1,7 @@
 import axios from "axios";
 
-import {POST_LIVESTREAM, FETCH_ALL_LIVESTREAMS, SET_CURRENT_LIVESTREAM} from "./livestream.types";
+import {POST_LIVESTREAM, FETCH_ALL_LIVESTREAMS, SET_CURRENT_LIVESTREAM, 
+    SET_IS_STREAMER} from "./livestream.types";
 
 // Redux action for making new livestream row
 export const postLivestream = (payload) => {
@@ -50,6 +51,13 @@ export const fetchAllLivestreamsThunk = (livestream) => {
 export const setCurrentLivestream = (payload) => {
     return {
         type: SET_CURRENT_LIVESTREAM,
+        payload: payload,
+    }
+}
+
+export const setIsStreamer = (payload) => {
+    return{
+        type: SET_IS_STREAMER,
         payload: payload,
     }
 }
