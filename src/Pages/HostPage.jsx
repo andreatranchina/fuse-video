@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import '../styles/callpage.css';
 import {useSelector, useDispatch} from 'react-redux';
-import {postLivestreamThunk, setCurrentLivestream} from "../redux/livestreams/livestream.actions";
+import {postLivestreamThunk, setCurrentLivestream, setIsStreamer} from "../redux/livestreams/livestream.actions";
 import {v4 as uuidv4} from 'uuid';
 import Box from '@mui/material/Box'
 import FloatingMenu from '../components/navbar/FloatingMenu';
@@ -24,7 +24,7 @@ const HostPage = ({socket}) => {
         const v4Id = uuidv4();
 
       if (title !=="" && description !==""){
-        socket.emit("join_room", v4Id); //join socket room
+        // socket.emit("join_room", v4Id); //join socket room
 
         //create new livestream object to store in db
         const livestream = {
@@ -39,6 +39,10 @@ const HostPage = ({socket}) => {
 
         //set current livestream in redux
         dispatch(setCurrentLivestream(response));
+
+        //set is streamer in redux to true 
+        //(if not called person joining would not be considered the host and video would not share)
+        dispatch(setIsStreamer(true));
 
         //navigate to specific livestream page
         navigate(`/livestream/${v4Id}`);

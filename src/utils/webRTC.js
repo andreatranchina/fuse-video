@@ -1,21 +1,24 @@
 import * as socketIOClient from './socketIO.js';
 import Peer from 'simple-peer';
 
-export const getLocalPreviewAndInitRoomConnection = (async (isRoomHost, identity, roomId) => {
+let localStream;
+
+export const initLivestreamConnection = (async (isStreamer, fullName, livestreamCode) => {
     try {
         console.log('sucessfully received local stream');
-        const stream = await navigator.mediaDevices.getUserMedia({
-            audio: true,
-            video: true,
-        });
-        localStream = stream;
-        showLocalVideoPreview(localStream);
 
-        //dispatch action to hide overlay
-        store.dispatch(setShowOverlay(false));
-
-
-        isRoomHost ? wss.createNewRoom(identity) : wss.joinRoom(identity, roomId);
+        if(isStreamer){
+            const stream = await navigator.mediaDevices.getUserMedia({
+                audio: true,
+                video: true,
+            });
+            localStream = stream;
+            showLocalVideoPreview(localStream);
+    
+            //dispatch action to hide overlay
+            // store.dispatch(setShowOverlay(false));
+        }
+        isStreamer ? socketIOClient.hostLivestream(fullName, livestreamCode) : socketIOClient.joinLivestream(fullName, livestreamCode);
 
 
     }
@@ -24,3 +27,7 @@ export const getLocalPreviewAndInitRoomConnection = (async (isRoomHost, identity
         console.log(error);
     }
 })
+
+const showLocalVideoPreview = (localStream) => {
+
+}

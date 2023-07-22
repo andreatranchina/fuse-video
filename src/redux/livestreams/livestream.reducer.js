@@ -1,8 +1,10 @@
-import { POST_LIVESTREAM, FETCH_ALL_LIVESTREAMS, SET_CURRENT_LIVESTREAM } from "./livestream.types";
+import { POST_LIVESTREAM, FETCH_ALL_LIVESTREAMS, SET_CURRENT_LIVESTREAM, 
+    SET_IS_STREAMER } from "./livestream.types";
 
 export const INITIAL_LIVESTREAMS_STATE = {
     livestreamList: [],
     currentLivestream: {},
+    isStreamer: false,
 };
 
 export default function livestreamReducer(state = INITIAL_LIVESTREAMS_STATE, action) {
@@ -21,6 +23,12 @@ export default function livestreamReducer(state = INITIAL_LIVESTREAMS_STATE, act
                 ...state,
                 currentLivestream: action.payload
             }    
+        
+        case SET_IS_STREAMER:
+            return{
+                ...state,
+                isStreamer: action.payload
+            }
         default:
             return state;
     }

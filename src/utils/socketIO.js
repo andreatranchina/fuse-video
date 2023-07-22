@@ -11,3 +11,26 @@ export const connectWithSocketIO = () => {
 
     return socket;
 }
+
+export const hostLivestream = (fullName, livestreamCode) => {
+    console.log("hosting livestream");
+
+    const data = {
+        fullName,
+        livestreamCode,
+    }
+
+    socket.emit("host-new-livestream", data);
+}
+
+
+export const joinLivestream = (fullName, livestreamCode) => {
+    console.log("joining livestream");
+
+    const data = {
+        fullName,
+        livestreamCode,
+    }
+
+    socket.emit("join-livestream", data);
+}

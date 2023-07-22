@@ -19,7 +19,7 @@ const JoinPage = ({socket}) => {
     //called to join livestream upon clicking join livestream button
     const joinLivestream = async () => {
       if (livestreamCode !==""){
-        socket.emit("join_room", livestreamCode); //join socket room based on inputted livestream code
+        // socket.emit("join_room", livestreamCode); //join socket room based on inputted livestream code
 
         try{
             //fetch the livestream to join from db based on inputed livestream code
