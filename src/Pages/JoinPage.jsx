@@ -11,15 +11,13 @@ import { useMediaQuery } from '@mui/material'
 import io from "socket.io-client";
 const socket = io.connect("http://localhost:3001");
 
-const HostPage = () => {
-    const [title, setTitle] = useState("")
-    const [description, setDescription] = useState("")
+const JoinPage = () => {
+    const [livestreamCode, setLivestreamCode] = useState("");
     const [username, setUsername] = useState("");
     const [showChat, setShowChat] = useState(false);
-    const [livestreamCode, setLivestreamCode] = useState("");
+
 
     const loggedInUser = useSelector((state) => state.user);
-
     const dispatch = useDispatch();
 
     const isSmallScreen = useMediaQuery("(max-width: 900px");
@@ -29,19 +27,10 @@ const HostPage = () => {
       setUsername(loggedInUser.fullName);
     }, [])
   
-    const startLivestream = async () => {
-        const v4Id = uuidv4();
-        setLivestreamCode(v4Id);
-
-      if (title !=="" && description !==""){
+    const joinLivestream = async () => {
+      if (livestreamCode !==""){
         socket.emit("join_room", livestreamCode);
 
-        const livestream = {
-            user_id: loggedInUser.id,
-            title,
-            description
-        };
-            const response = await dispatch((postLivestreamThunk(livestream)));
             dispatch(setCurrentLivestream(response));
     
             setShowChat(true);
@@ -53,13 +42,12 @@ const HostPage = () => {
       <div className="callPage">
         {!showChat? (
           <div className="joinChatContainer">
-            <h3>Host livestream</h3>
-            <input type="text" placeholder="title" onChange={(e) => {setTitle(e.target.value)}}/>
-            <input type="text" placeholder="description" onChange={(e) => setDescription(e.target.value)}/>
-            <button onClick={startLivestream}>Host livestream</button>
+            <h3>Join livestream</h3>
+            <input type="text" placeholder="livestream code.." onChange={(e) => {setLivestreamCode(e.target.value)}}/>
+            <button onClick={joinLivestream}>Join Livestream</button>
           </div>
         ): (<div>
-          <h1>Livestream Id: {livestreamCode}</h1>
+         <h1>Livestream Id: {livestreamCode}</h1>
           <ChatComponent socket={socket} username={username} room={livestreamCode}/>
           </div>
         )         
@@ -76,4 +64,4 @@ const HostPage = () => {
     );
 }
 
-export default HostPage
+export default JoinPage

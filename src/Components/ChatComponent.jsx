@@ -2,7 +2,6 @@ import React, {useState, useEffect} from 'react'
 import {useSelector, useDispatch} from 'react-redux';
 import ScrollToBottom from "react-scroll-to-bottom";
 import '../styles/callpage.css';
-import axios from 'axios';
 import { postMessagesThunk } from '../redux/messages/message.actions';
 
 const ChatComponent = ({socket, username, room}) => {
