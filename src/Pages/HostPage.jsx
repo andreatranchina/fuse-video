@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import '../styles/callpage.css';
 import {useSelector, useDispatch} from 'react-redux';
-import {postLivestreamThunk} from "../redux/livestreams/livestream.actions";
+import {postLivestreamThunk, setCurrentLivestream} from "../redux/livestreams/livestream.actions";
 import ChatComponent from '../components/ChatComponent';
 import {v4 as uuidv4} from 'uuid';
 
@@ -18,14 +18,12 @@ const HostPage = () => {
     const dispatch = useDispatch();
   
     useEffect(() => {
-      console.log(loggedInUser);
+
       setUsername(loggedInUser.fullName);
     }, [])
   
-    const startLivestream = () => {
+    const startLivestream = async () => {
         const v4Id = uuidv4();
-        console.log(v4Id);
-        console.log("userID : " + loggedInUser.id);
 
       if (title !=="" && description !==""){
         socket.emit("join_room", title);
@@ -35,21 +33,21 @@ const HostPage = () => {
             title,
             description
         };
+            const response = await dispatch((postLivestreamThunk(livestream)));
+            const livestreamId = response.id;
+            dispatch(setCurrentLivestream(response));
+            console.log("done");
+    
+            setShowChat(true);
 
-        const response = dispatch((postLivestreamThunk(livestream)));
-        const responseData = response.data;
-        console.log("response data: " + responseData);
-
-        setShowChat(true);
-  
-    }
+      }
     }
   
     return (
       <div className="callPage">
         {!showChat? (
           <div className="joinChatContainer">
-            <h3>Join chat</h3>
+            <h3>Host livestream</h3>
             <input type="text" placeholder="title" onChange={(e) => {setTitle(e.target.value)}}/>
             <input type="text" placeholder="description" onChange={(e) => setDescription(e.target.value)}/>
             <button onClick={startLivestream}>Join room</button>
