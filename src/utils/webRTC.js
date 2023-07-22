@@ -13,7 +13,7 @@ export const initLivestreamConnection = (async (isStreamer, fullName, livestream
                 video: true,
             });
             localStream = stream;
-            showLocalVideoPreview(localStream);
+            showLocalLivestreamVideo(localStream);
     
             //dispatch action to hide overlay
             // store.dispatch(setShowOverlay(false));
@@ -28,6 +28,18 @@ export const initLivestreamConnection = (async (isStreamer, fullName, livestream
     }
 })
 
-const showLocalVideoPreview = (localStream) => {
+const showLocalLivestreamVideo = (localStream) => {
+    const videosContainer = document.getElementById('videos_container');
+    const videoContainer = document.createElement('div');
+    const videoElement = document.createElement('video');
 
+    videoElement.autoplay = true;
+    videoElement.muted = true; //do not want to hear ourselves
+    videoElement.srcObject = localStream;
+    videoElement.onloadedmetadata = () => {//some browsers like firefox may need this event listener to start playing video on load
+        videoElement.play();
+    }
+
+    videoContainer.appendChild(videoElement);
+    videosContainer.appendChild(videoContainer);
 }
