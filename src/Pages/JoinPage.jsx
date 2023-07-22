@@ -7,19 +7,18 @@ import {v4 as uuidv4} from 'uuid';
 import Box from '@mui/material/Box'
 import FloatingMenu from '../components/navbar/FloatingMenu';
 import { useMediaQuery } from '@mui/material'
+import axios from 'axios';
 
 import io from "socket.io-client";
 const socket = io.connect("http://localhost:3001");
 
-const HostPage = () => {
-    const [title, setTitle] = useState("")
-    const [description, setDescription] = useState("")
+const JoinPage = () => {
+    const [livestreamCode, setLivestreamCode] = useState("");
     const [username, setUsername] = useState("");
     const [showChat, setShowChat] = useState(false);
-    const [livestreamCode, setLivestreamCode] = useState("");
+
 
     const loggedInUser = useSelector((state) => state.user);
-
     const dispatch = useDispatch();
 
     const isSmallScreen = useMediaQuery("(max-width: 900px");
@@ -29,25 +28,21 @@ const HostPage = () => {
       setUsername(loggedInUser.fullName);
     }, [])
   
-    const startLivestream = async () => {
-        const v4Id = uuidv4();
-        setLivestreamCode(v4Id.toString());
+    const joinLivestream = async () => {
+      if (livestreamCode !==""){
+        socket.emit("join_room", livestreamCode);
+        console.log(livestreamCode)
 
-      if (title !=="" && description !==""){
-        socket.emit("join_room", v4Id);
-
-        const livestream = {
-            user_id: loggedInUser.id,
-            title,
-            description,
-            code: v4Id.toString(),
-        };
-            const response = await dispatch((postLivestreamThunk(livestream)));
-            console.log(response);
-            dispatch(setCurrentLivestream(response));
-    
+        try{
+            const response = await axios.get(`http://localhost:3001/api/livestreams/byCode/${livestreamCode}`);
+            const responseData = response.data;
+            console.log(responseData);
+            dispatch(setCurrentLivestream(responseData));
             setShowChat(true);
-
+        }
+        catch(error){
+            console.log(error);
+        }
       }
     }
   
@@ -55,13 +50,12 @@ const HostPage = () => {
       <div className="callPage" style={{marginTop: "5rem"}}>
         {!showChat? (
           <div className="joinChatContainer">
-            <h3>Host livestream</h3>
-            <input type="text" placeholder="title" onChange={(e) => {setTitle(e.target.value)}}/>
-            <input type="text" placeholder="description" onChange={(e) => setDescription(e.target.value)}/>
-            <button onClick={startLivestream}>Host livestream</button>
+            <h3>Join livestream</h3>
+            <input type="text" placeholder="livestream code.." onChange={(e) => {setLivestreamCode(e.target.value)}}/>
+            <button onClick={joinLivestream}>Join Livestream</button>
           </div>
         ): (<div>
-          <h1>Livestream Id: {livestreamCode}</h1>
+         <h1>Livestream Id: {livestreamCode}</h1>
           <ChatComponent socket={socket} username={username} room={livestreamCode}/>
           </div>
         )         
@@ -78,4 +72,4 @@ const HostPage = () => {
     );
 }
 
-export default HostPage
+export default JoinPage
