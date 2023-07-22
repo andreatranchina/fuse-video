@@ -7,6 +7,7 @@ import {v4 as uuidv4} from 'uuid';
 import Box from '@mui/material/Box'
 import FloatingMenu from '../components/navbar/FloatingMenu';
 import { useMediaQuery } from '@mui/material'
+import axios from 'axios';
 
 import io from "socket.io-client";
 const socket = io.connect("http://localhost:3001");
@@ -30,16 +31,23 @@ const JoinPage = () => {
     const joinLivestream = async () => {
       if (livestreamCode !==""){
         socket.emit("join_room", livestreamCode);
+        console.log(livestreamCode)
 
-            dispatch(setCurrentLivestream(response));
-    
+        try{
+            const response = await axios.get(`http://localhost:3001/api/livestreams/byCode/${livestreamCode}`);
+            const responseData = response.data;
+            console.log(responseData);
+            dispatch(setCurrentLivestream(responseData));
             setShowChat(true);
-
+        }
+        catch(error){
+            console.log(error);
+        }
       }
     }
   
     return (
-      <div className="callPage">
+      <div className="callPage" style={{marginTop: "5rem"}}>
         {!showChat? (
           <div className="joinChatContainer">
             <h3>Join livestream</h3>

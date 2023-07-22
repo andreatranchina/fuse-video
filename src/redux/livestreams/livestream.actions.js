@@ -17,6 +17,7 @@ export const postLivestreamThunk = (livestream) => {
                 user_id: livestream.user_id,
                 title: livestream.title,
                 description: livestream.description,
+                code: livestream.code,
             });
             dispatch(postLivestream(res.data));
             return res.data;

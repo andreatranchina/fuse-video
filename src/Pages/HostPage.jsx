@@ -31,17 +31,19 @@ const HostPage = () => {
   
     const startLivestream = async () => {
         const v4Id = uuidv4();
-        setLivestreamCode(v4Id);
+        setLivestreamCode(v4Id.toString());
 
       if (title !=="" && description !==""){
-        socket.emit("join_room", livestreamCode);
+        socket.emit("join_room", v4Id);
 
         const livestream = {
             user_id: loggedInUser.id,
             title,
-            description
+            description,
+            code: v4Id.toString(),
         };
             const response = await dispatch((postLivestreamThunk(livestream)));
+            console.log(response);
             dispatch(setCurrentLivestream(response));
     
             setShowChat(true);
@@ -50,7 +52,7 @@ const HostPage = () => {
     }
   
     return (
-      <div className="callPage">
+      <div className="callPage" style={{marginTop: "5rem"}}>
         {!showChat? (
           <div className="joinChatContainer">
             <h3>Host livestream</h3>
