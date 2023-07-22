@@ -1,4 +1,6 @@
 import io from 'socket.io-client';
+import {store }from '../redux/store';
+import { setParticipants } from '../redux/livestreams/livestream.actions';
 
 let socket = null;
 
@@ -9,12 +11,15 @@ export const connectWithSocketIO = () => {
         console.log('successfully connected with socket io server');
     })
 
+    socket.on("update-livestream", (data) => {
+        const {participantsInLivestream} = data;
+        store.dispatch(setParticipants(participantsInLivestream));
+    })
+
     return socket;
 }
 
 export const hostLivestream = (fullName, livestreamCode) => {
-    console.log("hosting livestream");
-
     const data = {
         fullName,
         livestreamCode,
@@ -25,8 +30,6 @@ export const hostLivestream = (fullName, livestreamCode) => {
 
 
 export const joinLivestream = (fullName, livestreamCode) => {
-    console.log("joining livestream");
-
     const data = {
         fullName,
         livestreamCode,
