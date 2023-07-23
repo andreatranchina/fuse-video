@@ -16,8 +16,18 @@ import EditInfoForm from '../components/bio/EditInfoForm.jsx';
 import { editAccount } from '../redux/user/user.actions.js';
 import { toggleModal } from '../redux/ui/ui.actions.js'
 
-const CustomBackdrop = styled('div')(({ theme }) => ({
-  
+const HiddenBackdrop = styled('div')(({ theme }) => ({
+  zIndex: theme.zIndex.modal - 1,
+}));
+
+const RootBackdrop = styled('div')(({ theme }) => ({
+  zIndex: theme.zIndex.modal - 1,
+  backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  position: 'fixed',
+  top: 0,
+  left: 0,
+  width: '100%',
+  height: '100%',
 }));
 
 const RootLayout = () => {
@@ -27,6 +37,7 @@ const RootLayout = () => {
   const dispatch = useDispatch();
   const { theme } = useThemeContext();
   const open = useSelector(state => !state.modalIsOpen);
+  const modalIsOpen = useSelector(state => state.ui.modalIsOpen)
   
   const navbarStyle = {
     backgroundColor: theme.palette.primary.main,
@@ -88,16 +99,19 @@ const RootLayout = () => {
           <UserLogin/>
         </nav>) : ('')}
       </header>
+       {modalIsOpen && <RootBackdrop />}
       <main>
         <Outlet />
+        {/* SHOW MODAL IF ACCOUNT SETTINGS SELECTED FROM PROFILE ICON DROPDOWN */}
         {isEditingAccount ? ( <Modal
         sx={modal}
         open={open}
-        BackdropComponent={CustomBackdrop} 
+        BackdropComponent={HiddenBackdrop} 
         >
         <>
       <EditInfoForm handleClose={handleClose}/></>
-    </Modal>) : ('')}
+    </Modal>
+    ) : ('')}
       </main>
       <footer>
         {isSmallScreen ? 

@@ -50,14 +50,14 @@ function App() {
   const { theme } = useThemeContext()
 
   return (
-  <ThemeProvider theme={theme}>
-    <CssBaseline/>
-      <HelmetProvider>
+  <HelmetProvider>
+    <ThemeProvider theme={theme}>
+      <CssBaseline/>
         <div className="App">
           <RouterProvider router={router}/>
         </div>
-      </HelmetProvider>
-  </ThemeProvider>
+    </ThemeProvider>
+  </HelmetProvider>
   );
 }
 
