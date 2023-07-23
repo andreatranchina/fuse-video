@@ -37,7 +37,8 @@ const getDesignTokens = (mode) => ({
               upload: light[400],
               hover: light[500]
             },
-            login:light[600],
+            login:light[300],
+            profile: light[800],
             boxShadow: '2px 2px 4px rgba(129, 91, 132, 0.6)',
           },
           text: {
@@ -66,6 +67,7 @@ const getDesignTokens = (mode) => ({
               upload:dark[800]
             },
             login: dark[900],
+            profile: dark[900],
             boxShadow: '2px 2px 4px rgba(246, 233, 205, 0.6)',
           },
           text: {
