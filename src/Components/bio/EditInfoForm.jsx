@@ -1,7 +1,23 @@
 import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Box, Button, FormGroup, TextField }  from '@mui/material'
+import { editAccount } from '../../redux/user/user.actions'
+import { toggleModal } from '../../redux/ui/ui.actions'
 
-const EditInfoForm = ({handleClose}) => {
+const EditInfoForm = () => {
+
+  const dispatch = useDispatch();
+
+  const isEditingAccount = useSelector((state) => !!state.user.isEditingAccount)
+
+  const handleClose = () => {
+    dispatch(toggleModal());
+    dispatch(editAccount());
+  }
+
+  const handleSubmit = () => {
+
+  }
   return (
     <Box>
       <FormGroup>
@@ -28,6 +44,10 @@ const EditInfoForm = ({handleClose}) => {
         <Button onClick={handleClose}>
          "Close"
         </Button>
+        <Button onClick={handleSubmit}>
+         "Submit"
+        </Button>
+        
       </FormGroup>
     </Box>
   )

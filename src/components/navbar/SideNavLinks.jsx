@@ -5,13 +5,14 @@ import '../.././styles/navbar.css'
 import SwitchLayout from './SwitchLayout'
 import { useThemeContext } from "../../theme/ThemeContextProvider"
 import PersonIcon from '@mui/icons-material/Person'
+import ProfileMenu from './ProfileMenu'
 
 const SideNavlinks = () => {
   const isLoggedIn = useSelector((state) => !!state.user.id);
   const { theme } = useThemeContext();
 
     const navlink = {
-    color: theme.palette.text.primary,
+    color: theme.palette.text.secondary,
   };
   
   return (
@@ -20,10 +21,7 @@ const SideNavlinks = () => {
         <NavLink to="/host" style={navlink}>Host</NavLink>
         <NavLink to="/translate" style={navlink}>Translate</NavLink>
         <NavLink to="/customize" style={navlink}>Customize</NavLink>
-        {isLoggedIn ? (<NavLink to='/profile' style={navlink}>
-          <PersonIcon 
-            sx={{width:'38px', height: '38px', marginRight: '20px'}}/>
-          </NavLink>) : ('')}
+        {isLoggedIn ? (<ProfileMenu/>) : ('')}
         <SwitchLayout/>
     </div>
   )

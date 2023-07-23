@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { editProfile } from '../../redux/user/user.actions'
 import { Box, Button, Modal, Typography, createMuiTheme } from '@mui/material'
 import { useThemeContext } from '../../theme/ThemeContextProvider'
@@ -17,6 +17,7 @@ const EditProfile= () => {
 
 	const { theme } = useThemeContext();
   const modalTheme = useTheme();
+  const dispatch = useDispatch();
   const isEditing = useSelector((state) => !state.user.isEditing)
 
   const editButton = {
@@ -35,19 +36,6 @@ const EditProfile= () => {
         color: theme.palette.text
 	}
 
-  const modal = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: '80%',
-    height: '80%',
-    bgcolor: 'white',
-    border: '2px solid #000',
-    boxShadow: 24,
-    p: 4,
-};
-
   const [open, setOpen] = useState(false);
 
   const handleClose = () => {
@@ -55,7 +43,7 @@ const EditProfile= () => {
   };
 
   const handleEditProfile = () => {
-    editProfile();
+    dispatch(editProfile());
     setOpen(true);
   }
 	
@@ -67,14 +55,6 @@ const EditProfile= () => {
 				</Typography>
                 <EditIcon />
 			</Button>
-      {isEditing ? ( <Modal
-        keepMounted
-        sx={modal}
-        open={open}
-        BackdropComponent={CustomBackdrop} 
-        >
-      <EditInfoForm handleClose={handleClose}/>
-    </Modal>) : ('')}
     </Box>
   )
 }
