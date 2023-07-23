@@ -1,12 +1,25 @@
 import React, {useState, useEffect} from 'react'
+import {useSelector, useDispatch} from 'react-redux';
 import ScrollToBottom from "react-scroll-to-bottom";
-import '../styles/callpage.css'
+import '../styles/callpage.css';
+import { postMessagesThunk } from '../redux/messages/message.actions';
 
 const ChatComponent = ({socket, username, room}) => {
     const [currentMessage, setCurrentMessage] = useState("");
     const [messageList, setMessageList] = useState([]);
+    const loggedInUser = useSelector((state) => state.user);
+    const currentLivestream = useSelector((state) => state.livestreams.currentLivestream);
+    const dispatch = useDispatch();
 
     const sendMessage = async() => {
+        const newMessageToDb = {
+            content: currentMessage,
+            user_id: loggedInUser.id,
+            livestream_id: currentLivestream.id,
+        }
+
+        dispatch(postMessagesThunk(newMessageToDb));
+
         if(currentMessage) {
             const messageData = {
                 room: room,
@@ -23,7 +36,7 @@ const ChatComponent = ({socket, username, room}) => {
 
     useEffect(() => {
         socket.on("receive_message", (data) => {
-            // console.log(data);
+
             setMessageList((list) => [...list, data]); //set to list from before with new data
         })
 

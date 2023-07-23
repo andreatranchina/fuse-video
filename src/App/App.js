@@ -11,13 +11,17 @@ import Home from '.././pages/Home'
 import Join from '.././pages/Join'
 import Host from '.././pages/Host'
 import HostPage from '../pages/HostPage'
-import CallPage from '.././pages/CallPage';
+import JoinPage from '../pages/JoinPage'
+import LivestreamPage from '../pages/LivestreamPage'
 import LoginPage from '.././pages/LoginPage';
 import SignUpPage from '.././pages/SignUpPage';
 import Translations from '.././pages/Translations'
 import Customizations from '.././pages/Customizations'
 import Profile from '.././pages/Profile'
 import RootLayout from '.././layouts/RootLayout'
+import { connectWithSocketIO } from '../utils/socketIO'
+
+let socket = connectWithSocketIO();
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -28,15 +32,14 @@ const router = createBrowserRouter(
       <Route path="/profile" element={<Profile/>}/>
       {/* <Route path="/join" element={<Join/>}/>
       <Route path="/host" element={<Host/>}> */}
-      <Route path="/join" element={<CallPage/>}/>
-      <Route path="/host" element={<HostPage/>}>
+      <Route path="/join" element={<JoinPage socket={socket}/>}/>
+      <Route path="/host" element={<HostPage socket={socket}/>} />
+      <Route path="/livestream/:code" element={<LivestreamPage socket={socket} />} />
         {/* <Route path="/golive"/> /host/golive
          <Route path="/schedule"/> /host/schedule <------- nested routes */}
-      </Route>
-      <Route path="/translate" element={<Translations/>}>
+      <Route path="/translate" element={<Translations/>}/>
        {/* <Route path="/preferences" />
         <Route path="/import" />    <---- more nested routes, etc */}
-      </Route>
       <Route path="/customize" element={<Customizations/>}/>
     </Route>
   )

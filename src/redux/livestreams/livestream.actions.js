@@ -1,6 +1,7 @@
 import axios from "axios";
 
-import {POST_LIVESTREAM, FETCH_ALL_LIVESTREAMS} from "./livestream.types";
+import {POST_LIVESTREAM, FETCH_ALL_LIVESTREAMS, SET_CURRENT_LIVESTREAM, 
+    SET_IS_STREAMER, SET_PARTICIPANTS} from "./livestream.types";
 
 // Redux action for making new livestream row
 export const postLivestream = (payload) => {
@@ -13,15 +14,14 @@ export const postLivestream = (payload) => {
 export const postLivestreamThunk = (livestream) => {
     return async (dispatch) => {
         try {
-            console.log("running thunk");
-            console.log("livestream in thunk: " + JSON.stringify(livestream));
             const res = await axios.post("http://localhost:3001/api/livestreams", {
                 user_id: livestream.user_id,
                 title: livestream.title,
                 description: livestream.description,
+                code: livestream.code,
             });
-            console.log("res in thunk: " + res)
             dispatch(postLivestream(res.data));
+            return res.data;
         }
         catch (error) {
             console.log(error.message);
@@ -45,5 +45,26 @@ export const fetchAllLivestreamsThunk = (livestream) => {
         catch (error) {
             console.log(error.message);
         }
+    }
+}
+
+export const setCurrentLivestream = (payload) => {
+    return {
+        type: SET_CURRENT_LIVESTREAM,
+        payload: payload,
+    }
+}
+
+export const setIsStreamer = (payload) => {
+    return{
+        type: SET_IS_STREAMER,
+        payload: payload,
+    }
+}
+
+export const setParticipants = (payload) => {
+    return{
+        type: SET_PARTICIPANTS,
+        payload: payload,
     }
 }
