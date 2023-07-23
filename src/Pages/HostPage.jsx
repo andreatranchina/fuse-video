@@ -34,6 +34,20 @@ const HostPage = ({socket}) => {
             code: v4Id.toString(),
         };
 
+
+        // email trigger for backend
+        const sendNotificationsResponse = await fetch(`/sendNotifications?userId=${loggedInUser.id}`, {
+          method: 'GET',
+          credentials: 'include', 
+        });
+
+        if (sendNotificationsResponse.ok) {
+          console.log('email notification sent successfully');
+        } else {
+          console.error('error sending email');
+        }
+
+
         //store livestream object in db
         const response = await dispatch((postLivestreamThunk(livestream)));
 
