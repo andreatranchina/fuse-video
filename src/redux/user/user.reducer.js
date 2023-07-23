@@ -1,9 +1,10 @@
-import { GET_USER, REMOVE_USER, EDIT_PROFILE } from "./user.types";
+import { GET_USER, REMOVE_USER, EDIT_PROFILE, EDIT_ACCOUNT } from "./user.types";
 
 
 export const INITIAL_USER_STATE = {
   defaultUser: {},
-  isEditing: false
+  isEditingProfile: false,
+  isEditingAccount: false
 }
 
 export default function userReducer(state = INITIAL_USER_STATE, action) {
@@ -16,7 +17,11 @@ export default function userReducer(state = INITIAL_USER_STATE, action) {
       };
       case EDIT_PROFILE:
         return {
-          ...state, isEditing: !state.isEditing
+          ...state, isEditingProfile: !state.isEditingProfile
+      }
+      case EDIT_ACCOUNT:
+        return {
+          ...state, isEditingAccount: !state.isEditingAccount
       }
       // case EDIT_PROFILE
       default:
