@@ -146,3 +146,47 @@ const addStream = (stream, connectedUserSocketId) => {
     videoContainer.appendChild(videoElement);
     videosContainer.appendChild(videoContainer);
 }
+
+
+export const toggleMicrophone = (isMicrophoneOn) => {
+    //in stream we have audio and video tracks, here we only have one in our local stream coming from our own mic
+    localStream.getAudioTracks()[0].enabled = isMicrophoneOn? true : false;
+}
+
+export const toggleCamera = (isCameraOn) => {
+    localStream.getVideoTracks()[0].enabled = isCameraOn? true : false;
+}
+
+export const toggleScreenShare = (isScreenSharing, screenSharingStream = null) => {//default screenSharingStream is null if nothing passed
+    if(isScreenSharing){
+        //switch track from camera to screen
+        switchVideoTracks(localStream);
+    }
+    else{
+        //switch track from screen to camera
+        switchVideoTracks(screenSharingStream);
+    }
+}
+
+export const switchVideoTracks = (stream) => {
+    for (let socket_id in peers) {//each peers object used socketId as key
+        //replace video track (switch) in each peer connection
+        //parameters of replaceTrack():
+        //1 - track which should be replaced, 2 - new track to replace with, 3 - stream to which you want to attach the video
+        for (let index in peers[socket_id].streams[0].getTracks()) {
+          for (let index2 in stream.getTracks()) {
+            if (
+              peers[socket_id].streams[0].getTracks()[index].kind ===
+              stream.getTracks()[index2].kind
+            ) {
+              peers[socket_id].replaceTrack(
+                peers[socket_id].streams[0].getTracks()[index],
+                stream.getTracks()[index2],
+                peers[socket_id].streams[0]
+              );
+              break;
+            }
+          }
+        }
+    }
+}
