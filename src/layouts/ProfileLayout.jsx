@@ -1,8 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import Container from '@mui/material/Container'
-import Grid from '@mui/material/Grid'
-import Stack from '@mui/material/Stack'
+import { Backdrop, Card, Grid, Stack }  from '@mui/material'
 import UploadProfilePhoto from '../components/profileInfo/UploadProfilePhoto'
 import UserBanner from '../components/profileInfo/UserBanner'
 import ProfilePhoto from '../components/profileInfo/ProfilePhoto'
@@ -21,8 +19,10 @@ import { useMediaQuery } from '@mui/material'
 
 const ProfileInfoLayout = () => {
 
-   const isLoggedIn = useSelector((state) => !!state.user.id);
+  //  const isLoggedIn = useSelector((state) => !!state.user.id);
+  const isLoggedIn = true;
    const isSmallScreen = useMediaQuery('(max-width: 900px)');
+   const isEditing = useSelector((state) => !state.user.isEditing)
 
   return (
      <Stack>
@@ -60,12 +60,14 @@ const ProfileInfoLayout = () => {
                     </Stack>
                 </Grid>
               </Grid>
-              <Grid item xs={8} sx={{backgroundColor:'purple',color:'white'}}>
-                <Grid container sx={{backgroundColor:'green', minHeight:'100%'}}>
-                  <Stack spacing={2}>
+              <Grid item xs={8} sx={{color:'white', width:'100%'}}>
+                <Grid container sx={{minHeight:'100%', pr:'20px'}}>
+                  <Stack spacing={2} justifyContent={'center'} sx={{width:'100%'}}>
+                    <Card sx={{width:'100%', p:'20px'}}>
                       <Bio/>
                       <Topics/>
-                      <EditInfoForm/>
+                    </Card>
+                      {/* <EditInfoForm/> */}
                   </Stack>
                 </Grid>
               </Grid>

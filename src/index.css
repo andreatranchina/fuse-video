@@ -12,6 +12,8 @@
       --prussian-blue: rgb(1, 26, 37);
       --teal: #44808Bff;
       --charcoal: #384B5Aff;
+      --paper-light: #e9dcda;
+      --paper-dark: #00131a;
 }
 
 body {

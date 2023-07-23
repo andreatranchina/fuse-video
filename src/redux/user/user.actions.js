@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { GET_USER, REMOVE_USER } from "./user.types";
+import { GET_USER, REMOVE_USER, EDIT_PROFILE, EDIT_ACCOUNT } from "./user.types";
 
 export const getUser = (payload) => {
     return{
@@ -62,3 +62,16 @@ export const logout = () => {
         }
       };
 } 
+
+export const editProfile = () => (dispatch) => {
+    dispatch({
+      type: EDIT_PROFILE,
+    });
+};
+
+export const editAccount = () => (dispatch) => {
+  console.log('edit account')
+    dispatch({
+      type: EDIT_ACCOUNT,
+    });
+};

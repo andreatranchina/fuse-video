@@ -1,9 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
-import { useMediaQuery } from '@mui/material';
+import { useMediaQuery, Modal, Stack } from '@mui/material';
 import { Helmet } from 'react-helmet-async'
-import { useSelector } from 'react-redux'
-import Stack from '@mui/material/Stack'
+import { useDispatch, useSelector } from 'react-redux'
 import UserLogin from '../components/login/UserLogin.jsx'
 import SideNavLinks from '../components/navbar/SideNavLinks';
 import FuseLogo from '../components/navbar/FuseLogo';
@@ -11,19 +10,31 @@ import SwitchLayout from '../components/navbar/SwitchLayout';
 import { useThemeContext } from "../theme/ThemeContextProvider";
 import '../styles/navbar.css';
 import MobileSpeedDial from '../components/navbar/MobileSpeedDial.jsx';
-import PersonIcon from '@mui/icons-material/Person';
+import ProfileMenu from '../components/navbar/ProfileMenu.jsx';
+import { styled } from '@mui/material/styles';
+import EditInfoForm from '../components/bio/EditInfoForm.jsx';
+import { editAccount } from '../redux/user/user.actions.js';
+import { toggleModal } from '../redux/ui/ui.actions.js'
 
+const CustomBackdrop = styled('div')(({ theme }) => ({
+  
+}));
 
 const RootLayout = () => {
   const isLoggedIn = useSelector((state) => !!state.user.id);
+  const isEditingAccount = useSelector((state) => !!state.user.isEditingAccount)
   const isSmallScreen = useMediaQuery("(max-width: 900px");
+  const dispatch = useDispatch();
   const { theme } = useThemeContext();
+  const open = useSelector(state => !state.modalIsOpen);
   
-
   const navbarStyle = {
     backgroundColor: theme.palette.primary.main,
     boxShadow: theme.palette.background.boxShadow
   };
+  useEffect(() => {
+    console.log('isEditingAccount changed:', isEditingAccount);
+  }, [isEditingAccount]);
 
   const loginStyle = { 
     display:'flex',
@@ -32,9 +43,22 @@ const RootLayout = () => {
     paddingTop: '80px', color:'black'
   }
 
-  const navlink = {
-    color: theme.palette.text.primary,
-  }
+   const modal = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: '80%',
+    height: '80%',
+    bgcolor: 'white',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+};
+
+  const handleClose = () => {
+    dispatch(toggleModal())
+  };
 
   return (
     <>
@@ -54,9 +78,8 @@ const RootLayout = () => {
             <div>
               {isSmallScreen ? 
               <Stack direction='row'>
-              {isLoggedIn ? (<NavLink to ="/profile" style={navlink}>
-                <PersonIcon sx={{width:'38px', height: '38px', marginRight: '20px'}}/>
-                </NavLink>) : ('')}
+              {isLoggedIn ? (
+                <ProfileMenu/>) : ('')}
                 <SwitchLayout/>
               </Stack> : <SideNavLinks/>}
             </div>
@@ -67,6 +90,14 @@ const RootLayout = () => {
       </header>
       <main>
         <Outlet />
+        {isEditingAccount ? ( <Modal
+        sx={modal}
+        open={open}
+        BackdropComponent={CustomBackdrop} 
+        >
+        <>
+      <EditInfoForm handleClose={handleClose}/></>
+    </Modal>) : ('')}
       </main>
       <footer>
         {isSmallScreen ? 
