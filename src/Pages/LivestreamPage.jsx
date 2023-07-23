@@ -14,6 +14,10 @@ const LivestreamPage = ({socket}) => {
 
     }, [])
 
+    const handleLeaveRoom = () => {
+        window.location.href = window.location.origin;
+    }
+
   return (
     <div style={{marginTop: "5rem"}}>
         <h1>Livestream title: {currentLivestream.title}</h1>
@@ -23,6 +27,10 @@ const LivestreamPage = ({socket}) => {
             return <p>{participant.name}</p> 
         }):null}
         <ChatComponent socket={socket} username={loggedInUser.fullName} room={currentLivestream.code}/>
+        <button>Toggle Mic</button>
+        <button>Toggle Camera</button>
+        <button onClick={handleLeaveRoom}>Leave Room</button>
+        <button>Toggle Screenshare</button>
     </div>
   )
 }
