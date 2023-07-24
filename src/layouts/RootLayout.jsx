@@ -52,7 +52,7 @@ const RootLayout = () => {
     display:'flex',
     justifyContent: isSmallScreen ? 'space-between' : 'flex-end',
     backgroundColor: theme.palette.background.login,
-    paddingTop: '80px', color:'black'
+    paddingTop: '80px',
   }
 
    const modal = {
@@ -60,10 +60,11 @@ const RootLayout = () => {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: '80%',
+    width: '500px',
     height: '80%',
     bgcolor: 'white',
-    border: '2px solid #000',
+    border: `2px solid ${theme.palette.text.secondary}`,
+    backgroundColor:theme.palette.background.paper,
     boxShadow: 24,
     p: 4,
 };
