@@ -5,7 +5,7 @@ import { Box, Button, Modal, Typography, createMuiTheme } from '@mui/material'
 import { useThemeContext } from '../../theme/ThemeContextProvider'
 import Backdrop from '@mui/material/Backdrop'
 import EditIcon from '@mui/icons-material/Edit'
-import EditInfoForm from '../bio/EditInfoForm'
+import EditInfoForm from '../account/EditInfoForm'
 import { useTheme } from '@mui/material/styles';
 import { styled } from '@mui/material/styles';
 
