@@ -86,7 +86,7 @@ const EditInfoForm = () => {
         country: country
       }
       console.log(editedAccount);
-      dispatch(editAccountThunk(6, editedAccount));
+      dispatch(editAccountThunk(7, editedAccount));
       //editUserInfo(firstName, lastName, email, mobile, errors, isSuccess);
     } else {
       console.log('failed');
