@@ -1,10 +1,9 @@
-import { GET_USER, REMOVE_USER, EDIT_PROFILE, EDIT_ACCOUNT } from "./user.types";
+import { GET_USER, REMOVE_USER, EDIT_ACCOUNT, EDIT_STATUS } from "./user.types";
 
 
 export const INITIAL_USER_STATE = {
   defaultUser: {},
-  isEditingProfile: false,
-  isEditingAccount: false
+  editedProfile:[],
 }
 
 export default function userReducer(state = INITIAL_USER_STATE, action) {
@@ -15,15 +14,19 @@ export default function userReducer(state = INITIAL_USER_STATE, action) {
         return {
         ...INITIAL_USER_STATE
       };
-      case EDIT_PROFILE:
-        return {
-          ...state, isEditingProfile: !state.isEditingProfile
-      }
+      //edit the profile information
       case EDIT_ACCOUNT:
+      return {
+        ...state,
+        defaultUser: {
+          ...state.defaultUser,
+          ...action.payload,
+        },
+      };
+      case EDIT_STATUS:
         return {
           ...state, isEditingAccount: !state.isEditingAccount
       }
-      // case EDIT_PROFILE
       default:
         return state;
     }
