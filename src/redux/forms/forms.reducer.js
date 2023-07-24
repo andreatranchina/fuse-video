@@ -1,17 +1,19 @@
 import { EDIT_FORM_FIELD, FLAG_ERRORS, SUBMIT_SUCCESS, SUBMIT_FAIL } from './forms.types'
 
 const INITIAL_FORM_STATE = {
-	firstName: '',
-	lastName: '',
-	email: '',
-	mobile: '',
-	passowrd:'',
+	firstName: ' ',
+	lastName: ' ',
+	email: ' ',
+	mobile: ' ',
+	passowrd:' ',
+	country:' ',
 	errors: {
-		firstName: '',
-		lastName: '',
-		email: '',
-		mobile: '',
-		password: ''
+		firstName: ' ',
+		lastName: ' ',
+		email: ' ',
+		mobile: ' ',
+		password: ' ',
+		country:' ',
 	},
 	isSuccess: false,
 };
