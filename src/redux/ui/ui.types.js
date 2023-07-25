@@ -1,1 +1,2 @@
 export const TOGGLE_MODAL = 'TOGGLE_MODAL'
+export const SET_SETTINGS_TAB = 'SET_SETTINGS_TAB'

@@ -12,9 +12,10 @@ import '../styles/navbar.css';
 import MobileSpeedDial from '../components/navbar/MobileSpeedDial.jsx';
 import ProfileMenu from '../components/navbar/ProfileMenu.jsx';
 import { styled } from '@mui/material/styles';
-import EditInfoForm from '../components/bio/EditInfoForm.jsx';
+import EditInfoForm from '../components/account/EditInfoForm.jsx';
 import { editAccount } from '../redux/user/user.actions.js';
 import { toggleModal } from '../redux/ui/ui.actions.js'
+import SettingsTabs from '../components/account/SettingsTabs.jsx';
 
 const HiddenBackdrop = styled('div')(({ theme }) => ({
   zIndex: theme.zIndex.modal - 1,
@@ -51,7 +52,7 @@ const RootLayout = () => {
     display:'flex',
     justifyContent: isSmallScreen ? 'space-between' : 'flex-end',
     backgroundColor: theme.palette.background.login,
-    paddingTop: '80px', color:'black'
+    paddingTop: '80px',
   }
 
    const modal = {
@@ -59,10 +60,11 @@ const RootLayout = () => {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: '80%',
+    width: '500px',
     height: '80%',
     bgcolor: 'white',
-    border: '2px solid #000',
+    border: `2px solid ${theme.palette.text.secondary}`,
+    backgroundColor:theme.palette.background.paper,
     boxShadow: 24,
     p: 4,
 };
@@ -108,8 +110,8 @@ const RootLayout = () => {
         open={open}
         BackdropComponent={HiddenBackdrop} 
         >
-        <>
-      <EditInfoForm handleClose={handleClose}/></>
+        
+      <SettingsTabs/>
     </Modal>
     ) : ('')}
       </main>
