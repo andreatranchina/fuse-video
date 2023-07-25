@@ -17,7 +17,7 @@ export const initLivestreamConnection = (async (isStreamer, fullName, livestream
                 // video: {width: '480', height: '360'},
             });
             localStream = stream;
-            showLocalLivestreamVideo(localStream);
+            // showLocalLivestreamVideo(localStream);
     
             //dispatch action to hide overlay
             // store.dispatch(setShowOverlay(false));
@@ -34,6 +34,7 @@ export const initLivestreamConnection = (async (isStreamer, fullName, livestream
         console.log('error occurred when trying to get access to local stream');
         console.log(error);
     }
+    return localStream;
 })
 
 let peers = {};
@@ -107,7 +108,7 @@ export const removePeerConnection = (data) => {
 }
 
 const showLocalLivestreamVideo = (localStream) => {
-    const videosContainer = document.getElementById('videos_container');
+    const videosContainer = document.getElementById('videos-container');
     const videoContainer = document.createElement('div');
     const videoElement = document.createElement('video');
 
@@ -124,7 +125,7 @@ const showLocalLivestreamVideo = (localStream) => {
 
 const addStream = (stream, connectedUserSocketId) => {
     //display incoming stream
-    const videosContainer = document.getElementById('videos_container');
+    const videosContainer = document.getElementById('videos-container');
     const videoContainer = document.createElement('div');
 
     videoContainer.id = connectedUserSocketId;

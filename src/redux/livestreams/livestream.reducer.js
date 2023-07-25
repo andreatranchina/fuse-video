@@ -1,5 +1,5 @@
 import { POST_LIVESTREAM, FETCH_ALL_LIVESTREAMS, SET_CURRENT_LIVESTREAM, 
-    SET_IS_STREAMER, SET_PARTICIPANTS } from "./livestream.types";
+    SET_IS_STREAMER, SET_PARTICIPANTS, ADD_REMOTE_STREAM } from "./livestream.types";
 
 export const INITIAL_LIVESTREAMS_STATE = {
     livestreamList: [],
@@ -35,7 +35,7 @@ export default function livestreamReducer(state = INITIAL_LIVESTREAMS_STATE, act
             return{
                 ...state,
                 participants: action.payload
-            }    
+            }
         default:
             return state;
     }

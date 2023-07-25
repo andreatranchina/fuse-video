@@ -20,8 +20,10 @@ import Customizations from '.././pages/Customizations'
 import Profile from '.././pages/Profile'
 import RootLayout from '.././layouts/RootLayout'
 import { connectWithSocketIO } from '../utils/socketIO'
+import { useEffect } from 'react'
 
 let socket = connectWithSocketIO();
+// let socket = null;
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -35,6 +37,9 @@ const router = createBrowserRouter(
       <Route path="/join" element={<JoinPage socket={socket}/>}/>
       <Route path="/host" element={<HostPage socket={socket}/>} />
       <Route path="/livestream/:code" element={<LivestreamPage socket={socket} />} />
+      {/* <Route path="/join" element={<JoinPage />}/>
+      <Route path="/host" element={<HostPage />} />
+      <Route path="/livestream/:code" element={<LivestreamPage />} /> */}
         {/* <Route path="/golive"/> /host/golive
          <Route path="/schedule"/> /host/schedule <------- nested routes */}
       <Route path="/translate" element={<Translations/>}/>
@@ -46,6 +51,9 @@ const router = createBrowserRouter(
 )
 
 function App() {
+//   useEffect(() => {
+//     connectWithSocketIO();
+//   })
 
   const { theme } = useThemeContext()
 

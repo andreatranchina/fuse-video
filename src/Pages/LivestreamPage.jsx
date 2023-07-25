@@ -2,12 +2,11 @@ import React, {useEffect, useState, useRef} from 'react'
 import { useSelector} from 'react-redux';
 import ChatComponent from '../components/ChatComponent';
 import * as webRTC from '../utils/webRTC';
-import { typographyClasses } from '@mui/material';
+import ButtonsContainer from '../components/video/ButtonsContainer';
+import { useThemeContext } from '../theme/ThemeContextProvider';
+import { Box } from '@mui/material';
 
 const LivestreamPage = ({socket}) => {
-    const [isMicrophoneOn, setIsMicrophoneOn] = useState(true);
-    const [isCameraOn, setIsCameraOn] = useState(true);
-    const [isScreenSharing, setIsScreenSharing] = useState(false);
     const [screenSharingStream, setScreenSharingStream] = useState(null);
 
     const currentLivestream = useSelector((state) => state.livestreams.currentLivestream);
@@ -15,84 +14,70 @@ const LivestreamPage = ({socket}) => {
     const loggedInUser = useSelector((state) => state.user);
     const participants = useSelector((state) => state.livestreams.participants);
 
-    const localPreviewRef = useRef();
+    const localScreenRef = useRef();
+    const localCameraRef = useRef();
+    const { mode } = useThemeContext();
 
     useEffect(() => {
-        webRTC.initLivestreamConnection(isStreamer, loggedInUser.fullName, currentLivestream.code)
 
-    }, [])
-
-    useEffect(()=> {
-        const video = localPreviewRef.current;
-        video.srcObject = screenSharingStream;
-        video.onloadedmetadata = () =>{
-            video.play();
-        }
-    }, [screenSharingStream])
-
-    const handleLeaveRoom = () => {
-        window.location.href = window.location.origin;
-    }
-
-    const handleToggleMicrophone = () => {
-        webRTC.toggleMicrophone(!isMicrophoneOn);
-        setIsMicrophoneOn(!isMicrophoneOn)
-    }
-
-    const handleToggleCamera = () => {
-        webRTC.toggleCamera(!isCameraOn);
-        setIsCameraOn(!isCameraOn);
-
-    }
-
-    const handleToggleScreenShare = async() => {
-        if(!isScreenSharing){
-            let stream = null;
+        const getlocalCameraStream = async () => {
             try{
-                stream = await navigator.mediaDevices.getDisplayMedia({
-                    audio: false, //only want the video stream from screen, audio will still come from mediaDevices.getUserMedia();
-                    video: true,
-                });
+                let localCameraStream = await webRTC.initLivestreamConnection(isStreamer, loggedInUser.fullName, currentLivestream.code)
+                const localCameraVideo = localCameraRef.current;
+                localCameraVideo.srcObject = localCameraStream;
+                localCameraVideo.onloadedmetadata = () => {
+                    localCameraVideo.play();
+                }
             }
             catch(error){
                 console.log(error);
             }
-            if(stream){
-                setScreenSharingStream(stream);
 
-                webRTC.toggleScreenShare(isScreenSharing, stream);
+        }
 
-                setIsScreenSharing(true);
+        getlocalCameraStream();
 
-                //switch video track which we are sending to other users
+    }, [])
+
+    useEffect(()=> {
+        if(isStreamer){
+            const video = localScreenRef.current;
+            video.srcObject = screenSharingStream;
+            video.onloadedmetadata = () =>{
+                video.play();
             }
         }
-        else{
-            webRTC.toggleScreenShare(isScreenSharing); //is screen sharing true in this case 
-            setIsScreenSharing(false);
 
-            //stop screen share stream
-            screenSharingStream.getTracks().forEach(track => track.stop());// note there will only be one track
-            setScreenSharingStream(null);
-        }
-    }
+    }, [screenSharingStream])
 
   return (
-    <div style={{marginTop: "5rem"}}>
-        <h1>Livestream title: {currentLivestream.title}</h1>
-        <h1>Livestream Id: {currentLivestream.code}</h1>
-        <h1>Participants</h1>
-        {participants? participants.map((participant) => {
-            return <p>{participant.name}</p> 
-        }):null}
+    <Box className="room-container" id={mode === 'light' ? 'home-light' : 'home-dark'} sx={{pt:10, justifyContent:'center', display:'flex'}}>
+        <div className="room-details-container">
+            <div className="room-details-content">
+                <h1>Livestream title: {currentLivestream.title}</h1>
+                <h3>Livestream Id: {currentLivestream.code}</h3>
+            </div>
+        </div>
+
+        <div className="participants-container">
+            <h1>Participants</h1>
+            {participants? participants.map((participant) => {
+                return <p>{participant.name}</p> 
+            }):null}
+        </div>
+
+        <div className="videos-container" id="videos-container">
+            {isStreamer?<video muted autoPlay ref={localCameraRef}></video>:null}
+        </div>
         <ChatComponent socket={socket} username={loggedInUser.fullName} room={currentLivestream.code}/>
-        {isStreamer?<button onClick={handleToggleMicrophone}>Toggle Mic</button>:null}
-        {isStreamer?<button onClick={handleToggleCamera}>Toggle Camera</button>:null}
-        <button onClick={handleLeaveRoom}>Leave Room</button>
-        {isStreamer?<button onClick={handleToggleScreenShare}>Toggle Screenshare</button>:null}
-        <video muted autoPlay ref={localPreviewRef}></video>
-    </div>
+
+
+        {isStreamer?<video className="screen-share" muted autoPlay ref={localScreenRef}></video>:null}
+
+        <ButtonsContainer isStreamer={isStreamer} screenSharingStream={screenSharingStream} 
+        setScreenSharingStream={setScreenSharingStream}/>
+    </Box>
   )
 }
 
-export default LivestreamPage
+export default LivestreamPage;

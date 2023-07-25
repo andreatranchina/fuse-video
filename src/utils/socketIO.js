@@ -68,3 +68,13 @@ export const joinLivestream = (fullName, livestreamCode) => {
 export const signalPeerData = (data) => {
     socket.emit("connection-signal", data);
 }
+
+export const sendRemoteStreamsToComponent = (streams) => {
+    console.log("running sendremotestremstocomponent " + streams);
+    console.log(streams);
+    const data = {
+        streams,
+    }
+    console.log(data);
+    socket.emit('update-remote-streams', data);
+}

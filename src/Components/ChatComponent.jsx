@@ -1,8 +1,9 @@
 import React, {useState, useEffect} from 'react'
 import {useSelector, useDispatch} from 'react-redux';
 import ScrollToBottom from "react-scroll-to-bottom";
-import '../styles/callpage.css';
+import '../styles/chatComponent.css';
 import { postMessagesThunk } from '../redux/messages/message.actions';
+import SendIcon from '@mui/icons-material/Send';
 
 const ChatComponent = ({socket, username, room}) => {
     const [currentMessage, setCurrentMessage] = useState("");
@@ -69,7 +70,7 @@ const ChatComponent = ({socket, username, room}) => {
                 onChange={(e) => setCurrentMessage(e.target.value)}
                 onKeyDown={(e) => {e.key === "Enter" && sendMessage()}}               
             />
-            <button onClick={sendMessage}>&#8658;</button>
+            <button onClick={sendMessage}><SendIcon style={{marginRight: "0.5rem"}}/></button>
         </div>
     </div>
   )
