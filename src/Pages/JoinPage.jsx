@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import '../styles/callpage.css';
+import '../styles/chatComponent.css';
 import {useDispatch} from 'react-redux';
 import {setCurrentLivestream} from "../redux/livestreams/livestream.actions";
 import Box from '@mui/material/Box'
@@ -39,7 +39,7 @@ const JoinPage = ({socket}) => {
     }
   
     return (
-      <div className="callPage" style={{marginTop: "5rem"}}>
+      <div className="callPage" style={{marginTop: "4rem"}}>
           <div className="joinChatContainer">
             <h3>Join livestream</h3>
             <input type="text" placeholder="livestream code.." onChange={(e) => {setLivestreamCode(e.target.value)}}/>
