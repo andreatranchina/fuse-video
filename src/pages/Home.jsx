@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Box } from "@mui/material"
 import '../styles/home.css'
 import FloatingMenu from '../components/navbar/FloatingMenu';
@@ -13,6 +13,8 @@ const Home = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isLoggedIn = useSelector((state) => !!state.user.id);
+
+  const currentUser = useSelector((state) => state.user.defaultUser)
 
   const handleLogOut = (e) => {
     e.preventDefault();

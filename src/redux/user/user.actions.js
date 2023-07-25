@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { GET_USER, REMOVE_USER, EDIT_ACCOUNT, EDIT_STATUS } from "./user.types";
+import { GET_USER, REMOVE_USER, EDIT_ACCOUNT, EDIT_STATUS, EMAIL_FETCH_USER } from "./user.types";
 
 export const getUser = (payload) => {
     return{
@@ -45,8 +45,11 @@ export const auth = (email, password, method, isAdmin) => {
         try {
           dispatch(getUser(res.data));
           // history.push("/home");
+          dispatch(fetchUserByEmailThunk(email));
+          // return Promise.resolve();
         } catch (dispatchOrHistoryErr) {
-          console.error(dispatchOrHistoryErr);
+          console.error(dispatchOrHistoryErr + " it didn't work");
+          // return Promise.reject()
         }
       };
 } 
@@ -111,88 +114,39 @@ export const editAccountThunk = (id, editedAccount) => {
   }
 }
 
-  // email:{
-  //           type: DataTypes.STRING,
-  //           unique: true,
-  //           allowNull: false,
-  //           validate: {
-  //               isEmail: true,
-  //           }
-  //       },
-  //       password: {
-  //           type: DataTypes.STRING,
-  //       },
-  //       firstName: {
-  //           type: DataTypes.STRING,
-  //           defaultValue: 'Jenny',
-  //           allowNull: false,
-  //       },
-  //       lastName: {
-  //           type: DataTypes.STRING,
-  //           defaultValue: 'Craig',
-  //           allowNull: false,
-  //       },
-  //       userName: {
-  //           type: DataTypes.STRING,
-  //           defaultValue:'sleekusername91',
-  //           allowNull: false,
-  //       },
-  //       imgUrl: {
-  //           type: DataTypes.STRING(1000),
-  //           defaultValue: "https://i0.wp.com/cfe.umich.edu/wp-content/uploads/2015/09/blank-profile.jpg?fit=4016%2C2677&ssl=1",
-  //       },
-  //       salt: { //salt is needed to run the encryption again, each user will have unique salt
-  //           type: DataTypes.STRING
-  //       },
-  //       googleId: { //for OAuth
-  //           type: DataTypes.STRING,
-  //       },
-  //       isAdmin: {
-  //           type: DataTypes.BOOLEAN,
-  //           allowNull: false,
-  //           defaultValue: false,
-  //       },
-  //       language:{
-  //           type: DataTypes.STRING,
-  //           allowNull: false,
-  //           defaultValue: 'EN',
-  //       },
-  //       bio: {
-  //           type: DataTypes.STRING(100),
-  //           defaultValue:'I love tennis, movies, music, and more! Let\'s connect!'
-  //       },
-  //       mobile: {
-  //           type:DataTypes.STRING(100),
-  //           defaultValue:'+18009092929'
-  //       },
-  //       isDeactivated: {
-  //           type: DataTypes.BOOLEAN,
-  //           defaultValue:false
-  //       },
-  //       isPrivate: {
-  //           type: DataTypes.BOOLEAN,
-  //           defaultValue:false
-  //       },
-  //       emailNotifications:{
-  //           type: DataTypes.BOOLEAN,
-  //           defaultValue:true
-  //       },
-  //       mobileNotifications:{
-  //           type: DataTypes.BOOLEAN,
-  //           defaultValue:true
-  //       },
-  //       country:{
-  //           type: DataTypes.STRING(100),
-  //           defaultValue: 'United States'
-  //       },
-  //       city:{
-  //           type: DataTypes.STRING(100),
-  //           defaultValue: 'Denver'
-  //       },
-  //       state:{
-  //           type: DataTypes.STRING(100),
-  //           defaultValue: 'CO'
-  //       },
-  //   },
 
+export const fetchUserByEmail = (payload) => ({
+  type: EMAIL_FETCH_USER,
+  payload: payload,
+});
 
+export const fetchUserByEmailThunk = (userEmail) => {
+  return async (dispatch) => {
+    let user = {}
+    try {
+    console.log('email fetch thunk hit')
+    user = await axios.get(`http://localhost:3001/api/user/byEmail/${userEmail}`, {
+      email: user.email,
+      password: user.password,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      userName: user.userName,
+      imgUrl: user.imgUrl,
+      language: user.language,
+      bio: user.bio,
+      mobile: user.mobile,
+      isDeactivated: user.isDeactivated,
+      isPrivate: user.isPrivate,
+      emailNotificiations: user.emailNotificiations,
+      mobileNotifications: user.mobileNotifications,
+      country: user.country,
+      city: user.city,
+      state: user.state,
+    });
+    console.log('made edit account axios call')
+    dispatch(fetchUserByEmail(user.data));
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}

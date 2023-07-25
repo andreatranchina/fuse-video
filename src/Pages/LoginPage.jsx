@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { auth } from "../redux/user/user.actions";
 import { useNavigate } from "react-router-dom";
@@ -11,12 +11,13 @@ const LoginPage = () => {
   const dispatch = useDispatch();
   const error = useSelector((state) => state.user.error);
   const navigate = useNavigate();
+  const currentUser = useSelector((state) => state.user.defaultUser)
 
   const handleSubmit = (event) => {
     event.preventDefault();
     // setEmail(event.target.email.value);
     // setPassword(event.target.password.value);
-
+    // dispatch(fetchUserByEmailThunk(email))
     dispatch(auth(email, password, "login"));
     navigate('/');
   }
@@ -41,3 +42,4 @@ const LoginPage = () => {
 }
 
 export default LoginPage
+

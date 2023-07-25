@@ -13,9 +13,12 @@ const EditInfoForm = () => {
 
   const isEditingAccount = useSelector((state) => !!state.user.isEditingAccount)
   const { firstName, lastName, email, isSuccess, errors, mobile, country } = useSelector((state) => state.forms)
-  const userId = useSelector((state) => state.user.defaultUser?.id)
-
+  const userId = useSelector((state) => state.user.defaultUser.id)
+  const defaultUser = useSelector((state) => state.user.defaultUser)
   //need a selector to fetch all the data from the user prior to the form uploading
+
+  const { id } = defaultUser;
+
 
   const isValidEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -37,7 +40,6 @@ const EditInfoForm = () => {
     
     if (!isValidEmail(email)){
       dispatch(flagErrors({ email: 'Invalid Email'})) 
-      console.log('invalid email')
     } 
 
     const mobileError = errors.mobile;
@@ -52,11 +54,9 @@ const EditInfoForm = () => {
     try {
       // Parse the phone number
       const mobileNumberInstance = parsePhoneNumber(mobile, country);
-      console.log(mobileNumberInstance.number);
 
       // Check if the phone number is valid, using the isValidNumber method from react-phone-number-input
       const isValidMobile = mobileNumberInstance.number ? isValidNumber(mobileNumberInstance.number) : false;
-      console.log(isValidMobile);
 
       // Format the phone number if it's valid
       if (isValidMobile) {
@@ -67,14 +67,11 @@ const EditInfoForm = () => {
       }
     } catch (error) {
       // Handle any exceptions that occur during phone number parsing
-      console.error('Error parsing phone number:', error);
       dispatch(flagErrors({ mobile: 'Error parsing phone number' }));
     }
   }
 
     const areErrorsEmpty = Object.values(errors).every((value) => value === '');
-
-    console.log(areErrorsEmpty)
 
     if (areErrorsEmpty){
       dispatch(submitSuccess());
@@ -85,11 +82,9 @@ const EditInfoForm = () => {
         mobile: mobile,
         country: country
       }
-      console.log(editedAccount);
-      dispatch(editAccountThunk(7, editedAccount));
+      dispatch(editAccountThunk(id, editedAccount));
       //editUserInfo(firstName, lastName, email, mobile, errors, isSuccess);
     } else {
-      console.log('failed');
       dispatch(submitFail());
     }
   }
