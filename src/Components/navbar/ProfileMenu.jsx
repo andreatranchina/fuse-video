@@ -4,7 +4,7 @@ import { IconButton, Menu, MenuItem } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
 import { useThemeContext } from '../../theme/ThemeContextProvider';
 import PersonIcon from '@mui/icons-material/Person'
-import { editAccount, logout } from '../../redux/user/user.actions';
+import { updateEditStatus, logout } from '../../redux/user/user.actions';
 import { toggleModal } from '../../redux/ui/ui.actions';
 
 const ProfileMenu = () => {
@@ -32,7 +32,7 @@ const ProfileMenu = () => {
   const handleShowAccount = () => {
     console.log('Modal state', modalOpen);
     dispatch(toggleModal());
-    dispatch(editAccount());
+    dispatch(updateEditStatus());
     setAnchorEl(null);
   }
 

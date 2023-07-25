@@ -1,0 +1,4 @@
+export const EDIT_FORM_FIELD = 'EDIT_FORM_FIELD'
+export const FLAG_ERRORS = 'FLAG_ERRORS'
+export const SUBMIT_FAIL = 'SUBMIT_FAIL'
+export const SUBMIT_SUCCESS = 'SUBMIT_SUCCESS'
