@@ -60,11 +60,11 @@
 .videos-container {
     display: flex;
     flex-wrap: wrap;
-    flex-direction: column;
-    justify-content: flex-end;
+    /* flex-direction: column; */
+    /* justify-content: flex-end; */
     margin-left: 20%;
-    width: 60%;
-    left: 5%;
+    width: 55%;
+    left: 7%;
     top: 22%;
     position: absolute;
     border-radius: 2rem;
@@ -77,6 +77,40 @@ video {
     box-shadow: 3px 3px 3px var(--chinese-violet);
 
 }
+
+.video-container:first-child:nth-last-child(1):first-child:nth-last-child(1) {
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
+  
+  .video-container:first-child:nth-last-child(2),
+  .video-container:first-child:nth-last-child(2) ~ .video-container {
+    width: 45%;
+    height: 45%;
+    position: relative;
+  }
+  
+  .video-container:first-child:nth-last-child(3),
+  .video-container:first-child:nth-last-child(3) ~ .video-container {
+    width: 45%;
+    height: 45%;
+    position: relative;
+  }
+  
+  .video-container:first-child:nth-last-child(4),
+  .video-container:first-child:nth-last-child(4) ~ .video-container {
+    width: 45%;
+    height: 45%;
+    position: relative;
+  }
+  
+  .video-container:first-child:nth-last-child(5),
+  .video-container:first-child:nth-last-child(5) ~ .video-container {
+    width: 33%;
+    height: 33%;
+    position: relative;
+  }
 
 .screen-share{
     position: absolute;

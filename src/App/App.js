@@ -13,6 +13,7 @@ import Host from '.././pages/Host'
 import HostPage from '../pages/HostPage'
 import JoinPage from '../pages/JoinPage'
 import LivestreamPage from '../pages/LivestreamPage'
+import VideoChatPage from '../pages/VideoChatPage'
 import LoginPage from '.././pages/LoginPage';
 import SignUpPage from '.././pages/SignUpPage';
 import Translations from '.././pages/Translations'
@@ -37,6 +38,7 @@ const router = createBrowserRouter(
       <Route path="/join" element={<JoinPage socket={socket}/>}/>
       <Route path="/host" element={<HostPage socket={socket}/>} />
       <Route path="/livestream/:code" element={<LivestreamPage socket={socket} />} />
+      <Route path="/videochat/:code" element={<VideoChatPage socket={socket} />} />
       {/* <Route path="/join" element={<JoinPage />}/>
       <Route path="/host" element={<HostPage />} />
       <Route path="/livestream/:code" element={<LivestreamPage />} /> */}

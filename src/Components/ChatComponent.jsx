@@ -5,23 +5,33 @@ import '../styles/chatComponent.css';
 import { postMessagesThunk } from '../redux/messages/message.actions';
 import SendIcon from '@mui/icons-material/Send';
 
-const ChatComponent = ({socket, username, room}) => {
+const ChatComponent = ({socket, username, room, type}) => {
     const [currentMessage, setCurrentMessage] = useState("");
     const [messageList, setMessageList] = useState([]);
     const loggedInUser = useSelector((state) => state.user);
-    const currentLivestream = useSelector((state) => state.livestreams.currentLivestream);
+    const currentRoom = useSelector((state) => state.room.currentRoom);
     const dispatch = useDispatch();
 
     const sendMessage = async() => {
-        const newMessageToDb = {
-            content: currentMessage,
-            user_id: loggedInUser.id,
-            livestream_id: currentLivestream.id,
+        let newMessageToDb = null;
+        if (type==="livestream"){
+            newMessageToDb = {
+                content: currentMessage,
+                user_id: loggedInUser.id,
+                livestream_id: currentRoom.id,
+            }
+        }
+        else{
+            newMessageToDb = {
+                content: currentMessage,
+                user_id: loggedInUser.id,
+                videochat_id: currentRoom.id,
+            }           
         }
 
-        dispatch(postMessagesThunk(newMessageToDb));
+        if(currentMessage) { //do not want to send null message
+            dispatch(postMessagesThunk(newMessageToDb));
 
-        if(currentMessage) {
             const messageData = {
                 room: room,
                 author: username,
@@ -32,6 +42,7 @@ const ChatComponent = ({socket, username, room}) => {
             await socket.emit("send_message", messageData);
             setMessageList((list) => [...list, messageData])
             setCurrentMessage("");
+
         }
     }
 
@@ -58,7 +69,7 @@ const ChatComponent = ({socket, username, room}) => {
                         </div>
                         <div className="message-meta">
                             <p id="time">{messageContent.time}</p>
-                            <p id="author">{messageContent.author}</p>
+                            <p id="author">{username === messageContent.author? "You" : messageContent.author}</p>
                         </div>
                         </div>
                     </div>)
