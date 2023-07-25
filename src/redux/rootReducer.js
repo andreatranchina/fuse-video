@@ -5,6 +5,7 @@ import livestreamReducer from "./livestreams/livestream.reducer"
 import messageReducer from "./messages/message.reducer"
 import uiReducer from './ui/ui.reducer'
 import formReducer from "./forms/forms.reducer"
+import roomReducer from "./room/room.reducer"
 
 //function takes in object of all reducers to combine,
 //taking a key value pair 
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
     messages: messageReducer,
     ui: uiReducer,
     forms: formReducer,
+    room: roomReducer,
 })
 
 export default rootReducer

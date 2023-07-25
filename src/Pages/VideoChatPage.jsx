@@ -1,15 +1,16 @@
 import React, {useEffect, useState, useRef} from 'react'
-import { useSelector} from 'react-redux';
+import { useSelector, useDispatch} from 'react-redux';
 import ChatComponent from '../components/ChatComponent';
 import * as webRTC from '../utils/webRTC';
 import ButtonsContainer from '../components/video/ButtonsContainer';
 import { useThemeContext } from '../theme/ThemeContextProvider';
 import { Box } from '@mui/material';
+import { setIsStreamer } from '../redux/room/room.actions';
 
-const LivestreamPage = ({socket}) => {
+const VideoChatPage = ({socket}) => {
     const [screenSharingStream, setScreenSharingStream] = useState(null);
 
-    const currentLivestream = useSelector((state) => state.room.currentRoom);
+    const currentVideochat = useSelector((state) => state.room.currentRoom);
     const isStreamer = useSelector((state) => state.room.isStreamer);
     const loggedInUser = useSelector((state) => state.user);
     const participants = useSelector((state) => state.room.participants);
@@ -18,12 +19,16 @@ const LivestreamPage = ({socket}) => {
     const localCameraRef = useRef();
     const { mode } = useThemeContext();
 
-    useEffect(() => {
+    const dispatch = useDispatch();
+
+    useEffect(() => { 
+        //in video chat meetings everyone is a streamer (will share audio and video)
+        dispatch(setIsStreamer(true));
 
         const getlocalCameraStream = async () => {
-            console.log(participants);
+            console.log(isStreamer);
             try{
-                let localCameraStream = await webRTC.initLivestreamConnection(isStreamer, loggedInUser.userName, currentLivestream.code)
+                let localCameraStream = await webRTC.initVideoChatConnection(isStreamer, loggedInUser.userName, currentVideochat.code)
                 const localCameraVideo = localCameraRef.current;
                 localCameraVideo.srcObject = localCameraStream;
                 localCameraVideo.onloadedmetadata = () => {
@@ -51,12 +56,13 @@ const LivestreamPage = ({socket}) => {
 
     }, [screenSharingStream])
 
+
   return (
     <Box className="room-container" id={mode === 'light' ? 'home-light' : 'home-dark'} sx={{pt:10, justifyContent:'center', display:'flex'}}>
         <div className="room-details-container">
             <div className="room-details-content">
-                <h1>Livestream title: {currentLivestream.title}</h1>
-                <h3>Livestream Id: {currentLivestream.code}</h3>
+                <h1>Video Chat Title: {currentVideochat.title}</h1>
+                <h3>Video Chat Id: {currentVideochat.code}</h3>
             </div>
         </div>
 
@@ -71,7 +77,7 @@ const LivestreamPage = ({socket}) => {
             {isStreamer?<div className="video-container"><video muted autoPlay ref={localCameraRef}></video></div>:null}
         </div>
         <ChatComponent socket={socket} username={loggedInUser.userName} 
-        room={currentLivestream.code} type={"livestream"}/>
+        room={currentVideochat.code} type={"videochat"}/>
 
 
         {isStreamer?<video className="screen-share" muted autoPlay ref={localScreenRef}></video>:null}
@@ -82,4 +88,4 @@ const LivestreamPage = ({socket}) => {
   )
 }
 
-export default LivestreamPage;
+export default VideoChatPage
