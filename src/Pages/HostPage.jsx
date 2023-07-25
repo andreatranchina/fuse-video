@@ -36,7 +36,7 @@ const HostPage = ({socket}) => {
 
 
         // email trigger for backend
-        const sendNotificationsResponse = await fetch(`http://localhost:3001/api/follows/sendNotifications?userId=${loggedInUser.id}`, {
+        const sendNotificationsResponse = await fetch(`http://localhost:3001/api/follows/sendNotifications?userId=${loggedInUser.id}&livestreamCode=${v4Id.toString()}`, {
           method: 'GET',
           credentials: 'include', 
         });
