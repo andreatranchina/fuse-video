@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types';
-import { Box, Button, Tab, Tabs, ThemeContext, ThemeProvider, Typography } from '@mui/material'
+import { Box, Button, Tab, Tabs, ThemeProvider, Typography } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
 import { setSettingsTab } from '../../redux/ui/ui.actions';
 import EditInfoForm from './EditInfoForm';
@@ -8,7 +8,6 @@ import { updateEditStatus } from '../../redux/user/user.actions'
 import { toggleModal } from '../../redux/ui/ui.actions'
 import { submitFail } from '../../redux/forms/forms.actions';
 import useTypographyTheme from '../../theme/useTypographyTheme';
-import { styled } from '@mui/material/styles';
 import { useThemeContext } from '../../theme/ThemeContextProvider';
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined'
 
@@ -75,10 +74,10 @@ const SettingsTabs = () => {
       <Button onClick={handleClose} sx={{ maxWidth: '30px', maxHeight: '30px', minWidth: '30px', minHeight: '30px', color:'red', border:'2px solid red', '&:hover': { backgroundColor:'red', color:`${theme.palette.background.paper}`} }}>
         <CloseOutlinedIcon sx={{'&hover': { backgroundColor:'red !important'}}}/>
       </Button>
-      </Box>
+    </Box>
         <ThemeProvider theme={tabsTheme}>
           <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-            <Tabs value={value} onChange={handleChange} textColor={`${theme.palette.primary}`} aria-label="basic tabs example" TabIndicatorProps={{
+            <Tabs value={value} onChange={handleChange} textColor={`${theme.palette.text.primary}`} aria-label="basic tabs example" TabIndicatorProps={{
     style: {
       backgroundColor: "#D97D54"
     }

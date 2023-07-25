@@ -1,11 +1,12 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Box, Button, FormControl, FormHelperText, Input, InputLabel, Stack, TextField }  from '@mui/material'
+import { Box, Stack, TextField }  from '@mui/material'
 import { editFormField, submitSuccess, submitFail, flagErrors } from '../../redux/forms/forms.actions';
 import MobileValidation from '../validators/MobileValidation';
 import PasswordValidtator from '../validators/PasswordValidator';
 import { editAccountThunk } from '../../redux/user/user.actions';
-import { parsePhoneNumber, isValidNumber, format } from 'libphonenumber-js';
+import { useThemeContext } from '../../theme/ThemeContextProvider';
+import SaveAccountButton from './SaveAccountButton';
 
 const EditInfoForm = () => {
 
@@ -16,77 +17,43 @@ const EditInfoForm = () => {
   const userId = useSelector((state) => state.user.defaultUser.id)
   const defaultUser = useSelector((state) => state.user.defaultUser)
   //need a selector to fetch all the data from the user prior to the form uploading
+  const { theme } = useThemeContext();
 
-  const { id } = defaultUser;
+  const inputStyles = { 
+    '& label': {
+      color: theme.palette.text.secondary,
+    },
+      '& .MuiInputLabel-root': {
+    color: theme.palette.text.secondary, // Change the label color
+  },
+  '& .MuiInputBase-root': {
+    color: theme.palette.text.secondary, // Change the input text color
+  },
+  '& .MuiInput-underline:before': {
+    borderBottomColor: theme.palette.text.secondary, // Change the line (border) color when input is not focused
+  },
+  '& .MuiInput-underline:hover:not(.Mui-disabled):before': {
+    borderBottomColor: theme.palette.text.primary, // Change the line (border) color when input is hovered
+  },
+  '& .MuiInput-underline:after': {
+    borderBottomColor: `#D97D54`, // Change the line (border) color when input is focused
+  },
+  }
 
-
-  const isValidEmail = (email) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
+  const mobileInputStyle = {
+    '& label': {
+      color: theme.palette.text.secondary
+    },
+      '& .MuiInputLabel-root': {
+    color: theme.palette.text.secondary, // Change the label color
+  },
+  '& .MuiInputBase-root': {
+    color: theme.palette.text.secondary, // Change the input text color
+  },
   }
 
   const handleChange = (fieldName, newValue) => {
     dispatch(editFormField(fieldName,newValue))
-  }
-
-  const handleSave = (e) => {
-    if (firstName.trim() === '' && firstName.includes(' ')){
-      //get the user's first name from auth
-    }
-
-    if (lastName.trim() === '' && lastName.includes(' ')){
-      //get the user's last name from auth
-    }
-    
-    if (!isValidEmail(email)){
-      dispatch(flagErrors({ email: 'Invalid Email'})) 
-    } 
-
-    const mobileError = errors.mobile;
-
-  if (mobile.trim() === '') {
-    // If the mobile number is empty (only whitespace), dispatch an error message for the mobile field
-    dispatch(flagErrors({ mobile: 'Please input a mobile number without area code' }));
-  } else if (mobileError) {
-    // If there was already an error for the mobile field, display that error message
-    console.log(mobileError);
-  } else {
-    try {
-      // Parse the phone number
-      const mobileNumberInstance = parsePhoneNumber(mobile, country);
-
-      // Check if the phone number is valid, using the isValidNumber method from react-phone-number-input
-      const isValidMobile = mobileNumberInstance.number ? isValidNumber(mobileNumberInstance.number) : false;
-
-      // Format the phone number if it's valid
-      if (isValidMobile) {
-        dispatch(editFormField('mobile', mobileNumberInstance.number));
-      } else {
-        // Handle the case when the phone number is not valid
-        dispatch(flagErrors({ mobile: 'Invalid mobile number' }));
-      }
-    } catch (error) {
-      // Handle any exceptions that occur during phone number parsing
-      dispatch(flagErrors({ mobile: 'Error parsing phone number' }));
-    }
-  }
-
-    const areErrorsEmpty = Object.values(errors).every((value) => value === '');
-
-    if (areErrorsEmpty){
-      dispatch(submitSuccess());
-      const editedAccount = {
-        email: email,
-        firstName: firstName,
-        lastName: lastName,
-        mobile: mobile,
-        country: country
-      }
-      dispatch(editAccountThunk(id, editedAccount));
-      //editUserInfo(firstName, lastName, email, mobile, errors, isSuccess);
-    } else {
-      dispatch(submitFail());
-    }
   }
 
   return (
@@ -103,6 +70,7 @@ const EditInfoForm = () => {
           onChange={(e) => handleChange('firstName', e.target.value)}
           helperText={errors.firstName}
           error={!!errors.firstName}
+          sx={inputStyles}
         />
       <TextField
         label="Last Name"
@@ -111,6 +79,7 @@ const EditInfoForm = () => {
         onChange={(e) => handleChange('lastName',e.target.value)}
         helperText={errors.lastName}
         error={!!errors.lastName}
+        sx={inputStyles}
       />
       <TextField
         label="Email"
@@ -119,6 +88,7 @@ const EditInfoForm = () => {
         onChange={(e) => handleChange('email',e.target.value)}
         helperText={errors.email}
         error={!!errors.email}
+        sx={inputStyles}
       />
        <TextField
             id='component-mobile'
@@ -131,16 +101,11 @@ const EditInfoForm = () => {
             InputProps={{
               inputComponent: MobileValidation, // Use MobileValidation component as the input
             }}
-            sx={{
-    "& label": { // Apply styles to the label element within the TextField
-      transform: 'translate(10px,5px)',
-      fontSize:'13px' // Adjust the value based on your desired downward movement
-    },
-  }}
+            sx={mobileInputStyle}
           />
-        <Button onClick={handleSave}>
-         "Save"
-        </Button>
+          <Box display={'flex'} justifyContent={'center'} >
+            <SaveAccountButton/>
+        </Box>
         </Stack>
     </Box>
   )
