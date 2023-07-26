@@ -1,6 +1,6 @@
 import io from 'socket.io-client';
 import {store }from '../redux/store';
-import { setParticipants } from '../redux/livestreams/livestream.actions';
+import { setParticipants } from '../redux/room/room.actions';
 import * as webRTC from './webRTC';
 
 let socket = null;
@@ -46,9 +46,9 @@ export const connectWithSocketIO = () => {
     return socket;
 }
 
-export const hostLivestream = (fullName, livestreamCode) => {
+export const hostLivestream = (username, livestreamCode) => {
     const data = {
-        fullName,
+        username,
         livestreamCode,
     }
 
@@ -56,9 +56,9 @@ export const hostLivestream = (fullName, livestreamCode) => {
 }
 
 
-export const joinLivestream = (fullName, livestreamCode) => {
+export const joinLivestream = (username, livestreamCode) => {
     const data = {
-        fullName,
+        username,
         livestreamCode,
     }
 
@@ -67,4 +67,14 @@ export const joinLivestream = (fullName, livestreamCode) => {
 
 export const signalPeerData = (data) => {
     socket.emit("connection-signal", data);
+}
+
+export const sendRemoteStreamsToComponent = (streams) => {
+    console.log("running sendremotestremstocomponent " + streams);
+    console.log(streams);
+    const data = {
+        streams,
+    }
+    console.log(data);
+    socket.emit('update-remote-streams', data);
 }

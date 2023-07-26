@@ -16,6 +16,7 @@ export const postMessagesThunk = (message) => {
         try {
             const res = await axios.post("http://localhost:3001/api/messages", {
                 livestream_id: message.livestream_id,
+                videochat_id: message.videochat_id, //either this or livestream_id will be null
                 user_id: message.user_id,
                 content: message.content,
             });

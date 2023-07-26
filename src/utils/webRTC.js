@@ -5,7 +5,7 @@ let localStream;
 let needToAddStream = false;
 let needToRemoveStream = false;
 
-export const initLivestreamConnection = (async (isStreamer, fullName, livestreamCode) => {
+export const initLivestreamConnection = (async (isStreamer, username, livestreamCode) => {
     try {
         console.log('sucessfully received local stream');
 
@@ -17,23 +17,48 @@ export const initLivestreamConnection = (async (isStreamer, fullName, livestream
                 // video: {width: '480', height: '360'},
             });
             localStream = stream;
-            showLocalLivestreamVideo(localStream);
+            // showLocalLivestreamVideo(localStream);
     
             //dispatch action to hide overlay
             // store.dispatch(setShowOverlay(false));
         }
-        isStreamer ? socketIOClient.hostLivestream(fullName, livestreamCode) : socketIOClient.joinLivestream(fullName, livestreamCode);
+        isStreamer ? socketIOClient.hostLivestream(username, livestreamCode) : socketIOClient.joinLivestream(username, livestreamCode);
         if (!isStreamer){
             needToAddStream = true;
             needToRemoveStream = true;
         }
-
-
     }
     catch(error){
         console.log('error occurred when trying to get access to local stream');
         console.log(error);
     }
+    return localStream;
+})
+
+export const initVideoChatConnection = (async (isStreamer, username, livestreamCode) => {
+    try {
+        console.log('sucessfully received local stream');
+
+            const stream = await navigator.mediaDevices.getUserMedia({
+                audio: true,
+                video: true,
+                //can set max resolution for video if slowing computer down
+                // video: {width: '480', height: '360'},
+            });
+            localStream = stream;
+            // showLocalLivestreamVideo(localStream);
+    
+            //dispatch action to hide overlay
+            // store.dispatch(setShowOverlay(false));
+        isStreamer ? socketIOClient.hostLivestream(username, livestreamCode) : socketIOClient.joinLivestream(username, livestreamCode);
+        needToAddStream = true;
+        needToRemoveStream = true;
+    }
+    catch(error){
+        console.log('error occurred when trying to get access to local stream');
+        console.log(error);
+    }
+    return localStream;
 })
 
 let peers = {};
@@ -107,8 +132,9 @@ export const removePeerConnection = (data) => {
 }
 
 const showLocalLivestreamVideo = (localStream) => {
-    const videosContainer = document.getElementById('videos_container');
+    const videosContainer = document.getElementById('videos-container');
     const videoContainer = document.createElement('div');
+    videoContainer.classList.add('video-container');
     const videoElement = document.createElement('video');
 
     videoElement.autoplay = true;
@@ -124,11 +150,11 @@ const showLocalLivestreamVideo = (localStream) => {
 
 const addStream = (stream, connectedUserSocketId) => {
     //display incoming stream
-    const videosContainer = document.getElementById('videos_container');
+    const videosContainer = document.getElementById('videos-container');
     const videoContainer = document.createElement('div');
 
     videoContainer.id = connectedUserSocketId;
-    // videoContainer.classList.add('video_track_container');
+    videoContainer.classList.add('video-container');
 
     const videoElement = document.createElement("video");
     videoElement.autoplay = true;
