@@ -6,7 +6,7 @@ import MessageBarLayout from '../layouts/MessageBarLayout'
 import ProfileInfoLayout from '../layouts/ProfileLayout'
 
 const Profile = () => {
-  const isLoggedIn = useSelector((state) => !!state.user.id);
+  const isLoggedIn = useSelector((state) => !!state.user.defaultUser?.id);
 
   return (
     <Box sx={{height:'100%', width:'100%'}}>

@@ -1,9 +1,10 @@
-import { GET_USER, REMOVE_USER, EDIT_ACCOUNT, EDIT_STATUS } from "./user.types";
-
+import { GET_USER, REMOVE_USER, EDIT_ACCOUNT, EDIT_STATUS, EMAIL_FETCH_USER, ERROR_HANDLING, FETCH_USER_BY_ID } from "./user.types";
 
 export const INITIAL_USER_STATE = {
-  defaultUser: {},
+  defaultUser: null,
   editedProfile:[],
+  error:null,
+  isEditingAccount:false
 }
 
 export default function userReducer(state = INITIAL_USER_STATE, action) {
@@ -14,6 +15,16 @@ export default function userReducer(state = INITIAL_USER_STATE, action) {
         return {
         ...INITIAL_USER_STATE
       };
+      //fetch user by id
+      case FETCH_USER_BY_ID:
+        return {
+          ...state, defaultUser: action.payload
+        }
+      //fetch userid by email 
+      case EMAIL_FETCH_USER:
+        return {
+          ...state, defaultUser: action.payload
+        }
       //edit the profile information
       case EDIT_ACCOUNT:
       return {
@@ -27,6 +38,10 @@ export default function userReducer(state = INITIAL_USER_STATE, action) {
         return {
           ...state, isEditingAccount: !state.isEditingAccount
       }
+      case ERROR_HANDLING:
+          return {
+            ...state, error: action.payload
+          }
       default:
         return state;
     }

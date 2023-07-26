@@ -1,6 +1,6 @@
-import React, {useState} from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { auth } from "../redux/user/user.actions";
+import { auth, errorHandling } from "../redux/user/user.actions";
 import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
@@ -9,17 +9,39 @@ const LoginPage = () => {
 
 
   const dispatch = useDispatch();
-  const error = useSelector((state) => state.user.error);
+  const errorHandle = useSelector((state) => state.user.error);
   const navigate = useNavigate();
+  const currentUser = useSelector((state) => state.user.defaultUser)
+  const loginError = useSelector((state) => state.user.error)
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // setEmail(event.target.email.value);
-    // setPassword(event.target.password.value);
-
+    // // setEmail(event.target.email.value);
+    // // setPassword(event.target.password.value);
+    // // dispatch(fetchUserByEmailThunk(email))
+    // try {
     dispatch(auth(email, password, "login"));
-    navigate('/');
+      // console.log('auth hit when it shouldn\'t have')
+    // } catch (error) {
+    //   console.log('error dispatch hit', loginError);
+    //   navigate('/login');
+    // }
+    // navigate('/');
+    // if (loginError) {
+      
+    // } else {
+      
   }
+  useEffect(() => {
+      if (currentUser) {
+      // User logged in successfully, redirect to dashboard home
+      navigate('/');
+    } else if (loginError) {
+      // An error occurred during login, handle the error
+      console.log('Login error:', loginError);
+      navigate('/login');
+    }
+    },[currentUser, loginError, navigate])
 
   return (
     <div>
@@ -34,10 +56,11 @@ const LoginPage = () => {
           onChange={(e) => (setPassword(e.target.value))}
         />
         <button type="submit">Login!</button>
-        {error && error.response && <div> {error.response.data} </div>}
+        {errorHandle && errorHandle.response && <div> {errorHandle.response.data} </div>}
       </form>
     </div>
   )
 }
 
 export default LoginPage
+
