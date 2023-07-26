@@ -5,7 +5,7 @@ import { Box, Button, Modal, Typography, createMuiTheme } from '@mui/material'
 import { useThemeContext } from '../../theme/ThemeContextProvider'
 import Backdrop from '@mui/material/Backdrop'
 import EditIcon from '@mui/icons-material/Edit'
-import EditInfoForm from '../account/EditInfoForm'
+import EditInfoForm from '../userDetails/EditInfoForm'
 import { useTheme } from '@mui/material/styles';
 import { styled } from '@mui/material/styles';
 
@@ -18,7 +18,7 @@ const EditProfile= () => {
 	const { theme } = useThemeContext();
   const modalTheme = useTheme();
   const dispatch = useDispatch();
-  const isEditing = useSelector((state) => !state.user.isEditing)
+  const isEditing = useSelector((state) => !!state.user.isEditingAccount)
 
   const editButton = {
     backgroundColor:theme.palette.button.main,

@@ -12,7 +12,7 @@ import '../styles/navbar.css';
 import MobileSpeedDial from '../components/navbar/MobileSpeedDial.jsx';
 import ProfileMenu from '../components/navbar/ProfileMenu.jsx';
 import { styled } from '@mui/material/styles';
-import EditInfoForm from '../components/account/EditInfoForm.jsx';
+import EditInfoForm from '../components/userDetails/EditInfoForm.jsx';
 import { editAccount } from '../redux/user/user.actions.js';
 import { toggleModal } from '../redux/ui/ui.actions.js'
 import SettingsTabs from '../components/account/SettingsTabs.jsx';
@@ -32,21 +32,18 @@ const RootBackdrop = styled('div')(({ theme }) => ({
 }));
 
 const RootLayout = () => {
-  const isLoggedIn = useSelector((state) => !!state.user.id);
+  const isLoggedIn = useSelector((state) => !!state.user.defaultUser?.id);
   const isEditingAccount = useSelector((state) => !!state.user.isEditingAccount)
   const isSmallScreen = useMediaQuery("(max-width: 900px");
   const dispatch = useDispatch();
   const { theme } = useThemeContext();
-  const open = useSelector(state => !state.modalIsOpen);
+  const open = useSelector(state => !!state.ui.modalIsOpen);
   const modalIsOpen = useSelector(state => state.ui.modalIsOpen)
   
   const navbarStyle = {
     backgroundColor: theme.palette.primary.main,
     boxShadow: theme.palette.background.boxShadow
   };
-  useEffect(() => {
-    console.log('isEditingAccount changed:', isEditingAccount);
-  }, [isEditingAccount]);
 
   const loginStyle = { 
     display:'flex',
@@ -60,13 +57,14 @@ const RootLayout = () => {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: '500px',
-    height: '80%',
+    width: '700px',
+    height: '70%',
     bgcolor: 'white',
     border: `2px solid ${theme.palette.text.secondary}`,
     backgroundColor:theme.palette.background.paper,
     boxShadow: 24,
     p: 4,
+    borderRadius:'2%'
 };
 
   const handleClose = () => {
@@ -97,10 +95,12 @@ const RootLayout = () => {
               </Stack> : <SideNavLinks/>}
             </div>
         </nav>
+        {/* SHOW THE USER LOGIN/SIGNUP DROPDOWN IN NAVBAR IF LOGGED IN */}
         {!isLoggedIn ? (<nav id="login" style={loginStyle}>
           <UserLogin/>
         </nav>) : ('')}
       </header>
+      {/* APPLY BACKDROP WHEN MODAL IS OPEN */}
        {modalIsOpen && <RootBackdrop />}
       <main>
         <Outlet />

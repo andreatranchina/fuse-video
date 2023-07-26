@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { GET_USER, REMOVE_USER, EDIT_ACCOUNT, EDIT_STATUS } from "./user.types";
+import { GET_USER, REMOVE_USER, EDIT_ACCOUNT, EDIT_STATUS, EMAIL_FETCH_USER, ERROR_HANDLING, FETCH_USER_BY_ID } from "./user.types";
 
 export const getUser = (payload) => {
     return{
@@ -39,14 +39,18 @@ export const auth = (email, password, method, isAdmin) => {
             isAdmin,
           });
         } catch (authError) {
-          return dispatch(getUser({ error: authError }));
+          return dispatch(errorHandling( authError));
         }
       
         try {
-          dispatch(getUser(res.data));
+          // dispatch(getUser(res.data));
           // history.push("/home");
+          dispatch(fetchUserByEmailThunk(email));
+          // return Promise.resolve();
         } catch (dispatchOrHistoryErr) {
-          console.error(dispatchOrHistoryErr);
+          console.error(dispatchOrHistoryErr + " it didn't work");
+          dispatch(errorHandling(dispatchOrHistoryErr))
+          // return Promise.reject()
         }
       };
 } 
@@ -62,6 +66,28 @@ export const logout = () => {
         }
       };
 } 
+
+export const fetchUserById = (payload) => ({
+  type: FETCH_USER_BY_ID,
+  payload: payload
+})
+
+export const fetchUserByIdThunk = (id) => {
+  return async (dispatch) => {
+    try {
+      let res = await axios.get(`http://localhost:3001/api/user/${id}`);
+      dispatch(fetchUserById(res.data));
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
+
+export const errorHandling = () => (dispatch) => {
+    dispatch({
+      type: ERROR_HANDLING,
+    });
+};
 
 export const editProfile = () => (dispatch) => {
     dispatch({
@@ -84,7 +110,7 @@ export const editAccount = (payload) => ({
 export const editAccountThunk = (id, editedAccount) => {
   return async (dispatch) => {
     try {
-    console.log('edit account thunk hit')
+    console.log('edit account thunk hit with country', editedAccount.country)
     const newAccountInfo = await axios.put(`http://localhost:3001/api/user/${id}`, {
       email: editedAccount.email,
       password: editedAccount.password,
@@ -103,6 +129,7 @@ export const editAccountThunk = (id, editedAccount) => {
       city: editedAccount.city,
       state: editedAccount.state,
     });
+    console.log(editedAccount.country);
     console.log('made edit account axios call')
     dispatch(editAccount(newAccountInfo));
     } catch (error) {
@@ -111,88 +138,22 @@ export const editAccountThunk = (id, editedAccount) => {
   }
 }
 
-  // email:{
-  //           type: DataTypes.STRING,
-  //           unique: true,
-  //           allowNull: false,
-  //           validate: {
-  //               isEmail: true,
-  //           }
-  //       },
-  //       password: {
-  //           type: DataTypes.STRING,
-  //       },
-  //       firstName: {
-  //           type: DataTypes.STRING,
-  //           defaultValue: 'Jenny',
-  //           allowNull: false,
-  //       },
-  //       lastName: {
-  //           type: DataTypes.STRING,
-  //           defaultValue: 'Craig',
-  //           allowNull: false,
-  //       },
-  //       userName: {
-  //           type: DataTypes.STRING,
-  //           defaultValue:'sleekusername91',
-  //           allowNull: false,
-  //       },
-  //       imgUrl: {
-  //           type: DataTypes.STRING(1000),
-  //           defaultValue: "https://i0.wp.com/cfe.umich.edu/wp-content/uploads/2015/09/blank-profile.jpg?fit=4016%2C2677&ssl=1",
-  //       },
-  //       salt: { //salt is needed to run the encryption again, each user will have unique salt
-  //           type: DataTypes.STRING
-  //       },
-  //       googleId: { //for OAuth
-  //           type: DataTypes.STRING,
-  //       },
-  //       isAdmin: {
-  //           type: DataTypes.BOOLEAN,
-  //           allowNull: false,
-  //           defaultValue: false,
-  //       },
-  //       language:{
-  //           type: DataTypes.STRING,
-  //           allowNull: false,
-  //           defaultValue: 'EN',
-  //       },
-  //       bio: {
-  //           type: DataTypes.STRING(100),
-  //           defaultValue:'I love tennis, movies, music, and more! Let\'s connect!'
-  //       },
-  //       mobile: {
-  //           type:DataTypes.STRING(100),
-  //           defaultValue:'+18009092929'
-  //       },
-  //       isDeactivated: {
-  //           type: DataTypes.BOOLEAN,
-  //           defaultValue:false
-  //       },
-  //       isPrivate: {
-  //           type: DataTypes.BOOLEAN,
-  //           defaultValue:false
-  //       },
-  //       emailNotifications:{
-  //           type: DataTypes.BOOLEAN,
-  //           defaultValue:true
-  //       },
-  //       mobileNotifications:{
-  //           type: DataTypes.BOOLEAN,
-  //           defaultValue:true
-  //       },
-  //       country:{
-  //           type: DataTypes.STRING(100),
-  //           defaultValue: 'United States'
-  //       },
-  //       city:{
-  //           type: DataTypes.STRING(100),
-  //           defaultValue: 'Denver'
-  //       },
-  //       state:{
-  //           type: DataTypes.STRING(100),
-  //           defaultValue: 'CO'
-  //       },
-  //   },
 
+export const fetchUserByEmail = (payload) => ({
+  type: EMAIL_FETCH_USER,
+  payload: payload,
+});
 
+export const fetchUserByEmailThunk = (userEmail) => {
+  return async (dispatch) => {
+    let user = {}
+    try {
+    console.log('email fetch thunk hit')
+    user = await axios.get(`http://localhost:3001/api/user/byEmail/${userEmail}`)
+    console.log('made edit account axios call')
+    dispatch(fetchUserByEmail(user.data));
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}

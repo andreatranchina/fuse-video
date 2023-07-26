@@ -16,7 +16,7 @@ const Topics = () => {
     { key: 3, label: 'True Crime' },
     { key: 4, label: 'E-sports' },
   ])
-  const isLoggedIn = useSelector((state) => !!state.user.id);
+  const isLoggedIn = useSelector((state) => !!state.user.defaultUser?.id);
 
   const handleDelete = (topicToDelete) => () => {
     setTopics((topics) => topics.filter((topic) => topic.key !== topicToDelete.key));
