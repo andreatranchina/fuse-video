@@ -15,6 +15,7 @@ const LivestreamPage = ({socket}) => {
     const loggedInUser = useSelector((state) => state.user);
     const participants = useSelector((state) => state.room.participants);
     const showLoadingOverlay = useSelector((state) => state.room.showLoadingOverlay);
+    const onlyAudio = useSelector((state) => state.room.onlyAudio);
 
     const localScreenRef = useRef();
     const localCameraRef = useRef();
@@ -25,7 +26,8 @@ const LivestreamPage = ({socket}) => {
         const getlocalCameraStream = async () => {
             console.log(participants);
             try{
-                let localCameraStream = await webRTC.initLivestreamConnection(isStreamer, loggedInUser.userName, currentLivestream.code)
+                let localCameraStream = await webRTC.initLivestreamConnection(isStreamer, 
+                    loggedInUser.userName, currentLivestream.code, onlyAudio)
                 const localCameraVideo = localCameraRef.current;
                 localCameraVideo.srcObject = localCameraStream;
                 localCameraVideo.onloadedmetadata = () => {
