@@ -1,5 +1,7 @@
 import * as socketIOClient from './socketIO.js';
 import Peer from 'simple-peer';
+import { store } from '../redux/store.js';
+import { setShowLoadingOverlay } from '../redux/room/room.actions.js';
 
 let localStream;
 let needToAddStream = false;
@@ -20,7 +22,7 @@ export const initLivestreamConnection = (async (isStreamer, username, livestream
             // showLocalLivestreamVideo(localStream);
     
             //dispatch action to hide overlay
-            // store.dispatch(setShowOverlay(false));
+            store.dispatch(setShowLoadingOverlay(false));
         }
         isStreamer ? socketIOClient.hostLivestream(username, livestreamCode) : socketIOClient.joinLivestream(username, livestreamCode);
         if (!isStreamer){
@@ -49,7 +51,7 @@ export const initVideoChatConnection = (async (isStreamer, username, livestreamC
             // showLocalLivestreamVideo(localStream);
     
             //dispatch action to hide overlay
-            // store.dispatch(setShowOverlay(false));
+            store.dispatch(setShowLoadingOverlay(false));
         isStreamer ? socketIOClient.hostLivestream(username, livestreamCode) : socketIOClient.joinLivestream(username, livestreamCode);
         needToAddStream = true;
         needToRemoveStream = true;
@@ -165,8 +167,31 @@ const addStream = (stream, connectedUserSocketId) => {
         videoElement.play();
     };
 
-    videoElement.addEventListener('click', () => {
-        videoElement.classList.toggle('full_screen');
+    videoContainer.addEventListener('click', () => {
+        const videos = document.querySelectorAll(".video-container");
+        const videosArray = Array.from(videos);
+        if(!videoContainer.classList.contains("enlarged")){
+            videosArray.map((video) => {
+                if(video !== videoContainer){
+                    video.style.display = "none";
+                }
+                else{
+                    video.style.width = "100%";
+                }
+            })
+            videoContainer.classList.add('enlarged');
+        } else {
+            videosArray.map((video) => {
+                if(video !== videoContainer){
+                    video.style.display = "inline-block";
+                }
+                else{
+                    video.style.width = "45%";
+                }
+            })
+            videoContainer.classList.remove('enlarged')
+
+        }
     })
 
     videoContainer.appendChild(videoElement);

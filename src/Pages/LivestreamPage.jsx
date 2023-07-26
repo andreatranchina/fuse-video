@@ -5,6 +5,7 @@ import * as webRTC from '../utils/webRTC';
 import ButtonsContainer from '../components/video/ButtonsContainer';
 import { useThemeContext } from '../theme/ThemeContextProvider';
 import { Box } from '@mui/material';
+import LoadingOverlay from '../components/video/LoadingOverlay';
 
 const LivestreamPage = ({socket}) => {
     const [screenSharingStream, setScreenSharingStream] = useState(null);
@@ -13,6 +14,7 @@ const LivestreamPage = ({socket}) => {
     const isStreamer = useSelector((state) => state.room.isStreamer);
     const loggedInUser = useSelector((state) => state.user);
     const participants = useSelector((state) => state.room.participants);
+    const showLoadingOverlay = useSelector((state) => state.room.showLoadingOverlay);
 
     const localScreenRef = useRef();
     const localCameraRef = useRef();
@@ -78,6 +80,8 @@ const LivestreamPage = ({socket}) => {
 
         <ButtonsContainer isStreamer={isStreamer} screenSharingStream={screenSharingStream} 
         setScreenSharingStream={setScreenSharingStream}/>
+
+        {showLoadingOverlay && <LoadingOverlay />}
     </Box>
   )
 }
