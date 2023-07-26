@@ -12,7 +12,7 @@ import { logout } from '../redux/user/user.actions';
 const Home = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const isLoggedIn = useSelector((state) => !!state.user.id);
+  const isLoggedIn = useSelector((state) => !!state.user.defaultUser?.id);
 
   const currentUser = useSelector((state) => state.user.defaultUser)
 

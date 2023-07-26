@@ -22,7 +22,7 @@ const ProfileInfoLayout = () => {
   //  const isLoggedIn = useSelector((state) => !!state.user.id);
   const isLoggedIn = true;
    const isSmallScreen = useMediaQuery('(max-width: 900px)');
-   const isEditing = useSelector((state) => !state.user.isEditing)
+   const isEditing = useSelector((state) => !state.user.isEditingAccount)
 
   return (
      <Stack>

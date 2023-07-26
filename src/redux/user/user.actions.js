@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { GET_USER, REMOVE_USER, EDIT_ACCOUNT, EDIT_STATUS, EMAIL_FETCH_USER } from "./user.types";
+import { GET_USER, REMOVE_USER, EDIT_ACCOUNT, EDIT_STATUS, EMAIL_FETCH_USER, ERROR_HANDLING } from "./user.types";
 
 export const getUser = (payload) => {
     return{
@@ -39,16 +39,17 @@ export const auth = (email, password, method, isAdmin) => {
             isAdmin,
           });
         } catch (authError) {
-          return dispatch(getUser({ error: authError }));
+          return dispatch(errorHandling( authError));
         }
       
         try {
-          dispatch(getUser(res.data));
+          // dispatch(getUser(res.data));
           // history.push("/home");
           dispatch(fetchUserByEmailThunk(email));
           // return Promise.resolve();
         } catch (dispatchOrHistoryErr) {
           console.error(dispatchOrHistoryErr + " it didn't work");
+          dispatch(errorHandling(dispatchOrHistoryErr))
           // return Promise.reject()
         }
       };
@@ -65,6 +66,12 @@ export const logout = () => {
         }
       };
 } 
+
+export const errorHandling = () => (dispatch) => {
+    dispatch({
+      type: ERROR_HANDLING,
+    });
+};
 
 export const editProfile = () => (dispatch) => {
     dispatch({
@@ -87,7 +94,7 @@ export const editAccount = (payload) => ({
 export const editAccountThunk = (id, editedAccount) => {
   return async (dispatch) => {
     try {
-    console.log('edit account thunk hit')
+    console.log('edit account thunk hit with country', editedAccount.country)
     const newAccountInfo = await axios.put(`http://localhost:3001/api/user/${id}`, {
       email: editedAccount.email,
       password: editedAccount.password,
@@ -106,6 +113,7 @@ export const editAccountThunk = (id, editedAccount) => {
       city: editedAccount.city,
       state: editedAccount.state,
     });
+    console.log(editedAccount.country);
     console.log('made edit account axios call')
     dispatch(editAccount(newAccountInfo));
     } catch (error) {
@@ -125,24 +133,7 @@ export const fetchUserByEmailThunk = (userEmail) => {
     let user = {}
     try {
     console.log('email fetch thunk hit')
-    user = await axios.get(`http://localhost:3001/api/user/byEmail/${userEmail}`, {
-      email: user.email,
-      password: user.password,
-      firstName: user.firstName,
-      lastName: user.lastName,
-      userName: user.userName,
-      imgUrl: user.imgUrl,
-      language: user.language,
-      bio: user.bio,
-      mobile: user.mobile,
-      isDeactivated: user.isDeactivated,
-      isPrivate: user.isPrivate,
-      emailNotificiations: user.emailNotificiations,
-      mobileNotifications: user.mobileNotifications,
-      country: user.country,
-      city: user.city,
-      state: user.state,
-    });
+    user = await axios.get(`http://localhost:3001/api/user/byEmail/${userEmail}`)
     console.log('made edit account axios call')
     dispatch(fetchUserByEmail(user.data));
     } catch (error) {

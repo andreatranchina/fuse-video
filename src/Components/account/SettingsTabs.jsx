@@ -83,9 +83,9 @@ const SettingsTabs = () => {
     }
     
   }} >
-              <Tab label="Account"  sx={{ fontWeight: 700 }}{...a11yProps(0)} />
-              <Tab label="Profile" sx={{ fontWeight: 700 }}{...a11yProps(1)} />
-              <Tab label="Preferences" sx={{ fontWeight: 700 }}{...a11yProps(2)} />
+              <Tab label="Account"  sx={{ fontWeight: 700, WebkitTextStrokeWidth: '1px' }}{...a11yProps(0)} />
+              <Tab label="Profile" sx={{ fontWeight: 700, WebkitTextStrokeWidth: '1px' }}{...a11yProps(1)} />
+              <Tab label="Preferences" sx={{ fontWeight: 700, WebkitTextStrokeWidth: '1px' }}{...a11yProps(2)} />
             </Tabs>
           </Box>
         </ThemeProvider>

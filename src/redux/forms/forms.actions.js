@@ -11,12 +11,14 @@ export const flagErrors = (errors) => ({
 });
 
 export const submitSuccess = () => {
+    console.log('success from redux forms')
     return {
         type: SUBMIT_SUCCESS
     }
 };
 
 export const submitFail = () => {
+    console.log('failure from redux forms')
     return{
         type: SUBMIT_FAIL
     }

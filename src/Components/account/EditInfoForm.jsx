@@ -1,10 +1,9 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Box, Stack, TextField }  from '@mui/material'
-import { editFormField, submitSuccess, submitFail, flagErrors } from '../../redux/forms/forms.actions';
+import { editFormField } from '../../redux/forms/forms.actions';
 import MobileValidation from '../validators/MobileValidation';
 import PasswordValidtator from '../validators/PasswordValidator';
-import { editAccountThunk } from '../../redux/user/user.actions';
 import { useThemeContext } from '../../theme/ThemeContextProvider';
 import SaveAccountButton from './SaveAccountButton';
 
@@ -12,14 +11,15 @@ const EditInfoForm = () => {
 
   const dispatch = useDispatch();
 
-  const isEditingAccount = useSelector((state) => !!state.user.isEditingAccount)
-  const { firstName, lastName, email, isSuccess, errors, mobile, country } = useSelector((state) => state.forms)
-  const userId = useSelector((state) => state.user.defaultUser.id)
-  const defaultUser = useSelector((state) => state.user.defaultUser)
-  //need a selector to fetch all the data from the user prior to the form uploading
+  const { firstName, lastName, email, isSuccess, errors, mobile, userName, } = useSelector((state) => state.forms)
+  const areErrorsEmpty = Object.values(errors).every((value) => value === '');
+  //
   const { theme } = useThemeContext();
 
+   const [currentIsSuccess, setCurrentIsSuccess] = useState(isSuccess);
+
   const inputStyles = { 
+    width:'100%',
     '& label': {
       color: theme.palette.text.secondary,
     },
@@ -40,9 +40,11 @@ const EditInfoForm = () => {
   },
   }
 
-  const mobileInputStyle = {
+  const mobileInputStyle = { transform: isSuccess ? 'translate(4px, -15px' : 'translateY(-15px)',
     '& label': {
-      color: theme.palette.text.secondary
+      color: theme.palette.text.secondary,
+      transform: isSuccess ? 'translateY(10px)' : 'translateY(15px)',
+      fontSize:'12px'
     },
       '& .MuiInputLabel-root': {
     color: theme.palette.text.secondary, // Change the label color
@@ -56,13 +58,19 @@ const EditInfoForm = () => {
     dispatch(editFormField(fieldName,newValue))
   }
 
+  // Effect to update the currentIsSuccess state when isSuccess changes
+  useEffect(() => {
+    setCurrentIsSuccess(isSuccess);
+  }, [isSuccess]);
+
   return (
     <Box 
     component='form'
     autoComplete='off'
     display={'flex'}
-    justifyContent={'center'} >
-    <Stack spacing={4} sx={{width:'400px'}}>
+    justifyContent={'center'}>
+    <Stack spacing={4} sx={{width:'600px'}}>
+    <Stack direction='row' spacing={2} display={'flex'} justifyContent={'space-between'} sx={{w:'100%'}}>
      <TextField
           label='First Name'
           variant={isSuccess ? 'filled' : 'standard'}
@@ -81,15 +89,28 @@ const EditInfoForm = () => {
         error={!!errors.lastName}
         sx={inputStyles}
       />
+      </Stack>
+      <Stack direction='row' spacing={2} display={'flex'} justifyContent={'space-between'} sx={{w:'100%'}}>
       <TextField
         label="Email"
         variant={isSuccess ? 'filled' : 'standard'}
+        color="success"
         value={email}
         onChange={(e) => handleChange('email',e.target.value)}
         helperText={errors.email}
         error={!!errors.email}
         sx={inputStyles}
       />
+      <TextField
+        label="Username"
+        variant={isSuccess ? 'filled' : 'standard'}
+        value={userName}
+        onChange={(e) => handleChange('userName',e.target.value)}
+        helperText={errors.userName}
+        error={!!errors.userName}
+        sx={inputStyles}
+      />
+      </Stack>
        <TextField
             id='component-mobile'
             label='Mobile Number'
@@ -103,7 +124,7 @@ const EditInfoForm = () => {
             }}
             sx={mobileInputStyle}
           />
-          <Box display={'flex'} justifyContent={'center'} >
+          <Box display={'flex'} justifyContent={'center'} sx={{transform:'translateY(-20px)'}}  >
             <SaveAccountButton/>
         </Box>
         </Stack>
