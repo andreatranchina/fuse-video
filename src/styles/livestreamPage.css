@@ -82,7 +82,7 @@ video {
     width: 100%;
     height: 100%;
     position: relative;
-  }
+  } 
   
   .video-container:first-child:nth-last-child(2),
   .video-container:first-child:nth-last-child(2) ~ .video-container {
@@ -123,3 +123,15 @@ video {
     bottom: 5px;
     left: 8%;
 }
+
+.loading-overlay-container {
+    width: 100%;
+    height: 180vh;
+    background: rgba(37, 34, 75, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    bottom: 0.5rem;
+    z-index: 100;
+  }
