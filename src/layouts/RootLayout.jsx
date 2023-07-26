@@ -12,7 +12,7 @@ import '../styles/navbar.css';
 import MobileSpeedDial from '../components/navbar/MobileSpeedDial.jsx';
 import ProfileMenu from '../components/navbar/ProfileMenu.jsx';
 import { styled } from '@mui/material/styles';
-import EditInfoForm from '../components/account/EditInfoForm.jsx';
+import EditInfoForm from '../components/userDetails/EditInfoForm.jsx';
 import { editAccount } from '../redux/user/user.actions.js';
 import { toggleModal } from '../redux/ui/ui.actions.js'
 import SettingsTabs from '../components/account/SettingsTabs.jsx';
@@ -58,7 +58,7 @@ const RootLayout = () => {
     left: '50%',
     transform: 'translate(-50%, -50%)',
     width: '700px',
-    height: '80%',
+    height: '70%',
     bgcolor: 'white',
     border: `2px solid ${theme.palette.text.secondary}`,
     backgroundColor:theme.palette.background.paper,

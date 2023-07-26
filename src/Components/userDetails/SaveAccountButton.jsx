@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Button, Typography } from '@mui/material'
 import { useThemeContext } from '../../theme/ThemeContextProvider'
-import { editAccountThunk } from '../../redux/user/user.actions'
+import { editAccountThunk, fetchUserByIdThunk } from '../../redux/user/user.actions'
 import { editFormField, submitSuccess, submitFail, flagErrors } from '../../redux/forms/forms.actions'
 import { parsePhoneNumber, isValidNumber } from 'libphonenumber-js';
 
@@ -26,6 +26,8 @@ const SaveAccountButton = () => {
     if (firstName.trim() === '' && firstName.includes(' ')){
     //get user's first name from database and input into form redux
       dispatch(editFormField('firstName', oldFirstName))
+    } else {
+    dispatch(editFormField('firstName', firstName))
     }
   }
 
@@ -40,8 +42,6 @@ const SaveAccountButton = () => {
     if (email?.trim() === '' || email.includes(' ')){
     //get user's first name from database and input into form redux
       dispatch(editFormField('email', oldEmail))
-      console.log('email was blank',email)
-      return 0;
     }
     if (!isValidEmail(email)){
         dispatch(flagErrors({ email: 'Invalid Email'})) 
@@ -50,11 +50,13 @@ const SaveAccountButton = () => {
   
 
   const handleUserNameSave = () => {
-    if (userName?.trim() === '' && userName.includes(' ')){
+    if (userName.trim() === '' || userName.includes(' ') || userName.length===0){
       //get the user's last name from auth and input in redux
-      dispatch(editFormField('lastName', oldUserName))
+      dispatch(editFormField('userName', oldUserName))
+      console.log('hit old user name assignment')
     } else {
-      dispatch(flagErrors({ userName: 'Username not available'}))
+      dispatch(editFormField('userName',userName))
+      console.log('assigned a new username')
     }
   }
 
@@ -79,7 +81,7 @@ const SaveAccountButton = () => {
       if (isValidMobile) {
         dispatch(editFormField('mobile', mobileNumberInstance.number));
       } else {
-        // Handle the case when the phone number is not valid
+        // Handle the case when the  phone number is not valid
         dispatch(flagErrors({ mobile: 'Invalid mobile number' }));
       }
     } catch (error) {
@@ -91,16 +93,17 @@ const SaveAccountButton = () => {
 
   const handleSave = (e) => {
     handleFirstNameSave();
+    console.log(errors);
     handleLastNameSave();
+    console.log(errors);
     handleEmailSave();
+    console.log(errors);
     handleUserNameSave();
+    console.log(errors);
     handleMobileSave();
-
-    //check to see if there are any errors
-    const areErrorsEmpty = Object.values(errors).every((value) => value === '');
-
+    console.log(errors);
     //send data and turn on form success state
-    if (areErrorsEmpty){
+    if (!errors.firstName && !errors.lastName && !errors.mobile && !errors.email && !errors.userName){
       console.log(`still went through`);
       const editedAccount = {
         email: email,
@@ -112,11 +115,13 @@ const SaveAccountButton = () => {
       }
       dispatch(editAccountThunk(userId, editedAccount));
       dispatch(submitSuccess());
+      dispatch(fetchUserByIdThunk(userId));
     } else {
       dispatch(submitFail());
     }
   }
 
+  
   return (
     <>
 			<Button onClick={handleSave} 

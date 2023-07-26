@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Box, Button, Tab, Tabs, ThemeProvider, Typography } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
 import { setSettingsTab } from '../../redux/ui/ui.actions';
-import EditInfoForm from '../userDetails/EditInfoForm';
+import EditInfoForm from './EditInfoForm';
 import { updateEditStatus } from '../../redux/user/user.actions'
 import { toggleModal } from '../../redux/ui/ui.actions'
 import { submitFail } from '../../redux/forms/forms.actions';

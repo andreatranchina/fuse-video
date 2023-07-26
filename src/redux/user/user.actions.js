@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { GET_USER, REMOVE_USER, EDIT_ACCOUNT, EDIT_STATUS, EMAIL_FETCH_USER, ERROR_HANDLING } from "./user.types";
+import { GET_USER, REMOVE_USER, EDIT_ACCOUNT, EDIT_STATUS, EMAIL_FETCH_USER, ERROR_HANDLING, FETCH_USER_BY_ID } from "./user.types";
 
 export const getUser = (payload) => {
     return{
@@ -66,6 +66,22 @@ export const logout = () => {
         }
       };
 } 
+
+export const fetchUserById = (payload) => ({
+  type: FETCH_USER_BY_ID,
+  payload: payload
+})
+
+export const fetchUserByIdThunk = (id) => {
+  return async (dispatch) => {
+    try {
+      let res = await axios.get(`http://localhost:3001/api/user/${id}`);
+      dispatch(fetchUserById(res.data));
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
 
 export const errorHandling = () => (dispatch) => {
     dispatch({

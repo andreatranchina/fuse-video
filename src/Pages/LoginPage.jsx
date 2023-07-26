@@ -20,7 +20,7 @@ const LoginPage = () => {
     // // setPassword(event.target.password.value);
     // // dispatch(fetchUserByEmailThunk(email))
     // try {
-      dispatch(auth(email, password, "login"));
+    dispatch(auth(email, password, "login"));
       // console.log('auth hit when it shouldn\'t have')
     // } catch (error) {
     //   console.log('error dispatch hit', loginError);

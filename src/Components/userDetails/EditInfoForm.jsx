@@ -12,11 +12,9 @@ const EditInfoForm = () => {
   const dispatch = useDispatch();
 
   const { firstName, lastName, email, isSuccess, errors, mobile, userName, } = useSelector((state) => state.forms)
-  const areErrorsEmpty = Object.values(errors).every((value) => value === '');
-  //
   const { theme } = useThemeContext();
-
-   const [currentIsSuccess, setCurrentIsSuccess] = useState(isSuccess);
+   // State to track if errors are empty
+  // const [areErrorsEmpty, setAreErrorsEmpty] = useState(false);
 
   const inputStyles = { 
     width:'100%',
@@ -40,10 +38,10 @@ const EditInfoForm = () => {
   },
   }
 
-  const mobileInputStyle = { transform: isSuccess ? 'translate(4px, -15px' : 'translateY(-15px)',
+  const mobileInputStyle = { transform: errors ? 'translate(4px, -15px' : 'translateY(-15px)',
     '& label': {
       color: theme.palette.text.secondary,
-      transform: isSuccess ? 'translateY(10px)' : 'translateY(15px)',
+      transform: errors ? 'translateY(10px)' : 'translateY(15px)',
       fontSize:'12px'
     },
       '& .MuiInputLabel-root': {
@@ -58,10 +56,16 @@ const EditInfoForm = () => {
     dispatch(editFormField(fieldName,newValue))
   }
 
-  // Effect to update the currentIsSuccess state when isSuccess changes
-  useEffect(() => {
-    setCurrentIsSuccess(isSuccess);
-  }, [isSuccess]);
+   // useEffect to update the state whenever 'errors' changes
+  // useEffect(() => {
+  //   // Check if all error values are empty strings
+  //   const newAreErrorsEmpty = Object.values(errors).every((value) => value === '');
+
+  //   // Update the state accordingly
+  //   setAreErrorsEmpty(newAreErrorsEmpty);
+  //   console.log(newAreErrorsEmpty)
+  // }, [errors]);
+  
 
   return (
     <Box 
@@ -73,7 +77,7 @@ const EditInfoForm = () => {
     <Stack direction='row' spacing={2} display={'flex'} justifyContent={'space-between'} sx={{w:'100%'}}>
      <TextField
           label='First Name'
-          variant={isSuccess ? 'filled' : 'standard'}
+          variant={!errors.firstName && isSuccess ? 'filled' : 'standard'}
           value={firstName}
           onChange={(e) => handleChange('firstName', e.target.value)}
           helperText={errors.firstName}
@@ -82,7 +86,7 @@ const EditInfoForm = () => {
         />
       <TextField
         label="Last Name"
-        variant={isSuccess ? 'filled' : 'standard'}
+        variant={!errors.lastName && isSuccess ? 'filled' : 'standard'}
         value={lastName}
         onChange={(e) => handleChange('lastName',e.target.value)}
         helperText={errors.lastName}
@@ -93,7 +97,7 @@ const EditInfoForm = () => {
       <Stack direction='row' spacing={2} display={'flex'} justifyContent={'space-between'} sx={{w:'100%'}}>
       <TextField
         label="Email"
-        variant={isSuccess ? 'filled' : 'standard'}
+        variant={!errors.email && isSuccess ? 'filled' : 'standard'}
         color="success"
         value={email}
         onChange={(e) => handleChange('email',e.target.value)}
@@ -103,7 +107,7 @@ const EditInfoForm = () => {
       />
       <TextField
         label="Username"
-        variant={isSuccess ? 'filled' : 'standard'}
+        variant={!errors.userName && isSuccess ? 'filled' : 'standard'}
         value={userName}
         onChange={(e) => handleChange('userName',e.target.value)}
         helperText={errors.userName}
@@ -114,7 +118,7 @@ const EditInfoForm = () => {
        <TextField
             id='component-mobile'
             label='Mobile Number'
-            variant={isSuccess ? 'filled' : 'standard'}
+            variant={!errors.mobile && isSuccess ? 'filled' : 'standard'}
             value={mobile}
             onChange={(e) => handleChange('mobile', e.target.value)}
             helperText={errors.mobile}
@@ -125,7 +129,7 @@ const EditInfoForm = () => {
             sx={mobileInputStyle}
           />
           <Box display={'flex'} justifyContent={'center'} sx={{transform:'translateY(-20px)'}}  >
-            <SaveAccountButton/>
+            <SaveAccountButton />
         </Box>
         </Stack>
     </Box>
