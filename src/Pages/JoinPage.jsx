@@ -1,7 +1,7 @@
 import React, {useState, forwardRef} from 'react';
 import '../styles/chatComponent.css';
-import {useDispatch} from 'react-redux';
-import {setCurrentRoom} from "../redux/room/room.actions";
+import {useDispatch, useSelector} from 'react-redux';
+import {setCurrentRoom, setOnlyAudio} from "../redux/room/room.actions";
 import Box from '@mui/material/Box'
 import FloatingMenu from '../components/navbar/FloatingMenu';
 import { useMediaQuery } from '@mui/material'
@@ -18,6 +18,8 @@ const JoinPage = ({socket}) => {
     const [code, setCode] = useState("");
     const [choseType, setChoseType] = useState("");
     const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
+    
+    const onlyAudio = useSelector((state) => state.room.onlyAudio);
 
     const handleOpenSnackbar = () => {
       console.log("opening snackbar");
@@ -36,6 +38,10 @@ const JoinPage = ({socket}) => {
     const navigate = useNavigate();
 
     const isSmallScreen = useMediaQuery("(max-width: 900px");
+
+    const handleChangeCheckbox = () => {
+      dispatch(setOnlyAudio(!onlyAudio));
+    }
   
     //called to join livestream upon clicking join livestream button
     const joinRoom = async () => {
@@ -90,6 +96,10 @@ const JoinPage = ({socket}) => {
             <input type="text" placeholder="livestream code.." onChange={(e) => {setCode(e.target.value)}}/>
             <button onClick={joinRoom}>Join {choseType}</button>
             <button onClick={() => setChoseType("")}>Back</button>
+            {/* <div>
+              <input type="checkbox" name="onlyAudio" onChange={handleChangeCheckbox} checked={onlyAudio}></input>
+              <p className="checkbox-label">Only audio</p>
+            </div> */}
           </div>}
 
       <Box sx={{pt:10}} >

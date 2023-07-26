@@ -1,11 +1,12 @@
 import { SET_CURRENT_ROOM, 
-    SET_IS_STREAMER, SET_PARTICIPANTS, SET_SHOW_LOADING_OVERLAY} from "./room.types";
+    SET_IS_STREAMER, SET_ONLY_AUDIO, SET_PARTICIPANTS, SET_SHOW_LOADING_OVERLAY} from "./room.types";
 
 export const INITIAL_ROOM_STATE = {
     currentRoom: {},
     isStreamer: false,
     participants: [],
     showLoadingOverlay: true,
+    onlyAudio: false,
 };
 
 export default function roomReducer(state = INITIAL_ROOM_STATE, action) {
@@ -33,6 +34,11 @@ export default function roomReducer(state = INITIAL_ROOM_STATE, action) {
                 ...state,
                 showLoadingOverlay: action.payload
             }      
+        case SET_ONLY_AUDIO:
+            return{
+                ...state,
+                onlyAudio: action.payload,
+            }     
         default:
             return state;
     }
