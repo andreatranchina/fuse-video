@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import validator from 'validator';
 import { Input } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux'
-import { editFormField, flagErrors } from '../../redux/forms/forms.actions';
+import { editAccountField, flagAccountErrors } from '../../redux/account/account.actions';
 
 const PasswordValidator = () => {
 
@@ -13,9 +13,9 @@ const PasswordValidator = () => {
 
     let newPassword = event.target.value;
     if (validatePassword(newPassword) !== ''){
-      dispatch(flagErrors({ passowrd: validatePassword(newPassword)}));
+      dispatch(flagAccountErrors({ passowrd: validatePassword(newPassword)}));
     } 
-    dispatch(editFormField('password',newPassword));
+    dispatch(editAccountField('password',newPassword));
   };
 
   const validatePassword = (password) => {

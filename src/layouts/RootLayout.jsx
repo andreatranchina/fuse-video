@@ -12,10 +12,8 @@ import '../styles/navbar.css';
 import MobileSpeedDial from '../components/navbar/MobileSpeedDial.jsx';
 import ProfileMenu from '../components/navbar/ProfileMenu.jsx';
 import { styled } from '@mui/material/styles';
-import EditInfoForm from '../components/userDetails/EditInfoForm.jsx';
-import { editAccount } from '../redux/user/user.actions.js';
 import { toggleModal } from '../redux/ui/ui.actions.js'
-import SettingsTabs from '../components/account/SettingsTabs.jsx';
+import SettingsTabs from '../components/userDetails/SettingsTabs.jsx';
 
 const HiddenBackdrop = styled('div')(({ theme }) => ({
   zIndex: theme.zIndex.modal - 1,
