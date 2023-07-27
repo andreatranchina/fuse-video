@@ -21,7 +21,6 @@ import Customizations from '.././pages/Customizations'
 import Profile from '.././pages/Profile'
 import RootLayout from '.././layouts/RootLayout'
 import { connectWithSocketIO } from '../utils/socketIO'
-import { useEffect } from 'react'
 
 let socket = connectWithSocketIO();
 // let socket = null;
@@ -53,10 +52,6 @@ const router = createBrowserRouter(
 )
 
 function App() {
-//   useEffect(() => {
-//     connectWithSocketIO();
-//   })
-
   const { theme } = useThemeContext()
 
   return (

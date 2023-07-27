@@ -8,17 +8,20 @@ import { useMediaQuery } from '@mui/material'
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
 import { logout } from '../redux/user/user.actions';
+import FirebaseAuthService from '../firebase/FirebaseAuthService';
 
 const Home = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const isLoggedIn = useSelector((state) => !!state.user.defaultUser?.id);
+  // const isLoggedIn = useSelector((state) => !!state.user.defaultUser?.id);
 
-  const currentUser = useSelector((state) => state.user.defaultUser)
+  // const currentUser = useSelector((state) => state.user.defaultUser)
+  const user = useSelector((state) => state.user.defaultUser);
 
-  const handleLogOut = (e) => {
+  const handleLogout = (e) => {
     e.preventDefault();
-    dispatch(logout());
+    // dispatch(logout());
+    FirebaseAuthService.logoutUser();
     navigate("/");
   };
 
@@ -28,8 +31,8 @@ const Home = () => {
   return (
      <Box id={mode === 'light' ? 'home-light' : 'home-dark'} sx={{pt:10, justifyContent:'center', display:'flex'}}>
         Home
-        {isLoggedIn? <h1>Successfully logged in!</h1> : <h1>Please signup or login!</h1>}
-        <button style={{height:'30px'}}onClick={handleLogOut}>Logout</button>
+        {user? <h1>Welcome {user.email}</h1> : <h1>Please signup or login!</h1>}
+        <button style={{height:'30px'}} onClick={handleLogout}>Logout</button>
         {isSmallScreen ? 
             <div style={{position: 'fixed', left: '50%', bottom: '20px', transform: 'translate(-50%, -20%)',  margin: '0 auto'}}>
                 <FloatingMenu />
