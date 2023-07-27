@@ -1,22 +1,18 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { editProfile } from '../../redux/user/user.actions'
-import { Box, Button, Modal, Typography, createMuiTheme } from '@mui/material'
+import { Box, Button, Typography } from '@mui/material'
 import { useThemeContext } from '../../theme/ThemeContextProvider'
-import Backdrop from '@mui/material/Backdrop'
 import EditIcon from '@mui/icons-material/Edit'
-import EditInfoForm from '../userDetails/EditInfoForm'
-import { useTheme } from '@mui/material/styles';
-import { styled } from '@mui/material/styles';
+// import { styled } from '@mui/material/styles';
 
-const CustomBackdrop = styled('div')(({ theme }) => ({
-  zIndex: theme.zIndex.modal -1 ,
-}));
+// const CustomBackdrop = styled('div')(({ theme }) => ({
+//   zIndex: theme.zIndex.modal -1 ,
+// }));
 
 const EditProfile= () => {
 
 	const { theme } = useThemeContext();
-  const modalTheme = useTheme();
   const dispatch = useDispatch();
   const isEditing = useSelector((state) => !!state.user.isEditingAccount)
 

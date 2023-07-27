@@ -3,10 +3,12 @@ import PropTypes from 'prop-types';
 import { Box, Button, Tab, Tabs, ThemeProvider, Typography } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
 import { setSettingsTab } from '../../redux/ui/ui.actions';
-import EditInfoForm from './EditInfoForm';
+import EditAccountForm from './account/EditAccountForm';
+import EditProfileForm from './profile/EditProfileForm';
+import EditPreferencesForm from './preferences/EditPreferencesForm'
 import { updateEditStatus } from '../../redux/user/user.actions'
 import { toggleModal } from '../../redux/ui/ui.actions'
-import { submitFail } from '../../redux/forms/forms.actions';
+import { submitAccountFail } from '../../redux/account/account.actions';
 import useTypographyTheme from '../../theme/useTypographyTheme';
 import { useThemeContext } from '../../theme/ThemeContextProvider';
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined'
@@ -65,7 +67,7 @@ const SettingsTabs = () => {
   const handleClose = () => {
     dispatch(toggleModal());
     dispatch(updateEditStatus());
-    dispatch(submitFail());
+    dispatch(submitAccountFail());
   }
 
   return (
@@ -90,13 +92,13 @@ const SettingsTabs = () => {
           </Box>
         </ThemeProvider>
       <TabPanel value={value} index={0}>
-        {value === 0 && <EditInfoForm/>}
+        {value === 0 && <EditAccountForm/>}
       </TabPanel>
       <TabPanel value={value} index={1}>
-        Profile: Bio, username, topics, location(city, state if US) homecountry
+        {value === 1 && <EditProfileForm/>}
       </TabPanel>
       <TabPanel value={value} index={2}>
-        Preferences: languages, notification settings, make profile private (request a follow)
+        {value === 2 && <EditPreferencesForm/>}
       </TabPanel>
     </Box>
   )
