@@ -46,20 +46,22 @@ export const connectWithSocketIO = () => {
     return socket;
 }
 
-export const hostLivestream = (username, livestreamCode) => {
+export const hostLivestream = (username, livestreamCode, onlyAudio) => {
     const data = {
         username,
         livestreamCode,
+        onlyAudio
     }
 
     socket.emit("host-new-livestream", data);
 }
 
 
-export const joinLivestream = (username, livestreamCode) => {
+export const joinLivestream = (username, livestreamCode, onlyAudio) => {
     const data = {
         username,
         livestreamCode,
+        onlyAudio,
     }
 
     socket.emit("join-livestream", data);

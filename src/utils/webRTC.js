@@ -2,19 +2,23 @@ import * as socketIOClient from './socketIO.js';
 import Peer from 'simple-peer';
 import { store } from '../redux/store.js';
 import { setShowLoadingOverlay } from '../redux/room/room.actions.js';
+import { fetchTURNCredentials, getTURNIceServers } from './turn.js';
 
 let localStream;
 let needToAddStream = false;
 let needToRemoveStream = false;
 
-export const initLivestreamConnection = (async (isStreamer, username, livestreamCode) => {
+export const initLivestreamConnection = (async (isStreamer, 
+    username, livestreamCode, onlyAudio) => {
     try {
         console.log('sucessfully received local stream');
 
         if(isStreamer){
+            await fetchTURNCredentials();
+
             const stream = await navigator.mediaDevices.getUserMedia({
                 audio: true,
-                video: true,
+                video: onlyAudio? false: true,
                 //can set max resolution for video if slowing computer down
                 // video: {width: '480', height: '360'},
             });
@@ -24,7 +28,8 @@ export const initLivestreamConnection = (async (isStreamer, username, livestream
             //dispatch action to hide overlay
             store.dispatch(setShowLoadingOverlay(false));
         }
-        isStreamer ? socketIOClient.hostLivestream(username, livestreamCode) : socketIOClient.joinLivestream(username, livestreamCode);
+        isStreamer ? socketIOClient.hostLivestream(username, livestreamCode, onlyAudio) 
+        : socketIOClient.joinLivestream(username, livestreamCode, onlyAudio);
         if (!isStreamer){
             needToAddStream = true;
             needToRemoveStream = true;
@@ -37,13 +42,15 @@ export const initLivestreamConnection = (async (isStreamer, username, livestream
     return localStream;
 })
 
-export const initVideoChatConnection = (async (isStreamer, username, livestreamCode) => {
+export const initVideoChatConnection = (async (isStreamer, username, livestreamCode, 
+    onlyAudio) => {
     try {
         console.log('sucessfully received local stream');
+        await fetchTURNCredentials();
 
             const stream = await navigator.mediaDevices.getUserMedia({
                 audio: true,
-                video: true,
+                video: onlyAudio? false: true,
                 //can set max resolution for video if slowing computer down
                 // video: {width: '480', height: '360'},
             });
@@ -52,7 +59,8 @@ export const initVideoChatConnection = (async (isStreamer, username, livestreamC
     
             //dispatch action to hide overlay
             store.dispatch(setShowLoadingOverlay(false));
-        isStreamer ? socketIOClient.hostLivestream(username, livestreamCode) : socketIOClient.joinLivestream(username, livestreamCode);
+        isStreamer ? socketIOClient.hostLivestream(username, livestreamCode, onlyAudio) 
+        : socketIOClient.joinLivestream(username, livestreamCode, onlyAudio);
         needToAddStream = true;
         needToRemoveStream = true;
     }
@@ -66,11 +74,42 @@ export const initVideoChatConnection = (async (isStreamer, username, livestreamC
 let peers = {};
 let streams = [];
 
+const getConfiguration = () => {
+    const turnIceServers = getTURNIceServers();
+
+    if(turnIceServers){
+        console.log("TURN server credentials fetched");
+        console.log(turnIceServers);
+        return {
+            iceServers: [
+                {
+                    urls: "stun:stun.l.google.com:19302",
+                },
+                ...turnIceServers,        
+            ]
+        }
+    } else {
+        console.warn("using only STUN server");
+        return {
+            iceServers: [
+                {
+                    urls: "stun:stun.l.google.com:19302",
+                }
+            ]
+        }
+    }
+
+
+}
+
 export const prepareNewPeerConnection = (connectedUserSocketId, isInitiator) => {
     //new peer connection is prepared
+    const configuration = getConfiguration();
+
     peers[connectedUserSocketId] = new Peer({
         initiator: isInitiator,
-        stream: localStream
+        stream: localStream,
+        config: configuration
     })
 
     //when passing peer connection on second round (from active side, isInitiator=true), it will then automatically
@@ -195,7 +234,22 @@ const addStream = (stream, connectedUserSocketId) => {
     })
 
     videoContainer.appendChild(videoElement);
+
+    //check if incoming user joined with only audio
+    // const participants = store.getState().room.participants;
+    // console.log("participants" + JSON.stringify(participants));
+    // console.log("conn" + connectedUserSocketId);
+
+    // const participant = participants.find(p => p.socketId === connectedUserSocketId);
+    // if(participant?.onlyAudio){
+    //     console.log("found participant");
+    //     const audioOnlyContainer = getAudioOnlyContainer();
+    //     console.log(audioOnlyContainer)
+    //     videoContainer.appendChild(audioOnlyContainer);
+
+    // }
     videosContainer.appendChild(videoContainer);
+
 }
 
 
@@ -241,3 +295,15 @@ export const switchVideoTracks = (stream) => {
         }
     }
 }
+
+// const getAudioOnlyContainer = () => {
+//     const audioOnlyContainer = document.createElement('div');
+//     audioOnlyContainer.classList.add('only-audio-container');
+
+//     const audioOnlyLabel = document.createElement('p');
+//     audioOnlyLabel.classList.add('audio-only-text');
+//     audioOnlyLabel.innerHTML = "Only audio";
+
+//     audioOnlyContainer.appendChild(audioOnlyLabel);
+//     return audioOnlyContainer;
+// }

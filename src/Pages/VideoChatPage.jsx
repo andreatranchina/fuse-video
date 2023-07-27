@@ -16,6 +16,7 @@ const VideoChatPage = ({socket}) => {
     const loggedInUser = useSelector((state) => state.user);
     const participants = useSelector((state) => state.room.participants);
     const showLoadingOverlay = useSelector((state) => state.room.showLoadingOverlay);
+    const onlyAudio = useSelector((state) => state.room.onlyAudio);
 
     const localScreenRef = useRef();
     const localCameraRef = useRef();
@@ -24,7 +25,6 @@ const VideoChatPage = ({socket}) => {
     const dispatch = useDispatch();
 
     const handleEnlarge = (event) => {
-        console.log(event.target.parentNode);
         const clickedVideoContainer = event.target.parentNode;
         const videos = document.querySelectorAll(".video-container");
         const videosArray = Array.from(videos);
@@ -56,14 +56,18 @@ const VideoChatPage = ({socket}) => {
         dispatch(setIsStreamer(true));
 
         const getlocalCameraStream = async () => {
-            console.log(isStreamer);
             try{
-                let localCameraStream = await webRTC.initVideoChatConnection(isStreamer, loggedInUser.userName, currentVideochat.code)
+                let localCameraStream = await webRTC.initVideoChatConnection(
+                    isStreamer, loggedInUser.userName, currentVideochat.code, onlyAudio)
                 const localCameraVideo = localCameraRef.current;
                 localCameraVideo.srcObject = localCameraStream;
                 localCameraVideo.onloadedmetadata = () => {
                     localCameraVideo.play();
                 }
+                // if(onlyAudio){
+                //     localCameraVideo.style.display = "none";
+
+                // }
             }
             catch(error){
                 console.log(error);

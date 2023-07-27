@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import {SET_CURRENT_ROOM, 
+import {SET_CURRENT_ROOM, SET_ONLY_AUDIO,
     SET_IS_STREAMER, SET_PARTICIPANTS, SET_SHOW_LOADING_OVERLAY} from "./room.types";
 
 export const setCurrentRoom = (payload) => {
@@ -27,6 +27,13 @@ export const setParticipants = (payload) => {
 export const setShowLoadingOverlay = (payload) => {
     return{
         type: SET_SHOW_LOADING_OVERLAY,
+        payload: payload,
+    }
+}
+
+export const setOnlyAudio = (payload) => {
+    return{
+        type: SET_ONLY_AUDIO,
         payload: payload,
     }
 }
