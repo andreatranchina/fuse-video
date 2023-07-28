@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Box, Stack, TextField }  from '@mui/material'
+import { Box, Stack, TextField, useMediaQuery }  from '@mui/material'
 import { editAccountField } from '../../../redux/account/account.actions';
 import MobileValidation from '../../validators/MobileValidation';
 import PasswordValidtator from '../../validators/PasswordValidator';
@@ -13,13 +13,17 @@ const EditAccountForm = () => {
 
   const { firstName, lastName, email, isSuccess, errors, mobile, userName, } = useSelector((state) => state.account)
   const { theme } = useThemeContext();
+  const isSmallScreen = useMediaQuery("(max-width: 900px");
+  const isSmallerScreen = useMediaQuery('(max-width: 550px)');
+  const isXtraSmallScreen = useMediaQuery('(max-width: 420px)');
+  const isMobileScreen = useMediaQuery('(max-width: 390px)');
 
   const inputStyles = { 
     width:'100%',
     '& label': {
       color: theme.palette.text.secondary,
     },
-     '& .MuiInputLabel-root': {
+      '& .MuiInputLabel-root': {
     color: theme.palette.text.primary, // Change the label color
   },
   '& .MuiInputBase-root': {
@@ -61,10 +65,9 @@ const EditAccountForm = () => {
     <Box 
       component='form'
       autoComplete='off'
-      display={'flex'}
-      justifyContent={'center'}>
-      <Stack spacing={4} sx={{width:'600px'}}>
-        <Stack direction='row' spacing={2} display={'flex'} justifyContent={'space-between'} sx={{w:'100%'}}>
+      sx={{marginLeft:'20px'}}
+      >
+      <Stack spacing={1} sx={{width:isMobileScreen ? ('200px') : isXtraSmallScreen ? ('280px'): ('280px')}}>
         <TextField
           label='First Name'
           variant={!errors.firstName && isSuccess ? 'filled' : 'standard'}
@@ -83,8 +86,6 @@ const EditAccountForm = () => {
           error={!!errors.lastName}
           sx={inputStyles}
         />
-        </Stack>
-        <Stack direction='row' spacing={2} display={'flex'} justifyContent={'space-between'} sx={{w:'100%'}}>
         <TextField
           label="Email"
           variant={!errors.email && isSuccess ? 'filled' : 'standard'}
@@ -103,7 +104,6 @@ const EditAccountForm = () => {
           error={!!errors.userName}
           sx={inputStyles}
         />
-        </Stack>
         <TextField
           id='component-mobile'
           label='Mobile Number'
@@ -117,7 +117,7 @@ const EditAccountForm = () => {
           }}
           sx={mobileInputStyle}
         />
-      <Box display={'flex'} justifyContent={'center'} sx={{transform:'translateY(-20px)'}}  >
+      <Box display={'flex'} justifyContent={'center'} sx={{transform:'translateY(-10px)'}}  >
       {/* SAVE ACCOUNT INFORMATION */}
         <SaveAccountButton />
       </Box>

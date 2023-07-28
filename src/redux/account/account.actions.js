@@ -10,9 +10,8 @@ export const flagAccountErrors = (errors) => ({
     payload: errors
 });
 
-export const unflagAccountErrors = (errors) => ({
+export const unflagAccountErrors = () => ({
     type: UNFLAG_ACCOUNT_ERRORS,
-    payload: errors
 });
 
 export const submitAccountSuccess = () => {

@@ -1,5 +1,5 @@
 import React from 'react'
-import Autocomplete from '@mui/material/Autocomplete'
+import { Autocomplete, useMediaQuery }from '@mui/material'
 import { Paper, TextField } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
 import { editPreferredLanguage } from '../../../redux/preferences/preferences.actions'
@@ -40,32 +40,37 @@ const languagesAvailable = [
 		}
 	]
     
-	const LanguageAutocomplete = () => {
-    const { theme } = useThemeContext();
-    const inputStyles = { 
-      width:'100%',
-      '&:hover': {
-      background: theme.palette.background.fab.hover, // Change this to the desired hover background color
-    },
-      '& label': {
-        color: theme.palette.text.secondary,
-    },
-        '& .MuiInputLabel-root': {
-      color: theme.palette.text.secondary, // Change the label color
-    },
-    '& .MuiInputBase-root': {
-      color: theme.palette.text.secondary, // Change the input text color
-    },
-    '& .MuiInput-underline:before': {
-      borderBottomColor: theme.palette.text.secondary, // Change the line (border) color when input is not focused
-    },
-    '& .MuiInput-underline:hover:not(.Mui-disabled):before': {
-      borderBottomColor: theme.palette.text.primary, // Change the line (border) color when input is hovered
-    },
-    '& .MuiInput-underline:after': {
-      borderBottomColor: `#D97D54`, // Change the line (border) color when input is focused
-    },
-    }
+const LanguageAutocomplete = () => {
+  const { theme } = useThemeContext();
+
+  const inputStyles = { 
+  width: '100%',
+  '& label': {
+    color: theme.palette.text.secondary,
+  },
+  '& .MuiInputLabel-root': {
+    color: theme.palette.text.primary, // Change the label color
+  },
+  '& .MuiInputBase-root': {
+    color: theme.palette.text.secondary, // Change the input text color
+    borderBottom: `1px solid ${theme.palette.text.secondary}`, // Add border bottom to mimic underline
+  },
+  '& .MuiInputBase-root:hover': {
+    borderBottomColor: theme.palette.text.primary, // Change the underline color when input is hovered
+  },
+  '& .MuiInputBase-root.Mui-focused': {
+    borderBottomColor: `#D97D54`, // Change the underline color when input is focused
+  },
+  '& .MuiInput-underline:before': {
+    borderBottomColor: theme.palette.text.secondary, // Change the line (border) color when input is not focused
+  },
+  '& .MuiInput-underline:hover:not(.Mui-disabled):before': {
+    borderBottomColor: `#D97D54`, // Change the line (border) color when input is hovered
+  },
+  '& .MuiInput-underline:after': {
+    borderBottomColor: `#D97D54`, // Change the line (border) color when input is focused
+  },
+};
 
 		const dispatch = useDispatch();
 		const selectedLanguage = useSelector((state) => state.preferences.language);

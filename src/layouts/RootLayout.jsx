@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
-import { useMediaQuery, Modal, Stack } from '@mui/material';
+import { Box, useMediaQuery, Modal, Stack } from '@mui/material';
 import { Helmet } from 'react-helmet-async'
 import { useDispatch, useSelector } from 'react-redux'
 import UserLogin from '../components/login/UserLogin.jsx'
@@ -14,6 +14,8 @@ import ProfileMenu from '../components/navbar/ProfileMenu.jsx';
 import { styled } from '@mui/material/styles';
 import { toggleModal } from '../redux/ui/ui.actions.js'
 import SettingsTabs from '../components/userDetails/SettingsTabs.jsx';
+import SettingsStepper from '../components/userDetails/SettingsStepper.jsx';
+import Draggable from 'react-draggable'
 
 const HiddenBackdrop = styled('div')(({ theme }) => ({
   zIndex: theme.zIndex.modal - 1,
@@ -35,7 +37,9 @@ const RootLayout = () => {
   const user = useSelector((state) => state.user.defaultUser);
 
   const isSmallScreen = useMediaQuery("(max-width: 900px");
-
+  const isSmallerScreen = useMediaQuery('(max-width: 550px)');
+  const isXtraSmallScreen = useMediaQuery('(max-width: 420px)');
+  const isMobileScreen = useMediaQuery('(max-width: 390px)');
   const dispatch = useDispatch();
   const { theme } = useThemeContext();
   const open = useSelector(state => !!state.ui.modalIsOpen);
@@ -58,11 +62,12 @@ const RootLayout = () => {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: '700px',
-    height: '70%',
-    bgcolor: 'white',
+    width: isSmallerScreen ? '90%' : '700px',
+    height: isSmallerScreen ? '90%' : '70%',
+    display: 'flex',
+    justifyContent:'center',
     border: `2px solid ${theme.palette.text.secondary}`,
-    backgroundColor:theme.palette.background.paper,
+    backgroundColor:theme.palette.background.default,
     boxShadow: 24,
     p: 4,
     borderRadius:'2%'
@@ -106,14 +111,14 @@ const RootLayout = () => {
       <main>
         <Outlet />
         {/* SHOW MODAL IF ACCOUNT SETTINGS SELECTED FROM PROFILE ICON DROPDOWN */}
-        {isEditingAccount ? ( <Modal
-        sx={modal}
-        open={open}
-        BackdropComponent={HiddenBackdrop} 
+        {isEditingAccount ? ( 
+          <Modal
+            sx={modal}
+            open={open}
+            BackdropComponent={HiddenBackdrop} 
         >
-        
-      <SettingsTabs/>
-    </Modal>
+        {isSmallerScreen ? (<Box sx={{paddingLeft: isMobileScreen ? ('') : isXtraSmallScreen ? ('20px') : ('')}}><SettingsStepper/></Box>) : (<SettingsTabs/>)}
+      </Modal>
     ) : ('')}
       </main>
       <footer>
