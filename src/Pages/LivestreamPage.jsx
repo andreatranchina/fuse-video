@@ -12,7 +12,7 @@ const LivestreamPage = ({socket}) => {
 
     const currentLivestream = useSelector((state) => state.room.currentRoom);
     const isStreamer = useSelector((state) => state.room.isStreamer);
-    const loggedInUser = useSelector((state) => state.user);
+    const loggedInUser = useSelector((state) => state.user.defaultUser);
     const participants = useSelector((state) => state.room.participants);
     const showLoadingOverlay = useSelector((state) => state.room.showLoadingOverlay);
     const onlyAudio = useSelector((state) => state.room.onlyAudio);

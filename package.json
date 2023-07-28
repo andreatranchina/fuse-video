@@ -15,6 +15,7 @@
     "countries-list": "^2.6.1",
     "country-state-city": "^3.1.4",
     "dotenv": "^16.3.1",
+    "firebase": "^10.1.0",
     "i18next": "^23.2.11",
     "libphonenumber-js": "^1.10.37",
     "process": "^0.11.10",

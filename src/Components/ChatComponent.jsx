@@ -8,7 +8,7 @@ import SendIcon from '@mui/icons-material/Send';
 const ChatComponent = ({socket, username, room, type}) => {
     const [currentMessage, setCurrentMessage] = useState("");
     const [messageList, setMessageList] = useState([]);
-    const loggedInUser = useSelector((state) => state.user);
+    const loggedInUser = useSelector((state) => state.user.defaultUser);
     const currentRoom = useSelector((state) => state.room.currentRoom);
     const dispatch = useDispatch();
 

@@ -8,8 +8,6 @@ import { CssBaseline, ThemeProvider } from "@mui/material"
 import { useThemeContext } from ".././theme/ThemeContextProvider"
 import { HelmetProvider } from 'react-helmet-async'
 import Home from '.././pages/Home'
-import Join from '.././pages/Join'
-import Host from '.././pages/Host'
 import HostPage from '../pages/HostPage'
 import JoinPage from '../pages/JoinPage'
 import LivestreamPage from '../pages/LivestreamPage'
@@ -21,7 +19,6 @@ import Customizations from '.././pages/Customizations'
 import Profile from '.././pages/Profile'
 import RootLayout from '.././layouts/RootLayout'
 import { connectWithSocketIO } from '../utils/socketIO'
-import { useEffect } from 'react'
 
 let socket = connectWithSocketIO();
 // let socket = null;
@@ -53,10 +50,6 @@ const router = createBrowserRouter(
 )
 
 function App() {
-//   useEffect(() => {
-//     connectWithSocketIO();
-//   })
-
   const { theme } = useThemeContext()
 
   return (

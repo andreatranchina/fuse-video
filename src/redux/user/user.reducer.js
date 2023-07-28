@@ -1,4 +1,4 @@
-import { GET_USER, REMOVE_USER, EDIT_ACCOUNT, EDIT_STATUS, EMAIL_FETCH_USER, ERROR_HANDLING, FETCH_USER_BY_ID } from "./user.types";
+import { SET_USER, GET_USER, REMOVE_USER, EDIT_ACCOUNT, EDIT_STATUS, EMAIL_FETCH_USER, ERROR_HANDLING, FETCH_USER_BY_ID } from "./user.types";
 
 export const INITIAL_USER_STATE = {
   defaultUser: null,
@@ -9,6 +9,11 @@ export const INITIAL_USER_STATE = {
 
 export default function userReducer(state = INITIAL_USER_STATE, action) {
     switch (action.type) {
+      case SET_USER:
+        return{
+          ...state,
+          defaultUser: action.payload,
+        }
       case GET_USER:
         return action.payload;
       case REMOVE_USER:

@@ -8,7 +8,8 @@ import PersonIcon from '@mui/icons-material/Person'
 import ProfileMenu from './ProfileMenu'
 
 const SideNavlinks = () => {
-  const isLoggedIn = useSelector((state) => !!state.user.defaultUser?.id);
+  // const isLoggedIn = useSelector((state) => !!state.user.defaultUser?.id);
+  const user = useSelector((state) => state.user.defaultUser);
   const { theme } = useThemeContext();
 
     const navlink = {
@@ -21,7 +22,7 @@ const SideNavlinks = () => {
         <NavLink to="/host" style={navlink}>Host</NavLink>
         <NavLink to="/translate" style={navlink}>Translate</NavLink>
         <NavLink to="/customize" style={navlink}>Customize</NavLink>
-        {isLoggedIn ? (<ProfileMenu/>) : ('')}
+        {user ? (<ProfileMenu/>) : ('')}
         <SwitchLayout/>
     </div>
   )
