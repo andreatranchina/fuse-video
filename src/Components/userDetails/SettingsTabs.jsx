@@ -1,35 +1,36 @@
 import React from 'react'
 import PropTypes from 'prop-types';
-import { Box, Button, Tab, Tabs, ThemeProvider, Typography } from '@mui/material'
+import { Box, Button, Tab, Tabs, ThemeProvider, Typography, useMediaQuery } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
-import { setSettingsTab } from '../../redux/ui/ui.actions';
-import EditAccountForm from './account/EditAccountForm';
-import EditProfileForm from './profile/EditProfileForm';
+import { setSettingsTab } from '../../redux/ui/ui.actions'
+import EditAccountForm from './account/EditAccountForm'
+import EditProfileForm from './profile/EditProfileForm'
 import EditPreferencesForm from './preferences/EditPreferencesForm'
 import { updateEditStatus } from '../../redux/user/user.actions'
 import { toggleModal } from '../../redux/ui/ui.actions'
-import { submitAccountFail } from '../../redux/account/account.actions';
-import useTypographyTheme from '../../theme/useTypographyTheme';
-import { useThemeContext } from '../../theme/ThemeContextProvider';
+import { submitAccountFail } from '../../redux/account/account.actions'
+import { submitProfileFail } from '../../redux/profile/profile.actions'
+import { submitPreferencesFail } from '../../redux/preferences/preferences.actions'
+import useTypographyTheme from '../../theme/useTypographyTheme'
+import { useThemeContext } from '../../theme/ThemeContextProvider'
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined'
 
 const TabPanel = (props) => {
   const { children, value, index, ...other } = props;
   const { textFieldTheme } = useTypographyTheme();
-  
+const isSmallScreen = useMediaQuery('(max-width: 550px)');
   return (
     <ThemeProvider theme={textFieldTheme}>
-    <div
+    <div 
       role="tabpanel"
       hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
       aria-labelledby={`simple-tab-${index}`}
       {...other}
     >
       {value === index && (
         
           <Box sx={{ p: 3 }}>
-            <Typography>{children}</Typography>
+            <Typography sx={{textSize:isSmallScreen ? '2px' : '10px'}}>{children}</Typography>
           </Box>
         
       )}
@@ -53,12 +54,13 @@ const a11yProps = (index) => {
 
 const SettingsTabs = () => {
   const { theme } = useThemeContext();
-
+  const isSmallScreen = useMediaQuery('(max-width: 700px)');
   const dispatch = useDispatch();
   const value = useSelector((state) => state.ui.settingsTabValue)
   const { tabsTheme } = useTypographyTheme();
 
   const handleChange = (e, newTab) => {
+    console.log('Changing tab to:', newTab);
     dispatch(setSettingsTab(newTab))
   }
 
@@ -68,10 +70,43 @@ const SettingsTabs = () => {
     dispatch(toggleModal());
     dispatch(updateEditStatus());
     dispatch(submitAccountFail());
+    dispatch(submitProfileFail());
+		dispatch(submitPreferencesFail());
   }
 
   return (
-    <Box sx={{ width: '100%' }}>
+    //for smaller screens
+    isSmallScreen ? (
+    <Box sx={{ width: '80%' }} >
+      <Box display="flex" justifyContent="flex-end" sx={{p:'3px'}}>
+        <Button onClick={handleClose} sx={{ maxWidth: '30px', maxHeight: '30px', minWidth: '30px', minHeight: '30px', color:'red', border:'2px solid red', '&:hover': { backgroundColor:'red', color:`${theme.palette.background.paper}`} }}>
+          <CloseOutlinedIcon sx={{'&hover': { backgroundColor:'red !important'}}}/>
+        </Button>
+      </Box>
+        <ThemeProvider theme={tabsTheme}>
+          <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+            <Tabs value={value} onChange={handleChange} textColor={`${theme.palette.text.primary}`} aria-label="basic tabs example" TabIndicatorProps={{
+    style: {
+      backgroundColor: "#D97D54"
+    }
+    
+  }} >
+              <Tab label="Account"  sx={{ fontWeight: 700, WebkitTextStrokeWidth: '1px' }}{...a11yProps(0)} />
+              <Tab label="Profile" sx={{ fontWeight: 700, WebkitTextStrokeWidth: '1px' }}{...a11yProps(1)} />
+              <Tab label="Preferences" sx={{ fontWeight: 700, WebkitTextStrokeWidth: '1px' }}{...a11yProps(2)} />
+            </Tabs>
+          </Box>
+        </ThemeProvider>
+      <TabPanel value={value} index={0}>
+        {value === 0 && <EditAccountForm/>}
+      </TabPanel>
+      <TabPanel value={value} index={1}>
+        {value === 1 && <EditProfileForm/>}
+      </TabPanel>
+      <TabPanel value={value} index={2}>
+        {value === 2 && <EditPreferencesForm/>}
+      </TabPanel>
+    </Box>) : (<Box sx={{ width: '100%' }} >
     <Box display="flex" justifyContent="flex-end" sx={{p:'3px'}}>
       <Button onClick={handleClose} sx={{ maxWidth: '30px', maxHeight: '30px', minWidth: '30px', minHeight: '30px', color:'red', border:'2px solid red', '&:hover': { backgroundColor:'red', color:`${theme.palette.background.paper}`} }}>
         <CloseOutlinedIcon sx={{'&hover': { backgroundColor:'red !important'}}}/>
@@ -100,9 +135,7 @@ const SettingsTabs = () => {
       <TabPanel value={value} index={2}>
         {value === 2 && <EditPreferencesForm/>}
       </TabPanel>
-    </Box>
-  )
-}
+    </Box>))}
 
 export default SettingsTabs
 
