@@ -19,8 +19,8 @@ const EditAccountForm = () => {
     '& label': {
       color: theme.palette.text.secondary,
     },
-      '& .MuiInputLabel-root': {
-    color: theme.palette.text.secondary, // Change the label color
+     '& .MuiInputLabel-root': {
+    color: theme.palette.text.primary, // Change the label color
   },
   '& .MuiInputBase-root': {
     color: theme.palette.text.secondary, // Change the input text color
@@ -36,24 +36,27 @@ const EditAccountForm = () => {
   },
   }
 
-  const mobileInputStyle = { transform: errors ? 'translate(4px, -15px' : 'translateY(-15px)',
-    '& label': {
+  const mobileInputStyle = { transform: errors ? 'translate(4px, -15px)' : 'translateY(-15px)',
+  '& label': {
+    color: theme.palette.text.secondary,
+    transform: errors ? 'translateY(10px)' : 'translateY(15px)',
+    fontSize: '12px',
+    '&.Mui-focused': {
       color: theme.palette.text.secondary,
-      transform: errors ? 'translateY(10px)' : 'translateY(15px)',
-      fontSize:'12px'
     },
-    '& .MuiInputLabel-root': {
+  },
+  '& .MuiInputLabel-root': {
     color: theme.palette.text.secondary, // Change the label color
-    },
-    '& .MuiInputBase-root': {
-      color: theme.palette.text.secondary, // Change the input text color
-    },
-  }
+  },
+  '& .MuiInputBase-root': {
+    color: theme.palette.text.secondary, // Change the input text color
+  },
+}
 
   const handleChange = (fieldName, newValue) => {
     dispatch(editAccountField(fieldName,newValue))
   }
-  
+
   return (
     <Box 
       component='form'
