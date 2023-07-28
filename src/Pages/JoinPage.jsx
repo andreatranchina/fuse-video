@@ -4,11 +4,13 @@ import {useDispatch, useSelector} from 'react-redux';
 import {setCurrentRoom, setOnlyAudio} from "../redux/room/room.actions";
 import Box from '@mui/material/Box'
 import FloatingMenu from '../components/navbar/FloatingMenu';
-import { useMediaQuery } from '@mui/material'
+import { useMediaQuery, Button } from '@mui/material'
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
+import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRounded';
+
 
 const Alert = forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -22,7 +24,6 @@ const JoinPage = ({socket}) => {
     const onlyAudio = useSelector((state) => state.room.onlyAudio);
 
     const handleOpenSnackbar = () => {
-      console.log("opening snackbar");
       setIsSnackbarOpen(true);
     };
   
@@ -82,11 +83,13 @@ const JoinPage = ({socket}) => {
               <button className="choice-button" onClick={() => setChoseType("Video Chat")}>Video Chat</button>
             </div>
           </div>)
-        : <div className="joinChatContainer">
+        : <div className="joinChatContainer minipage">
             <h3>Join {choseType}</h3>
             <input type="text" placeholder="livestream code.." onChange={(e) => {setCode(e.target.value)}}/>
-            <button onClick={joinRoom}>Join {choseType}</button>
-            <button onClick={() => setChoseType("")}>Back</button>
+            <div className="container-buttons-preroom">
+              <Button onClick={joinRoom}>Start {choseType} </Button>
+              <Button className="back-button" onClick={() => setChoseType("")}><ArrowBackIosNewRoundedIcon /></Button>
+            </div>
             {/* <div>
               <input type="checkbox" name="onlyAudio" onChange={handleChangeCheckbox} checked={onlyAudio}></input>
               <p className="checkbox-label">Only audio</p>

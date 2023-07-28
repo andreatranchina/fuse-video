@@ -31,13 +31,14 @@ const loginWithGoogle = () => {
 }
 
 const loginWithGithub = () => {
+    console.log("github")
     const provider = new GithubAuthProvider();
-    return signInWithPopup(provider);
+    return signInWithPopup(auth, provider);
 }
 
 const loginWithFacebook = () => {
     const provider = new FacebookAuthProvider();
-    return signInWithPopup(provider);
+    return signInWithPopup(auth, provider);
 }
 
 onAuthStateChanged (auth, async (user) => {

@@ -13,43 +13,6 @@
   }
   @import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,700");
   
-  .joinChatContainer {
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-  }
-  
-  .joinChatContainer h3 {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-  }
-  .joinChatContainer input {
-    width: 210px;
-    height: 40px;
-    margin: 7px;
-    border: 2px solid #43a047;
-    border-radius: 5px;
-    padding: 5px;
-    font-size: 16px;
-  }
-  
-  .joinChatContainer button {
-    width: 225px;
-    height: 50px;
-    margin: 7px;
-    border: none;
-    border-radius: 5px;
-    padding: 5px;
-    font-size: 16px;
-    background: #43a047;
-    color: #fff;
-    cursor: pointer;
-  }
-  
-  .joinChatContainer button:hover {
-    background: #2e7d32;
-  }
-  
   .chat-window {
     width: 300px;
     height: 420px;
