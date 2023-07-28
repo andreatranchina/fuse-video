@@ -33,6 +33,7 @@ export const initLivestreamConnection = (async (isStreamer,
         if (!isStreamer){
             needToAddStream = true;
             needToRemoveStream = true;
+            store.dispatch(setShowLoadingOverlay(false));
         }
     }
     catch(error){

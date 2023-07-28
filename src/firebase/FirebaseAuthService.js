@@ -4,11 +4,14 @@ signInWithPopup, GoogleAuthProvider, GithubAuthProvider,
 FacebookAuthProvider, onAuthStateChanged} from 'firebase/auth'
 import { store } from "../redux/store";
 import { setUser } from "../redux/user/user.actions";
+import axios from 'axios';
+
 
 const auth = firebase.auth;
 
 const registerUser = (email, password) => {
     return createUserWithEmailAndPassword(auth, email, password);
+
 
 };
 
@@ -37,23 +40,16 @@ const loginWithFacebook = () => {
     return signInWithPopup(provider);
 }
 
-onAuthStateChanged (auth, (user) => {
+onAuthStateChanged (auth, async (user) => {
     console.log("user status changed: " + JSON.stringify(user));
-    if(user){
-        const loggedInUser = {
-            email: user.email,
-            fullName: user.displayName,
-            imgUrl: user.photoURL,
+    if (user?.email){
 
-        }
-        store.dispatch(setUser(loggedInUser));
-    }
-    else{
-        store.dispatch(setUser(null));
-        return null;
+        // store.dispatch(setUser(user));
+        const response = await axios.get(`http://localhost:3001/api/user/byEmail/${user.email}`);
+        store.dispatch(setUser(response.data));
     }
 
-})
+});
 
 const FirebaseAuthService = {
     registerUser,

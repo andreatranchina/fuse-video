@@ -8,8 +8,6 @@ import { CssBaseline, ThemeProvider } from "@mui/material"
 import { useThemeContext } from ".././theme/ThemeContextProvider"
 import { HelmetProvider } from 'react-helmet-async'
 import Home from '.././pages/Home'
-import Join from '.././pages/Join'
-import Host from '.././pages/Host'
 import HostPage from '../pages/HostPage'
 import JoinPage from '../pages/JoinPage'
 import LivestreamPage from '../pages/LivestreamPage'

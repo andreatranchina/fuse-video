@@ -164,3 +164,4 @@ export const fetchUserByEmailThunk = (userEmail) => {
     }
   }
 }
+//`http://localhost:3001/api/user/findOrCreate`

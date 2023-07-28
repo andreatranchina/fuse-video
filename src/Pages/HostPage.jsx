@@ -17,7 +17,7 @@ const HostPage = ({socket}) => {
     const [description, setDescription] = useState("")
     const [choseType, setChoseType] = useState("");
 
-    const loggedInUser = useSelector((state) => state.user);
+    const loggedInUser = useSelector((state) => state.user.defaultUser);
     const onlyAudio = useSelector((state) => state.room.onlyAudio);
 
     const dispatch = useDispatch();
