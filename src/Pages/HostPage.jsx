@@ -17,7 +17,7 @@ const HostPage = ({socket}) => {
     const [description, setDescription] = useState("")
     const [choseType, setChoseType] = useState("");
 
-    const loggedInUser = useSelector((state) => state.user);
+    const loggedInUser = useSelector((state) => state.user.defaultUser);
     const onlyAudio = useSelector((state) => state.room.onlyAudio);
 
     const dispatch = useDispatch();
@@ -40,7 +40,7 @@ const HostPage = ({socket}) => {
         console.log(loggedInUser);
         const sendNotificationsResponse = await fetch(`http://localhost:3001/api/follows/sendNotifications?userId=${loggedInUser.id}&livestreamCode=${v4Id.toString()}`, {
           method: 'GET',
-          credentials: 'include', 
+          credentials: 'include',
         });
 
         if (sendNotificationsResponse.ok) {
@@ -50,7 +50,7 @@ const HostPage = ({socket}) => {
         }
 
 
-        const sendTextNotification = await fetch(`http://localhost:3001/api/follows/followers/phoneNumbers/${loggedInUser.id}`, {
+        const sendTextNotification = await fetch(`http://localhost:3001/api/follows/phoneNumbers?userId=${loggedInUser.id}&livestreamCode=${v4Id.toString()}`, {
             method: 'GET',
             credentials: 'include',
           });
