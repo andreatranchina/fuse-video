@@ -45,8 +45,6 @@ const JoinPage = ({socket}) => {
   
     //called to join livestream upon clicking join livestream button
     const joinRoom = async () => {
-      // if (code !==""){
-        // socket.emit("join_room", livestreamCode); //join socket room based on inputted livestream code
 
         try{
             if(choseType === "Livestream"){
@@ -61,16 +59,10 @@ const JoinPage = ({socket}) => {
               navigate(`/livestream/${code}`);
             }
             else{ //else user chose to join a video chat
-              // try{
                 const response = await axios.get(`http://localhost:3001/api/videochats/byCode/${code}`);
                 const responseData = response.data;
                 dispatch(setCurrentRoom(responseData));
                 navigate(`/videochat/${code}`);
-              // }
-              // catch(error){
-              //   console.log(error + "room does not exist");
-              // }
-
             }
 
         }
@@ -78,7 +70,6 @@ const JoinPage = ({socket}) => {
             console.log(error);
             handleOpenSnackbar();
         }
-      // }
     }
   
     return (
