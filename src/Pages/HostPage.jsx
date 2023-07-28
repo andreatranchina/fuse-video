@@ -40,7 +40,7 @@ const HostPage = ({socket}) => {
         console.log(loggedInUser);
         const sendNotificationsResponse = await fetch(`http://localhost:3001/api/follows/sendNotifications?userId=${loggedInUser.id}&livestreamCode=${v4Id.toString()}`, {
           method: 'GET',
-          credentials: 'include', 
+          credentials: 'include',
         });
 
         if (sendNotificationsResponse.ok) {
@@ -48,6 +48,20 @@ const HostPage = ({socket}) => {
         } else {
           console.error('error sending email');
         }
+
+
+        const sendTextNotification = await fetch(`http://localhost:3001/api/follows/phoneNumbers?userId=${loggedInUser.id}&livestreamCode=${v4Id.toString()}`, {
+            method: 'GET',
+            credentials: 'include',
+          });
+
+          if (sendTextNotification.ok) {
+            console.log('Text sent front end');
+          } else {
+            console.error('Text error front end');
+          }
+
+
 
         //set is streamer in redux to true, or else video and audio of this person would not be shared
         dispatch(setIsStreamer(true)); //every host is a streamer (both in livestream and video chat case)
@@ -123,7 +137,7 @@ const HostPage = ({socket}) => {
       </Box>
   
       </div>
-    );
+    );  
 }
 
 export default HostPage
