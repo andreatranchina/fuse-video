@@ -5,6 +5,7 @@ import { useThemeContext } from '../../../theme/ThemeContextProvider'
 import { editAccountThunk, fetchUserByIdThunk } from '../../../redux/user/user.actions'
 import { editProfileField, submitProfileSuccess, submitProfileFail, flagProfileErrors } from '../../../redux/profile/profile.actions'
 import { parsePhoneNumber, isValidNumber } from 'libphonenumber-js';
+import { unflagPreferencesErrors } from '../../../redux/preferences/preferences.actions'
 
 
 const SaveProfileButton = () => {
@@ -24,7 +25,7 @@ const SaveProfileButton = () => {
     if (bioLength > 100){
         dispatch(flagProfileErrors({ bio: 'Keep your bio under 100 characters'})) 
     }
-    if (bio === '' || hasWhiteSpace(bio)){
+    if (bio === ''){
     //get user's first name from database and input into form redux
         dispatch(flagProfileErrors({ bio: 'Write a short bio'})) 
     } else {
@@ -65,7 +66,7 @@ const SaveProfileButton = () => {
       dispatch(fetchUserByIdThunk(userId));
     } else {
       dispatch(submitProfileFail());
-      dispatch(flagProfileErrors({bio:'',city:'',state:''}))
+      dispatch(unflagPreferencesErrors())
     }
   }
 
