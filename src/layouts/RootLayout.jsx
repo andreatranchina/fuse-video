@@ -30,9 +30,12 @@ const RootBackdrop = styled('div')(({ theme }) => ({
 }));
 
 const RootLayout = () => {
-  const isLoggedIn = useSelector((state) => !!state.user.defaultUser?.id);
+  // const isLoggedIn = useSelector((state) => !!state.user.defaultUser?.id);
   const isEditingAccount = useSelector((state) => !!state.user.isEditingAccount)
+  const user = useSelector((state) => state.user.defaultUser);
+
   const isSmallScreen = useMediaQuery("(max-width: 900px");
+
   const dispatch = useDispatch();
   const { theme } = useThemeContext();
   const open = useSelector(state => !!state.ui.modalIsOpen);
@@ -87,14 +90,14 @@ const RootLayout = () => {
             <div>
               {isSmallScreen ? 
               <Stack direction='row'>
-              {isLoggedIn ? (
+              {user ? (
                 <ProfileMenu/>) : ('')}
                 <SwitchLayout/>
               </Stack> : <SideNavLinks/>}
             </div>
         </nav>
-        {/* SHOW THE USER LOGIN/SIGNUP DROPDOWN IN NAVBAR IF LOGGED IN */}
-        {!isLoggedIn ? (<nav id="login" style={loginStyle}>
+        {/* SHOW THE USER LOGIN/SIGNUP DROPDOWN IN NAVBAR NOT LOGGED IN */}
+        {!user ? (<nav id="login" style={loginStyle}>
           <UserLogin/>
         </nav>) : ('')}
       </header>
