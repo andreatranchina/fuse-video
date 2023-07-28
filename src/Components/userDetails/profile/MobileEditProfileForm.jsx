@@ -1,17 +1,30 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Box, FormControl, InputLabel, MenuItem, Select, Stack, TextField } from '@mui/material';
+import { Box, FormControl, InputLabel, MenuItem, Select, Stack, TextField, styled, useMediaQuery } from '@mui/material';
 import { editProfileField } from '../../../redux/profile/profile.actions';
 import { useThemeContext } from '../../../theme/ThemeContextProvider';
 import SaveProfileButton from '../profile/SaveProfileButton';
 import { State, City } from 'country-state-city';
 
-const EditProfileForm = () => {
+const SmallFormControl = styled(FormControl)(({ theme }) => ({
+  '& .MuiInputLabel-root': {
+    fontSize: '12px',
+  },
+  '& .MuiOutlinedInput-input': {
+    padding: '3px', // Adjust the padding to control the height
+    height: '28px', // Adjust the height as per your requirement
+  },
+  '& .MuiFormHelperText-root': {
+    fontSize: '10px',
+  },
+}));
+
+const MobileEditProfileForm = () => {
   
   const { theme } = useThemeContext();
 
- const inputStyles = { 
-    width:'100%',
+  const inputStyles = { 
+    width:'80%',
     justifyContent:'center',
     '& label': {
       color: theme.palette.text.secondary,
@@ -56,6 +69,10 @@ const EditProfileForm = () => {
   const country = useSelector((state) => state.user.defaultUser?.country);
   const [cities, setCities] = useState([]);
   const [states, setStates] = useState([]);
+  const isSmallScreen = useMediaQuery("(max-width: 900px");
+  const isSmallerScreen = useMediaQuery('(max-width: 550px)');
+  const isXtraSmallScreen = useMediaQuery('(max-width: 420px)');
+  const isMobileScreen = useMediaQuery('(max-width: 390px)');
 
   const handleChange = (fieldName, newValue) => {
     dispatch(editProfileField(fieldName, newValue));
@@ -86,12 +103,12 @@ const EditProfileForm = () => {
   const cityValue = city || ''; // Use empty string as default
 
   return (
-    <Box component="form" autoComplete="off" display={'flex'} justifyContent={'center'}>
-      <Stack spacing={4} sx={{ width: '600px' }}>
-        <Stack direction="row" spacing={2} display={'flex'} justifyContent={'space-between'} sx={{ w: '100%' }}>
+    <Box component="form" autoComplete="off" display={'flex'} justifyContent={'center'} sx={{marginLeft:'20px'}}>
+      <Stack spacing={2} justifyContent={'center'} sx={{width:isMobileScreen ? ('200px') : isXtraSmallScreen ? ('280px'): ('280px')}}>
+      <Box display={'flex'} justifyContent={'flex-start'} sx={{alignItems:'center'}}>
           <TextField
             multiline
-            rows={5}
+            rows={3}
             label="Bio"
             variant={!errors.bio && isSuccess ? 'filled' : 'standard'}
             value={bio}
@@ -100,16 +117,12 @@ const EditProfileForm = () => {
             error={!!errors.bio}
             sx={inputStyles}
           />
-          <Stack spacing={2} display={'flex'} justifyContent={'space-evenly'} sx={{ w: '100%' }}>
-            <Box sx={{ minWidth: 120 }}>
-              <FormControl fullWidth>
+          </Box>
+           <Stack direction="row" spacing={2} display={'flex'} justifyContent={'flex-start'}>
+            <Box sx={{transorm:'translateX(200px)'}}>
+              <SmallFormControl sx={{width:'90px'}}>
                 <InputLabel
-                  sx={{
-                    color: theme.palette.text.primary,
-                    '&.Mui-focused': {
-                      color: theme.palette.text.secondary, // Change the label color on focus
-                    },
-                  }}
+                  size='small'
                 >
                   State
                 </InputLabel>
@@ -139,11 +152,12 @@ const EditProfileForm = () => {
                     ))
                   )}
                 </Select>
-              </FormControl>
+              </SmallFormControl>
             </Box>
             <Box sx={{ minWidth: 120 }}>
-              <FormControl fullWidth>
+              <SmallFormControl sx={{width:'90px'}}>
                 <InputLabel
+                  size='small'
                   sx={{
                     color: theme.palette.text.primary,
                     '&.Mui-focused': {
@@ -163,7 +177,7 @@ const EditProfileForm = () => {
                       MenuListProps: {
                         sx: {
                           backgroundColor: theme.palette.background.fab.default,
-                          color: theme.palette.text.primary,
+                          color: theme.palette.text.primary, 
                         },
                       },
                     },
@@ -179,16 +193,15 @@ const EditProfileForm = () => {
                     ))
                   )}
                 </Select>
-              </FormControl>
+              </SmallFormControl>
             </Box>
           </Stack>
-        </Stack>
-        <Box display={'flex'} justifyContent={'center'} sx={{ transform: 'translateY(20px)' }}>
+          <Box display={'flex'} justifyContent={'flex-start'} >
           <SaveProfileButton />
         </Box>
-      </Stack>
+        </Stack>
     </Box>
   );
 };
 
-export default EditProfileForm;
+export default MobileEditProfileForm;

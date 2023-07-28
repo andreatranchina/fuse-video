@@ -28,9 +28,8 @@ export const flagPreferencesErrors = (errors) => ({
     payload: errors
 });
 
-export const unflagPreferencesErrors = (errors) => ({
+export const unflagPreferencesErrors = () => ({
     type: UNFLAG_PREFERENCES_ERRORS,
-    payload: errors
 });
 
 export const submitPreferencesSuccess = () => ({

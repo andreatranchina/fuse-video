@@ -10,9 +10,8 @@ export const flagProfileErrors = (errors) => ({
     payload: errors
 });
 
-export const unflagProfileErrors = (errors) => ({
+export const unflagProfileErrors = () => ({
     type: UNFLAG_PROFILE_ERRORS,
-    payload: errors
 })
 
 export const submitProfileSuccess = () => {
