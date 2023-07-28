@@ -47,8 +47,9 @@ const ChatComponent = ({socket, username, room, type}) => {
     }
 
     useEffect(() => {
+        //data has username, time, and message  -> data.message
         socket.on("receive_message", (data) => {
-
+            console.log(data,'was a received message')
             setMessageList((list) => [...list, data]); //set to list from before with new data
         })
 
