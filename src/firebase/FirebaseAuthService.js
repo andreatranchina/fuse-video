@@ -45,8 +45,16 @@ onAuthStateChanged (auth, async (user) => {
     if (user?.email){
 
         // store.dispatch(setUser(user));
-        const response = await axios.get(`http://localhost:3001/api/user/byEmail/${user.email}`);
-        store.dispatch(setUser(response.data));
+        try{
+            const response = await axios.get(`http://localhost:3001/api/user/byEmail/${user.email}`);
+            if (response.data){
+                store.dispatch(setUser(response.data));
+            }
+
+        }
+        catch(error){
+            console.log(error.message);
+        }
     }
 
 });
