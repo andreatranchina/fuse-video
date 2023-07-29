@@ -8,6 +8,7 @@ import accountReducer from "./account/account.reducer"
 import roomReducer from "./room/room.reducer"
 import profileReducer from './profile/profile.reducer'
 import preferencesReducer from "./preferences/preferences.reducer"
+import photosReducer from "./photos/photos.reducer"
 
 //function takes in object of all reducers to combine,
 //taking a key value pair 
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
     room: roomReducer,
     profile: profileReducer,
     preferences: preferencesReducer,
+    photos: photosReducer,
 })
 
 export default rootReducer
