@@ -1,7 +1,9 @@
 import React from 'react';
 import axios from 'axios';
+import { useSelector } from 'react-redux';
 
-const People = ({ users, setUsers, loggedInUserId }) => {
+const People = ({ users, setUsers }) => {
+const loggedInUserId = useSelector((state) => state.user.defaultUser?.id);
   const handleFollow = async (userId) => {
     try {
       await axios.post(`http://localhost:3001/api/follows/`, {
@@ -43,16 +45,26 @@ const People = ({ users, setUsers, loggedInUserId }) => {
   };
 
   return (
-    <div>
-      <h2>List of Registered Users</h2>
-      <ul>
+<div className="people-container">
+      <h2>Users</h2>
+      <ul className="people-list">
         {users.map((user) => (
-          <li key={user.id}>
+          <li key={user.id} className="people-item">
             <span>{user.firstName} {user.lastName} {user.userName}</span>
             {user.isFollowed ? (
-              <button onClick={() => handleUnfollow(user.id)}>Unfollow</button>
+              <button
+                className="follow-button unfollow" // Change the class name to "unfollow"
+                onClick={() => handleUnfollow(user.id)}
+              >
+                Unfollow
+              </button>
             ) : (
-              <button onClick={() => handleFollow(user.id)}>Follow</button>
+              <button
+                className="follow-button follow"
+                onClick={() => handleFollow(user.id)}
+              >
+                Follow
+              </button>
             )}
           </li>
         ))}
