@@ -1,4 +1,5 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom'
 import Box from '@mui/material/Box'
 import SpeedDial from '@mui/material/SpeedDial'
 import SpeedDialAction from '@mui/material/SpeedDialAction'
@@ -29,8 +30,8 @@ const iconStyle = {
 }
 
 const actions = [
-  { icon: <div style={iconStyle}><HostIcon width={'38px'} height={'38px'} /></div>, name: 'Host' },
-  { icon: <div style={iconStyle}><JoinIcon /></div>, name: 'Join' },
+  { icon:  <div style={iconStyle}><NavLink to="/host" className="navlink"><HostIcon width={'38px'} height={'38px'} /></NavLink></div>, name: 'Host' },
+  { icon: <div style={iconStyle}><NavLink to="/join" className="navlink"><JoinIcon /></NavLink></div>, name: 'Join' },
   { icon: <div style={iconStyle}><TranslateIcon /></div>, name: 'Discover' },
   { icon: <div style={iconStyle}><CustomizeIcon /></div>, name: 'Profile' },
 ];

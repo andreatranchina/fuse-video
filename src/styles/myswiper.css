@@ -1,0 +1,21 @@
+/* Style for the navigation arrows */
+.swiper-button-next,
+.swiper-button-prev {
+    width: 10px;
+    height: 10px;
+    color: white;
+    background-color: transparent;
+}
+
+/* Style for the navigation arrows on hover */
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Style for the navigation arrows on active */
+.swiper-button-next.swiper-button-disabled,
+.swiper-button-prev.swiper-button-disabled {
+    opacity: 0.5;
+    cursor: auto;
+}
