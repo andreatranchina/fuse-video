@@ -1,18 +1,26 @@
 import React, { useEffect, useState } from 'react';
-import People from './People';
+import People from '../components/explore/People';
+import axios from 'axios';
+import "../styles/explorePage.css"
 
 const ExplorePage = () => {
     const [users, setUsers] = useState([]);
 
     useEffect(() => {
-        fetch('/api/explore/users')
-            .then((response) => response.json())
-            .then((data) => setUsers(data))
-            .catch((error) => console.error('user fetch error: ', error));
+        const fetchUsers = async () => {
+            try{
+                const response = await axios.get('http://localhost:3001/api/explore/users')
+                setUsers(response.data)  
+            }
+            catch(error) {
+                console.log(error)
+            }
+        }
+        fetchUsers();
     }, []);
 
     return (
-        <div>
+        <div style={{marginTop:'5rem'}}>
             <People users={users} />
         </div>
     );
