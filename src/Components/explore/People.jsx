@@ -4,7 +4,10 @@ import axios from 'axios';
 const People = ({ users, loggedInUserId }) => {
   const handleFollow = async (userId) => {
     try {
-      await axios.post(`http://localhost:3001/api/follows/${loggedInUserId}/${userId}`);
+      await axios.post(`http://localhost:3001/api/follows/`, {
+        loggedInUserId,
+        userId,
+      });
       console.log('followed user:', userId);
     } catch (error) {
       console.error('error following user:', error.message);
@@ -13,7 +16,10 @@ const People = ({ users, loggedInUserId }) => {
 
   const handleUnfollow = async (userId) => {
     try {
-      await axios.delete(`http://localhost:3001/api/follows/${loggedInUserId}/${userId}`);
+        await axios.delete(`http://localhost:3001/api/follows/`, {
+        loggedInUserId,
+        userId,
+      });
       console.log('unfollowed user:', userId);
     } catch (error) {
       console.error('error unfollowing user:', error.message);
