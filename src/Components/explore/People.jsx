@@ -1,13 +1,20 @@
 import React from 'react';
 import axios from 'axios';
 
-const People = ({ users, loggedInUserId }) => {
+const People = ({ users, setUsers, loggedInUserId }) => {
   const handleFollow = async (userId) => {
     try {
       await axios.post(`http://localhost:3001/api/follows/`, {
         loggedInUserId,
         userId,
       });
+
+      setUsers((prevUsers) =>
+        prevUsers.map((user) =>
+          user.id === userId ? { ...user, isFollowed: true } : user
+        )
+      );
+
       console.log('followed user:', userId);
     } catch (error) {
       console.error('error following user:', error.message);
@@ -16,10 +23,19 @@ const People = ({ users, loggedInUserId }) => {
 
   const handleUnfollow = async (userId) => {
     try {
-        await axios.delete(`http://localhost:3001/api/follows/`, {
-        loggedInUserId,
-        userId,
+      await axios.delete(`http://localhost:3001/api/follows/`, {
+        data: {
+          loggedInUserId,
+          userId,
+        },
       });
+
+      setUsers((prevUsers) =>
+        prevUsers.map((user) =>
+          user.id === userId ? { ...user, isFollowed: false } : user
+        )
+      );
+
       console.log('unfollowed user:', userId);
     } catch (error) {
       console.error('error unfollowing user:', error.message);

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import People from '../components/explore/People';
 import axios from 'axios';
-import { useSelector } from 'react-redux'; // Import useSelector to access Redux state
+import { useSelector } from 'react-redux';
 import "../styles/explorePage.css"
 
 const ExplorePage = () => {
@@ -24,7 +24,7 @@ const ExplorePage = () => {
 
     return (
         <div style={{marginTop:'5rem'}}>
-            <People users={users} loggedInUserId={loggedInUser.id} />
+            <People users={users} setUsers={setUsers} loggedInUserId={loggedInUser.id} />
         </div>
     );
 };
