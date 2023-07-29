@@ -5,8 +5,6 @@ import { useThemeContext } from "../theme/ThemeContextProvider";
 import { useMediaQuery } from '@mui/material';
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { setUser } from '../redux/user/user.actions';
-import FirebaseAuthService from '../firebase/FirebaseAuthService';
 import Slogan from '../components/home/Slogan';
 import Description from '../components/home/Description';
 import HomeImagesContainer from '../components/home/HomeImagesContainer';
@@ -19,19 +17,6 @@ const Home = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useSelector((state) => state.user.defaultUser);
-
-  const handleLogout = (e) => {
-    e.preventDefault();
-    FirebaseAuthService.logoutUser();
-    dispatch(setUser(null));
-    navigate("/");
-  };
-
-
-  const handleExploreClick = () => {
-    navigate('/explore');
-  };
-
   const { mode } = useThemeContext();
   const isSmallScreen = useMediaQuery('(max-width: 900px)');
   const isMobileScreen = useMediaQuery('(max-width: 420px)');
@@ -97,7 +82,6 @@ const Home = () => {
             </Box>
           </Stack>
         </Stack>
-        <button onClick={handleExploreClick}>Explore</button>
       </Box>
     )}
   </Box>

@@ -1,6 +1,6 @@
 import React from 'react'
 
-const TranslateIcon = () => {
+const ExploreIcon = () => {
   return (
     <div style={{ transform: 'translate(-1px,2px)' }}>
      <svg
@@ -20,4 +20,4 @@ const TranslateIcon = () => {
   )
 }
 
-export default TranslateIcon
+export default ExploreIcon

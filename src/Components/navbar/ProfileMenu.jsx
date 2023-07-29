@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { IconButton, Menu, MenuItem } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
 import { useThemeContext } from '../../theme/ThemeContextProvider';
 import PersonIcon from '@mui/icons-material/Person'
-import { updateEditStatus, logout } from '../../redux/user/user.actions';
-import { toggleModal } from '../../redux/ui/ui.actions';
+import { updateEditStatus, logout, setUser } from '../../redux/user/user.actions'
+import FirebaseAuthService from '../../firebase/FirebaseAuthService'
+import { toggleModal } from '../../redux/ui/ui.actions'
 
 const ProfileMenu = () => {
 
@@ -24,8 +25,11 @@ const ProfileMenu = () => {
   // const isEditing = useSelector((state) => !state.user.isEditing)
 
   const handleLogOut = (e) => {
+    e.preventDefault();
     dispatch(logout());
+    FirebaseAuthService.logoutUser();
     setAnchorEl(null);
+    dispatch(setUser(null));
     navigate("/");
   };
 
