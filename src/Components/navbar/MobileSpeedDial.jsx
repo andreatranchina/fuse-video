@@ -4,10 +4,10 @@ import Box from '@mui/material/Box'
 import SpeedDial from '@mui/material/SpeedDial'
 import SpeedDialAction from '@mui/material/SpeedDialAction'
 import FuseIcon from '../icons/FuseIcon'
-import TranslateIcon from '../icons/TranslateIcon'
+import TranslateIcon from '../icons/ExploreIcon'
 import JoinIcon from '../icons/JoinIcon'
 import HostIcon from '../icons/HostIcon'
-import CustomizeIcon from '../icons/CustomizeIcon'
+import CustomizeIcon from '../icons/ProfileIcon'
 import { useThemeContext } from "../../theme/ThemeContextProvider"
 
 const MobileSpeedDial = () => {
@@ -32,7 +32,7 @@ const iconStyle = {
 const actions = [
   { icon:  <div style={iconStyle}><NavLink to="/host" className="navlink"><HostIcon width={'38px'} height={'38px'} /></NavLink></div>, name: 'Host' },
   { icon: <div style={iconStyle}><NavLink to="/join" className="navlink"><JoinIcon /></NavLink></div>, name: 'Join' },
-  { icon: <div style={iconStyle}><TranslateIcon /></div>, name: 'Discover' },
+  { icon: <div style={iconStyle}><NavLink to='/expore'><TranslateIcon /></NavLink></div>, name: 'Expore' },
   { icon: <div style={iconStyle}><CustomizeIcon /></div>, name: 'Profile' },
 ];
 
