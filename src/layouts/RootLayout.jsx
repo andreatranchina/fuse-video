@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
 import { Box, useMediaQuery, Modal, Stack } from '@mui/material';
 import { Helmet } from 'react-helmet-async'
@@ -10,12 +10,12 @@ import SwitchLayout from '../components/navbar/SwitchLayout';
 import { useThemeContext } from "../theme/ThemeContextProvider";
 import '../styles/navbar.css';
 import MobileSpeedDial from '../components/navbar/MobileSpeedDial.jsx';
+import FloatingMenu from '../components/navbar/FloatingMenu.jsx';
 import ProfileMenu from '../components/navbar/ProfileMenu.jsx';
 import { styled } from '@mui/material/styles';
 import { toggleModal } from '../redux/ui/ui.actions.js'
 import SettingsTabs from '../components/userDetails/SettingsTabs.jsx';
 import SettingsStepper from '../components/userDetails/SettingsStepper.jsx';
-import Draggable from 'react-draggable'
 
 const HiddenBackdrop = styled('div')(({ theme }) => ({
   zIndex: theme.zIndex.modal - 1,
@@ -47,7 +47,8 @@ const RootLayout = () => {
   
   const navbarStyle = {
     backgroundColor: theme.palette.primary.main,
-    boxShadow: theme.palette.background.boxShadow
+    boxShadow: theme.palette.background.boxShadow,
+    zIndex:20
   };
 
   const loginStyle = { 
@@ -122,9 +123,12 @@ const RootLayout = () => {
     ) : ('')}
       </main>
       <footer>
-        {isSmallScreen ? 
-            <div style={{position: 'fixed', left: '90%', bottom: '20px', margin: '0 auto'}}>
+        {isXtraSmallScreen ? 
+            <div style={{position: 'fixed', left: '70%', bottom: '20px', margin: '0 auto', zIndex:999999}}>
                 <MobileSpeedDial/>
+            </div> :  isSmallScreen ? 
+            <div style={{position: 'fixed', left: '50%', bottom: '20px', transform: 'translate(-50%, -20%)',  margin: '0 auto', zIndex:999999}}>
+                <FloatingMenu />
             </div> : <></>}
       </footer>
     </>
