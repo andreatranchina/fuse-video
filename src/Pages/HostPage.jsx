@@ -7,14 +7,14 @@ import { setCurrentRoom, setIsStreamer, setOnlyAudio } from '../redux/room/room.
 import {v4 as uuidv4} from 'uuid';
 import Box from '@mui/material/Box'
 import FloatingMenu from '../components/navbar/FloatingMenu';
-import { useMediaQuery } from '@mui/material'
+import { useMediaQuery, Button } from '@mui/material'
 import { useNavigate } from 'react-router-dom';
 import "../styles/hostPage.css";
 import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRounded';
 
 const HostPage = ({socket}) => {
-    const [title, setTitle] = useState("")
-    const [description, setDescription] = useState("")
+    const [title, setTitle] = useState()
+    const [description, setDescription] = useState()
     const [choseType, setChoseType] = useState("");
 
     const loggedInUser = useSelector((state) => state.user.defaultUser);
@@ -116,12 +116,14 @@ const HostPage = ({socket}) => {
               <button className="choice-button" onClick={() => setChoseType("Video Chat")}>Video Chat</button>
             </div>
           </div>)
-        :  <div className="joinChatContainer">
+        :  <div className="joinChatContainer minipage">
             <h3>Host {choseType}</h3>
             <input type="text" placeholder="title" onChange={(e) => {setTitle(e.target.value)}}/>
             <input type="text" placeholder="description" onChange={(e) => setDescription(e.target.value)}/>
-            <button onClick={startLivestream}>Start {choseType} </button>
-            <button onClick={() => setChoseType("")}>Back</button>
+            <div className="container-buttons-preroom">
+              <Button onClick={startLivestream}>Start {choseType} </Button>
+              <Button className="back-button" onClick={() => setChoseType("")}><ArrowBackIosNewRoundedIcon /></Button>
+            </div>
             {/* <div>
               <input type="checkbox" name="onlyAudio" onChange={handleChangeCheckbox} checked={onlyAudio}></input>
               <p className="checkbox-label">Only audio</p>

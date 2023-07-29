@@ -27,6 +27,11 @@ const Home = () => {
     navigate("/");
   };
 
+
+  const handleExploreClick = () => {
+    navigate('/explore');
+  };
+
   const { mode } = useThemeContext();
   const isSmallScreen = useMediaQuery('(max-width: 900px');
   const isMobileScreen = useMediaQuery('(max-width: 420px)');
@@ -87,11 +92,9 @@ const Home = () => {
             </Box>
           </Stack>
         </Stack>
-        {/* {user ? <h1>Welcome, {user.firstName + " " + user.lastName}</h1> : <h1>Please signup or login!</h1>}
-        <button style={{ height: '30px' }} onClick={handleLogout}>Logout</button> */}
-      </Box>)}
-    </>
+      <button onClick={handleExploreClick}>Explore</button>
+    </Box>
   )
 }
 
-export default Home;
+export default Home

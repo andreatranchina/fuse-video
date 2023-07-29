@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,700");
+
 .minipage{
     border: 3px solid white;
     width: 80%;
@@ -53,4 +55,73 @@
 .choice-button:hover {
   box-shadow: rgba(44,187,99,.35) 0 -25px 18px -14px inset,rgba(44,187,99,.25) 0 1px 2px,rgba(44,187,99,.25) 0 2px 4px,rgba(44,187,99,.25) 0 4px 8px,rgba(44,187,99,.25) 0 8px 16px,rgba(44,187,99,.25) 0 16px 32px;
   transform: scale(1.05) rotate(-1deg);
+}
+
+::placeholder{
+  color: rgb(115, 114, 130)
+}
+
+
+.joinChatContainer {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  align-content: center;
+  /* border: 3px solid black; */
+}
+
+.joinChatContainer h3 {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  position: relative;
+  bottom: 0.5rem;
+}
+
+.joinChatContainer input {
+  width: 310px;
+  height: 40px;
+  margin: 7px auto;
+  border: 3px solid white;
+  /* box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px; */
+  box-shadow: rgba(58, 115, 144, 0.2) 0 -25px 18px -14px inset,rgba(49, 126, 138, 0.15) 0 1px 2px,rgba(45, 114, 148, 0.15) 0 2px 4px,rgba(44, 106, 187, 0.15) 0 4px 8px,rgba(44, 137, 187, 0.15) 0 8px 16px,rgba(44, 139, 187, 0.15) 0 16px 32px;
+  border-radius: 5px;
+  padding: 5px;
+  font-size: 16px;
+}
+
+.joinChatContainer input:focus{
+  outline-color: var(--teal);
+}
+
+.joinChatContainer button {
+  width: 230px;
+  height: 50px;
+  margin: 5px auto;
+  border: none;
+  border-radius: 5px;
+  padding: 5px;
+  font-size: 16px;
+  background: linear-gradient(rgb(188, 175, 222), rgb(116, 87, 165), rgb(188, 175, 222));
+  color: #fff;
+  cursor: pointer;
+  box-shadow: rgba(58, 138, 144, 0.2) 0 -25px 18px -14px inset,rgba(49, 138, 128, 0.15) 0 1px 2px,rgba(139, 45, 148, 0.15) 0 2px 4px,rgba(154, 44, 187, 0.15) 0 4px 8px,rgba(44, 187, 99, .15) 0 8px 16px,rgba(44, 175, 187, 0.15) 0 16px 32px;
+  /* border: 2px solid rgb(67, 73, 101); */
+}
+
+.joinChatContainer button:hover {
+  background: #2e407d;
+  box-shadow: rgba(44, 144, 187, 0.35) 0 -25px 18px -14px inset,rgba(44, 187, 182, 0.25) 0 1px 2px,rgba(44, 149, 187, 0.25) 0 2px 4px,rgba(161, 44, 187, 0.25) 0 4px 8px,rgba(118, 44, 187, 0.25) 0 8px 16px,rgba(44, 177, 187, 0.25) 0 16px 32px;
+}
+
+.joinChatContainer .back-button{
+  width: 7px;
+}
+
+.container-buttons-preroom{
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  width: 330px;
+  margin: 15px auto;
 }
