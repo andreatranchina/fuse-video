@@ -23,6 +23,11 @@ const Home = () => {
     navigate("/");
   };
 
+
+  const handleExploreClick = () => {
+    navigate('/explore');
+  };
+
   const { mode } = useThemeContext();
   const isSmallScreen = useMediaQuery("(max-width: 900px");
 
@@ -35,7 +40,10 @@ const Home = () => {
             <div style={{position: 'fixed', left: '50%', bottom: '20px', transform: 'translate(-50%, -20%)',  margin: '0 auto'}}>
                 <FloatingMenu />
             </div> : <></>}
+      <button onClick={handleExploreClick}>Explore</button>
+
     </Box>
+
   )
 }
 
