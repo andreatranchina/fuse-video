@@ -41,85 +41,84 @@ const EditPreferencesForm = () => {
     },
   };
 
-  const dispatch = useDispatch();
+	const dispatch = useDispatch();
 
-  const { language, isDeactivated, isPrivate, errors, isSuccess } = useSelector((state) => state.preferences)
+	const { language, isDeactivated, isPrivate, errors, isSuccess } = useSelector((state) => state.preferences)
 	const deactivate = useSelector((state) => state.preferences.isDeactivated)
 	const makePrivate = useSelector((state) => state.preferences.isPrivate)
 	const topics = useSelector((state) => state.preferences.topics)
 
 	const handleDeactivation = () => {
-		dispatch(toggleIsDeactivated());
+	dispatch(toggleIsDeactivated());
 	}
 
 	const handleMakePrivate = () => {
-		dispatch(toggleIsPrivate());
+	dispatch(toggleIsPrivate());
 	}
-  
-  return (
-    <Box 
-			component='form'
-			autoComplete='off'
-			display={'flex'}
-			justifyContent={'center'}
-			>
-			<Stack spacing={4} sx={{width:'600px'}}>
+
+	return (
+		<Box 
+		component='form'
+		autoComplete='off'
+		display={'flex'}
+		justifyContent={'center'}
+		>
+			<Stack spacing={4} sx={{width:'600px', display:'flex', justifyContent:'center', alignItems:'center'}}>
 				<LanguageAutocomplete/>
-					<Stack direction='row' spacing={1} >
+				<Stack direction='row' spacing={1} >
 					<Stack spacing={2} display={'flex'} justifyContent={'space-between'} sx={{w:'100%', alignItems:'center'}}>
-					<Stack direction='row' spacing={1} sx={{width:'280px'}}>
-					{isPrivate ? <Box display={'flex'} 
-													sx={{justifyContent:'flex-end', 
-														alignItems:'center'}}>
-													<LockIcon sx={{color:'red', fontSize:'48px'}}/>
-												</Box> : <Box display={'flex'} 
-																		sx={{justifyContent:'flex-end', 
-																			alignItems:'center'}}>
-																		<LockOpenIcon sx={{color:'green', fontSize:'48px'}}/>
-																	</Box>}
-					<Typography variant='subtitle1' >
-							Make your streams private?
-					</Typography>
-					
+						<Stack direction='row' spacing={1} sx={{width:'280px'}}>
+						{isPrivate ? <Box display={'flex'} 
+							sx={{justifyContent:'flex-end', 
+								alignItems:'center'}}>
+							<LockIcon sx={{color:'red', fontSize:'48px'}}/>
+							</Box> : <Box display={'flex'} 
+								sx={{justifyContent:'flex-end', 
+										alignItems:'center'}}>
+								<LockOpenIcon sx={{color:'green', fontSize:'48px'}}/>
+							</Box>}
+							<Typography variant='subtitle1' >
+								Make your streams private?
+							</Typography>
+
 						<Switch 
 							checked={makePrivate}
 							onChange={handleMakePrivate}
 							color='primary'
 							sx={switchStyles}
 						/>
-						{isSuccess ? <CheckCircleOutlineIcon sx={{color:'green'}}/> : ''}
-						</Stack>
-						<Stack direction='row' spacing={1} sx={{width:'280px'}}>
-						{isDeactivated ? <Box display={'flex'} 
-													sx={{justifyContent:'flex-end', 
-														alignItems:'center'}}>
-													<PowerSettingsNewIcon sx={{color:'red', fontSize:'48px'}}/>
-												</Box> : <Box display={'flex'} 
-																		sx={{justifyContent:'flex-end', 
-																			alignItems:'center'}}>
-																		<PowerSettingsNewIcon sx={{color:'green', fontSize:'48px'}}/>
-																	</Box>}
-						<Typography variant='subtitle1'>
-							Deactivate Account?
-						</Typography>
+				{isSuccess ? <CheckCircleOutlineIcon sx={{color:'green'}}/> : ''}
+			</Stack>
+			<Stack direction='row' spacing={1} sx={{width:'280px'}}>
+				{isDeactivated ? <Box display={'flex'} 
+					sx={{justifyContent:'flex-end', alignItems:'center'}}>
+					<PowerSettingsNewIcon sx={{color:'red', fontSize:'48px'}}/>
+						</Box> : <Box display={'flex'} 
+								sx={{justifyContent:'flex-end', 
+								alignItems:'center'}}>
+							<PowerSettingsNewIcon sx={{color:'green', fontSize:'48px'}}/>
+							</Box>}
+								<Typography variant='subtitle1'>
+									Deactivate Account?
+								</Typography>
 						<Switch 
 							checked={deactivate}
 							onChange={handleDeactivation}
 							color='primary'
 							sx={switchStyles}
 						/>
-						{isSuccess ? <CheckCircleOutlineIcon sx={{color:'green'}}/> : ''}
-						</Stack>
-					</Stack>
-				<TopicsPool/>
+					{isSuccess ? <CheckCircleOutlineIcon sx={{color:'green'}}/> : ''}
 				</Stack>
-				<Box display={'flex'} justifyContent={'center'} sx={{transform:'translateY(-20px)'}}  >
-      {/* SAVE PREFERENCES */}
-        <SavePreferencesButton />
-      </Box>
+				<Box sx={{backgroundColor:'red', width:'200px'}}></Box>
 			</Stack>
-    </Box>
-  )
+		</Stack>
+			<Box display={'flex'} justifyContent={'center'} sx={{transform:'translateY(-20px)'}}  >
+			{/* SAVE PREFERENCES */}
+			<SavePreferencesButton />
+			</Box>
+		</Stack>
+		</Box>
+	)
 }
 
 export default EditPreferencesForm
