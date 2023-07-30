@@ -33,8 +33,14 @@ const GoLiveButton = () => {
 	const goLiveText = { 
 		fontFamily:`'Bungee Hairline', cursive`, 
 		fontWeight:'700',
-    marginRight:'8px'
-	}
+    marginRight:'8px',
+    color: theme.palette.text,
+    WebkitTextStrokeWidth: '2px', 
+		WebkitTextStrokeColor:`${theme.palette.text}`,
+    '&:hover': {
+    color: 'white', // Text color on hover
+  }
+}
 	
   return (
     <Box >
