@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useThemeContext } from '../../theme/ThemeContextProvider';
 import PersonIcon from '@mui/icons-material/Person'
 import { updateEditStatus, setUser } from '../../redux/user/user.actions'
+import { setSettingsTab } from '../../redux/ui/ui.actions';
 import FirebaseAuthService from '../../firebase/FirebaseAuthService'
 import { toggleModal } from '../../redux/ui/ui.actions'
 
@@ -37,6 +38,7 @@ const ProfileMenu = () => {
 
   const handleShowAccount = () => {
     console.log('Modal state', modalOpen);
+    dispatch(setSettingsTab(0));
     dispatch(toggleModal());
     dispatch(updateEditStatus());
     setAnchorEl(null);

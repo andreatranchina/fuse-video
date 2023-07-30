@@ -1,7 +1,7 @@
 import axios from "axios";
 import { SET_USER, GET_USER, REMOVE_USER, EDIT_ACCOUNT, EDIT_STATUS, 
   EMAIL_FETCH_USER, ERROR_HANDLING, FETCH_USER_BY_ID, FETCH_FOLLOWERS, ADD_PROFILE_TO_VIEWS, 
-  REMOVE_PROFILE_FROM_VIEWS, FETCH_FOLLOWINGS } from "./user.types";
+  REMOVE_PROFILE_FROM_VIEWS, FETCH_FOLLOWINGS, INPUT_NEW_INFO } from "./user.types";
 
 export const setUser = (payload) => {
   return{
@@ -50,6 +50,13 @@ export const editProfile = () => (dispatch) => {
       type: EDIT_ACCOUNT,
     });
 };
+
+export const inputNewInfo = (payload) => (dispatch) => {
+  dispatch({
+    type: INPUT_NEW_INFO,
+    payload: payload
+  });
+}
 
 export const updateEditStatus = () => (dispatch) => {
   console.log('edit account')

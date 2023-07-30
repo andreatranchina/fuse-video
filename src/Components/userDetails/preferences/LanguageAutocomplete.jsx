@@ -100,9 +100,8 @@ const LanguageAutocomplete = () => {
         )}
 					value={languagesAvailable.find((language) => language?.shortName === selectedLanguage || null)}
 					onChange={handleSelectLanguage}
-      		renderInput={(params) => <TextField {...params} variant={!errors.language && isSuccess ? 'filled' : 'standard'} label="Language" helperText={errors.language}
-          error={!!errors.language}
-          sx={inputStyles}/>}
+      		renderInput={(params) => <TextField {...params} variant={!errors.language && isSuccess ? 'filled' : 'standard'} sx={{width:'500px'}}label="Language" helperText={errors.language}
+          error={!!errors.language} />}
     		/>
 		)
 	}

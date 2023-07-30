@@ -44,8 +44,8 @@ const UserBanner = ({viewUserId}) => {
   return (
     <Box >
       <Typography variant={isSmallScreen ? ('h5') : ('h4')} sx={{fontFamily:`'Bungee Hairline',monospace`, fontWeight:'700', marginTop:'18px',
-    color: theme.palette.text.primary}}>
-          {isOwnProfile ? loggedInUserName : viewUserName}
+    color: theme.palette.text.primary, WebkitTextStrokeWidth: '2px',WebkitTextStrokeColor:theme.palette.text.primary}}>
+          @{isOwnProfile ? loggedInUserName : viewUserName}
       </Typography>
     </Box>
   )

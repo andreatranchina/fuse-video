@@ -40,7 +40,7 @@ const ProfileInfoLayout = ({loggedInUserId,viewUserId}) => {
      <Stack>
           {/* PROFILE PIC AND BIO */}
             <Grid container sx={{color:'white', flexGrow: 1 }}>
-              <Grid item xs={4} sx={{color:'white', height:'55vh'}}>
+              <Grid item xs={4} sx={{color:'white', height:'65vh'}}>
                 <Grid container sx={{minHeight:'100%', justifyContent:'center', alignItems:'center'}}>
                     <Grid item sx={{marginTop:'-40px'}}>
                       <UserBanner viewUserId={viewUserId}/>
@@ -85,7 +85,7 @@ const ProfileInfoLayout = ({loggedInUserId,viewUserId}) => {
               </Grid>
               {/* PAST STREAMS */}
               <Grid container>
-                <Grid item xs={12} sx={{backgroundColor:'orange', height:'45vh'}}>
+                <Grid item xs={12} sx={{ height:'45vh'}}>
                   <StreamHistory viewUserId={viewUserId}/>
                 </Grid>
               </Grid>
