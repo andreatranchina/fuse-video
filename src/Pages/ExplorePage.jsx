@@ -9,8 +9,6 @@ const ExplorePage = () => {
     const [users, setUsers] = useState([]);
     const {theme, mode } = useThemeContext();
 
-
-
     useEffect(() => {
         const fetchUsers = async () => {
             try {
@@ -23,8 +21,6 @@ const ExplorePage = () => {
         }
         fetchUsers();
     }, []);
-
-
 
     return (
         <div id={mode === 'light' ? 'home-light' : 'home-dark'} className="explore-page-container">

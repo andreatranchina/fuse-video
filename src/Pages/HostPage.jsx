@@ -11,6 +11,7 @@ import { useMediaQuery, Button } from '@mui/material'
 import { useNavigate } from 'react-router-dom';
 import "../styles/hostPage.css";
 import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRounded';
+import axios from 'axios';
 
 const HostPage = ({socket}) => {
     const [title, setTitle] = useState()
@@ -38,10 +39,12 @@ const HostPage = ({socket}) => {
 
         // email trigger for backend
         console.log(loggedInUser);
-        const sendNotificationsResponse = await fetch(`http://localhost:3001/api/follows/sendNotifications?userId=${loggedInUser.id}&livestreamCode=${v4Id.toString()}`, {
-          method: 'GET',
-          credentials: 'include',
-        });
+        // const sendNotificationsResponse = await fetch(`http://localhost:3001/api/follows/sendNotifications?userId=${loggedInUser.id}&livestreamCode=${v4Id.toString()}`, {
+        //   method: 'GET',
+        //   credentials: 'include',
+        // });
+
+        const sendNotificationsResponse = await axios.get(`http://localhost:3001/api/follows/sendNotifications?userId=${loggedInUser.id}&livestreamCode=${v4Id.toString()}`);
 
         if (sendNotificationsResponse.ok) {
           console.log('email notification sent successfully');
@@ -50,10 +53,13 @@ const HostPage = ({socket}) => {
         }
 
 
-        const sendTextNotification = await fetch(`http://localhost:3001/api/follows/phoneNumbers?userId=${loggedInUser.id}&livestreamCode=${v4Id.toString()}`, {
-            method: 'GET',
-            credentials: 'include',
-          });
+        // const sendTextNotification = await fetch(`http://localhost:3001/api/follows/phoneNumbers?userId=${loggedInUser.id}&livestreamCode=${v4Id.toString()}`, {
+        //     method: 'GET',
+        //     credentials: 'include',
+        //   });
+
+
+        const sendTextNotification = axios.get(`http://localhost:3001/api/follows/phoneNumbers?userId=${loggedInUser.id}&livestreamCode=${v4Id.toString()}`);
 
           if (sendTextNotification.ok) {
             console.log('Text sent front end');

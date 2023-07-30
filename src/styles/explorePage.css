@@ -5,7 +5,7 @@
 }
 
 .people-component-container{
-    width: 35%;
+    width: 37%;
     display: inline-block;
     overflow: scroll;
     height: 88vh;
@@ -64,10 +64,10 @@
 }
 
 .username-span{
-    width: 45%;
-    display: inline-block;
-    margin-right: 3px;
-    margin-left: 3px;
+    /* width: 45%; */
+    display: block;
+    /* margin-right: 3px;
+    margin-left: 3px; */
 }
 
 .people-item:hover{
@@ -75,8 +75,9 @@
 }
 
 .follow-button {
-    position: absolute;
-    right: 20px;
+    /* position: absolute;
+    right: 20px; */
+    display: block;
     padding: 5px 10px;
     border: none;
     cursor: pointer;
@@ -88,15 +89,24 @@
     /* margin-left: 50px; */
 }
 
+.follow-button:hover{
+    box-shadow: none;
+}
+
 .profile-pic{
     width: 30px;
     position: relative;
     top: 3px;
     border-radius: 20%;
+    display: inline-block;
 }
 
-.profile-pic-username-container{
+/* .profile-pic-username-container{
     display:inline;
+} */
+
+.username-btn-container{
+    display: inline-block;
 }
 
 .video-card{
@@ -118,13 +128,14 @@
 }
 
 @media (max-width: 930px){
-    .profile-pic-username-container{
-        display:block;
+    .profile-pic{
+        position: relative;
+        left: 3px;
     }
 
     .follow-button{
         position: relative;
-        left: 1px;
+        left: 0;
         display: block;
         margin: 5px auto;
         width: 90%;
