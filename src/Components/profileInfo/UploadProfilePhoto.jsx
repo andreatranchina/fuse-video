@@ -3,13 +3,16 @@ import Box from '@mui/material/Box'
 import Fab from '@mui/material/Fab'
 import IconButton from '@mui/material/IconButton'
 import AddIcon from '@mui/icons-material/Add'
+import { useSelector } from 'react-redux'
 import { useThemeContext } from '../../theme/ThemeContextProvider'
 import { useMediaQuery } from '@mui/material'
 
-const UploadProfilePhoto = () => {
+const UploadProfilePhoto = ({viewUserId}) => {
 
   const { theme } = useThemeContext();
   const isSmallScreen = useMediaQuery('(max-width: 900px)');
+  const loggedInUserId = useSelector((state) => state.user.defaultUser?.id)
+  const isOwnProfile = loggedInUserId === Number(viewUserId); 
 
   const upload = {
     backgroundColor: theme.palette.background.fab.upload, width:'36px', height:'24px', 

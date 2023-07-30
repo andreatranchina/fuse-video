@@ -1,11 +1,14 @@
 import React from 'react'
 import Avatar from '@mui/material/Avatar'
 import Box from '@mui/material/Box'
+import { useSelector } from 'react-redux'
 import { useThemeContext } from '../../theme/ThemeContextProvider'
 
-const ProfilePhoto = () => {
+const ProfilePhoto = ({viewUserId}) => {
 
   const { theme } = useThemeContext();
+  const loggedInUserId = useSelector((state) => state.user.defaultUser?.id)
+  const isOwnProfile = loggedInUserId === Number(viewUserId); 
 
   return (
     <Box sx={{ display: 'flex', justifyContent:'center', transform:'translateY(-20px)'}}>
