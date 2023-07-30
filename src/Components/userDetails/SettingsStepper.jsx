@@ -32,7 +32,7 @@ const SettingsStepper = () => {
 
 	const handleClose = () => {
     dispatch(toggleModal());
-    dispatch(updateEditStatus());
+    dispatch(updateEditStatus()); //not eidting
     dispatch(submitAccountFail());
 		dispatch(submitProfileFail());
 		dispatch(submitPreferencesFail());

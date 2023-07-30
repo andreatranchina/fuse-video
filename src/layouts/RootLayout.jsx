@@ -16,6 +16,7 @@ import { styled } from '@mui/material/styles';
 import { toggleModal } from '../redux/ui/ui.actions.js'
 import SettingsTabs from '../components/userDetails/SettingsTabs.jsx';
 import SettingsStepper from '../components/userDetails/SettingsStepper.jsx';
+import { inputNewInfo } from '../redux/user/user.actions.js';
 
 const HiddenBackdrop = styled('div')(({ theme }) => ({
   zIndex: theme.zIndex.modal - 1,
@@ -41,7 +42,7 @@ const RootLayout = () => {
   const isXtraSmallScreen = useMediaQuery('(max-width: 420px)');
   const isMobileScreen = useMediaQuery('(max-width: 390px)');
   const dispatch = useDispatch();
-  const { theme } = useThemeContext();
+  const { theme, } = useThemeContext();
   const open = useSelector(state => !!state.ui.modalIsOpen);
   const modalIsOpen = useSelector(state => state.ui.modalIsOpen)
   
@@ -66,6 +67,7 @@ const RootLayout = () => {
     width: isSmallerScreen ? '90%' : '700px',
     height: isSmallerScreen ? '90%' : '70%',
     display: 'flex',
+
     justifyContent:'center',
     border: `2px solid ${theme.palette.text.secondary}`,
     backgroundColor:theme.palette.background.default,
