@@ -188,16 +188,19 @@ export const addProfileToViews = (viewUser, mutualFollowers) => ({
 
 //thunk to add a opened user profile to a list of opened profiles, allowing multiple user profile tabs to be opened to view
 
-export const addProfileToViewsThunk = (viewUserId,accessingUserId) => {
+export const addProfileToViewsThunk = (viewUserId,loggedInUserId) => {
   return async(dispatch) => {
     try {
-      const res = await axios.get(`http://localhost:3001/api/user/viewProfile/${viewUserId}?accessingUserId=${accessingUserId}`);
-      const { viewUser, viewUserFollowers, mutualFollowers } = res.data;
+      const res = await axios.get(`http://localhost:3001/api/user/viewProfile/${viewUserId}?loggedInUserId=${loggedInUserId}`);
+      const { viewUser, viewUserFollowers, mutualFollowers, viewUserFollowersCount } = res.data;
       dispatch(addProfileToViews(viewUser, viewUserFollowers, mutualFollowers));
     } catch (error) {
       console.log(error)
     }
   }
 }
-
-//`http://localhost:3001/api/user/findOrCreate`
+//remove visiting profile data from the current view(s)
+export const removeProfileFromViews = (viewUserId) => ({
+  type: REMOVE_PROFILE_FROM_VIEWS,
+  payload: viewUserId
+})
