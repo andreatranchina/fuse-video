@@ -3,13 +3,13 @@ import Box from '@mui/material/Box'
 import Fab from '@mui/material/Fab'
 import IconButton from '@mui/material/IconButton'
 import AddIcon from '@mui/icons-material/Add'
+import { useSelector, useDispatch } from 'react-redux'
 import { useThemeContext } from '../../theme/ThemeContextProvider'
 import { useMediaQuery } from '@mui/material'
 import {v4 as uuidv4 } from "uuid";
 import FirebaseStorageService from "../../firebase/FirebaseStorageService";
 import axios from 'axios';
 import { editAccountThunk } from '../../redux/user/user.actions';
-import {useSelector, useDispatch} from 'react-redux';
 import { useNavigate } from 'react-router-dom'
 
 const UploadProfilePhoto = ({setUploadedPhoto, uploadedPhoto}) => {

@@ -2,6 +2,7 @@ import React from 'react'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
+import { useSelector } from 'react-redux'
 import { useThemeContext } from '../../theme/ThemeContextProvider'
 import HostIcon from '../icons/HostIcon'
 import { useMediaQuery } from '@mui/material'
@@ -10,6 +11,7 @@ const GoLiveButton = () => {
 
 	const { theme } = useThemeContext();
   const isSmallScreen = useMediaQuery('(max-width: 900px)');
+  const loggedInUserId = useSelector((state) => state.user.defaultUser?.id)
 
   const goLiveButton = {
     backgroundColor:theme.palette.background.fab.upload,

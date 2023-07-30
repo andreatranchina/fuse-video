@@ -1,8 +1,10 @@
-import { SET_USER, GET_USER, REMOVE_USER, EDIT_ACCOUNT, EDIT_STATUS, EMAIL_FETCH_USER, ERROR_HANDLING, FETCH_USER_BY_ID, FETCH_FOLLOWERS, SHOW_NO_FOLLOWERS } from "./user.types";
+import { SET_USER, GET_USER, REMOVE_USER, EDIT_ACCOUNT, EDIT_STATUS, EMAIL_FETCH_USER, ERROR_HANDLING, FETCH_USER_BY_ID, FETCH_FOLLOWERS, ADD_PROFILE_TO_VIEWS, REMOVE_PROFILE_FROM_VIEWS } from "./user.types";
 
 export const INITIAL_USER_STATE = {
   defaultUser: null,
   editedProfile:[],
+  //a list of all profiles that the user is currently viewing
+  openProfiles:[],
   error:null,
   isEditingAccount:false
 }
@@ -55,6 +57,34 @@ export default function userReducer(state = INITIAL_USER_STATE, action) {
           followers: action.payload, 
         }// Update followers in the defaultUser object
       };
+      case ADD_PROFILE_TO_VIEWS:
+        const { viewUser, viewUserFollowers, mutualFollowers, viewUserFollowersCount } = action.payload;
+        //check if the user already in the opened profiles
+        const viewUserIndex = state.openProfiles.findIndex((user) => user.id === viewUser.id);
+
+        if (viewUserIndex !== -1) {
+          //provide any update to mutual since last view
+          const updatedOpenProfiles = [...state.openProfiles];
+          updatedOpenProfiles[viewUserIndex] = {
+            ...viewUser, viewUserFollowers, mutualFollowers, viewUserFollowersCount
+          };
+          return {
+            ...state, openProfiles: updatedOpenProfiles,
+          };
+        } else {
+          //new view of the profile alongside mutual followers
+          return {
+            ...state, openProfiles: [...state.openProfiles, { ...viewUser, viewUserFollowers, mutualFollowers}]
+          }
+        }
+      //action.payload = the viewUserId
+      case REMOVE_PROFILE_FROM_VIEWS:
+        const profileIdToRemove = action.payload;
+        return {
+          ...state,
+          openProfiles: state.openProfiles.filter((user) => user.id != profileIdToRemove),
+        };
+
       default:
         return state;
     }

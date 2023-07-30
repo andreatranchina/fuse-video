@@ -15,6 +15,7 @@ const EditProfile= () => {
 	const { theme } = useThemeContext();
   const dispatch = useDispatch();
   const isEditing = useSelector((state) => !!state.user.isEditingAccount)
+  const loggedInUserId = useSelector((state) => state.user.defaultUser?.id)
 
   const editButton = {
     backgroundColor:theme.palette.button.main,

@@ -5,7 +5,7 @@ import Typography from '@mui/material/Typography'
 import { useThemeContext } from '../../theme/ThemeContextProvider'
 import AddIcon from '@mui/icons-material/Add'
 
-const FollowProfile = () => {
+const FollowProfile = ({viewUserId}) => {
 
 	const { theme } = useThemeContext();
 

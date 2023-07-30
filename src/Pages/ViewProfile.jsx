@@ -7,7 +7,7 @@ import Grid from '@mui/material/Grid'
 import MessageBarLayout from '../layouts/MessageBarLayout'
 import ProfileInfoLayout from '../layouts/ProfileInfoLayout'
 
-const Profile = () => {
+const ViewProfile = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const isLoggedIn = useSelector((state) => !!state.user.defaultUser?.id);
@@ -21,12 +21,17 @@ const Profile = () => {
   const city = useSelector((state) => state.user.defaultUser?.city)
   const state = useSelector((state) => state.user.defaultUser?.state)
 
-  //   useEffect(() => {
-  //   // Remove the profile from the list of logged-in user's openProfiles when the component unmounts
-  //   return () => {
-  //     dispatch(removeProfileFromViews(id));
-  //   };
-  // }, [id]);
+    useEffect(() => {
+    // Remove the profile from the list of logged-in user's openProfiles when the component unmounts
+    return () => {
+      dispatch(removeProfileFromViews(id));
+    };
+  }, [id]);
+
+  useEffect(() => {
+    console.log(loggedInUserId,'is the logged in');
+    console.log(id,'is the viewed user');
+  },[])
 
   return (
     <Box sx={{height:'100%', width:'100%'}}>
@@ -34,7 +39,7 @@ const Profile = () => {
       <Grid container sx={{marginTop: isLoggedIn ? '55px' : ''}}>
         <MessageBarLayout/>
         <Grid item xs={8} sm={9} md={10}>
-          <ProfileInfoLayout loggedInUserId={loggedInUserId} viewUserId={id}/>
+          <ProfileInfoLayout viewUserId={id}/>
         </Grid>
       </Grid>
     </Box>
@@ -42,4 +47,4 @@ const Profile = () => {
   )
 }
 
-export default Profile
+export default ViewProfile

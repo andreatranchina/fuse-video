@@ -8,7 +8,10 @@ const Topic = styled('li')(({ theme }) => ({
   margin: theme.spacing(0.5),
 }));
 
-const Topics = () => {
+const Topics = ({viewUserId}) => {
+  const isLoggedIn = useSelector((state) => !!state.user.defaultUser?.id);
+  const loggedInUserId = useSelector((state) => state.user.defaultUser?.id)
+  const isOwnProfile = loggedInUserId === Number(viewUserId); 
   const [topics,setTopics] = useState([
     { key: 0, label: 'Tennis' },
     { key: 1, label: 'Movies' },
@@ -16,7 +19,6 @@ const Topics = () => {
     { key: 3, label: 'True Crime' },
     { key: 4, label: 'E-sports' },
   ])
-  const isLoggedIn = useSelector((state) => !!state.user.defaultUser?.id);
 
   const handleDelete = (topicToDelete) => () => {
     setTopics((topics) => topics.filter((topic) => topic.key !== topicToDelete.key));
@@ -38,7 +40,7 @@ const Topics = () => {
 
         return (
           <Topic key={topic.key}>
-          {isLoggedIn ? (<Chip
+          {isLoggedIn && isOwnProfile ? (<Chip
               label={topic.label}
               onDelete={handleDelete(topic)}
             />) : <Chip
