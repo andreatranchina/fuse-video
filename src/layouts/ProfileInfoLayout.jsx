@@ -9,7 +9,7 @@ import GoLiveButton from '../components/profileInfo/GoLiveButton'
 import FollowProfile from '../components/profileInfo/FollowProfile'
 import MessageUser from '../components/profileInfo/MessageUser'
 import UserLocation from '../components/profileInfo/UserLocation'
-import Followers from '.././components/profileInfo/Followers'
+import Followers from '../components/profileInfo/Followers'
 import Bio from '../components/bio/Bio'
 import Topics from '../components/bio/Topics'
 import EditInfoForm from '../components/userDetails/account/EditAccountForm'
@@ -22,8 +22,10 @@ const ProfileInfoLayout = () => {
   //  const isLoggedIn = useSelector((state) => !!state.user.id);
   const isLoggedIn = true;
    const isSmallScreen = useMediaQuery('(max-width: 900px)');
-   const isEditing = useSelector((state) => !state.user.isEditingAccount)
+   const isEditing = useSelector((state) => !state.user.defaultUser?.isEditingAccount)
+   const userId = useSelector((state) => state.user.defaultUser?.id)
 
+   //if the pro
   return (
      <Stack>
           {/* PROFILE PIC AND BIO */}

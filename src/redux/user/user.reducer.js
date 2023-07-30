@@ -1,4 +1,4 @@
-import { SET_USER, GET_USER, REMOVE_USER, EDIT_ACCOUNT, EDIT_STATUS, EMAIL_FETCH_USER, ERROR_HANDLING, FETCH_USER_BY_ID } from "./user.types";
+import { SET_USER, GET_USER, REMOVE_USER, EDIT_ACCOUNT, EDIT_STATUS, EMAIL_FETCH_USER, ERROR_HANDLING, FETCH_USER_BY_ID, FETCH_FOLLOWERS, SHOW_NO_FOLLOWERS } from "./user.types";
 
 export const INITIAL_USER_STATE = {
   defaultUser: null,
@@ -44,9 +44,17 @@ export default function userReducer(state = INITIAL_USER_STATE, action) {
           ...state, isEditingAccount: !state.isEditingAccount
       }
       case ERROR_HANDLING:
-          return {
-            ...state, error: action.payload
-          }
+        return {
+          ...state, error: action.payload
+        }
+      case FETCH_FOLLOWERS:
+        return {
+          ...state,
+        defaultUser: {
+          ...state.defaultUser,
+          followers: action.payload, 
+        }// Update followers in the defaultUser object
+      };
       default:
         return state;
     }

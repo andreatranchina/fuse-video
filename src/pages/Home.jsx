@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Box, Grid, Stack } from "@mui/material";
 import '../styles/home.css';
 import { useThemeContext } from "../theme/ThemeContextProvider";
@@ -20,6 +20,12 @@ const Home = () => {
   const { mode } = useThemeContext();
   const isSmallScreen = useMediaQuery('(max-width: 900px)');
   const isMobileScreen = useMediaQuery('(max-width: 420px)');
+
+  useEffect(() => {
+    if (user) {
+    console.log(user)
+    }
+  },[])
 
  return (
   <Box>
