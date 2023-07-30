@@ -20,7 +20,6 @@ import Customizations from '.././pages/Customizations'
 import Profile from '.././pages/Profile'
 import RootLayout from '.././layouts/RootLayout'
 import { connectWithSocketIO } from '../utils/socketIO'
-import Recordings from '../pages/Recordings'
 
 let socket = connectWithSocketIO();
 // let socket = null;
@@ -38,7 +37,6 @@ const router = createBrowserRouter(
       <Route path="/host" element={<HostPage socket={socket}/>} />
       <Route path="/livestream/:code" element={<LivestreamPage socket={socket} />} />
       <Route path="/videochat/:code" element={<VideoChatPage socket={socket} />} />
-      <Route path="/recordings" element={<Recordings />} />
       <Route path="/explore" element={<ExplorePage />} />
       {/* <Route path="/join" element={<JoinPage />}/>
       <Route path="/host" element={<HostPage />} />
