@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { SET_USER, GET_USER, REMOVE_USER, EDIT_ACCOUNT, EDIT_STATUS, EMAIL_FETCH_USER, ERROR_HANDLING, FETCH_USER_BY_ID } from "./user.types";
+import { SET_USER, GET_USER, REMOVE_USER, EDIT_ACCOUNT, EDIT_STATUS, EMAIL_FETCH_USER, ERROR_HANDLING, FETCH_USER_BY_ID, FETCH_FOLLOWERS, SHOW_NO_FOLLOWERS } from "./user.types";
 
 export const setUser = (payload) => {
   return{
@@ -164,4 +164,26 @@ export const fetchUserByEmailThunk = (userEmail) => {
     }
   }
 }
+
+export const fetchFollowers = (payload) => ({
+  type: FETCH_FOLLOWERS,
+  payload: payload
+})
+
+export const showNoFollowers = () => ({
+  type: SHOW_NO_FOLLOWERS
+})
+
+//thunk for find all of the logged in user's followers
+export const fetchFollowersThunk = (userId) => {
+  return async(dispatch) => {
+    try {
+      const res = await axios.get(`http://localhost:3001/api/follows/followers/${userId}`)
+      dispatch(fetchFollowers(res.data));
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
+
 //`http://localhost:3001/api/user/findOrCreate`
