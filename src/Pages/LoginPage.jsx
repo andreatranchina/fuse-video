@@ -1,5 +1,6 @@
 import React, { useState, forwardRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Box, Typography } from '@mui/material'
 import { setUser } from "../redux/user/user.actions";
 import { useNavigate } from "react-router-dom";
 import FirebaseAuthService from "../firebase/FirebaseAuthService";
@@ -9,13 +10,19 @@ import { ThemeProvider } from "@emotion/react";
 import "../styles/loginPage.css";
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
+import { useThemeContext } from "../theme/ThemeContextProvider";
+import GoogleIcon from "../components/icons/GoogleIcon";
+import GithubIcon from "../components/icons/GithubIcon";
+import FacebookIcon from "../components/icons/FacebookIcon";
 
 const Alert = forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
 const LoginPage = () => {
-  const theme = createTheme({
+
+  const { mode } = useThemeContext();
+  const loginTheme = createTheme({
     components: {
       MuiTextField: {
         styleOverrides: {
@@ -172,15 +179,17 @@ const handleLoginWithFacebook = async () => {
 }  
 
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={loginTheme}>
     <div className="minipage-signup">
-      <h1>Login Page</h1>
+      <Box id={mode === 'light' ? 'signup-light' : 'signup-dark'} sx={{oveflow:'contain'}}>
+      <Typography variant='h2' sx={{fontFamily:'Bungee Inline', transform:'translateY(40px)'}}>Log In</Typography>
       {
         user ? (<div>
                 <h3>Welcome, {user.email}</h3>
                 <button type="button" onClick={handleLogout}>Logout</button>
               </div> )
         : (
+          <Box sx={{transform:'translateY(50px)'}}>
           <FormControl component="form" onKeyDown = {(e) => {return e.target==="enter"? handleSubmit: null}} onSubmit = {handleSubmit} id="signup-form">
                 <TextField id="signup-form-email" sx={{ input: { color: 'var(--teal)' } }} type="email" required value={email}
                   label = "Email" placeholder = "Email"
@@ -195,41 +204,48 @@ const handleLoginWithFacebook = async () => {
 
             <div>
               <div className="first-party-buttons-container">
-                <Button style= {{margin: "4px" }} className="signup-button" type="submit">Login</Button>
+                <Button style= {{margin: "4px" }} className="signup-button" type="submit"><Typography sx={{fontFamily:`'Bungee Hairline',cursive`, fontWeight:700, WebkitTextStrokeWidth: '2px', 
+								WebkitTextStrokeColor:'white'}}>Log in</Typography></Button>
                 <Button style= {{margin: "4px" }} className="forgot-password-button" type="button" onClick = {handleSendResetPasswordEmail}>
-                  Forgot Password?
+                   <Typography sx={{fontFamily:`'Bungee Hairline',cursive`, fontWeight:700, 
+                color:'#D97D54', WebkitTextStrokeWidth: '2px', 
+								WebkitTextStrokeColor:'#D97D54'}}>Forgot Password?</Typography>
                 </Button>
               </div>  
 
               <div className="third-party-buttons-container">
                 <div class="google-btn inline-btn" onClick={handleLoginWithGoogle}>
-                  <div class="google-icon-wrapper">
-                    <img alt="google logo" class="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"/>
-                  </div>
-                  <p class="btn-text"><b>Login with Google</b></p>
+                 <Box sx={{ position: 'relative', zIndex: 1 }}>
+                  <GoogleIcon/>
+                </Box>
+                  <Typography sx={{ fontFamily:`'Roboto flex', sans-serif;`,fontWeight:700, fontSize:'16px', transform:'translate(20px,-30px)',zIndex:'3'}}>Login with Google</Typography>
                 </div>
 
                 <div class="google-btn inline-btn" onClick={handleLoginWithGithub}>
-                  <div class="google-icon-wrapper">
-                    <img alt="github logo" class="google-icon" src="https://cdn-icons-png.flaticon.com/512/25/25231.png"/>
-                  </div>
-                  <p class="btn-text"><b>Login with Github</b></p>
+                  <Box sx={{ position: 'relative', zIndex: 1 }}>
+                  <GithubIcon/>
+                 </Box>
+                   <Typography sx={{ fontFamily:`'Roboto flex', sans-serif;`,fontWeight:700, fontSize:'16px', transform:'translate(20px,-30px)',zIndex:'3'}}>Login with Github</Typography>
                 </div>
 
                 <div class="google-btn block-btn" onClick={handleLoginWithFacebook}>
-                  <div class="google-icon-wrapper">
-                    <img alt= "facebook-logo" style= {{width: "2rem" }} class="google-icon" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSEy4H82v_a3m8Ru9_Z8T77TWt9JUR_M8eTxA&usqp=CAU"/>
-                  </div>
-                  <p class="btn-text"><b>Login with Facebook</b></p>
+                 <Box sx={{ position: 'relative', zIndex: 1 }}>
+                  <FacebookIcon/>
+                 </Box>
+                  <Typography sx={{ fontFamily:`'Roboto flex', sans-serif;`,fontWeight:700, fontSize:'16px', transform:'translate(20px,-30px)',zIndex:'3'}}>
+                    Login with Facebook
+                  </Typography>
                 </div>
               </div>
 
             </div>      
 
         </FormControl>
+        </Box>
 
         )   
-      }      
+      }     
+      </Box> 
     </div>
       <Snackbar open={isSnackbarOpen} autoHideDuration={6000} onClose={handleCloseSnackbar}>
         <Alert onClose={handleCloseSnackbar} severity={snackbarSeverity} sx={{ width: '100%' }}>

@@ -1,5 +1,3 @@
-@import url(https://fonts.googleapis.com/css?family=Roboto:500);
-
 .minipage-signup{
     border: 3px solid white;
     width: 80%;
@@ -7,6 +5,21 @@
     text-align: center;
     height: 78vh;
     box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+}
+
+#signup-light{
+  background-image: url('.././assets/light-background.webp');
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: 100%;
+}
+#signup-dark{
+  background-image: url('.././assets/dark-background.webp');
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 100%;
 }
 
 .input-1{
@@ -88,62 +101,49 @@
 .forgot-password-button:hover{
     color: #1b3158 !important;
     border-color: #1b3158 !important; 
-    box-shadow: rgba(44, 144, 187, 0.35) 0 -25px 18px -14px inset,rgba(44, 187, 182, 0.25) 0 1px 2px,rgba(44, 149, 187, 0.25) 0 2px 4px,rgba(161, 44, 187, 0.25) 0 4px 8px,rgba(118, 44, 187, 0.25) 0 8px 16px,rgba(44, 177, 187, 0.25) 0 16px 32px;
+    
 
 }
 
 .google-btn {
-    width: 210px;
-    height: 42px;
-    background-color: #6842f4;
-    background: linear-gradient(rgb(177, 175, 222), rgb(88, 87, 165), rgb(175, 182, 222));
-    border-radius: 20px;
-    box-shadow: 0 3px 4px 0 rgba(0,0,0,.25);
-    position: relative;
-    .google-icon-wrapper {
-      position: absolute;
-      margin-top: 1px;
-      margin-left: 1px;
-      width: 40px;
-      height: 40px;
-      border-radius: 2px;
-      background-color: white;
-      border-radius: 15rem;
-    }
-    .google-icon {
-      position: relative;
-      right: 5px;
-      margin-top: 11px;
-      margin-left: 11px;
-      width: 18px;
-      height: 18px;
-    }
-    .btn-text {
-      float: right;
-      margin: 11px 11px 0 0;
-      color: white;
-      font-size: 14px;
-      letter-spacing: 0.2px;
-      font-family: "Roboto";
-    }
-    &:hover {
-      box-shadow: 0 0 6px #4285f4;
-    }
-    &:active {
-      background: #1669F2;
-    }
-  } 
+  width: 250px;
+  height: 42px;
+  background-color: #6842f4;
+  background: linear-gradient(rgb(177, 175, 222), rgb(88, 87, 165), rgb(175, 182, 222));
+  border-radius: 20px;
+  box-shadow: 0 3px 4px 0 rgba(0, 0, 0, .25);
+  position: relative;
+
+  /* Add the pseudo-element */
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 40px;
+    /* 1/6 of 210px */
+    height: 100%;
+    background-color: white;
+    /* Set this to the color you want */
+    border-radius: 20px 0 0 20px;
+    box-shadow: rgba(44, 144, 187, 0.35) 0 -25px 18px -14px inset, rgba(44, 187, 182, 0.25) 0 1px 2px, rgba(44, 149, 187, 0.25) 0 2px 4px, rgba(161, 44, 187, 0.25) 0 4px 8px, rgba(118, 44, 187, 0.25) 0 8px 16px, rgba(44, 177, 187, 0.25) 0 16px 32px;
+    z-index:1;
+  }
+
+  &:hover {
+    box-shadow: 0 0 6px #4285f4;
+  }
+
+  &:active {
+    background: #1669F2;
+  }
+}
   
   .google-btn:hover{
       background: #2e407d;
       box-shadow: rgba(44, 144, 187, 0.35) 0 -25px 18px -14px inset,rgba(44, 187, 182, 0.25) 0 1px 2px,rgba(44, 149, 187, 0.25) 0 2px 4px,rgba(161, 44, 187, 0.25) 0 4px 8px,rgba(118, 44, 187, 0.25) 0 8px 16px,rgba(44, 177, 187, 0.25) 0 16px 32px;
       cursor: pointer;
   
-  }
-
-  .inline-btn{
-    display: inline-block;
-    margin: 30px 5px 10px;
   }
 
   .block-btn{
@@ -172,17 +172,6 @@
         height: 95vh;
         box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
     }
-
-
-  .inline-btn{
-    display: block;
-    margin: 0px auto;
-  }
-
-  .google-btn{
-    position: relative;
-    margin: 15px auto;
-  }
 
   .third-party-buttons-container{
     margin-top: 20px;
