@@ -204,12 +204,12 @@ const handleLoginWithFacebook = async () => {
 
             <div>
               <div className="first-party-buttons-container">
-                <Button style= {{margin: "4px" }} className="signup-button" type="submit"><Typography sx={{fontFamily:`'Bungee Hairline',cursive`, fontWeight:700, WebkitTextStrokeWidth: '2px', 
+                <Button style= {{margin: "10px" }} className="signup-button" type="submit"><Typography sx={{fontFamily:`'Bungee Hairline',cursive`, fontWeight:700, WebkitTextStrokeWidth: '2px', 
 								WebkitTextStrokeColor:'white'}}>Log in</Typography></Button>
-                <Button style= {{margin: "4px" }} className="forgot-password-button" type="button" onClick = {handleSendResetPasswordEmail}>
+                <Button style= {{margin: "10px" }} className="forgot-password-button" type="button" onClick = {handleSendResetPasswordEmail}>
                    <Typography sx={{fontFamily:`'Bungee Hairline',cursive`, fontWeight:700, 
                 color:'#D97D54', WebkitTextStrokeWidth: '2px', 
-								WebkitTextStrokeColor:'#D97D54'}}>Forgot Password?</Typography>
+								WebkitTextStrokeColor: mode === 'light'? 'var(--teal)' :'white'}}>Forgot Password?</Typography>
                 </Button>
               </div>  
 

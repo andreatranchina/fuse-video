@@ -3,7 +3,7 @@
     width: 80%;
     margin: 1.7rem auto;
     text-align: center;
-    height: 78vh;
+    height: 79vh;
     box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
 }
 
@@ -52,7 +52,7 @@
 
 #signup-form{
     color: black;
-    margin: 10px;
+    margin: 5px;
 }
 
 .textfield-label{
@@ -146,8 +146,13 @@
   
   }
 
+  .inline-btn{
+    display: inline-block;
+    margin: 15px 5px 10px;
+  }
+
   .block-btn{
-    margin: 2px auto;
+    margin: -5px auto;
   }
 
   @keyframes slideleft {
@@ -163,7 +168,7 @@
     }
 }
 
-  @media (max-width:620px){
+  @media (max-width:690px){
     .minipage-signup{
         border: 3px solid white;
         width: 80%;

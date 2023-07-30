@@ -182,7 +182,7 @@ video {
 }
 
 .recording-video{
-  width: 50%;
+  width: 48%;
   margin: 10px auto;
   display: block;
 }
@@ -260,4 +260,10 @@ video {
   width: 50%;
   height: 5rem;
   font-size: 1.5rem;
+}
+
+@media (max-width:900px){
+  .recording-video{
+    width: 66%;
+  }
 }
