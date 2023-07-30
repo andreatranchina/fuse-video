@@ -1,5 +1,4 @@
 import axios from "axios";
-
 import { SET_USER, GET_USER, REMOVE_USER, EDIT_ACCOUNT, EDIT_STATUS, EMAIL_FETCH_USER, ERROR_HANDLING, FETCH_USER_BY_ID, FETCH_FOLLOWERS, ADD_PROFILE_TO_VIEWS, REMOVE_PROFILE_FROM_VIEWS } from "./user.types";
 
 export const setUser = (payload) => {
@@ -22,57 +21,57 @@ export const removeUser = () => {
     }
   };
 
-//THUNKS
-export const me = () => {
-    return async (dispatch) => {
-        try {
-          const res = await axios.get("http://localhost:3001/auth/me");
-          // dispatch(getUser(res.data || defaultUser));
-          dispatch(getUser(res.data));
-        } catch (err) {
-          console.error(err);
-        }
-    };
-}
+// //THUNKS
+// export const me = () => {
+//     return async (dispatch) => {
+//         try {
+//           const res = await axios.get("http://localhost:3001/auth/me");
+//           // dispatch(getUser(res.data || defaultUser));
+//           dispatch(getUser(res.data));
+//         } catch (err) {
+//           console.error(err);
+//         }
+//     };
+// }
 
-export const auth = (email, password, method, isAdmin) => {
-    return async (dispatch) => {
-        let res;
-        //method can be login or signup
-        try {
-          res = await axios.post(`http://localhost:3001/auth/${method}`, {
-            email,
-            password,
-            isAdmin,
-          });
-        } catch (authError) {
-          return dispatch(errorHandling( authError));
-        }
+// export const auth = (email, password, method, isAdmin) => {
+//     return async (dispatch) => {
+//         let res;
+//         //method can be login or signup
+//         try {
+//           res = await axios.post(`http://localhost:3001/auth/${method}`, {
+//             email,
+//             password,
+//             isAdmin,
+//           });
+//         } catch (authError) {
+//           return dispatch(errorHandling( authError));
+//         }
       
-        try {
-          // dispatch(getUser(res.data));
-          // history.push("/home");
-          dispatch(fetchUserByEmailThunk(email));
-          // return Promise.resolve();
-        } catch (dispatchOrHistoryErr) {
-          console.error(dispatchOrHistoryErr + " it didn't work");
-          dispatch(errorHandling(dispatchOrHistoryErr))
-          // return Promise.reject()
-        }
-      };
-} 
+//         try {
+//           // dispatch(getUser(res.data));
+//           // history.push("/home");
+//           dispatch(fetchUserByEmailThunk(email));
+//           // return Promise.resolve();
+//         } catch (dispatchOrHistoryErr) {
+//           console.error(dispatchOrHistoryErr + " it didn't work");
+//           dispatch(errorHandling(dispatchOrHistoryErr))
+//           // return Promise.reject()
+//         }
+//       };
+// } 
 
-export const logout = () => {
-    return async (dispatch) => {
-        try {
-          await axios.post("http://localhost:3001/auth/logout");
-          console.log("came back from axios logout")
-          return dispatch(removeUser());
-        } catch (err) {
-          console.error(err);
-        }
-      };
-} 
+// export const logout = () => {
+//     return async (dispatch) => {
+//         try {
+//           await axios.post("http://localhost:3001/auth/logout");
+//           console.log("came back from axios logout")
+//           return dispatch(removeUser());
+//         } catch (err) {
+//           console.error(err);
+//         }
+//       };
+// } 
 
 export const fetchUserById = (payload) => ({
   type: FETCH_USER_BY_ID,

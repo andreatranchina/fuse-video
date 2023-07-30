@@ -1,10 +1,52 @@
+.explore-page-container{
+    margin-top: 4rem;
+    display: flex;
+    gap: 1rem;
+}
+
+.people-component-container{
+    width: 37%;
+    display: inline-block;
+    overflow: scroll;
+    height: 88vh;
+    color: white;
+    font-weight: 700;
+    color: rgb(255, 255, 255);
+    z-index: 1;
+}
+
+.videos-component-container{
+    width: 58%;
+    display: inline-block;
+    overflow: scroll;
+    height: 88vh;
+    text-align: center;
+    color:white;
+    z-index: 1;
+}
+
+.videos-component-container::-webkit-scrollbar {
+    display: none;
+}
+  
+/* for IE, Edge and Firefox */
+.videos-component-container {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.people-component-container::-webkit-scrollbar {
+    display: none;
+}
+  
+/* for IE, Edge and Firefox */
+.people-component-container {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
 .people-container {
-    margin-top: 7rem;
-    width: 50%;
-    background-color: #f0f0f0;
-    border: 1px solid black;
     border-radius: 10px;
-    /* Rounded corners for the inner container */
     padding: 20px;
 }
 
@@ -14,27 +56,96 @@
 }
 
 .people-item {
+    position: relative;
     margin-bottom: 10px;
-    border: 1px solid #ccc;
-    /* Border around each entry */
     border-radius: 5px;
-    /* Rounded corners for each entry */
     padding: 10px;
+    background: linear-gradient(var(--paper-light), var(--prussian-blue), var(--prussian-blue), var(--paper-dark), var(--prussian-blue));
+}
+
+.username-span{
+    /* width: 45%; */
+    display: block;
+    /* margin-right: 3px;
+    margin-left: 3px; */
+}
+
+.people-item:hover{
+    box-shadow: 5px 5px 5px black;
 }
 
 .follow-button {
+    /* position: absolute;
+    right: 20px; */
+    display: block;
     padding: 5px 10px;
     border: none;
     cursor: pointer;
-    color: #fff;
+    color: var(--prussian-blue);
     border-radius: 5px;
+    background: linear-gradient(rgb(107, 101, 122), var(--paper-light), rgb(107, 101, 122));
+    box-shadow: 3px 3px 3px rgb(0, 87, 128);
+    font-weight: 700;
+    /* margin-left: 50px; */
 }
 
-.follow {
-    background-color: #800080;
+.follow-button:hover{
+    box-shadow: none;
 }
 
-.unfollow {
-    background-color: #800080;
-    /* Purple color for unfollow button */
+.profile-pic{
+    width: 30px;
+    position: relative;
+    top: 3px;
+    border-radius: 20%;
+    display: inline-block;
+}
+
+/* .profile-pic-username-container{
+    display:inline;
+} */
+
+.username-btn-container{
+    display: inline-block;
+}
+
+.video-card{
+    position: relative;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    padding: 10px;
+    background: linear-gradient(rgb(62, 72, 82), rgb(43, 49, 88), rgb(130, 141, 151));
+    /* background: linear-gradient(rgb(77, 97, 109), rgb(39, 49, 56),  var(--prussian-blue),  var(--prussian-blue), var(--prussian-blue), rgb(39, 49, 56), rgb(77, 97, 109)); */
+    border-radius: 1rem;
+    border: 3px groove var(--prussian-blue);
+    box-shadow: 5px 5px 5px black;
+    margin-bottom: 30px;
+}
+
+.video-element{
+    width: 55%;
+    box-shadow: 3px 3px 3px black;
+}
+
+@media (max-width: 930px){
+    .profile-pic{
+        position: relative;
+        left: 3px;
+    }
+
+    .follow-button{
+        position: relative;
+        left: 0;
+        display: block;
+        margin: 5px auto;
+        width: 90%;
+    }
+
+    .people-item{
+        text-align: center;
+    }
+
+    .video-element{
+        width: 70%;
+    }
 }
