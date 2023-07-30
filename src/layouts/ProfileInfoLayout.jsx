@@ -85,7 +85,7 @@ const ProfileInfoLayout = ({loggedInUserId,viewUserId}) => {
               </Grid>
               {/* PAST STREAMS */}
               <Grid container>
-                <Grid item xs={12} sx={{backgroundColor:'orange', height:'45vh'}}>
+                <Grid item xs={12} sx={{ height:'45vh'}}>
                   <StreamHistory viewUserId={viewUserId}/>
                 </Grid>
               </Grid>
