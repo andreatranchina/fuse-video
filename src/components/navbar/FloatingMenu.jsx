@@ -8,8 +8,10 @@ import JoinIcon from '../icons/JoinIcon'
 import HostIcon from '../icons/HostIcon'
 import ProfileIcon from '../icons/ProfileIcon'
 import { useThemeContext } from "../../theme/ThemeContextProvider"
+import { useSelector } from 'react-redux'
 
 const FloatingMenu = () => {
+  const loggedInUserId = useSelector((state) => state.user.defaultUser?.id);
 
     const { theme } = useThemeContext();
 
@@ -39,7 +41,7 @@ const FloatingMenu = () => {
       </Fab>
       </Tooltip>
     </NavLink>
-    <NavLink to="/profile" className="navlink">
+    <NavLink to={`/profile/${loggedInUserId}`} className="navlink">
       <Tooltip title="Profile" placement="top">
       <Fab sx={floatingMenuStyle} aria-label="profile">
         <ProfileIcon/>
