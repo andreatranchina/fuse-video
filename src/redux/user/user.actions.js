@@ -130,6 +130,8 @@ export const fetchFollowersThunk = (userId) => {
   return async(dispatch) => {
     try {
       const res = await axios.get(`http://localhost:3001/api/follows/followers/${userId}`)
+      console.log("user id in thunk " + userId);
+      console.log("res in thunk: " + res.data);
       dispatch(fetchFollowers(res.data));
     } catch (error) {
       console.log(error)

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
-import { removeProfileFromViews } from '../redux/user/user.actions'
+import { removeProfileFromViews, addProfileToViewsThunk } from '../redux/user/user.actions'
 import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid'
 import MessageBarLayout from '../layouts/MessageBarLayout'
@@ -27,6 +27,19 @@ const Profile = () => {
   //     dispatch(removeProfileFromViews(id));
   //   };
   // }, [id]);
+
+      useEffect(() => {
+    // Remove the profile from the list of logged-in user's openProfiles when the component unmounts
+    return () => {
+      dispatch(removeProfileFromViews(id));
+    };
+  }, [id]);
+
+  useEffect(() => {
+    console.log(loggedInUserId,'is the logged in');
+    console.log(id,'is the viewed user');
+    dispatch(addProfileToViewsThunk(id, loggedInUserId));
+  },[])
 
   return (
     <Box sx={{height:'100%', width:'100%'}}>

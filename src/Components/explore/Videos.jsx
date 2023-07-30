@@ -34,8 +34,8 @@ const Videos = () => {
     {videos.map((recording, index) => {
         return(
             <div className="video-card">
-                <div>Placeholder Title</div>
-                <div>Placeholder Creator</div>
+                <div className="video-title">{recording.title}</div>
+                <div className="video-creator">{recording.creator}</div>
                 <video className="video-element" controls>
                     <source src={recording.downloadUrl} />
                 </video>                
