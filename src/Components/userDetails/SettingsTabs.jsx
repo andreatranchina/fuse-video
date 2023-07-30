@@ -6,7 +6,7 @@ import { setSettingsTab } from '../../redux/ui/ui.actions'
 import EditAccountForm from './account/EditAccountForm'
 import EditProfileForm from './profile/EditProfileForm'
 import EditPreferencesForm from './preferences/EditPreferencesForm'
-import { updateEditStatus } from '../../redux/user/user.actions'
+import { updateEditStatus, inputNewInfo } from '../../redux/user/user.actions'
 import { toggleModal } from '../../redux/ui/ui.actions'
 import { submitAccountFail } from '../../redux/account/account.actions'
 import { submitProfileFail } from '../../redux/profile/profile.actions'
@@ -14,11 +14,14 @@ import { submitPreferencesFail } from '../../redux/preferences/preferences.actio
 import useTypographyTheme from '../../theme/useTypographyTheme'
 import { useThemeContext } from '../../theme/ThemeContextProvider'
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined'
+import AccountDetails from './account/AccountDetails'
+import ProfileDetails from './profile/ProfileDetails'
+import PreferencesDetails from './preferences/PreferencesDetails'
 
-const TabPanel = (props) => {
+  const TabPanel = (props) => {
   const { children, value, index, ...other } = props;
   const { textFieldTheme } = useTypographyTheme();
-const isSmallScreen = useMediaQuery('(max-width: 550px)');
+  const isSmallScreen = useMediaQuery('(max-width: 550px)');
   return (
     <ThemeProvider theme={textFieldTheme}>
     <div 
@@ -58,9 +61,11 @@ const SettingsTabs = () => {
   const dispatch = useDispatch();
   const value = useSelector((state) => state.ui.settingsTabValue)
   const { tabsTheme } = useTypographyTheme();
+  const isEditing = useSelector((state) => !!state.user.isEditingAccount)
+  const isInputtingNewInfo = useSelector((state) => !!state.user.isInputtingNewInfo)
 
   const handleChange = (e, newTab) => {
-    console.log('Changing tab to:', newTab);
+    // console.log('Changing tab to:', newTab);
     dispatch(setSettingsTab(newTab))
   }
 
@@ -72,19 +77,22 @@ const SettingsTabs = () => {
     dispatch(submitAccountFail());
     dispatch(submitProfileFail());
 		dispatch(submitPreferencesFail());
+    if (isInputtingNewInfo){
+      dispatch(inputNewInfo(false)); //turn off
+    }
   }
 
   return (
     //for smaller screens
     isSmallScreen ? (
     <Box sx={{ width: '80%' }} >
-      <Box display="flex" justifyContent="flex-end" sx={{p:'3px'}}>
+      <Box display="flex" justifyContent="center" sx={{p:'3px'}}>
         <Button onClick={handleClose} sx={{ maxWidth: '30px', maxHeight: '30px', minWidth: '30px', minHeight: '30px', color:'red', border:'2px solid red', '&:hover': { backgroundColor:'red', color:`${theme.palette.background.paper}`} }}>
           <CloseOutlinedIcon sx={{'&hover': { backgroundColor:'red !important'}}}/>
         </Button>
       </Box>
         <ThemeProvider theme={tabsTheme}>
-          <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+          <Box sx={{ borderBottom: 1, borderColor: 'divider'}}>
             <Tabs value={value} onChange={handleChange} textColor={`${theme.palette.text.primary}`} aria-label="basic tabs example" TabIndicatorProps={{
     style: {
       backgroundColor: "#D97D54"
@@ -98,13 +106,13 @@ const SettingsTabs = () => {
           </Box>
         </ThemeProvider>
       <TabPanel value={value} index={0}>
-        {value === 0 && <EditAccountForm/>}
+        {value === 0 && isEditing && isInputtingNewInfo ? <EditAccountForm/> : <AccountDetails/>}
       </TabPanel>
       <TabPanel value={value} index={1}>
-        {value === 1 && <EditProfileForm/>}
+        {value === 1 && isEditing && isInputtingNewInfo ? <EditProfileForm/> : <ProfileDetails/>}
       </TabPanel>
       <TabPanel value={value} index={2}>
-        {value === 2 && <EditPreferencesForm/>}
+        {value === 2 && isEditing && isInputtingNewInfo ? <EditPreferencesForm/> : <PreferencesDetails/>}
       </TabPanel>
     </Box>) : (<Box sx={{ width: '100%' }} >
     <Box display="flex" justifyContent="flex-end" sx={{p:'3px'}}>
@@ -127,13 +135,13 @@ const SettingsTabs = () => {
           </Box>
         </ThemeProvider>
       <TabPanel value={value} index={0}>
-        {value === 0 && <EditAccountForm/>}
+        {value === 0 && isEditing && isInputtingNewInfo ? <EditAccountForm/> : <AccountDetails/>}
       </TabPanel>
       <TabPanel value={value} index={1}>
-        {value === 1 && <EditProfileForm/>}
+        {value === 1 && isEditing && isInputtingNewInfo ? <EditProfileForm/> : <ProfileDetails/>}
       </TabPanel>
       <TabPanel value={value} index={2}>
-        {value === 2 && <EditPreferencesForm/>}
+        {value === 2 && isEditing && isInputtingNewInfo ? <EditPreferencesForm/> : <PreferencesDetails/>}
       </TabPanel>
     </Box>))}
 
