@@ -1,8 +1,10 @@
 import firebase from "firebase/compat/app";
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
+import 'firebase/compat/storage';
 import { initializeApp } from "firebase/app";
 import {getAuth} from "firebase/auth";
+import {getStorage} from "firebase/storage";
 
 const config = {
     apiKey: process.env.REACT_APP_API_KEY,
@@ -16,9 +18,11 @@ const config = {
 
 const firebaseApp = initializeApp(config);
 const auth = getAuth(firebaseApp);
+const storage = getStorage(firebaseApp);
 
 
 const firebaseConfig = {
     auth, 
+    storage,
 }
 export default firebaseConfig

@@ -47,10 +47,13 @@ const loggedInUserId = useSelector((state) => state.user.defaultUser?.id);
   return (
 <div className="people-container">
       <h2>Users</h2>
-      <ul className="people-list">
+      <div className="people-list">
         {users.map((user) => (
-          <li key={user.id} className="people-item">
-            <span>{user.firstName} {user.lastName} {user.userName}</span>
+          <div key={user.id} className="people-item">
+            <div className="profile-pic-username-container">
+              <img className="profile-pic" alt="profile" src={user.imgUrl}></img>
+              <div className="username-span">{user.userName}</div>
+            </div>
             {user.isFollowed ? (
               <button
                 className="follow-button unfollow" // Change the class name to "unfollow"
@@ -66,9 +69,9 @@ const loggedInUserId = useSelector((state) => state.user.defaultUser?.id);
                 Follow
               </button>
             )}
-          </li>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 };

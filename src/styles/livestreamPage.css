@@ -153,3 +153,111 @@ video {
   color: black;
 }
 
+#recording-popup-light{
+  position: absolute;
+  z-index: 100;
+  height: 80vh;
+  border: 3px solid white;
+  width: 80%;
+  margin: 2rem auto;
+  text-align: center;
+  height: 77vh;
+  box-shadow: rgb(38, 57, 77) 30px 30px 50px 30px;
+  box-shadow: rgb(34, 40, 47) 20px 30px 60px 50px;
+  background-color: var(--paper-light);
+}
+
+#recording-popup-dark{
+  position: absolute;
+  z-index: 100;
+  height: 80vh;
+  border: 3px solid white;
+  width: 80%;
+  margin: 2rem auto;
+  text-align: center;
+  height: 77vh;
+  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+  box-shadow: rgb(34, 40, 47) 20px 30px 60px 50px;
+  background-color: var(--paper-dark);
+}
+
+.recording-video{
+  width: 50%;
+  margin: 10px auto;
+  display: block;
+}
+
+#button-download-light{
+  background-color: var(--paper-dark);
+  box-shadow: 3px 3px 3px black;
+  margin: 3px;
+  border: 2px solid var(--paper-dark);
+}
+
+#button-download-dark{
+  background-color: var(--paper-light);
+  box-shadow: 3px 3px 3px black;
+  margin: 3px;
+  border: 2px solid var(--paper-light);
+}
+
+#download-link-light{
+  text-decoration: none;
+  color: var(--paper-light);
+}
+
+#download-link-dark{
+  text-decoration: none;
+  color: var(--paper-dark);
+}
+
+#button-post-light{
+  color: var(--paper-dark);
+  border: 2px solid var(--paper-dark);
+  box-shadow: 3px 3px 3px black;
+  margin: 3px;
+}
+
+#button-post-dark{
+  color: var(--paper-light);
+  border: 2px solid var(--paper-light);
+  box-shadow: 3px 3px 3px black;
+  margin: 3px;
+}
+
+#button-exit{
+  color: rgb(142, 65, 65);
+  border: 2px solid rgb(142, 65, 65);
+  border-radius: 100%;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+
+#button-view-light{
+  background-color: var(--paper-dark);
+  box-shadow: 3px 3px 3px black;
+  margin: 3px;
+  border: 2px solid var(--paper-dark);
+  position: relative;
+  top: 45%;
+  display: block;
+  margin: auto;
+  width: 50%;
+  height: 5rem;
+  font-size: 1.5rem;
+}
+
+#button-view-dark{
+  background-color: var(--paper-light);
+  box-shadow: 3px 3px 3px black;
+  margin: 3px;
+  border: 2px solid var(--paper-light);
+  position: relative;
+  top: 45%;
+  display: block;
+  margin: auto;
+  width: 50%;
+  height: 5rem;
+  font-size: 1.5rem;
+}

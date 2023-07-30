@@ -11,9 +11,16 @@ import StopScreenShareRoundedIcon from '@mui/icons-material/StopScreenShareRound
 import {Button} from '@mui/material';
 import LogoutIcon from '@mui/icons-material/Logout';
 import PersonAddAlt1RoundedIcon from '@mui/icons-material/PersonAddAlt1Rounded';
+import StopCircleOutlinedIcon from '@mui/icons-material/StopCircleOutlined';
+import RadioButtonCheckedOutlinedIcon from '@mui/icons-material/RadioButtonCheckedOutlined';
+import PlayCircleOutlineOutlinedIcon from '@mui/icons-material/PlayCircleOutlineOutlined';
+import PlayCircleFilledIcon from '@mui/icons-material/PlayCircleFilled';
+import RadioButtonCheckedRoundedIcon from '@mui/icons-material/RadioButtonCheckedRounded';
 
 
-const ButtonsContainer = ({isStreamer, setScreenSharingStream, screenSharingStream}) => {
+const ButtonsContainer = ({isStreamer, setScreenSharingStream, screenSharingStream,
+handleStopRecording, handleStartRecording, handlePostRecording, isRecording}) => {
+
     const [isMicrophoneOn, setIsMicrophoneOn] = useState(true);
     const [isCameraOn, setIsCameraOn] = useState(true);
     const [isScreenSharing, setIsScreenSharing] = useState(false);
@@ -73,13 +80,15 @@ const ButtonsContainer = ({isStreamer, setScreenSharingStream, screenSharingStre
         :isStreamer && !isCameraOn ?<IconButton size="large" onClick={handleToggleCamera} style={{color: "white"}}><LinkedCameraRoundedIcon /></IconButton>
         :null}
 
-        <Button variant="contained" size="large" onClick={handleLeaveRoom}>Leave Room</Button>
+        <Button variant="contained" size="large" onClick={handleLeaveRoom}>Leave</Button>
 
         {isStreamer && !isScreenSharing?<IconButton size="large" onClick={handleToggleScreenShare} style={{color: "white"}}><ScreenShareRoundedIcon /></IconButton>
         :isStreamer && isScreenSharing?<IconButton size="large" onClick={handleToggleScreenShare} style={{color: "white"}}><StopScreenShareRoundedIcon /></IconButton>
         :null}
 
-        {isStreamer && <IconButton size="large" style={{color: "white"}}> <PersonAddAlt1RoundedIcon /> </IconButton>}
+        {isStreamer && !isRecording?<IconButton size="large" style={{color: "white"}} onClick={handleStartRecording}><PlayCircleOutlineOutlinedIcon /></IconButton>
+        :isStreamer && isRecording?<IconButton size="large" style={{color: "white"}} onClick={handleStopRecording}><StopCircleOutlinedIcon /></IconButton>
+        :null}
     </div>
   )
 }

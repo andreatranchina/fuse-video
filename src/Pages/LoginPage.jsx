@@ -195,7 +195,7 @@ const handleLoginWithFacebook = async () => {
 
             <div>
               <div className="first-party-buttons-container">
-                <Button style= {{margin: "4px" }} className="signup-button" type="submit">Sign Up</Button>
+                <Button style= {{margin: "4px" }} className="signup-button" type="submit">Login</Button>
                 <Button style= {{margin: "4px" }} className="forgot-password-button" type="button" onClick = {handleSendResetPasswordEmail}>
                   Forgot Password?
                 </Button>

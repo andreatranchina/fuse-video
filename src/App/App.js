@@ -37,9 +37,7 @@ const router = createBrowserRouter(
       <Route path="/host" element={<HostPage socket={socket}/>} />
       <Route path="/livestream/:code" element={<LivestreamPage socket={socket} />} />
       <Route path="/videochat/:code" element={<VideoChatPage socket={socket} />} />
-
       <Route path="/explore" element={<ExplorePage />} />
-
       {/* <Route path="/join" element={<JoinPage />}/>
       <Route path="/host" element={<HostPage />} />
       <Route path="/livestream/:code" element={<LivestreamPage />} /> */}
