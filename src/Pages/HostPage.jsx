@@ -12,6 +12,9 @@ import { useNavigate } from 'react-router-dom';
 import "../styles/hostPage.css";
 import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRounded';
 import axios from 'axios';
+import { useThemeContext } from '../theme/ThemeContextProvider';
+import { useTheme } from '@emotion/react';
+import Typography from '@mui/material/Typography';
 
 const HostPage = ({socket}) => {
     const [title, setTitle] = useState()
@@ -20,6 +23,8 @@ const HostPage = ({socket}) => {
 
     const loggedInUser = useSelector((state) => state.user.defaultUser);
     const onlyAudio = useSelector((state) => state.room.onlyAudio);
+
+    const { mode } = useThemeContext();
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -115,12 +120,14 @@ const HostPage = ({socket}) => {
     return (
       <div className="callPage" style={{marginTop: "4rem"}}>
         {!choseType
-        ? (<div className="minipage">
-            <h1 className="minipage-header">Select Room To Host</h1>
-            <div className="choice-button-container">
+        ? (<div className="minipage" style={{transform:'translateY(-30px)'}}>
+          <Box id={mode === 'light' ? 'signup-light' : 'signup-dark'} sx={{oveflow:'contain'}}>
+      <Typography variant='h2' sx={{fontFamily:'Bungee Inline', transform:'translateY(40px)'}}>Select Room To Host</Typography>
+            <div className="choice-button-container" style={{transform:'translateY(120px)'}}>
               <button className="choice-button" onClick={() => setChoseType("Livestream")}>Livestream</button>
               <button className="choice-button" onClick={() => setChoseType("Video Chat")}>Video Chat</button>
             </div>
+            </Box>
           </div>)
         :  <div className="joinChatContainer minipage">
             <h3>Host {choseType}</h3>

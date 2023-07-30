@@ -2,7 +2,7 @@ import React, {useState, forwardRef} from 'react';
 import '../styles/chatComponent.css';
 import {useDispatch, useSelector} from 'react-redux';
 import {setCurrentRoom, setOnlyAudio} from "../redux/room/room.actions";
-import Box from '@mui/material/Box'
+import { Box, Typography }  from '@mui/material'
 import FloatingMenu from '../components/navbar/FloatingMenu';
 import { useMediaQuery, Button } from '@mui/material'
 import { useNavigate } from 'react-router-dom';
@@ -10,6 +10,8 @@ import axios from 'axios';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRounded';
+import { useThemeContext } from '../theme/ThemeContextProvider';
+import '../styles/joinPage.css'
 
 
 const Alert = forwardRef(function Alert(props, ref) {
@@ -20,7 +22,7 @@ const JoinPage = ({socket}) => {
     const [code, setCode] = useState("");
     const [choseType, setChoseType] = useState("");
     const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
-    
+    const { mode } = useThemeContext();
     const onlyAudio = useSelector((state) => state.room.onlyAudio);
 
     const handleOpenSnackbar = () => {
@@ -74,34 +76,40 @@ const JoinPage = ({socket}) => {
     }
   
     return (
+      
       <div className="callPage" style={{marginTop: "4rem"}}>
         {!choseType
-        ? (<div className="minipage">
-            <h1 className="minipage-header">Select Room To Join</h1>
-            <div className="choice-button-container">
-              <button className="choice-button" onClick={() => setChoseType("Livestream")}>Livestream</button>
+        ? (
+          <div className="minipage" style={{transform:'translateY(-30px)'}}>
+           <Box id={mode === 'light' ? 'signup-light' : 'signup-dark'} sx={{oveflow:'contain'}}>
+      <Typography variant='h2' sx={{fontFamily:'Bungee Inline', transform:'translateY(40px)'}}>Room to Join</Typography>
+            <div className="choice-button-container" style={{transform:'translateY(120px)'}}>
+              <button className="choice-button" onClick={() => setChoseType("Livestream")}><Typography sx={{fontFamily:`'Bungee Hairline',cursive`, fontWeight:700, WebkitTextStrokeWidth: '2px', 
+								WebkitTextStrokeColor:'white'}}>Livestream</Typography></button>
               <button className="choice-button" onClick={() => setChoseType("Video Chat")}>Video Chat</button>
             </div>
-          </div>)
+            </Box>
+          </div>
+          
+          )
         : <div className="joinChatContainer minipage">
-            <h3>Join {choseType}</h3>
+            <Typography sx={{fontFamily:`'Bungee Hairline',cursive`, fontWeight:700, WebkitTextStrokeWidth: '2px', 
+								WebkitTextStrokeColor:'white'}}>Join {choseType}</Typography>
             <input type="text" placeholder="livestream code.." onChange={(e) => {setCode(e.target.value)}}/>
+            
             <div className="container-buttons-preroom">
               <Button onClick={joinRoom}>Start {choseType} </Button>
               <Button className="back-button" onClick={() => setChoseType("")}><ArrowBackIosNewRoundedIcon /></Button>
+              
             </div>
-            {/* <div>
-              <input type="checkbox" name="onlyAudio" onChange={handleChangeCheckbox} checked={onlyAudio}></input>
-              <p className="checkbox-label">Only audio</p>
-            </div> */}
+
           </div>}
 
       <Snackbar open={isSnackbarOpen} autoHideDuration={6000} onClose={handleCloseSnackbar}>
         <Alert onClose={handleCloseSnackbar} severity="error" sx={{ width: '100%' }}>
           Room ID does not exist - try again
         </Alert>
-      </Snackbar>
-  
+      </Snackbar> 
       </div>
     );
 }
