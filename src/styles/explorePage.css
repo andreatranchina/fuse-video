@@ -117,15 +117,21 @@
     padding: 10px;
     background: linear-gradient(rgb(62, 72, 82), rgb(43, 49, 88), rgb(130, 141, 151));
     /* background: linear-gradient(rgb(77, 97, 109), rgb(39, 49, 56),  var(--prussian-blue),  var(--prussian-blue), var(--prussian-blue), rgb(39, 49, 56), rgb(77, 97, 109)); */
+    background: linear-gradient(rgb(46, 62, 79), var(--paper-dark), rgb(66, 86, 106));
     border-radius: 1rem;
-    border: 3px groove var(--prussian-blue);
-    box-shadow: 5px 5px 5px black;
+    border: 3px solid var(--prussian-blue);
+    box-shadow: 5px 7px 5px black;
     margin-bottom: 30px;
 }
 
 .video-element{
     width: 55%;
-    box-shadow: 3px 3px 3px black;
+    box-shadow: 5px 5px 5px rgb(32, 27, 27);
+}
+
+.video-title{
+    font-size: 1.5rem;
+    font-weight: 700;
 }
 
 @media (max-width: 930px){

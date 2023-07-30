@@ -139,10 +139,14 @@ const LivestreamPage = ({socket}) => {
                     blobUrl: URL.createObjectURL(recordedBlob),
                     downloadUrl: downloadUrl,
                     user_id: loggedInUser.id,
+                    title: currentLivestream.title,
+                    creator: loggedInUser.userName,
                     livestream_id: 2,
                 });
 
                 console.log(response);
+                setUploadProgress(-1);
+                setvideoUrl(null);
             }
             catch(error){
                 console.log(error.message);
@@ -160,6 +164,12 @@ const LivestreamPage = ({socket}) => {
     const handleViewRecording = () => {
         handleStopRecording();
         setIsViewingRecording(true);
+
+    }
+
+    const handleClickExitRecordingPopup = () => {
+        setRecordedBlob(null);
+        setIsViewingRecording(false);
     }
 
   return (
@@ -195,7 +205,7 @@ const LivestreamPage = ({socket}) => {
 
         {recordedBlob && (
         <div id={mode === 'light' ? 'recording-popup-light' : 'recording-popup-dark'}>
-            <IconButton id="button-exit" onClick={() => setRecordedBlob(null)}><CloseIcon fontSize="large"/></IconButton>
+            <IconButton id="button-exit" onClick={handleClickExitRecordingPopup}><CloseIcon fontSize="large"/></IconButton>
             {!isViewingRecording && 
                 <Button id={mode === 'light' ? 'button-view-light' : 'button-view-dark'} 
                     onClick={handleViewRecording}>View Recording
@@ -210,7 +220,9 @@ const LivestreamPage = ({socket}) => {
                             Download Video
                         </a>
                     </Button>
-                    <Button id={mode === 'light' ? 'button-post-light' : 'button-post-dark'} onClick = {handlePostRecording}>Post Now!</Button>
+                    <Button id={mode === 'light' ? 'button-post-light' : 'button-post-dark'} 
+                        onClick = {handlePostRecording}>Post Now!
+                    </Button>
                     {
                     !videoUrl && uploadProgress > -1 ? (
                         <div>

@@ -276,7 +276,7 @@ const handleRegisterWithFacebook = async () => {
               <Button style= {{margin: "4px" }} className="forgot-password-button" type="button" onClick = {handleSendResetPasswordEmail}>
                 <Typography sx={{fontFamily:`'Bungee Hairline',cursive`, fontWeight:700, 
                 color:'#D97D54', WebkitTextStrokeWidth: '2px', 
-								WebkitTextStrokeColor:'#D97D54'}}>Forgot Password?</Typography>
+								WebkitTextStrokeColor: mode === 'light'? 'var(--teal)' :'white'}}>Forgot Password?</Typography>
               </Button>
               <div >
                 <div class="google-btn inline-btn" onClick={handleRegisterWithGoogle}>
