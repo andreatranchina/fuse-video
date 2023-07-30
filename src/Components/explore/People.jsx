@@ -1,5 +1,7 @@
 import React from 'react';
 import axios from 'axios';
+import Button from '@mui/material/Button'
+import { NavLink } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 import { addProfileToViewsThunk } from '../../redux/user/user.actions';
@@ -50,8 +52,9 @@ const People = ({ users, setUsers }) => {
   };
 
   const handleViewProfile = (userId) => {
+
     dispatch(addProfileToViewsThunk(userId,loggedInUserId));
-    navigate(`/viewProfiles/${userId}`);
+    navigate(`/viewProfile/${userId}`);
   }
 
   return (
@@ -69,10 +72,9 @@ const People = ({ users, setUsers }) => {
               >
                 Unfollow
               </button>
-              <button
-                onClick={() => handleViewProfile(user.id)}>
+              <Button component={NavLink} onClick={() => handleViewProfile(user.id)} sx={{backgroundColor:'red'}}>
                 View Profile
-              </button>
+              </Button>
               </>
             ) : (
               <>
@@ -82,10 +84,10 @@ const People = ({ users, setUsers }) => {
               >
                 Follow
               </button>
-              <button
-                onClick={() => handleViewProfile(user.id)}>
-                View Profile
-              </button>
+                <Button component={NavLink} onClick={() => handleViewProfile(user.id)} sx={{backgroundColor:'red'}}
+                >
+                  View Profile
+                </Button>
               </>
             )}
           </li>
