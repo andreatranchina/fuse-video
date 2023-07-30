@@ -4,11 +4,14 @@ import ScrollToBottom from "react-scroll-to-bottom";
 import '../styles/chatComponent.css';
 import { postMessagesThunk } from '../redux/messages/message.actions';
 import SendIcon from '@mui/icons-material/Send';
+import axios from 'axios'
 
 const ChatComponent = ({socket, username, room, type}) => {
     const [currentMessage, setCurrentMessage] = useState("");
+    const [translatedText, setTranslatedText] = useState('');
     const [messageList, setMessageList] = useState([]);
     const loggedInUser = useSelector((state) => state.user.defaultUser);
+    const messageLanguage = useSelector((state) => state.user.defaultUser?.language)
     const currentRoom = useSelector((state) => state.room.currentRoom);
     const dispatch = useDispatch();
 
@@ -46,14 +49,65 @@ const ChatComponent = ({socket, username, room, type}) => {
         }
     }
 
-    useEffect(() => {
-        //data has username, time, and message  -> data.message
-        socket.on("receive_message", (data) => {
-            console.log(data,'was a received message')
-            setMessageList((list) => [...list, data]); //set to list from before with new data
-        })
+  //   const handleTranslate = async () => {
+  //   try {
+  //     console.log(messageLanguage + " what's going onnnnn");
+  //     const response = await axios.post('https://api-free.deepl.com/v2/translate', null, {
+  //       params: {
+  //         auth_key: process.env.REACT_APP_DEEPL_API_KEY,
+  //         text: ,
+  //         target_lang: messageLanguage,
+  //       },
+  //     });
 
-    }, [socket])
+  //     const translated = response.data.translations[0].text;
+  //     setTranslatedText(translated);
+  //   } catch (error) {
+  //     console.error('Translation Error:', error);
+  //     setTranslatedText('');
+  //   }
+  // };
+
+    useEffect(() => {
+  const translateMessage = async (data) => {
+    console.log(data,'BEGIN TRANSLATION')
+    console.log(data.message)
+    console.log(messageLanguage)
+    try {
+      const res = await axios.post('https://api-free.deepl.com/v2/translate', null, {
+        params: {
+          auth_key: process.env.REACT_APP_DEEPL_API_KEY,
+          text: data.message,
+          target_lang: messageLanguage,
+        },
+      });
+      const translatedMessage = res.data.translations[0].text;
+      console.log(translatedMessage,'is the translatedMessage')
+      const messageDataTranslated = { ...data, message: translatedMessage };
+      console.log(data, 'was a received translated message');
+      setMessageList((list) => [...list, messageDataTranslated]);
+    } catch (error) {
+      console.error('Translation Error:', error);
+    }
+  };
+
+  socket.on("receive_message", translateMessage);
+
+}, [socket,messageLanguage]);
+
+useEffect(() => {
+  console.log(messageLanguage);
+},[messageLanguage])
+
+//  useEffect(() => {
+//         //data has username, time, and message  -> data.message
+//         socket.on("receive_message", (data) => {
+//             console.log(data,'was a received message')
+//             setMessageList((list) => [...list, data]); //set to list from before with new data
+//         })
+
+//     }, [socket])
+
 
   return (
     <div className="chat-window">
