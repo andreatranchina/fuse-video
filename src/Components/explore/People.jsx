@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
+import PersonIcon from '@mui/icons-material/Person'
 
 const People = ({ users, setUsers }) => {
 const loggedInUserId = useSelector((state) => state.user.defaultUser?.id);
@@ -50,25 +51,29 @@ const loggedInUserId = useSelector((state) => state.user.defaultUser?.id);
       <div className="people-list">
         {users.map((user) => (
           <div key={user.id} className="people-item">
-            <div className="profile-pic-username-container">
-              <img className="profile-pic" alt="profile" src={user.imgUrl}></img>
+            {/* <div className="profile-pic-username-container"> */}
+            {user.imgUrl
+              ?<img alt="avatar" className="profile-pic" src={user.imgUrl} style={{width:'40px', height: '38px', marginRight: '20px', borderRadius: "2rem"}}  />
+              :<PersonIcon className="profile-pic" sx={{width:'38px', height: '38px', marginRight: '20px'}}/>
+            }
+            <div className="username-btn-container">
               <div className="username-span">{user.userName}</div>
-            </div>
-            {user.isFollowed ? (
+            {/* </div> */}
+              {user.isFollowed ? (
               <button
-                className="follow-button unfollow" // Change the class name to "unfollow"
-                onClick={() => handleUnfollow(user.id)}
-              >
+                className="follow-button unfollow" 
+                onClick={() => handleUnfollow(user.id)}>
                 Unfollow
               </button>
-            ) : (
+              ) : (
               <button
                 className="follow-button follow"
                 onClick={() => handleFollow(user.id)}
               >
                 Follow
               </button>
-            )}
+              )}
+            </div>
           </div>
         ))}
       </div>

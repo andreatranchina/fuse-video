@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { useSelector } from 'react-redux'
 import { Backdrop, Card, Grid, Stack }  from '@mui/material'
 import UploadProfilePhoto from '../components/profileInfo/UploadProfilePhoto'
@@ -25,6 +25,8 @@ const ProfileInfoLayout = () => {
    const isEditing = useSelector((state) => !state.user.defaultUser?.isEditingAccount)
    const userId = useSelector((state) => state.user.defaultUser?.id)
 
+   const [uploadedPhoto, setUploadedPhoto] = useState(false);
+
    //if the pro
   return (
      <Stack>
@@ -38,8 +40,8 @@ const ProfileInfoLayout = () => {
                     <Stack>
                     <Grid item sx={{marginTop:'-100px'}}>
                     {/* NEED TO PASS " IS LIVE " SO AS TO HAVE THE VIEWER JOIN THE LIVESTREAM */}
-                      {isLoggedIn ? (<UploadProfilePhoto/>) : (<NowLive/>)}
-                      <ProfilePhoto/>
+                      {isLoggedIn ? (<UploadProfilePhoto setUploadedPhoto={setUploadedPhoto} uploadedPhoto={uploadedPhoto}/>) : (<NowLive/>)}
+                      <ProfilePhoto uploadedPhoto={uploadedPhoto}/>
                     </Grid>
                     <Grid item sx={{margin:'10px', transform:'translateY(-20px)'}}>
                       <UserLocation/>

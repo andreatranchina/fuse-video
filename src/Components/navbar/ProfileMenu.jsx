@@ -4,7 +4,7 @@ import { IconButton, Menu, MenuItem } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
 import { useThemeContext } from '../../theme/ThemeContextProvider';
 import PersonIcon from '@mui/icons-material/Person'
-import { updateEditStatus, logout, setUser } from '../../redux/user/user.actions'
+import { updateEditStatus, setUser } from '../../redux/user/user.actions'
 import FirebaseAuthService from '../../firebase/FirebaseAuthService'
 import { toggleModal } from '../../redux/ui/ui.actions'
 
@@ -21,12 +21,13 @@ const ProfileMenu = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const modalOpen = useSelector((state) => !!state.ui.modalIsOpen)
+  const loggedInUser = useSelector((state) => state.user.defaultUser)
 
   // const isEditing = useSelector((state) => !state.user.isEditing)
 
   const handleLogOut = (e) => {
     e.preventDefault();
-    dispatch(logout());
+    // dispatch(logout());
     FirebaseAuthService.logoutUser();
     setAnchorEl(null);
     dispatch(setUser(null));
@@ -69,7 +70,10 @@ const ProfileMenu = () => {
             login: dark[900],
             boxShadow: '2px 2px 4px rgba(246, 233, 205, 0.6)',
           }, */}
-        <PersonIcon sx={{width:'38px', height: '38px', marginRight: '20px'}}/>
+          {loggedInUser.imgUrl
+        ?<img alt="avatar" src={loggedInUser.imgUrl} style={{width:'40px', height: '38px', marginRight: '20px', borderRadius: "2rem"}}  />
+        :<PersonIcon sx={{width:'38px', height: '38px', marginRight: '20px'}}/>
+          }
       </IconButton>
       <Menu
         id="basic-menu"
