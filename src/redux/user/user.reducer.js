@@ -58,7 +58,7 @@ export default function userReducer(state = INITIAL_USER_STATE, action) {
         }// Update followers in the defaultUser object
       };
       case ADD_PROFILE_TO_VIEWS:
-        const { viewUser, viewUserFollowers, mutualFollowers } = action.payload;
+        const { viewUser, viewUserFollowers, mutualFollowers, viewUserFollowersCount } = action.payload;
         //check if the user already in the opened profiles
         const viewUserIndex = state.openProfiles.findIndex((user) => user.id === viewUser.id);
 
@@ -66,7 +66,7 @@ export default function userReducer(state = INITIAL_USER_STATE, action) {
           //provide any update to mutual since last view
           const updatedOpenProfiles = [...state.openProfiles];
           updatedOpenProfiles[viewUserIndex] = {
-            ...viewUser, viewUserFollowers, mutualFollowers,
+            ...viewUser, viewUserFollowers, mutualFollowers, viewUserFollowersCount
           };
           return {
             ...state, openProfiles: updatedOpenProfiles,
@@ -77,9 +77,14 @@ export default function userReducer(state = INITIAL_USER_STATE, action) {
             ...state, openProfiles: [...state.openProfiles, { ...viewUser, viewUserFollowers, mutualFollowers}]
           }
         }
+      //action.payload = the viewUserId
       case REMOVE_PROFILE_FROM_VIEWS:
-        return { ...state, openProfiles: state.openProfiles.filter((user) => user.id !== action.payload) 
+        const profileIdToRemove = action.payload;
+        return {
+          ...state,
+          openProfiles: state.openProfiles.filter((user) => user.id != profileIdToRemove),
         };
+
       default:
         return state;
     }
