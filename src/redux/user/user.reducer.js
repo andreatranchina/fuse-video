@@ -10,6 +10,7 @@ export const INITIAL_USER_STATE = {
   error:null,
   isEditingAccount:false,
   followingIds: [],
+  followersIds: [],
 }
 
 export default function userReducer(state = INITIAL_USER_STATE, action) {
@@ -52,14 +53,19 @@ export default function userReducer(state = INITIAL_USER_STATE, action) {
         return {
           ...state, error: action.payload
         }
+      // case FETCH_FOLLOWERS:
+      //   return {
+      //     ...state,
+      //   defaultUser: {
+      //     ...state.defaultUser,
+      //     followers: action.payload, 
+      //   }// Update followers in the defaultUser object
+      // };
+
       case FETCH_FOLLOWERS:
-        return {
-          ...state,
-        defaultUser: {
-          ...state.defaultUser,
-          followers: action.payload, 
-        }// Update followers in the defaultUser object
-      };
+        return{
+          ...state, followersIds: action.payload
+        }
 
       case FETCH_FOLLOWINGS:
         return{
