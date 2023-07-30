@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { Backdrop, Card, Grid, Stack }  from '@mui/material'
 import UploadProfilePhoto from '../components/profileInfo/UploadProfilePhoto'
@@ -17,13 +17,21 @@ import StreamHistory from '../components/streamHistory/StreamHistory'
 import NowLive from '../components/profileInfo/NowLive'
 import { useMediaQuery } from '@mui/material'
 
-const ProfileInfoLayout = () => {
+const ProfileInfoLayout = ({loggedInUserId,viewUserId}) => {
 
-  //  const isLoggedIn = useSelector((state) => !!state.user.id);
-  const isLoggedIn = true;
-   const isSmallScreen = useMediaQuery('(max-width: 900px)');
-   const isEditing = useSelector((state) => !state.user.defaultUser?.isEditingAccount)
-   const userId = useSelector((state) => state.user.defaultUser?.id)
+  const isLoggedIn = useSelector((state) => !!state.user.defaultUser?.id);
+  const isOwnProfile = loggedInUserId === Number(viewUserId);
+ //boolean true if is accessing user from params id, false if not
+  // const isLoggedIn = true;
+  const isSmallScreen = useMediaQuery('(max-width: 900px)');
+  const isEditing = useSelector((state) => !state.user.defaultUser?.isEditingAccount)
+  
+  useEffect(() => {
+    console.log('isLoggedIn:', isLoggedIn);
+  console.log('isOwnProfile:', isOwnProfile);
+  console.log(loggedInUserId,'loggedin userid')
+  console.log(viewUserId,'viewuser id')
+  },[])
 
    //if the pro
   return (
@@ -33,29 +41,29 @@ const ProfileInfoLayout = () => {
               <Grid item xs={4} sx={{color:'white', height:'55vh'}}>
                 <Grid container sx={{minHeight:'100%', justifyContent:'center', alignItems:'center'}}>
                     <Grid item sx={{marginTop:'-40px'}}>
-                      <UserBanner/>
+                      <UserBanner viewUserId={viewUserId}/>
                     </Grid>
                     <Stack>
                     <Grid item sx={{marginTop:'-100px'}}>
                     {/* NEED TO PASS " IS LIVE " SO AS TO HAVE THE VIEWER JOIN THE LIVESTREAM */}
-                      {isLoggedIn ? (<UploadProfilePhoto/>) : (<NowLive/>)}
-                      <ProfilePhoto/>
+                      {isLoggedIn && isOwnProfile ? (<UploadProfilePhoto/>) : (<NowLive viewUserId={viewUserId}/>)}
+                      <ProfilePhoto viewUserId={viewUserId}/>
                     </Grid>
                     <Grid item sx={{margin:'10px', transform:'translateY(-20px)'}}>
-                      <UserLocation/>
-                      <Followers/>
+                      <UserLocation viewUserId={viewUserId}/>
+                      <Followers viewUserId={viewUserId}/>
                     </Grid>
                     {/* The buttons should lay on top of one another if the screen gets to 900px and below until mobile screen size is reached*/}
                       <Grid item sx={{ display: 'flex', justifyContent: 'center' }}>
                 {isSmallScreen ? (
                   <Stack spacing={1} >
-                    {isLoggedIn ? <EditProfile /> : <FollowProfile />}
-                    {isLoggedIn ? <GoLiveButton /> : <MessageUser />}
+                    {isLoggedIn && isOwnProfile ? <EditProfile /> : <FollowProfile viewUserId={viewUserId}/>}
+                    {isLoggedIn && isOwnProfile ? <GoLiveButton /> : <MessageUser viewUserId={viewUserId}/>}
                   </Stack>
                 ) : (
                   <>
-                    {isLoggedIn ? <EditProfile /> : <FollowProfile />}
-                    {isLoggedIn ? <GoLiveButton /> : <MessageUser />}
+                    {isLoggedIn && isOwnProfile ? <EditProfile /> : <FollowProfile viewUserId={viewUserId}/>}
+                    {isLoggedIn && isOwnProfile ? <GoLiveButton /> : <MessageUser viewUserId={viewUserId}/>}
                   </>
                 )}
               </Grid>
@@ -66,8 +74,8 @@ const ProfileInfoLayout = () => {
                 <Grid container sx={{minHeight:'100%', pr:'20px'}}>
                   <Stack spacing={2} justifyContent={'center'} sx={{width:'100%'}}>
                     <Card sx={{width:'100%', p:'20px'}}>
-                      <Bio/>
-                      <Topics/>
+                      <Bio viewUserId={viewUserId}/>
+                      <Topics viewUserId={viewUserId}/>
                     </Card>
                       {/* <EditInfoForm/> */}
                   </Stack>
@@ -76,7 +84,7 @@ const ProfileInfoLayout = () => {
               {/* PAST STREAMS */}
               <Grid container>
                 <Grid item xs={12} sx={{backgroundColor:'orange', height:'45vh'}}>
-                  <StreamHistory/>
+                  <StreamHistory viewUserId={viewUserId}/>
                 </Grid>
               </Grid>
             </Grid>
