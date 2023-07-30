@@ -49,30 +49,11 @@ const ChatComponent = ({socket, username, room, type}) => {
         }
     }
 
-  //   const handleTranslate = async () => {
-  //   try {
-  //     console.log(messageLanguage + " what's going onnnnn");
-  //     const response = await axios.post('https://api-free.deepl.com/v2/translate', null, {
-  //       params: {
-  //         auth_key: process.env.REACT_APP_DEEPL_API_KEY,
-  //         text: ,
-  //         target_lang: messageLanguage,
-  //       },
-  //     });
-
-  //     const translated = response.data.translations[0].text;
-  //     setTranslatedText(translated);
-  //   } catch (error) {
-  //     console.error('Translation Error:', error);
-  //     setTranslatedText('');
-  //   }
-  // };
-
     useEffect(() => {
   const translateMessage = async (data) => {
-    console.log(data,'BEGIN TRANSLATION')
-    console.log(data.message)
-    console.log(messageLanguage)
+    // console.log(data,'BEGIN TRANSLATION')
+    // console.log(data.message)
+    // console.log(messageLanguage)
     try {
       const res = await axios.post('https://api-free.deepl.com/v2/translate', null, {
         params: {
@@ -82,9 +63,9 @@ const ChatComponent = ({socket, username, room, type}) => {
         },
       });
       const translatedMessage = res.data.translations[0].text;
-      console.log(translatedMessage,'is the translatedMessage')
+      // console.log(translatedMessage,'is the translatedMessage')
       const messageDataTranslated = { ...data, message: translatedMessage };
-      console.log(data, 'was a received translated message');
+      // console.log(data, 'was a received translated message');
       setMessageList((list) => [...list, messageDataTranslated]);
     } catch (error) {
       console.error('Translation Error:', error);
@@ -94,10 +75,6 @@ const ChatComponent = ({socket, username, room, type}) => {
   socket.on("receive_message", translateMessage);
 
 }, [socket,messageLanguage]);
-
-useEffect(() => {
-  console.log(messageLanguage);
-},[messageLanguage])
 
 //  useEffect(() => {
 //         //data has username, time, and message  -> data.message
