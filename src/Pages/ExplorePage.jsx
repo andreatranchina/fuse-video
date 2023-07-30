@@ -10,10 +10,6 @@ import { useThemeContext } from '../theme/ThemeContextProvider';
 const ExplorePage = () => {
     const [users, setUsers] = useState([]);
     const {theme, mode } = useThemeContext();
-    // const dispatch = useDispatch();
-    // const followingIds = useSelector(state => state.user.followingIds);
-    // const user = useSelector(state => state.user);
-
 
     useEffect(() => {
         const fetchUsers = async () => {
@@ -26,27 +22,8 @@ const ExplorePage = () => {
             }
         }
         fetchUsers();
-        // dispatch(fetchFollowingsThunk(user.defaultUser?.id));
-        // console.log(followingIds);
 
     }, []);
-
-
-    // useEffect(() => {
-    //     const fetchUsers = async () => {
-    //         try {
-    //             const response = await axios.get('http://localhost:3001/api/explore/users')
-    //             setUsers(response.data)
-    //         }
-    //         catch (error) {
-    //             console.log(error)
-    //         }
-    //     }
-    //     fetchUsers();
-    //     dispatch(fetchFollowingsThunk(user.defaultUser?.id));
-    //     console.log(followingIds);
-
-    // }, [user.defaultUser?.id]);
 
     return (
         <div id={mode === 'light' ? 'home-light' : 'home-dark'} className="explore-page-container">
