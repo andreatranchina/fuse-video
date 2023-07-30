@@ -1,15 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import People from '../components/explore/People';
 import axios from 'axios';
 import Videos from '../components/explore/Videos';
 import '../styles/explorePage.css';
 import { useThemeContext } from '../theme/ThemeContextProvider';
-// import { fetchFollowingsThunk } from '../redux/user/user.actions';
-// import {useDispatch, useSelector} from "react-redux";
+
 
 const ExplorePage = () => {
     const [users, setUsers] = useState([]);
-    const {theme, mode } = useThemeContext();
+    const { mode } = useThemeContext();
 
     useEffect(() => {
         const fetchUsers = async () => {

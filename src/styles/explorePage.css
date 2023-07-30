@@ -134,6 +134,21 @@
     font-weight: 700;
 }
 
+#upload-button{
+    background: linear-gradient(var(--paper-light), var(--prussian-blue), var(--prussian-blue), var(--paper-dark), var(--prussian-blue));
+    position: relative;
+    bottom: 1rem;
+    color: white;
+}
+
+.confirmation-buttons-container{
+    display: block;
+}
+
+.uploading-video-card{
+    color: white;
+}
+
 @media (max-width: 930px){
     .profile-pic{
         position: relative;
