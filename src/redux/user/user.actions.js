@@ -1,5 +1,7 @@
 import axios from "axios";
-import { SET_USER, GET_USER, REMOVE_USER, EDIT_ACCOUNT, EDIT_STATUS, EMAIL_FETCH_USER, ERROR_HANDLING, FETCH_USER_BY_ID, FETCH_FOLLOWERS, ADD_PROFILE_TO_VIEWS, REMOVE_PROFILE_FROM_VIEWS } from "./user.types";
+import { SET_USER, GET_USER, REMOVE_USER, EDIT_ACCOUNT, EDIT_STATUS, 
+  EMAIL_FETCH_USER, ERROR_HANDLING, FETCH_USER_BY_ID, FETCH_FOLLOWERS, ADD_PROFILE_TO_VIEWS, 
+  REMOVE_PROFILE_FROM_VIEWS, FETCH_FOLLOWINGS } from "./user.types";
 
 export const setUser = (payload) => {
   return{
@@ -174,6 +176,23 @@ export const fetchFollowersThunk = (userId) => {
     try {
       const res = await axios.get(`http://localhost:3001/api/follows/followers/${userId}`)
       dispatch(fetchFollowers(res.data));
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
+
+export const fetchFollowings = (payload) => ({
+  type: FETCH_FOLLOWINGS,
+  payload: payload
+})
+
+//thunk for find all of the logged in user's followings
+export const fetchFollowingsThunk = (userId) => {
+  return async(dispatch) => {
+    try {
+      const res = await axios.get(`http://localhost:3001/api/follows/followings/${userId}`)
+      dispatch(fetchFollowings(res.data));
     } catch (error) {
       console.log(error)
     }
