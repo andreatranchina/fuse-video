@@ -14,6 +14,7 @@ import LivestreamPage from '../pages/LivestreamPage'
 import VideoChatPage from '../pages/VideoChatPage'
 import LoginPage from '.././pages/LoginPage';
 import SignUpPage from '.././pages/SignUpPage';
+import ExplorePage from '.././pages/ExplorePage';
 import Translations from '.././pages/Translations'
 import Customizations from '.././pages/Customizations'
 import Profile from '.././pages/Profile'
@@ -38,6 +39,7 @@ const router = createBrowserRouter(
       <Route path="/livestream/:code" element={<LivestreamPage socket={socket} />} />
       <Route path="/videochat/:code" element={<VideoChatPage socket={socket} />} />
       <Route path="/recordings" element={<Recordings />} />
+      <Route path="/explore" element={<ExplorePage />} />
       {/* <Route path="/join" element={<JoinPage />}/>
       <Route path="/host" element={<HostPage />} />
       <Route path="/livestream/:code" element={<LivestreamPage />} /> */}

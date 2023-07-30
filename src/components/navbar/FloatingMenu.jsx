@@ -3,10 +3,10 @@ import { NavLink } from 'react-router-dom'
 import Box from '@mui/material/Box'
 import Fab from '@mui/material/Fab'
 import Tooltip from '@mui/material/Tooltip'
-import TranslateIcon from '../icons/TranslateIcon'
+import TranslateIcon from '../icons/ExploreIcon'
 import JoinIcon from '../icons/JoinIcon'
 import HostIcon from '../icons/HostIcon'
-import CustomizeIcon from '../icons/CustomizeIcon'
+import ProfileIcon from '../icons/ProfileIcon'
 import { useThemeContext } from "../../theme/ThemeContextProvider"
 
 const FloatingMenu = () => {
@@ -32,17 +32,17 @@ const FloatingMenu = () => {
       </Fab>
       </Tooltip>
     </NavLink>
-    <NavLink to="/translate" className="navlink">
-      <Tooltip title="Translate" placement="top">
+    <NavLink to="/explore" className="navlink">
+      <Tooltip title="Explore" placement="top">
       <Fab sx={floatingMenuStyle} aria-label="translate">
         <TranslateIcon/>
       </Fab>
       </Tooltip>
     </NavLink>
-    <NavLink to="/customize" className="navlink">
-      <Tooltip title="Customize" placement="top">
-      <Fab sx={floatingMenuStyle} aria-label="customize">
-        <CustomizeIcon/>
+    <NavLink to="/profile" className="navlink">
+      <Tooltip title="Profile" placement="top">
+      <Fab sx={floatingMenuStyle} aria-label="profile">
+        <ProfileIcon/>
       </Fab>
       </Tooltip>
     </NavLink>

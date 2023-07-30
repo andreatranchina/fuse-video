@@ -1,0 +1,40 @@
+.people-container {
+    margin-top: 7rem;
+    width: 50%;
+    background-color: #f0f0f0;
+    border: 1px solid black;
+    border-radius: 10px;
+    /* Rounded corners for the inner container */
+    padding: 20px;
+}
+
+.people-list {
+    list-style: none;
+    padding: 0;
+}
+
+.people-item {
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    /* Border around each entry */
+    border-radius: 5px;
+    /* Rounded corners for each entry */
+    padding: 10px;
+}
+
+.follow-button {
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+    color: #fff;
+    border-radius: 5px;
+}
+
+.follow {
+    background-color: #800080;
+}
+
+.unfollow {
+    background-color: #800080;
+    /* Purple color for unfollow button */
+}

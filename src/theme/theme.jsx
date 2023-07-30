@@ -44,6 +44,7 @@ const getDesignTokens = (mode) => ({
           text: {
             primary: light[900],
             secondary: light[200],
+            header: '#363159'
           },
         }
       : {
@@ -73,6 +74,7 @@ const getDesignTokens = (mode) => ({
           text: {
             primary: dark[50],
             secondary: dark[200],
+            header: dark[50]
           },
         }),
   },

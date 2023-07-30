@@ -96,14 +96,6 @@ const JoinPage = ({socket}) => {
             </div> */}
           </div>}
 
-      <Box sx={{pt:10}} >
-        {isSmallScreen 
-        ? <div style={{position: 'fixed', left: '50%', bottom: '20px', transform: 'translate(-50%, -50%)',  margin: '0 auto'}}>
-            <FloatingMenu />
-          </div> 
-        : <></>}
-      </Box>
-
       <Snackbar open={isSnackbarOpen} autoHideDuration={6000} onClose={handleCloseSnackbar}>
         <Alert onClose={handleCloseSnackbar} severity="error" sx={{ width: '100%' }}>
           Room ID does not exist - try again

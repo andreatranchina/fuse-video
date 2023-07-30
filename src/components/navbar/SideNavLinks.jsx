@@ -21,7 +21,7 @@ const SideNavlinks = () => {
         <NavLink to="/join" style={navlink}>Join</NavLink>
         <NavLink to="/host" style={navlink}>Host</NavLink>
         <NavLink to="/translate" style={navlink}>Translate</NavLink>
-        <NavLink to="/customize" style={navlink}>Customize</NavLink>
+        <NavLink to="/expore" style={navlink}>Expore</NavLink>
         {user ? (<ProfileMenu/>) : ('')}
         <SwitchLayout/>
     </div>
