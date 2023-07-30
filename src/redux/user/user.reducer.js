@@ -1,4 +1,6 @@
-import { SET_USER, GET_USER, REMOVE_USER, EDIT_ACCOUNT, EDIT_STATUS, EMAIL_FETCH_USER, ERROR_HANDLING, FETCH_USER_BY_ID, FETCH_FOLLOWERS, ADD_PROFILE_TO_VIEWS, REMOVE_PROFILE_FROM_VIEWS } from "./user.types";
+import { SET_USER, GET_USER, REMOVE_USER, EDIT_ACCOUNT, EDIT_STATUS, EMAIL_FETCH_USER, 
+  ERROR_HANDLING, FETCH_USER_BY_ID, FETCH_FOLLOWERS, ADD_PROFILE_TO_VIEWS, 
+  REMOVE_PROFILE_FROM_VIEWS, FETCH_FOLLOWINGS } from "./user.types";
 
 export const INITIAL_USER_STATE = {
   defaultUser: null,
@@ -6,7 +8,8 @@ export const INITIAL_USER_STATE = {
   //a list of all profiles that the user is currently viewing
   openProfiles:[],
   error:null,
-  isEditingAccount:false
+  isEditingAccount:false,
+  followingIds: [],
 }
 
 export default function userReducer(state = INITIAL_USER_STATE, action) {
@@ -57,6 +60,11 @@ export default function userReducer(state = INITIAL_USER_STATE, action) {
           followers: action.payload, 
         }// Update followers in the defaultUser object
       };
+
+      case FETCH_FOLLOWINGS:
+        return{
+          ...state, followingIds: action.payload
+        }
       case ADD_PROFILE_TO_VIEWS:
         const { viewUser, viewUserFollowers, mutualFollowers, viewUserFollowersCount } = action.payload;
         //check if the user already in the opened profiles

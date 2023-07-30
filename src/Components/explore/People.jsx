@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import axios from 'axios';
 import Button from '@mui/material/Button';
 import { NavLink } from 'react-router-dom';
@@ -6,11 +6,20 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { addProfileToViewsThunk } from '../../redux/user/user.actions';
 import PersonIcon from '@mui/icons-material/Person';
+import { fetchFollowingsThunk } from '../../redux/user/user.actions';
 
 const People = ({ users, setUsers }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const loggedInUserId = useSelector((state) => state.user.defaultUser?.id);
+
+  const followingIds = useSelector(state => state.user.followingIds);
+
+  useEffect(() => {
+    dispatch(fetchFollowingsThunk(loggedInUserId));
+    console.log(followingIds);
+
+  }, [loggedInUserId]);
 
   const handleFollow = async (userId) => {
     try {
@@ -19,16 +28,11 @@ const People = ({ users, setUsers }) => {
         userId,
       });
 
-      setUsers((prevUsers) =>
-        prevUsers.map((user) =>
-          user.id === userId ? { ...user, isFollowed: true } : user
-        )
-      );
-
       console.log('followed user:', userId);
     } catch (error) {
       console.error('error following user:', error.message);
     }
+    dispatch(fetchFollowingsThunk(loggedInUserId));
   };
 
   const handleUnfollow = async (userId) => {
@@ -40,21 +44,16 @@ const People = ({ users, setUsers }) => {
         },
       });
 
-      setUsers((prevUsers) =>
-        prevUsers.map((user) =>
-          user.id === userId ? { ...user, isFollowed: false } : user
-        )
-      );
-
       console.log('unfollowed user:', userId);
     } catch (error) {
       console.error('error unfollowing user:', error.message);
     }
+    dispatch(fetchFollowingsThunk(loggedInUserId));
   };
 
   const handleViewProfile = (userId) => {
     dispatch(addProfileToViewsThunk(userId, loggedInUserId));
-    navigate(`/viewProfile/${userId}`);
+    loggedInUserId === userId ? navigate(`/profile/${userId}`) : navigate(`/viewProfile/${userId}`);
   };
 
   return (
@@ -69,8 +68,8 @@ const People = ({ users, setUsers }) => {
                 className="profile-pic"
                 src={user.imgUrl}
                 style={{
-                  width: '40px',
-                  height: '38px',
+                  width: '55px',
+                  height: '50px',
                   marginRight: '20px',
                   borderRadius: '2rem',
                 }}
@@ -86,40 +85,26 @@ const People = ({ users, setUsers }) => {
               />
             )}
             <div className="username-btn-container">
-              <div className="username-span">{user.userName}</div>
-              {user.isFollowed ? (
-                <>
-                  <button
-                    className="follow-button unfollow"
-                    onClick={() => handleUnfollow(user.id)}
-                  >
-                    Unfollow
-                  </button>
+              <div className="username-span">{user.id === loggedInUserId ? user.userName + " (you)" : user.userName}</div>
+              {/* {user.isFollowed ? ( */}
+              {user.id !== loggedInUserId 
+                ? (
+                  <Button
+                    className="follow-button"
+                    onClick={followingIds.includes(user.id)? () => handleUnfollow(user.id) : () => handleFollow(user.id)}
+                    sx={{color: "var(--prussian-blue)", fontSize: "0.7rem", fontWeight:"700", margin: "5px"}}
+                    >
+                    {followingIds.includes(user.id)?"Unfollow":"Follow"}
+                  </Button>)                
+                : null} 
                   <Button
                     component={NavLink}
                     onClick={() => handleViewProfile(user.id)}
-                    sx={{ backgroundColor: 'red' }}
+                    className="follow-button"
+                    sx={{color: "var(--prussian-blue)", fontSize: "0.7rem", fontWeight:"700", margin: "5px"}}
                   >
-                    View Profile
+                    Profile
                   </Button>
-                </>
-              ) : (
-                <>
-                  <button
-                    className="follow-button follow"
-                    onClick={() => handleFollow(user.id)}
-                  >
-                    Follow
-                  </button>
-                  <Button
-                    component={NavLink}
-                    onClick={() => handleViewProfile(user.id)}
-                    sx={{ backgroundColor: 'red' }}
-                  >
-                    View Profile
-                  </Button>
-                </>
-              )}
             </div>
           </div>
         ))}
