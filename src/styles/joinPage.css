@@ -9,6 +9,20 @@
     box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
 } */
 
+#signup-light {
+  background-image: url('.././assets/light-background.webp');
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 100%;
+} 
+#signup-dark {
+  background-image: url('.././assets/dark-background.webp');
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 100%h;
+}
 .minipage-header{
     margin: 5rem auto;
     font-size: 2.7rem;
