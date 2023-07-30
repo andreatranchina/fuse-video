@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { SET_USER, GET_USER, REMOVE_USER, EDIT_ACCOUNT, EDIT_STATUS, EMAIL_FETCH_USER, ERROR_HANDLING, FETCH_USER_BY_ID, FETCH_FOLLOWERS, SHOW_NO_FOLLOWERS } from "./user.types";
+import { SET_USER, GET_USER, REMOVE_USER, EDIT_ACCOUNT, EDIT_STATUS, EMAIL_FETCH_USER, ERROR_HANDLING, FETCH_USER_BY_ID, FETCH_FOLLOWERS, ADD_PROFILE_TO_VIEWS, REMOVE_PROFILE_FROM_VIEWS } from "./user.types";
 
 export const setUser = (payload) => {
   return{
@@ -145,7 +145,6 @@ export const editAccountThunk = (id, editedAccount) => {
   }
 }
 
-
 export const fetchUserByEmail = (payload) => ({
   type: EMAIL_FETCH_USER,
   payload: payload,
@@ -170,16 +169,31 @@ export const fetchFollowers = (payload) => ({
   payload: payload
 })
 
-export const showNoFollowers = () => ({
-  type: SHOW_NO_FOLLOWERS
-})
-
 //thunk for find all of the logged in user's followers
 export const fetchFollowersThunk = (userId) => {
   return async(dispatch) => {
     try {
       const res = await axios.get(`http://localhost:3001/api/follows/followers/${userId}`)
       dispatch(fetchFollowers(res.data));
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
+
+export const addProfileToViews = (viewUser, mutualFollowers) => ({
+  type: ADD_PROFILE_TO_VIEWS,
+  payload: { viewUser, mutualFollowers }
+})
+
+//thunk to add a opened user profile to a list of opened profiles, allowing multiple user profile tabs to be opened to view
+
+export const addProfileToViewsThunk = (viewUserId,accessingUserId) => {
+  return async(dispatch) => {
+    try {
+      const res = await axios.get(`http://localhost:3001/api/user/viewProfile/${viewUserId}?accessingUserId=${accessingUserId}`);
+      const { viewUser, viewUserFollowers, mutualFollowers } = res.data;
+      dispatch(addProfileToViews(viewUser, viewUserFollowers, mutualFollowers));
     } catch (error) {
       console.log(error)
     }
