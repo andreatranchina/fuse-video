@@ -21,6 +21,7 @@ const ProfileMenu = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const modalOpen = useSelector((state) => !!state.ui.modalIsOpen)
+  const loggedInUserId = useSelector((state) => state.user.defaultUser?.id)
 
   // const isEditing = useSelector((state) => !state.user.isEditing)
 
@@ -80,7 +81,7 @@ const ProfileMenu = () => {
           'aria-labelledby': 'basic-button',
         }}
       >
-      <NavLink to ="/profile" style={navlink}>
+      <NavLink to ={`/profile/${loggedInUserId}`} style={navlink}>
         <MenuItem onClick={handleClose}>Profile</MenuItem>
       </NavLink>
         <MenuItem onClick={handleShowAccount}>My account</MenuItem>

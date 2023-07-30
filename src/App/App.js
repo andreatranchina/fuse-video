@@ -18,6 +18,7 @@ import ExplorePage from '.././pages/ExplorePage';
 import Translations from '.././pages/Translations'
 import Customizations from '.././pages/Customizations'
 import Profile from '.././pages/Profile'
+import ViewProfile from '../pages/ViewProfile'
 import RootLayout from '.././layouts/RootLayout'
 import { connectWithSocketIO } from '../utils/socketIO'
 
@@ -30,7 +31,8 @@ const router = createBrowserRouter(
       <Route index element={<Home/>}/>
       <Route path="/login" element={<LoginPage/>}/>
       <Route path="/signup" element={<SignUpPage/>}/>
-      <Route path="/profile" element={<Profile/>}/>
+      <Route path="/profile/:id" element={<Profile/>}/>
+      <Route path="/viewProfile/:id" element={<ViewProfile />} />
       {/* <Route path="/join" element={<Join/>}/>
       <Route path="/host" element={<Host/>}> */}
       <Route path="/join" element={<JoinPage socket={socket}/>}/>
