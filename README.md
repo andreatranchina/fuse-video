@@ -2,7 +2,7 @@
   <img src="/readme/logo.png" alt="Fuse Logo" height="80px">
 </p>
 
-<h1 align="center"> <a href="https://deploylink">Fuse</a> </h1>
+<h1 align="center"> <a href="https://deploylink](https://fuse-video-frontend-f2j7.vercel.app">Fuse</a> </h1>
 <h3 align="center"> <a href="https://github.com/jons-repo/video-backend">Backend Code</a> </h3>
 
 <!-- TABLE OF CONTENTS -->
@@ -52,12 +52,15 @@
 * [![PostgreSQL][PostgreSQL.js]][PostgreSQL-url]
 * [![Sequelize][Sequelize.js]][Sequelize-url]
 
+<img width="1399" alt="Screen Shot 2023-07-30 at 9 54 26 PM" src="https://github.com/andreatranchina/fuse-video/assets/91578619/438a57a4-7ae0-4a78-b4e5-c8d5610b2eb1">
+<img width="1422" alt="Screen Shot 2023-07-31 at 6 26 59 AM" src="https://github.com/andreatranchina/fuse-video/assets/91578619/aaad7ed8-86b8-4c00-9a9b-fea9f9b910da">
+
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
 <!-- Join a Video Chat -->
 <h2 id="joinvideochat"> :telephone_receiver: Join a Video Chat</h2>
 <div class="placeholder-container">
-  <img src="readme/joinvideo.jpg" alt="Join a Video Chat" class="placeholder-image">
+  <img width="1422" alt="Screen Shot 2023-07-31 at 6 23 44 AM" src="https://github.com/andreatranchina/fuse-video/assets/91578619/aefa5cab-2fb9-4646-875e-048b0851be3d">
 </div>
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
@@ -65,7 +68,7 @@
 <!-- Host a Video Chat -->
 <h2 id="hostvideochat"> :calling: Host a Video Chat</h2>
 <div class="placeholder-container">
-  <img src="readme/hostvideo.JPG" alt="Host a Video Chat" class="placeholder-image">
+  <img width="1423" alt="Screen Shot 2023-07-31 at 6 23 32 AM" src="https://github.com/andreatranchina/fuse-video/assets/91578619/ac05cd43-2208-45d5-8fa4-e622cd51dc2b">
 </div>
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
@@ -73,7 +76,7 @@
 <!-- Join a Livestream -->
 <h2 id="joinlivestream"> :tv: Join a Livestream</h2>
 <div class="placeholder-container">
-  <img src="readme/joinlive.JPG" alt="Join a Livestream" class="placeholder-image">
+ <img width="1421" alt="Screen Shot 2023-07-31 at 6 16 05 AM" src="https://github.com/andreatranchina/fuse-video/assets/91578619/94b7442c-6944-4a98-820e-81901b93b882">
 </div>
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
@@ -81,7 +84,7 @@
 <!-- Host a Livestream -->
 <h2 id="hostlivestream"> :studio_microphone: Host a Livestream</h2>
 <div class="placeholder-container">
-  <img src="readme/hostlive.JPG" alt="Host a Livestream" class="placeholder-image">
+ <img width="1420" alt="Screen Shot 2023-07-31 at 6 22 06 AM" src="https://github.com/andreatranchina/fuse-video/assets/91578619/b4ef0c50-55a6-4e28-8bdd-473f00655e47">
 </div>
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
