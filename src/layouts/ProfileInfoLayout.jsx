@@ -16,6 +16,8 @@ import EditInfoForm from '../components/userDetails/account/EditAccountForm'
 import StreamHistory from '../components/streamHistory/StreamHistory'
 import NowLive from '../components/profileInfo/NowLive'
 import { useMediaQuery } from '@mui/material'
+import '.././styles/profile.css'
+import { useThemeContext } from '../theme/ThemeContextProvider'
 
 const ProfileInfoLayout = ({loggedInUserId,viewUserId}) => {
 
@@ -25,6 +27,8 @@ const ProfileInfoLayout = ({loggedInUserId,viewUserId}) => {
   // const isLoggedIn = true;
   const isSmallScreen = useMediaQuery('(max-width: 900px)');
   const isEditing = useSelector((state) => !state.user.defaultUser?.isEditingAccount)
+
+  const { mode } = useThemeContext();
   
   useEffect(() => {
     console.log('isLoggedIn:', isLoggedIn);
@@ -41,19 +45,22 @@ const ProfileInfoLayout = ({loggedInUserId,viewUserId}) => {
           {/* PROFILE PIC AND BIO */}
             <Grid container sx={{color:'white', flexGrow: 1 }}>
               <Grid item xs={4} sx={{color:'white', height:'65vh'}}>
-                <Grid container sx={{minHeight:'100%', justifyContent:'center', alignItems:'center'}}>
-                    <Grid item sx={{marginTop:'-40px'}}>
+                <Grid container sx={{minHeight:'100%', justifyContent:'center', alignItems:'center', transform:'translateY(-20px)'}}>
+                <Card id= {mode == 'light' ? "user-banner" : "dark-user-banner"}>
+                    <Grid item sx={{marginTop:'40px'}}>
                       <UserBanner viewUserId={viewUserId}/>
                     </Grid>
                     <Stack>
-                    <Grid item sx={{marginTop:'-100px'}}>
+                    <Grid item sx={{marginTop:'-390px'}}>
                     {/* NEED TO PASS " IS LIVE " SO AS TO HAVE THE VIEWER JOIN THE LIVESTREAM */}
                       {isLoggedIn && isOwnProfile ? (<UploadProfilePhoto setUploadedPhoto={setUploadedPhoto} uploadedPhoto={uploadedPhoto}/>) : (<NowLive viewUserId={viewUserId}/>)}
                       <ProfilePhoto uploadedPhoto={uploadedPhoto}/>
                     </Grid>
                     <Grid item sx={{margin:'10px', transform:'translateY(-20px)'}}>
+                    <Card>
                       <UserLocation viewUserId={viewUserId}/>
                       <Followers viewUserId={viewUserId}/>
+                      </Card>
                     </Grid>
                     {/* The buttons should lay on top of one another if the screen gets to 900px and below until mobile screen size is reached*/}
                       <Grid item sx={{ display: 'flex', justifyContent: 'center' }}>
@@ -70,10 +77,11 @@ const ProfileInfoLayout = ({loggedInUserId,viewUserId}) => {
                 )}
               </Grid>
                     </Stack>
+                    </Card>
                 </Grid>
               </Grid>
               <Grid item xs={8} sx={{color:'white', width:'100%'}}>
-                <Grid container sx={{minHeight:'100%', pr:'20px'}}>
+                <Grid container sx={{minHeight:'100%', pr:'20px', transform:'translateY(-100px)'}}>
                   <Stack spacing={2} justifyContent={'center'} sx={{width:'100%'}}>
                     <Card sx={{width:'100%', p:'20px'}}>
                       <Bio viewUserId={viewUserId}/>

@@ -1,0 +1,20 @@
+#user-banner{
+    display: 'flex';
+    background-image: url('.././assets/abstract_scandinavian_style_wave_pattern_background_1904.webp');
+    background-size: contain;
+    width: 300px;
+    height: 400px;
+    border-radius: 8;
+}
+
+#dark-user-banner {
+    display: 'flex';
+    background-image: url('.././assets/1368.webp');
+    background-size: contain;
+    width: 300px;
+    height: 400px;
+    border-radius: 8;
+}
+
+
+       

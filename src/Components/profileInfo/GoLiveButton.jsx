@@ -15,9 +15,10 @@ const GoLiveButton = () => {
 
   const goLiveButton = {
     backgroundColor:theme.palette.background.fab.upload,
+    transform:'translateY(-15px)',
     height: '36px',
     '&:hover': {
-      backgroundColor: theme.palette.text.primary, color:'black' 
+      backgroundColor: theme.palette.text.primary,
       }
   }
 
@@ -37,9 +38,6 @@ const GoLiveButton = () => {
     color: theme.palette.text,
     WebkitTextStrokeWidth: '2px', 
 		WebkitTextStrokeColor:`${theme.palette.text}`,
-    '&:hover': {
-    color: 'white', // Text color on hover
-  }
 }
 	
   return (

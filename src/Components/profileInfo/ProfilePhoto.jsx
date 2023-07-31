@@ -18,7 +18,7 @@ const ProfilePhoto = ({viewUserId}) => {
       imgUrl && isOwnProfile ? <img alt="avatar" src={imgUrl} 
       style={{height:'144px', width: '144px', border:`4px solid ${theme.palette.secondary.main}`, borderRadius:'10rem'}}  
       />
-      : <Avatar sx={{height:'144px', width: '144px', border:`4px solid ${theme.palette.secondary.main}`}}></Avatar>
+      : <Avatar sx={{height:'200px', width: '200px', border:`4px solid ${theme.palette.secondary.main}`}}></Avatar>
     }
     </Box>
   )
