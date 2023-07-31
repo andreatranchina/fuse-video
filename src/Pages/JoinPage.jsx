@@ -2,7 +2,7 @@ import React, {useState, forwardRef} from 'react';
 import '../styles/chatComponent.css';
 import {useDispatch, useSelector} from 'react-redux';
 import {setCurrentRoom, setOnlyAudio} from "../redux/room/room.actions";
-import { Box, Typography }  from '@mui/material'
+import { Box, Tooltip, Typography }  from '@mui/material'
 import FloatingMenu from '../components/navbar/FloatingMenu';
 import { useMediaQuery, Button } from '@mui/material'
 import { useNavigate } from 'react-router-dom';
@@ -22,7 +22,7 @@ const JoinPage = ({socket}) => {
     const [code, setCode] = useState("");
     const [choseType, setChoseType] = useState("");
     const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
-    const { mode } = useThemeContext();
+    const { mode, theme } = useThemeContext();
     const onlyAudio = useSelector((state) => state.room.onlyAudio);
 
     const handleOpenSnackbar = () => {
@@ -77,32 +77,37 @@ const JoinPage = ({socket}) => {
   
     return (
       
-      <div className="callPage" style={{marginTop: "4rem"}}>
+      <div className="callPage" style={{marginTop: "12rem"}}>
         {!choseType
         ? (
           <div className="minipage" style={{transform:'translateY(-30px)'}}>
            <Box id={mode === 'light' ? 'signup-light' : 'signup-dark'} sx={{oveflow:'contain'}}>
-      <Typography variant='h2' sx={{fontFamily:'Bungee Inline', transform:'translateY(40px)'}}>Room to Join</Typography>
+      <Typography variant='h2' sx={{fontFamily:'Bungee Inline', transform:'translateY(40px)', WebkitTextStrokeWidth: '1px', 
+								WebkitTextStrokeColor: mode === 'light' ? 'white' : theme.palette.background.fab.default}}>Room to Join</Typography>
             <div className="choice-button-container" style={{transform:'translateY(120px)'}}>
               <button className="choice-button" onClick={() => setChoseType("Livestream")}><Typography sx={{fontFamily:`'Bungee Hairline',cursive`, fontWeight:700, WebkitTextStrokeWidth: '2px', 
 								WebkitTextStrokeColor:'white'}}>Livestream</Typography></button>
-              <button className="choice-button" onClick={() => setChoseType("Video Chat")}>Video Chat</button>
+              <button className="choice-button" onClick={() => setChoseType("Video Chat")}><Typography sx={{fontFamily:`'Bungee Hairline',cursive`, fontWeight:700, WebkitTextStrokeWidth: '2px', 
+								WebkitTextStrokeColor:'white'}}>Video Chat</Typography></button>
             </div>
             </Box>
           </div>
           
           )
-        : <div className="joinChatContainer minipage">
-            <Typography sx={{fontFamily:`'Bungee Hairline',cursive`, fontWeight:700, WebkitTextStrokeWidth: '2px', 
-								WebkitTextStrokeColor:'white'}}>Join {choseType}</Typography>
+        : <div className="joinChatContainer minipage" style={{transform:'translateY(-30px)'}}>
+        <Box id={mode === 'light' ? 'signup-light' : 'signup-dark'} sx={{oveflow:'contain'}}>
+            <Typography variant='h2' sx={{fontFamily:'Bungee Inline', transform:'translateY(40px)', WebkitTextStrokeWidth: '1px', 
+								WebkitTextStrokeColor: mode === 'light' ? 'white' : theme.palette.background.fab.default}}>Join {choseType}</Typography>
+            <Box sx={{transform:'translateY(100px)'}}>
             <input type="text" placeholder="livestream code.." onChange={(e) => {setCode(e.target.value)}}/>
-            
             <div className="container-buttons-preroom">
-              <Button onClick={joinRoom}>Start {choseType} </Button>
-              <Button className="back-button" onClick={() => setChoseType("")}><ArrowBackIosNewRoundedIcon /></Button>
-              
+            <Tooltip title="Go back" placement="left">
+              <Button className="back-button" onClick={() => setChoseType("")}><ArrowBackIosNewRoundedIcon /></Button></Tooltip>
+              <Button onClick={joinRoom}><Typography sx={{fontFamily:`'Bungee Hairline',cursive`, fontWeight:700, WebkitTextStrokeWidth: '2px', 
+								WebkitTextStrokeColor:'white'}}>Start {choseType}</Typography> </Button>
             </div>
-
+            </Box>
+            </Box>
           </div>}
 
       <Snackbar open={isSnackbarOpen} autoHideDuration={6000} onClose={handleCloseSnackbar}>

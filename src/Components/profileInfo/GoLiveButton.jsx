@@ -17,7 +17,7 @@ const GoLiveButton = () => {
     backgroundColor:theme.palette.background.fab.upload,
     height: '36px',
     '&:hover': {
-      backgroundColor: theme.palette.background.fab.hover, color:'black' 
+      backgroundColor: theme.palette.text.primary, color:'black' 
       }
   }
 
@@ -26,7 +26,7 @@ const GoLiveButton = () => {
     backgroundColor:theme.palette.background.fab.upload,
     height: '36px',
     '&:hover': {
-      backgroundColor: theme.palette.background.fab.hover, color:'black' 
+      backgroundColor: theme.palette.background.login,
       }
   }
 
