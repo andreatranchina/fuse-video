@@ -49,6 +49,8 @@
 * [![Material-UI][Material-UI.js]][Material-UI-url]
 * [![Axios][Axios.js]][Axios-url]
 * [![WebRTC][WebRTC.js]][WebRTC-url]
+* [![PostgreSQL][PostgreSQL.js]][PostgreSQL-url]
+* [![Sequelize][Sequelize.js]][Sequelize-url]
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
@@ -202,3 +204,8 @@ You may also see any lint errors in the console.
 [Axios-url]: https://axios-http.com/
 [WebRTC.js]: https://img.shields.io/badge/WebRTC-XXXXXX?style=for-the-badge&logo=webrtc&logoColor=XXXXXX
 [WebRTC-url]: https://webrtc.org/
+[PostgreSQL.js]: https://img.shields.io/badge/PostgreSQL-336791?style=for-the-badge&logo=postgresql&logoColor=white
+[PostgreSQL-url]: https://www.postgresql.org/
+[Sequelize.js]: https://img.shields.io/badge/Sequelize-52B0E7?style=for-the-badge&logo=sequelize&logoColor=white
+[Sequelize-url]: https://sequelize.org/
+
