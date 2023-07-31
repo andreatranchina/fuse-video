@@ -43,7 +43,7 @@ const FollowProfile = ({viewUserId}) => {
 		try {
 			console.log("loggedInUserId: " + loggedInUserId);
 			console.log("viewUserId: " + viewUserId )
-			await axios.post(`http://localhost:3001/api/follows/`, {
+			await axios.post(`https://video-backend-6mkl.onrender.com/api/follows/`, {
 			  loggedInUserId,
 			  userId: viewUserId,
 			});
@@ -58,7 +58,7 @@ const FollowProfile = ({viewUserId}) => {
 
 	const handleUnfollow = async (userId) => {
 		try {
-		  await axios.delete(`http://localhost:3001/api/follows/`, {
+		  await axios.delete(`https://video-backend-6mkl.onrender.com/api/follows/`, {
 			data: {
 			  loggedInUserId,
 			  userId: viewUserId,

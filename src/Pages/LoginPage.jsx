@@ -96,7 +96,7 @@ const LoginPage = () => {
 
     try {
         await FirebaseAuthService.loginUser(email, password);
-        // const response = await axios.get(`http://localhost:3001/api/user/byEmail/${email}`);
+        // const response = await axios.get(`https://video-backend-6mkl.onrender.com/api/user/byEmail/${email}`);
         // dispatch(setUser(response.data));
         setEmail("");
         setPassword("");
@@ -137,7 +137,7 @@ const handleLoginWithGoogle = async () => {
     try{
         const googleResponse = await FirebaseAuthService.loginWithGoogle();
         const email = googleResponse.user.email;
-        // const response = await axios.get(`http://localhost:3001/api/user/byEmail/${email}`);
+        // const response = await axios.get(`https://video-backend-6mkl.onrender.com/api/user/byEmail/${email}`);
         // dispatch(setUser(response.data));
         navigate("/");
     }
@@ -152,7 +152,7 @@ const handleLoginWithGithub = async () => {
   try{
       const googleResponse = await FirebaseAuthService.loginWithGithub();
       const email = googleResponse.user.email;
-      // const response = await axios.get(`http://localhost:3001/api/user/byEmail/${email}`);
+      // const response = await axios.get(`https://video-backend-6mkl.onrender.com/api/user/byEmail/${email}`);
       // dispatch(setUser(response.data));
       navigate("/");
   }
@@ -167,7 +167,7 @@ const handleLoginWithFacebook = async () => {
   try{
       const googleResponse = await FirebaseAuthService.loginWithFacebook();
       const email = googleResponse.user.email;
-      // const response = await axios.get(`http://localhost:3001/api/user/byEmail/${email}`);
+      // const response = await axios.get(`https://video-backend-6mkl.onrender.com/api/user/byEmail/${email}`);
       // dispatch(setUser(response.data));
       navigate("/");
   }

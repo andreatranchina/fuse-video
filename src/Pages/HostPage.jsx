@@ -43,12 +43,12 @@ const HostPage = ({socket}) => {
 
         // email trigger for backend
         console.log(loggedInUser);
-        // const sendNotificationsResponse = await fetch(`http://localhost:3001/api/follows/sendNotifications?userId=${loggedInUser.id}&livestreamCode=${v4Id.toString()}`, {
+        // const sendNotificationsResponse = await fetch(`https://video-backend-6mkl.onrender.com/api/follows/sendNotifications?userId=${loggedInUser.id}&livestreamCode=${v4Id.toString()}`, {
         //   method: 'GET',
         //   credentials: 'include',
         // });
 
-        const sendNotificationsResponse = await axios.get(`http://localhost:3001/api/follows/sendNotifications?userId=${loggedInUser.id}&livestreamCode=${v4Id.toString()}`);
+        const sendNotificationsResponse = await axios.get(`https://video-backend-6mkl.onrender.com/api/follows/sendNotifications?userId=${loggedInUser.id}&livestreamCode=${v4Id.toString()}`);
 
         if (sendNotificationsResponse.ok) {
           console.log('email notification sent successfully');
@@ -57,13 +57,13 @@ const HostPage = ({socket}) => {
         }
 
 
-        // const sendTextNotification = await fetch(`http://localhost:3001/api/follows/phoneNumbers?userId=${loggedInUser.id}&livestreamCode=${v4Id.toString()}`, {
+        // const sendTextNotification = await fetch(`https://video-backend-6mkl.onrender.com/api/follows/phoneNumbers?userId=${loggedInUser.id}&livestreamCode=${v4Id.toString()}`, {
         //     method: 'GET',
         //     credentials: 'include',
         //   });
 
 
-        const sendTextNotification = axios.get(`http://localhost:3001/api/follows/phoneNumbers?userId=${loggedInUser.id}&livestreamCode=${v4Id.toString()}`);
+        const sendTextNotification = axios.get(`https://video-backend-6mkl.onrender.com/api/follows/phoneNumbers?userId=${loggedInUser.id}&livestreamCode=${v4Id.toString()}`);
 
           if (sendTextNotification.ok) {
             console.log('Text sent front end');

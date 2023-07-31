@@ -23,7 +23,7 @@ const People = ({ users, setUsers }) => {
 
   const handleFollow = async (userId) => {
     try {
-      await axios.post(`http://localhost:3001/api/follows/`, {
+      await axios.post(`https://video-backend-6mkl.onrender.com/api/follows/`, {
         loggedInUserId,
         userId,
       });
@@ -37,7 +37,7 @@ const People = ({ users, setUsers }) => {
 
   const handleUnfollow = async (userId) => {
     try {
-      await axios.delete(`http://localhost:3001/api/follows/`, {
+      await axios.delete(`https://video-backend-6mkl.onrender.com/api/follows/`, {
         data: {
           loggedInUserId,
           userId,
