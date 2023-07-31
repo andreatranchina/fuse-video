@@ -13,7 +13,7 @@ const ExplorePage = () => {
     useEffect(() => {
         const fetchUsers = async () => {
             try {
-                const response = await axios.get('http://localhost:3001/api/explore/users')
+                const response = await axios.get('https://video-backend-6mkl.onrender.com/api/explore/users')
                 setUsers(response.data)
             }
             catch (error) {

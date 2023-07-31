@@ -135,7 +135,7 @@ const LivestreamPage = ({socket}) => {
             setvideoUrl(downloadUrl);
 
             try{
-                const response = await axios.post("http://localhost:3001/api/recordings", {
+                const response = await axios.post("https://video-backend-6mkl.onrender.com/api/recordings", {
                     blobUrl: URL.createObjectURL(recordedBlob),
                     downloadUrl: downloadUrl,
                     user_id: loggedInUser.id,

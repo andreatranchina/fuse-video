@@ -6,7 +6,7 @@ import * as webRTC from './webRTC';
 let socket = null;
 
 export const connectWithSocketIO = () => {
-    socket = io("http://localhost:3001");
+    socket = io("https://video-backend-6mkl.onrender.com");
 
     socket.on("connect", () => {
         console.log('successfully connected with socket io server');
