@@ -1,5 +1,5 @@
 <p align="center"> 
-  <img src="gif/placeholder.jpg" alt="Fuse Logo" width="80px" height="80px">
+  <img src="/readme/logo.png" alt="Fuse Logo" height="80px">
 </p>
 
 <h1 align="center"> <a href="https://deploylink">Fuse</a> </h1>
@@ -57,7 +57,7 @@
 <!-- Join a Video Chat -->
 <h2 id="joinvideochat"> :telephone_receiver: Join a Video Chat</h2>
 <div class="placeholder-container">
-  <img src="https://via.placeholder.com/800x450" alt="Join a Video Chat" class="placeholder-image">
+  <img src="readme/joinvideo.jpg" alt="Join a Video Chat" class="placeholder-image">
 </div>
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
@@ -65,7 +65,7 @@
 <!-- Host a Video Chat -->
 <h2 id="hostvideochat"> :calling: Host a Video Chat</h2>
 <div class="placeholder-container">
-  <img src="https://via.placeholder.com/800x450" alt="Host a Video Chat" class="placeholder-image">
+  <img src="readme/hostvideo.JPG" alt="Host a Video Chat" class="placeholder-image">
 </div>
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
@@ -73,7 +73,7 @@
 <!-- Join a Livestream -->
 <h2 id="joinlivestream"> :tv: Join a Livestream</h2>
 <div class="placeholder-container">
-  <img src="https://via.placeholder.com/800x450" alt="Join a Livestream" class="placeholder-image">
+  <img src="readme/joinlive.JPG" alt="Join a Livestream" class="placeholder-image">
 </div>
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
@@ -81,7 +81,7 @@
 <!-- Host a Livestream -->
 <h2 id="hostlivestream"> :studio_microphone: Host a Livestream</h2>
 <div class="placeholder-container">
-  <img src="https://via.placeholder.com/800x450" alt="Host a Livestream" class="placeholder-image">
+  <img src="readme/hostlive.JPG" alt="Host a Livestream" class="placeholder-image">
 </div>
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
@@ -89,7 +89,7 @@
 <!-- Screenshare -->
 <h2 id="screenshare"> :desktop_computer: Screenshare</h2>
 <div class="placeholder-container">
-  <img src="https://via.placeholder.com/800x450" alt="Screenshare" class="placeholder-image">
+  <img src="readme/share.JPG" alt="Screenshare" class="placeholder-image">
 </div>
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
@@ -97,7 +97,7 @@
 <!-- Send Messages -->
 <h2 id="sendmessages"> :envelope: Send Messages</h2>
 <div class="placeholder-container">
-  <img src="https://via.placeholder.com/800x450" alt="Send Messages" class="placeholder-image">
+  <img src="readme/messages.JPG" alt="Send Messages" class="placeholder-image">
 </div>
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
@@ -105,7 +105,7 @@
 <!-- Translate Messages -->
 <h2 id="translatemessages"> :globe_with_meridians: Translate Messages</h2>
 <div class="placeholder-container">
-  <img src="https://via.placeholder.com/800x450" alt="Translate Messages" class="placeholder-image">
+  <img src="readme/translate.JPG" alt="Translate Messages" class="placeholder-image">
 </div>
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
@@ -113,7 +113,7 @@
 <!-- Record and Archive -->
 <h2 id="recordarchive"> :cd: Record and Archive</h2>
 <div class="placeholder-container">
-  <img src="https://via.placeholder.com/800x450" alt="Record and Archive" class="placeholder-image">
+  <img src="readme/record.JPG" alt="Record and Archive" class="placeholder-image">
 </div>
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
@@ -121,7 +121,7 @@
 <!-- Explore the Community -->
 <h2 id="explorecommunity"> :earth_americas: Explore the Community</h2>
 <div class="placeholder-container">
-  <img src="https://via.placeholder.com/800x450" alt="Explore the Community" class="placeholder-image">
+  <img src="readme/explore.JPG" alt="Explore the Community" class="placeholder-image">
 </div>
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
@@ -129,7 +129,7 @@
 <!-- Edit your profile -->
 <h2 id="editprofile"> :pencil2: Edit your profile</h2>
 <div class="placeholder-container">
-  <img src="https://via.placeholder.com/800x450" alt="Edit your profile" class="placeholder-image">
+  <img src="readme/profile.JPG" alt="Edit your profile" class="placeholder-image">
 </div>
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
@@ -208,4 +208,3 @@ You may also see any lint errors in the console.
 [PostgreSQL-url]: https://www.postgresql.org/
 [Sequelize.js]: https://img.shields.io/badge/Sequelize-52B0E7?style=for-the-badge&logo=sequelize&logoColor=white
 [Sequelize-url]: https://sequelize.org/
-
