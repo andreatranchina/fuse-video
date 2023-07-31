@@ -47,7 +47,7 @@ onAuthStateChanged (auth, async (user) => {
 
         // store.dispatch(setUser(user));
         try{
-            const response = await axios.get(`http://localhost:3001/api/user/byEmail/${user.email}`);
+            const response = await axios.get(`https://video-backend-6mkl.onrender.com/api/user/byEmail/${user.email}`);
             if (response.data){
                 store.dispatch(setUser(response.data));
             }
