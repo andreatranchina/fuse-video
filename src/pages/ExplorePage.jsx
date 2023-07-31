@@ -13,7 +13,7 @@ const ExplorePage = () => {
     useEffect(() => {
         const fetchUsers = async () => {
             try {
-                const response = await axios.get('http://localhost:3001/api/explore/users')
+                const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/explore/users`)
                 setUsers(response.data)
             }
             catch (error) {

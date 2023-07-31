@@ -101,7 +101,7 @@ const SignUpPage = () => {
     try {
         const newUser = await FirebaseAuthService.registerUser(email, password);
 
-        const response = await axios.post("http://localhost:3001/api/user", {
+        const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/user`, {
           email: newUser.user.email,
           imgUrl: newUser.user.photoURL,
           firstName: firstName,
@@ -152,7 +152,7 @@ const handleRegisterWithGoogle = async () => {
         console.log(newUser.user.displayName);
         console.log(nameArray);
  
-        const response = await axios.post("http://localhost:3001/api/user", {
+        const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/user`, {
           email: newUser.user.email,
           imgUrl: newUser.user.photoURL,
           firstName: nameArray[0],
@@ -182,7 +182,7 @@ const handleRegisterWithGithub = async () => {
       console.log(newUser.user.displayName);
       console.log(nameArray);
 
-      const response = await axios.post("http://localhost:3001/api/user", {
+      const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/user`, {
         email: newUser.user.email,
         imgUrl: newUser.user.photoURL,
         firstName: nameArray[0],
@@ -212,7 +212,7 @@ const handleRegisterWithFacebook = async () => {
       console.log(newUser.user.displayName);
       console.log(nameArray);
 
-      const response = await axios.post("http://localhost:3001/api/user", {
+      const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/user`, {
         email: newUser.user.email,
         imgUrl: newUser.user.photoURL,
         firstName: nameArray[0],

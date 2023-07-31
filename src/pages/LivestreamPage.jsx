@@ -135,7 +135,7 @@ const LivestreamPage = ({socket}) => {
             setvideoUrl(downloadUrl);
 
             try{
-                const response = await axios.post("http://localhost:3001/api/recordings", {
+                const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/recordings`, {
                     blobUrl: URL.createObjectURL(recordedBlob),
                     downloadUrl: downloadUrl,
                     user_id: loggedInUser.id,
