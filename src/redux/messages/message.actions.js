@@ -14,7 +14,7 @@ export const postMessagesThunk = (message) => {
     console.log("running post message thunk ");
     return async (dispatch) => {
         try {
-            const res = await axios.post("http://localhost:3001/api/messages", {
+            const res = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/messages`, {
                 livestream_id: message.livestream_id,
                 videochat_id: message.videochat_id, //either this or livestream_id will be null
                 user_id: message.user_id,
@@ -38,7 +38,7 @@ export const fetchAllMessages = (payload) => {
 export const fetchAllMessagesThunk = (message) => {
     return async (dispatch) => {
         try {
-            const res = await axios.get("http://localhost:3001/api/messages");
+            const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/messages`);
             dispatch(fetchAllMessages(res.data));
         }
         catch (error) {
