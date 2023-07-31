@@ -50,27 +50,7 @@
 * [![Axios][Axios.js]][Axios-url]
 * [![WebRTC][WebRTC.js]][WebRTC-url]
 
-
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
-
-<style>
-  .placeholder-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 800px;
-    height: 450px;
-    background-color: #f2f2f2;
-    border: 1px solid #ccc;
-    margin: 0 auto;
-  }
-
-  .placeholder-image {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-  }
-</style>
 
 <!-- Join a Video Chat -->
 <h2 id="joinvideochat"> :telephone_receiver: Join a Video Chat</h2>
@@ -194,7 +174,7 @@ REACT_APP_MESSAGING_SENDER_ID=
 REACT_APP_APP_ID=
 REACT_APP_MEASUREMENT_ID=</code></pre>
 
-API's used were DeepL, Elastic Email, and Firebase.
+API's used were DeepL, Elastic Email, Twilio, and Firebase.
 
 ### `npm start`
 
