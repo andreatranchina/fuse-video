@@ -31,7 +31,7 @@ export const fetchUserById = (payload) => ({
 export const fetchUserByIdThunk = (id) => {
   return async (dispatch) => {
     try {
-      let res = await axios.get(`http://localhost:3001/api/user/${id}`);
+      let res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/user/${id}`);
       dispatch(fetchUserById(res.data));
     } catch (error) {
       console.log(error)
@@ -74,7 +74,7 @@ export const editAccountThunk = (id, editedAccount) => {
   return async (dispatch) => {
     try {
     console.log('edit account thunk hit with country', editedAccount.country)
-    const newAccountInfo = await axios.put(`http://localhost:3001/api/user/${id}`, {
+    const newAccountInfo = await axios.put(`${process.env.REACT_APP_BACKEND_URL}/api/user/${id}`, {
       email: editedAccount.email,
       password: editedAccount.password,
       firstName: editedAccount.firstName,
@@ -111,7 +111,7 @@ export const fetchUserByEmailThunk = (userEmail) => {
     let user = {}
     try {
     console.log('email fetch thunk hit')
-    user = await axios.get(`http://localhost:3001/api/user/byEmail/${userEmail}`)
+    user = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/user/byEmail/${userEmail}`)
     console.log('made edit account axios call')
     dispatch(fetchUserByEmail(user.data));
     } catch (error) {
@@ -129,7 +129,7 @@ export const fetchFollowers = (payload) => ({
 export const fetchFollowersThunk = (userId) => {
   return async(dispatch) => {
     try {
-      const res = await axios.get(`http://localhost:3001/api/follows/followers/${userId}`)
+      const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/follows/followers/${userId}`)
       console.log("user id in thunk " + userId);
       console.log("res in thunk: " + res.data);
       dispatch(fetchFollowers(res.data));
@@ -148,7 +148,7 @@ export const fetchFollowings = (payload) => ({
 export const fetchFollowingsThunk = (userId) => {
   return async(dispatch) => {
     try {
-      const res = await axios.get(`http://localhost:3001/api/follows/followings/${userId}`)
+      const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/follows/followings/${userId}`)
       dispatch(fetchFollowings(res.data));
     } catch (error) {
       console.log(error)
@@ -166,7 +166,7 @@ export const addProfileToViews = (viewUser, mutualFollowers) => ({
 export const addProfileToViewsThunk = (viewUserId,loggedInUserId) => {
   return async(dispatch) => {
     try {
-      const res = await axios.get(`http://localhost:3001/api/user/viewProfile/${viewUserId}?loggedInUserId=${loggedInUserId}`);
+      const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/user/viewProfile/${viewUserId}?loggedInUserId=${loggedInUserId}`);
       const { viewUser, viewUserFollowers, mutualFollowers, viewUserFollowersCount } = res.data;
       dispatch(addProfileToViews(viewUser, viewUserFollowers, mutualFollowers));
     } catch (error) {
