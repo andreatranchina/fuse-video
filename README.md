@@ -48,27 +48,11 @@
 * [![Socket.io][Socket.io.js]][Socket.io-url]
 * [![Material-UI][Material-UI.js]][Material-UI-url]
 * [![Axios][Axios.js]][Axios-url]
+* [![WebRTC][WebRTC.js]][WebRTC-url]
+* [![PostgreSQL][PostgreSQL.js]][PostgreSQL-url]
+* [![Sequelize][Sequelize.js]][Sequelize-url]
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
-
-<style>
-  .placeholder-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 800px;
-    height: 450px;
-    background-color: #f2f2f2;
-    border: 1px solid #ccc;
-    margin: 0 auto;
-  }
-
-  .placeholder-image {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-  }
-</style>
 
 <!-- Join a Video Chat -->
 <h2 id="joinvideochat"> :telephone_receiver: Join a Video Chat</h2>
@@ -192,7 +176,7 @@ REACT_APP_MESSAGING_SENDER_ID=
 REACT_APP_APP_ID=
 REACT_APP_MEASUREMENT_ID=</code></pre>
 
-API's used were DeepL, Elastic Email, and Firebase.
+API's used were DeepL, Elastic Email, Twilio, and Firebase.
 
 ### `npm start`
 
@@ -218,3 +202,10 @@ You may also see any lint errors in the console.
 [Material-UI-url]: https://material-ui.com/
 [Axios.js]: https://img.shields.io/badge/Axios-007EC6?style=for-the-badge&logo=axios&logoColor=white
 [Axios-url]: https://axios-http.com/
+[WebRTC.js]: https://img.shields.io/badge/WebRTC-XXXXXX?style=for-the-badge&logo=webrtc&logoColor=XXXXXX
+[WebRTC-url]: https://webrtc.org/
+[PostgreSQL.js]: https://img.shields.io/badge/PostgreSQL-336791?style=for-the-badge&logo=postgresql&logoColor=white
+[PostgreSQL-url]: https://www.postgresql.org/
+[Sequelize.js]: https://img.shields.io/badge/Sequelize-52B0E7?style=for-the-badge&logo=sequelize&logoColor=white
+[Sequelize-url]: https://sequelize.org/
+
