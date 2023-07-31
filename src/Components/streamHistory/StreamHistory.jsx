@@ -23,7 +23,7 @@ const StreamHistory = ({viewUserId}) => {
   useEffect (() => {
     const fetchVideos = async () => {
         try{
-            const response = await axios.get(`http://localhost:3001/api/recordings/byUser/${viewUserId}`);
+            const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/recordings/byUser/${viewUserId}`);
             console.log(response.data);
             setVideos([...response.data])
 

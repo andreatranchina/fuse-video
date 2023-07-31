@@ -52,7 +52,7 @@ const JoinPage = ({socket}) => {
         try{
             if(choseType === "Livestream"){
               //fetch the livestream to join from db based on inputed livestream code
-              const response = await axios.get(`http://localhost:3001/api/livestreams/byCode/${code}`);
+              const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/livestreams/byCode/${code}`);
               const responseData = response.data; //if livestream code does not exist repsonse will be null
 
               //set currently joined livestream in redux
@@ -62,7 +62,7 @@ const JoinPage = ({socket}) => {
               navigate(`/livestream/${code}`);
             }
             else{ //else user chose to join a video chat
-                const response = await axios.get(`http://localhost:3001/api/videochats/byCode/${code}`);
+                const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/videochats/byCode/${code}`);
                 const responseData = response.data;
                 dispatch(setCurrentRoom(responseData));
                 navigate(`/videochat/${code}`);

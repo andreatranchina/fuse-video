@@ -72,7 +72,7 @@ const Videos = () => {
     useEffect (() => {
         const fetchVideos = async () => {
             try{
-                const response = await axios.get("http://localhost:3001/api/recordings");
+                const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/recordings`);
                 console.log(response.data);
                 setVideos([...response.data])
     
@@ -128,7 +128,7 @@ const Videos = () => {
             return;
         }
         try{
-            const response = await axios.post("http://localhost:3001/api/recordings", {
+            const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/recordings`, {
                 blobUrl: "noblob",
                 downloadUrl: videoUrl,
                 user_id: loggedInUser.id,
