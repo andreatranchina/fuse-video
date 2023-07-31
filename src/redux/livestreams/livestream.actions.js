@@ -13,7 +13,7 @@ export const postLivestream = (payload) => {
 export const postLivestreamThunk = (livestream) => {
     return async (dispatch) => {
         try {
-            const res = await axios.post("http://localhost:3001/api/livestreams", {
+            const res = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/livestreams`, {
                 user_id: livestream.user_id,
                 title: livestream.title,
                 description: livestream.description,
@@ -38,7 +38,7 @@ export const fetchAllLivestreams = (payload) => {
 export const fetchAllLivestreamsThunk = (livestream) => {
     return async (dispatch) => {
         try {
-            const res = await axios.get("http://localhost:3001/api/livestreams");
+            const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/livestreams`);
             dispatch(fetchAllLivestreams(res.data));
         }
         catch (error) {

@@ -13,7 +13,7 @@ export const postVideochat = (payload) => {
 export const postVideochatThunk = (videochat) => {
     return async (dispatch) => {
         try {
-            const res = await axios.post("http://localhost:3001/api/videochats", {
+            const res = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/videochats`, {
                 user_id: videochat.user_id,
                 title: videochat.title,
                 description: videochat.description,
@@ -38,7 +38,7 @@ export const fetchAllVideochats = (payload) => {
 export const fetchAllVideochatsThunk = (videochat) => {
     return async (dispatch) => {
         try {
-            const res = await axios.get("http://localhost:3001/api/videochats");
+            const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/videochats`);
             dispatch(fetchAllVideochats(res.data));
         }
         catch (error) {

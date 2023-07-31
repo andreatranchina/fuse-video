@@ -12,7 +12,7 @@ export const fetchLanguagePreferencesThunk = (userId) => {
     return async(dispatch) => {
         let res;
         try {
-            res = await axios.get(`http://localhost:3001/api/user/${userId}`);
+            res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/user/${userId}`);
             const { messageLanguage, streamLanguage, siteLanguage } = res.data;
             const languagePreferences = {
               messageLanguage,
@@ -37,7 +37,7 @@ export const changeMessageLanguageThunk = (userId, newLanguage) => {
     return async (dispatch) => {
     let res;
     try {
-        res = await axios.put(`http://localhost:3001/api/user/${userId}`,{
+        res = await axios.put(`${process.env.REACT_APP_BACKEND_URL}/api/user/${userId}`,{
             messageLanguage: newLanguage,
         });
         console.log('changing message language')
