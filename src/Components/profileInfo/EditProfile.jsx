@@ -22,8 +22,8 @@ const EditProfile= () => {
   const editButton = {
     backgroundColor:theme.palette.button.main,
     '&:hover': {
-      backgroundColor: theme.palette.background.fab.hover, textColor: mode === 'light' ? theme.palette.text.primary : 'white'
-      }
+      backgroundColor: mode ==='light' ? theme.palette.background.login : theme.palette.background.login
+    }
   }
 
   console.log(isEditing);
@@ -32,11 +32,10 @@ const EditProfile= () => {
   fontFamily: `'Bungee Hairline', cursive`,
   fontWeight: '700',
   marginRight: '8px',
-  color: theme.palette.text,
   WebkitTextStrokeWidth: '2px', 
 	WebkitTextStrokeColor:theme.palette.text,
   '&:hover': {
-    color: 'white', // Text color on hover
+    color: mode === 'light' ? 'white' : theme.palette.background.fab.login, // Text color on hover
   },
 };
 
