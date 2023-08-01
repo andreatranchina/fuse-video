@@ -2,7 +2,7 @@
   <img src="/readme/logo.png" alt="Fuse Logo" height="80px">
 </p>
 
-<h1 align="center"> <a href="https://deploylink](https://fuse-video-frontend-f2j7.vercel.app">Fuse</a> </h1>
+<h1 align="center"> <a href="https://fuse-video-frontend-f2j7.vercel.app">Fuse</a> </h1>
 <h3 align="center"> <a href="https://github.com/jons-repo/video-backend">Backend Code</a> </h3>
 
 <!-- TABLE OF CONTENTS -->
