@@ -22,7 +22,7 @@ const EditProfile= () => {
   const editButton = {
     backgroundColor:theme.palette.button.main,
     '&:hover': {
-      backgroundColor: mode ==='light' ? theme.palette.background.login : theme.palette.background.login
+      backgroundColor: mode ==='light' ? theme.palette.text.primary : theme.palette.background.login
     }
   }
 
@@ -53,7 +53,7 @@ const EditProfile= () => {
   }
 	
   return (
-    <Box sx={{marginRight:'10px'}}>
+    <Box sx={{marginRight:'10px', transform:'translateY(-15px)'}}>
     	<Button sx={editButton} onClick = {handleEditProfile}>
 			<Typography variant='subtitle2' sx={editText}>
 				Edit Info

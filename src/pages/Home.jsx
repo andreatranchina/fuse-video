@@ -6,7 +6,7 @@ import { useMediaQuery } from '@mui/material';
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Slogan from '../components/home/Slogan';
-import Description from '../components/home/Description';
+import DescriptionSwiper from '../components/home/DescriptionSwiper';
 import HomeImagesContainer from '../components/home/HomeImagesContainer';
 import MobileDescription from '../components/home/MobileDescription';
 import MobileAvatarSlogan from '../components/home/MobileAvatarSlogan';
@@ -62,7 +62,7 @@ const Home = () => {
           </Stack>
 
           <Box sx={{ width: '100%', height: '100%', alignItems: 'center', transform: 'translate(-100px,-60px)', zIndex: 2 }}>
-            <Description />
+            <DescriptionSwiper />
           </Box>
         </Stack>
       </Box>
@@ -78,7 +78,7 @@ const Home = () => {
                 <Slogan />
               </Grid>
               <Grid item xs={6} sx={{ width: '100%', height: '100%', alignItems: 'center', transform: 'translateY(-50px)', zIndex: 2 }}>
-                <Description />
+                <DescriptionSwiper />
               </Grid>
             </Grid>
           </Stack>

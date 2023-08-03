@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import Box from '@mui/material/Box'
-import Typography from '@mui/material/Typography'
+import { Box, Card, CardMedia, Typography }  from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
 import { useThemeContext } from '../../theme/ThemeContextProvider'
 import { useMediaQuery } from '@mui/material'
+import '../../styles/profile.css'
 
 const UserBanner = ({viewUserId}) => {
   const dispatch = useDispatch()
-  const { theme } = useThemeContext()
+  const { theme, mode } = useThemeContext()
   const isSmallScreen = useMediaQuery('(max-width: 900px)');
   const isLoggedIn = useSelector((state) => !!state.user.defaultUser?.id);
   const loggedInUserId = useSelector((state) => state.user.defaultUser?.id)
@@ -42,11 +42,14 @@ const UserBanner = ({viewUserId}) => {
   },[])
 
   return (
-    <Box >
-      <Typography variant={isSmallScreen ? ('h5') : ('h4')} sx={{fontFamily:`'Bungee Hairline',monospace`, fontWeight:'700', marginTop:'18px',
+   <Box id={mode === 'light' ? "user-banner" : 'dark-user-banner'}
+    >
+    <Card sx={{display: 'flex', alignItems:'center', justifyContent:'center', textAlign:'center', transform:'translateY(-20px)'}}>
+      <Typography variant={isSmallScreen ? ('h6') : ('h5')} sx={{fontFamily:`'Bungee Hairline',monospace`, fontWeight:'700',
     color: theme.palette.text.primary, WebkitTextStrokeWidth: '2px',WebkitTextStrokeColor:theme.palette.text.primary}}>
           @{isOwnProfile ? loggedInUserName : viewUserName}
       </Typography>
+      </Card>
     </Box>
   )
 }

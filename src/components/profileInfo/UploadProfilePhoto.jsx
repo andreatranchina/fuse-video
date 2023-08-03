@@ -25,8 +25,9 @@ const UploadProfilePhoto = ({setUploadedPhoto, uploadedPhoto}) => {
   const navigate = useNavigate();
 
   const upload = {
-    backgroundColor: theme.palette.background.fab.upload, width:'36px', height:'24px', 
-    transform: 'translate(45px,34px)'
+    backgroundColor: theme.palette.background.fab.upload, width:'48px', height:'48px', 
+    position: 'relative',
+    transform: 'translate(36px,50px)'
   }
 
   const uploadSmall = {

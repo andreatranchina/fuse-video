@@ -1,6 +1,6 @@
 import { SET_USER, GET_USER, REMOVE_USER, EDIT_ACCOUNT, EDIT_STATUS, EMAIL_FETCH_USER, 
   ERROR_HANDLING, FETCH_USER_BY_ID, FETCH_FOLLOWERS, ADD_PROFILE_TO_VIEWS, 
-  REMOVE_PROFILE_FROM_VIEWS, FETCH_FOLLOWINGS, INPUT_NEW_INFO } from "./user.types";
+  REMOVE_PROFILE_FROM_VIEWS, FETCH_FOLLOWINGS, INPUT_NEW_INFO, TOGGLE_LOGIN, TOGGLE_SIGNUP } from "./user.types";
 
 export const INITIAL_USER_STATE = {
   defaultUser: null,
@@ -12,6 +12,7 @@ export const INITIAL_USER_STATE = {
   isInputtingNewInfo:false,
   followingIds: [],
   followersIds: [],
+  isLoggingIn: false
 }
 
 export default function userReducer(state = INITIAL_USER_STATE, action) {
@@ -103,6 +104,14 @@ export default function userReducer(state = INITIAL_USER_STATE, action) {
           ...state,
           openProfiles: state.openProfiles.filter((user) => user.id != profileIdToRemove),
         };
+      case TOGGLE_LOGIN:
+        return {
+          ...state, isLoggingIn: !state.isLoggingIn,
+        }
+      case TOGGLE_SIGNUP:
+        return {
+          ...state, isSigningUp: !state.isSigningUp
+        }
 
       default:
         return state;

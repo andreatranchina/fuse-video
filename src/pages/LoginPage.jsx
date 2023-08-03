@@ -5,7 +5,7 @@ import { setUser } from "../redux/user/user.actions";
 import { useNavigate } from "react-router-dom";
 import FirebaseAuthService from "../firebase/FirebaseAuthService";
 import axios from 'axios';
-import { FormControl, TextField, createTheme, Button } from "@mui/material";
+import { FormControl, TextField, createTheme, Button, useMediaQuery } from "@mui/material";
 import { ThemeProvider } from "@emotion/react";
 import "../styles/loginPage.css";
 import Snackbar from '@mui/material/Snackbar';
@@ -20,7 +20,8 @@ const Alert = forwardRef(function Alert(props, ref) {
 });
 
 const LoginPage = () => {
-
+  const isXtraSmallScreen = useMediaQuery("(max-width: 500px");
+  const isSmallScreen = useMediaQuery("(max-width: 700px");
   const { mode } = useThemeContext();
   const loginTheme = createTheme({
     components: {
@@ -73,8 +74,6 @@ const LoginPage = () => {
   const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
   const [snackbarSeverity, setSnackbarSeverity] = useState("");
-
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useSelector((state) => state.user.defaultUser)
@@ -182,14 +181,14 @@ const handleLoginWithFacebook = async () => {
     <ThemeProvider theme={loginTheme}>
     <div className="minipage-signup">
       <Box id={mode === 'light' ? 'signup-light' : 'signup-dark'} sx={{oveflow:'contain'}}>
-      <Typography variant='h2' sx={{fontFamily:'Bungee Inline', transform:'translateY(40px)'}}>Log In</Typography>
+      <Typography variant='h2' sx={{fontFamily:'Bungee Inline', transform:isXtraSmallScreen ? 'translateY(10px)' : isSmallScreen ? 'translateY(25px)' : 'translateY(40px)'}}>Login</Typography>
       {
         user ? (<div>
                 <h3>Welcome, {user.email}</h3>
                 <button type="button" onClick={handleLogout}>Logout</button>
               </div> )
         : (
-          <Box sx={{transform:'translateY(50px)'}}>
+          <Box sx={{transform: isXtraSmallScreen ? 'translateY(60px)' : isSmallScreen ? 'translateY(25px)' : 'translateY(50px)'}}>
           <FormControl component="form" onKeyDown = {(e) => {return e.target==="enter"? handleSubmit: null}} onSubmit = {handleSubmit} id="signup-form">
                 <TextField id="signup-form-email" sx={{ input: { color: 'var(--teal)' } }} type="email" required value={email}
                   label = "Email" placeholder = "Email"
@@ -205,16 +204,20 @@ const handleLoginWithFacebook = async () => {
             <div>
               <div className="first-party-buttons-container">
                 <Button style= {{margin: "10px" }} className="signup-button" type="submit"><Typography sx={{fontFamily:`'Bungee Hairline',cursive`, fontWeight:700, WebkitTextStrokeWidth: '2px', 
-								WebkitTextStrokeColor:'white'}}>Log in</Typography></Button>
-                <Button style= {{margin: "10px" }} className="forgot-password-button" type="button" onClick = {handleSendResetPasswordEmail}>
+								WebkitTextStrokeColor:'white'}}>Login</Typography></Button>
+                {/* <Button style= {{margin: "10px" }} className="forgot-password-button" type="button" onClick = {handleSendResetPasswordEmail}>
                    <Typography sx={{fontFamily:`'Bungee Hairline',cursive`, fontWeight:700, 
                 color:'#D97D54', WebkitTextStrokeWidth: '2px', 
 								WebkitTextStrokeColor: mode === 'light'? 'var(--teal)' :'white'}}>Forgot Password?</Typography>
-                </Button>
+                </Button> */}
+                <Button style= {{margin: isSmallScreen ? '2px' : "10px"}} className="forgot-password-button-login"><Typography sx={{fontFamily:`'Bungee Hairline',cursive`, fontWeight:700, WebkitTextStrokeWidth: '2px', 
+								WebkitTextStrokeColor:'color: rgb(88, 87, 165) !important', ':&hover': {
+                  WebkitTextStrokeColor:'white',
+                }}}>Forgot Password?</Typography></Button>
               </div>  
 
               <div className="third-party-buttons-container">
-                <div class="google-btn inline-btn" onClick={handleLoginWithGoogle}>
+                <div class="google-btn inline-btn" onClick={handleLoginWithGoogle} sx={{transform:'translateY(-100px)'}}>
                  <Box sx={{ position: 'relative', zIndex: 1 }}>
                   <GoogleIcon/>
                 </Box>
