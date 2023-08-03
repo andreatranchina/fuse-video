@@ -1,7 +1,7 @@
 import axios from "axios";
 import { SET_USER, GET_USER, REMOVE_USER, EDIT_ACCOUNT, EDIT_STATUS, 
   EMAIL_FETCH_USER, ERROR_HANDLING, FETCH_USER_BY_ID, FETCH_FOLLOWERS, ADD_PROFILE_TO_VIEWS, 
-  REMOVE_PROFILE_FROM_VIEWS, FETCH_FOLLOWINGS, INPUT_NEW_INFO } from "./user.types";
+  REMOVE_PROFILE_FROM_VIEWS, FETCH_FOLLOWINGS, INPUT_NEW_INFO, TOGGLE_LOGIN, TOGGLE_SIGNUP } from "./user.types";
 
 export const setUser = (payload) => {
   return{
@@ -22,6 +22,18 @@ export const removeUser = () => {
         type: REMOVE_USER,
     }
   };
+
+  export const toggleLogin = () => {
+    return {
+      type: TOGGLE_LOGIN,
+    }
+  }
+
+  export const toggleSignUp = () => {
+    return {
+      type: TOGGLE_SIGNUP
+    }
+  }
 
 export const fetchUserById = (payload) => ({
   type: FETCH_USER_BY_ID,

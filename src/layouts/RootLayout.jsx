@@ -3,7 +3,7 @@ import { NavLink, Outlet } from 'react-router-dom';
 import { Box, useMediaQuery, Modal, Stack } from '@mui/material';
 import { Helmet } from 'react-helmet-async'
 import { useDispatch, useSelector } from 'react-redux'
-import UserLogin from '../components/login/UserLogin.jsx'
+import UserLogin from '../components/navbar/UserLogin.jsx'
 import SideNavLinks from '../components/navbar/SideNavLinks';
 import FuseLogo from '../components/navbar/FuseLogo';
 import SwitchLayout from '../components/navbar/SwitchLayout';
@@ -45,6 +45,8 @@ const RootLayout = () => {
   const { theme, } = useThemeContext();
   const open = useSelector(state => !!state.ui.modalIsOpen);
   const modalIsOpen = useSelector(state => state.ui.modalIsOpen)
+  const isLoggingIn = useSelector((state) => !!state.user.isLoggingIn) 
+  const isSigningUp = useSelector((state) => !!state.user.isSigningUp)
   
   const navbarStyle = {
     backgroundColor: theme.palette.primary.main,
@@ -125,11 +127,11 @@ const RootLayout = () => {
     ) : ('')}
       </main>
       <footer>
-        {isXtraSmallScreen ? 
+        {isXtraSmallScreen? 
             <div style={{position: 'fixed', left: '70%', bottom: '20px', margin: '0 auto', zIndex:999999}}>
                 <MobileSpeedDial/>
-            </div> :  isSmallScreen ? 
-            <div style={{position: 'fixed', left: '50%', bottom: '20px', transform: 'translate(-50%, -20%)',  margin: '0 auto', zIndex:999999}}>
+            </div> :  isSmallScreen  ? 
+            <div style={{position: 'fixed', left: '50%', bottom: '20px', transform: 'translate(-50%, -5%)',  margin: '0 auto', zIndex:999999}}>
                 <FloatingMenu />
             </div> : <></>}
       </footer>

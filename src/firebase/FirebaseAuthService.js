@@ -3,9 +3,8 @@ import {createUserWithEmailAndPassword, signInWithEmailAndPassword, sendPassword
 signInWithPopup, GoogleAuthProvider, GithubAuthProvider, 
 FacebookAuthProvider, onAuthStateChanged} from 'firebase/auth'
 import { store } from "../redux/store";
-import { setUser } from "../redux/user/user.actions";
+import { setUser, toggleLogin } from "../redux/user/user.actions";
 import axios from 'axios';
-
 
 const auth = firebase.auth;
 

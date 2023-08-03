@@ -12,7 +12,7 @@ import SkateboardStream from './SkateboardStream';
 import BusinessMeeting from './BusinessMeeting';
 import CoolStream from './CoolStream';
 
-const Description = () => {
+const DescriptionSwiper = () => {
 
   const { mode, theme } = useThemeContext();
   const isSmallScreen = useMediaQuery('(max-width: 900px');
@@ -96,4 +96,4 @@ const Description = () => {
   );
 };
 
-export default Description;
+export default DescriptionSwiper;

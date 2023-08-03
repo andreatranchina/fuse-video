@@ -5,6 +5,7 @@
     text-align: center;
     height: 79vh;
     box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+    
 }
 
 #signup-light{
@@ -14,6 +15,7 @@
   width: 100%;
   height: 100%;
 }
+
 #signup-dark{
   background-image: url('.././assets/dark-background.webp');
     background-size: cover;
@@ -60,7 +62,7 @@
 }
 
 .signup-button{
-    width: 225px;
+    width: 215px;
     height: 50px;
     margin: 9px auto;
     border: none;
@@ -85,7 +87,7 @@
 }
 
 .forgot-password-button{
-    width: 225px;
+    width: 215px;
     height: 50px;
     margin: 9px auto;
     border: 2px solid rgb(74, 73, 148) !important;
@@ -174,7 +176,7 @@
         width: 80%;
         margin: 2rem auto;
         text-align: center;
-        height: 95vh;
+        height: 80vh;
         box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
     }
 
@@ -182,14 +184,25 @@
     margin-top: 20px;
   }
 
-  @media (max-width:620px){
-    .signup-button{
-        width: 365px;
+    @media (max-width:690px) {
+      .minipage-signup {
+        border: 5px solid white;
+        width: 80%;
+        margin: 2rem auto;
+        text-align: center;
+        height: 80vh;
+        box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+      }
+  
+      .third-party-buttons-container {
+        margin-top: 20px;
+      }
     }
 
-    .forgot-password-button{
-        width: 365px;
-    }
+  @media (max-width:  550px){
+    .google-btn {
+        width: 200px;
+      }
   }
 
   }

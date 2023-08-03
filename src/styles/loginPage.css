@@ -44,8 +44,8 @@
 
 }
 
-.forgot-password-button{
-    width: 225px;
+.forgot-password-button-login{
+    width: 215px;
     height: 50px;
     margin: 9px auto;
     border: 2px solid rgb(74, 73, 148) !important;
@@ -58,7 +58,7 @@
     /* border: 2px solid rgb(67, 73, 101); */
 }
 
-.forgot-password-button:hover{
+.forgot-password-button-login:hover{
     color: #1b3158 !important;
     border-color: #1b3158 !important; 
     box-shadow: rgba(44, 144, 187, 0.35) 0 -25px 18px -14px inset,rgba(44, 187, 182, 0.25) 0 1px 2px,rgba(44, 149, 187, 0.25) 0 2px 4px,rgba(161, 44, 187, 0.25) 0 4px 8px,rgba(118, 44, 187, 0.25) 0 8px 16px,rgba(44, 177, 187, 0.25) 0 16px 32px;
@@ -111,6 +111,7 @@
       background: #2e407d;
       box-shadow: rgba(44, 144, 187, 0.35) 0 -25px 18px -14px inset,rgba(44, 187, 182, 0.25) 0 1px 2px,rgba(44, 149, 187, 0.25) 0 2px 4px,rgba(161, 44, 187, 0.25) 0 4px 8px,rgba(118, 44, 187, 0.25) 0 8px 16px,rgba(44, 177, 187, 0.25) 0 16px 32px;
       cursor: pointer;
+      color:white;
   
   }
 
@@ -146,20 +147,23 @@
         box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
     }
 
+    /* .third-party-buttons-container {
+        margin-top: 5px;
+        background-color: red;
+        align-items: center;
+      } */
+
 
   .inline-btn{
     display: block;
-    margin: 0px auto;
+    margin: 0px auto !important;
   }
 
   .google-btn{
     position: relative;
-    margin: 15px auto;
+    margin: 10px;
   }
-
-  .third-party-buttons-container{
-    margin-top: 20px;
-  }
+}
 
   @media (max-width:620px){
     .signup-button{
@@ -171,4 +175,12 @@
     }
   }
 
-  }
+    @media (max-width:500px) {
+      #signup-form{
+        transform: translateY(-30px);
+      }
+
+      .google-btn{
+        transform: translateY(-15px);
+      }
+    }
