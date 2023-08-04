@@ -3,7 +3,6 @@ import '../styles/chatComponent.css';
 import {useDispatch, useSelector} from 'react-redux';
 import {setCurrentRoom, setOnlyAudio} from "../redux/room/room.actions";
 import { Box, Tooltip, Typography }  from '@mui/material'
-import FloatingMenu from '../components/navbar/FloatingMenu';
 import { useMediaQuery, Button } from '@mui/material'
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';

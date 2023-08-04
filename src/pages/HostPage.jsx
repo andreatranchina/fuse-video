@@ -6,14 +6,12 @@ import { postVideochatThunk } from '../redux/videochats/videochat.actions';
 import { setCurrentRoom, setIsStreamer, setOnlyAudio } from '../redux/room/room.actions';
 import {v4 as uuidv4} from 'uuid';
 import { Box, Tooltip, Typography } from '@mui/material'
-import FloatingMenu from '../components/navbar/FloatingMenu';
 import { useMediaQuery, Button } from '@mui/material'
 import { useNavigate } from 'react-router-dom';
 import "../styles/hostPage.css";
 import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRounded';
 import axios from 'axios';
 import { useThemeContext } from '../theme/ThemeContextProvider';
-import { useTheme } from '@emotion/react';
 
 const HostPage = ({socket}) => {
     const [title, setTitle] = useState()
@@ -120,7 +118,7 @@ const HostPage = ({socket}) => {
       <div className="callPage" style={{marginTop: "10rem"}}>
         {!choseType
         ? (<div className="minipage" >
-          <Box id={mode === 'light' ? 'signup-light' : 'signup-dark'} sx={{oveflow:'contain'}}>
+          <Box id={mode === 'light' ? 'signup-light' : 'signup-dark'} sx={{overflow:'contain'}}>
             <Typography variant='h2' sx={{fontFamily:'Bungee Inline', transform:'translateY(40px)', WebkitTextStrokeWidth: '1px', 
 								WebkitTextStrokeColor: mode === 'light' ? 'white' : theme.palette.background.fab.default}}> Room To Host</Typography>
             <div className="choice-button-container" style={{transform:'translateY(120px)'}}>
