@@ -5,7 +5,7 @@ import Box from '@mui/material/Box'
 import FirebaseAuthService from "../firebase/FirebaseAuthService";
 import axios from 'axios';
 import { setUser } from "../redux/user/user.actions";
-import { FormControl, TextField, createTheme, Button, Typography } from "@mui/material";
+import { Button, createTheme,Typography, FormControl, TextField, useMediaQuery} from "@mui/material";
 import { ThemeProvider } from "@emotion/react";
 import "../styles/signupPage.css";
 import Snackbar from '@mui/material/Snackbar';
@@ -20,7 +20,9 @@ const Alert = forwardRef(function Alert(props, ref) {
 });
 
 const SignUpPage = () => {
-
+  const isXtraSmallScreen = useMediaQuery("(max-width: 500px");
+  const isSmallScreen = useMediaQuery("(max-width: 700px");
+  const isMediumScreen = useMediaQuery("(max-width: 920px");
   const { mode } = useThemeContext();
 
   const signUpTheme = createTheme({
@@ -28,14 +30,10 @@ const SignUpPage = () => {
       MuiTextField: {
         styleOverrides: {
           root: {
-            // '& input' : {
-            //   color: 'black',
-            // },
             '& placeholder': {
               color: 'black',
             },
             '& .MuiOutlinedInput-root': {
-              // backgroundColor: 'white',
               '& fieldset': {
                 borderColor: 'var(--teal)',
                 boxShadow: 'rgba(58, 115, 144, 0.2) 0 -25px 18px -14px inset,rgba(49, 126, 138, 0.15) 0 1px 2px,rgba(45, 114, 148, 0.15) 0 2px 4px,rgba(44, 106, 187, 0.15) 0 4px 8px,rgba(44, 137, 187, 0.15) 0 8px 16px,rgba(44, 139, 187, 0.15) 0 16px 32px',
@@ -52,9 +50,7 @@ const SignUpPage = () => {
       },
         MuiInputLabel: {
           styleOverrides: {
-          // root: {
             color: "white",
-          // },
         },
       },
       MuiFormHelperText: {
@@ -239,14 +235,14 @@ const handleRegisterWithFacebook = async () => {
     
     <div className="minipage-signup" >
     <Box id={mode === 'light' ? 'signup-light' : 'signup-dark'} sx={{oveflow:'contain'}}>
-      <Typography variant='h2' sx={{fontFamily:'Bungee Inline', transform:'translateY(40px)'}}>Sign Up Today</Typography>
+      <Typography variant={isSmallScreen ? ('h3') : ('h2')} sx={{fontFamily:'Bungee Inline', transform:isXtraSmallScreen ? 'translateY(10px)' : isSmallScreen ? 'translateY(25px)' : 'translateY(40px)'}}>Sign Up</Typography>
       {
         user ? (<div>
                 <h3>Welcome, {user.email}</h3>
                 <button type="button" onClick={handleLogout}>Logout</button>
               </div> )
         : (
-          <Box sx={{transform:'translateY(50px)'}}>
+          <Box sx={{transform: isXtraSmallScreen ? 'translateY(60px)' : isSmallScreen ? 'translateY(25px)' : 'translateY(50px)'}}>
           <FormControl component="form" onKeyDown = {(e) => {return e.target==="enter"? handleSubmit: null}} onSubmit = {handleSubmit} id="signup-form">
                 <TextField className="input-1" id="signup-form-email" sx={{ input: { color: 'var(--teal)' } }} type="email" required value={email}
                   label = "Email" placeholder = "Email"
@@ -271,32 +267,28 @@ const handleRegisterWithFacebook = async () => {
 
             <div>
 
-              <Button style= {{margin: "4px"}} className="signup-button" type="submit"><Typography sx={{fontFamily:`'Bungee Hairline',cursive`, fontWeight:700, WebkitTextStrokeWidth: '2px', 
-								WebkitTextStrokeColor:'white'}}>Sign Up</Typography></Button>
-              <Button style= {{margin: "4px" }} className="forgot-password-button" type="button" onClick = {handleSendResetPasswordEmail}>
-                <Typography sx={{fontFamily:`'Bungee Hairline',cursive`, fontWeight:700, 
-                color:'#D97D54', WebkitTextStrokeWidth: '2px', 
-								WebkitTextStrokeColor: mode === 'light'? 'var(--teal)' :'white'}}>Forgot Password?</Typography>
-              </Button>
-              <div >
-                <div class="google-btn inline-btn" onClick={handleRegisterWithGoogle}>
+              <Button style= {{marginBottom: isSmallScreen ? '-1px' : "4px"}} className="signup-button" type="submit" ><Typography sx={{fontFamily:`'Bungee Hairline',cursive`, fontWeight:700, WebkitTextStrokeWidth: '2px', 
+								WebkitTextStrokeColor:'white' }}>Sign Up</Typography></Button>
+              <div className='third-party-buttons-container'>
+                <div class="google-btn inline-btn" onClick={handleRegisterWithGoogle} sx={{transform:'translateY(-100px)'}}>
                 <Box sx={{ position: 'relative', zIndex: 1 }}>
                   <GoogleIcon/>
                 </Box>
-                  <Typography sx={{ fontFamily:`'Roboto flex', sans-serif;`,fontWeight:700, fontSize:'16px', transform:'translate(20px,-30px)',zIndex:'3'}}>Register with Google</Typography>
+                  <Typography sx={{ fontFamily:`'Roboto flex', sans-serif;`,fontWeight:700, fontSize: isSmallScreen ? '14px' : '16px', transform: 'translate(20px,-30px)',zIndex:'3'}}>Register with Google</Typography>
           </div>
+          {isSmallScreen}
                 <div class="google-btn inline-btn" onClick={handleRegisterWithGithub}>
                  <Box sx={{ position: 'relative', zIndex: 1 }}>
                   <GithubIcon/>
                  </Box>
-                   <Typography sx={{ fontFamily:`'Roboto flex', sans-serif;`,fontWeight:700, fontSize:'16px', transform:'translate(20px,-30px)',zIndex:'3'}}>Register with Github</Typography>
+                   <Typography sx={{ fontFamily:`'Roboto flex', sans-serif;`,fontWeight:700, fontSize: isSmallScreen ? '14px' : '16px', transform:'translate(20px,-30px)',zIndex:'3'}}>Register with Github</Typography>
                 </div>
 
-                <div class="google-btn block-btn" onClick={handleRegisterWithFacebook}>
+                <div class="google-btn inline-btn" onClick={handleRegisterWithFacebook}style={{transform: isSmallScreen ? 'translateY(0px)' : isMediumScreen ? 'translateY(-20px)' : ''}}>
                  <Box sx={{ position: 'relative', zIndex: 1 }}>
                   <FacebookIcon/>
                  </Box>
-                  <Typography sx={{ fontFamily:`'Roboto flex', sans-serif;`,fontWeight:700, fontSize:'16px', transform:'translate(20px,-30px)',zIndex:'3'}}>
+                  <Typography sx={{ fontFamily:`'Roboto flex', sans-serif`,fontWeight:700, fontSize: isSmallScreen ? '14px' : '16px', transform: 'translate(20px,-30px)', zIndex:'3'}}>
                     Register with Facebook
                   </Typography>
                 </div>

@@ -4,7 +4,6 @@ import { Box, Typography } from '@mui/material'
 import { setUser } from "../redux/user/user.actions";
 import { useNavigate } from "react-router-dom";
 import FirebaseAuthService from "../firebase/FirebaseAuthService";
-import axios from 'axios';
 import { FormControl, TextField, createTheme, Button, useMediaQuery } from "@mui/material";
 import { ThemeProvider } from "@emotion/react";
 import "../styles/loginPage.css";
