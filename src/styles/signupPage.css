@@ -5,7 +5,7 @@
     text-align: center;
     height: 79vh;
     box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
-    
+    overflow-x: hidden;
 }
 
 #signup-light{
@@ -14,6 +14,7 @@
   background-position: center;
   width: 100%;
   height: 100%;
+  overflow-x: hidden;
 }
 
 #signup-dark{
@@ -22,6 +23,7 @@
     background-position: center;
     width: 100%;
     height: 100%;
+    overflow-x: hidden;
 }
 
 .input-1{
@@ -108,13 +110,15 @@
 }
 
 .google-btn {
-  width: 250px;
+  width: 230px;
   height: 42px;
   background-color: #6842f4;
   background: linear-gradient(rgb(177, 175, 222), rgb(88, 87, 165), rgb(175, 182, 222));
+  color: white !important;
   border-radius: 20px;
   box-shadow: 0 3px 4px 0 rgba(0, 0, 0, .25);
   position: relative;
+  
 
   /* Add the pseudo-element */
   &::before {
@@ -183,6 +187,7 @@
   .third-party-buttons-container{
     margin-top: 20px;
   }
+}
 
     @media (max-width:690px) {
       .minipage-signup {
@@ -199,10 +204,75 @@
       }
     }
 
-  @media (max-width:  550px){
-    .google-btn {
-        width: 200px;
+    @media (max-width:620px) {
+      .signup-button {
+        width: 365px;
+      }
+
+      .forgot-password-button {
+        width: 365px;
+      }
+      .google-btn {
+      width: 200px;
+      }
+      .third-party-buttons-container {
+        margin-top: 20px;
       }
   }
 
+  @media (max-width:  550px){
+    .signup-button {
+        width: 300px;
+      }
+    
+      .google-btn {
+        width: 300px;
+        transform: translateY(3px);
+      }
+    #signup-form {
+      margin-top: -10px;
+    }
+    .third-party-buttons-container {
+      margin-top: 10px;
+    }
   }
+
+    @media (max-width:525px) {
+      #signup-form {
+        margin-top: -10px;
+      }
+
+      .signup-button {
+        width: 300px;
+      }
+  
+      .google-btn {
+        width: 300px;
+      }
+      .third-party-buttons-container {
+      margin-top: 5px;
+    }
+    }
+
+    @media (max-width:500px) {
+      #signup-form {
+          margin-top: -20px;
+        }
+      .third-party-buttons-container {
+        margin-top: 10px;
+      }
+    }
+
+    @media (max-width:414px) {
+      #signup-form {
+        width: 200px;
+      }
+
+      .signup-button {
+        width: 200px;
+      }
+
+      .google-btn {
+        width: 200px;
+      }
+    }
