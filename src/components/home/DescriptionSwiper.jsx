@@ -15,14 +15,14 @@ import CoolStream from './CoolStream';
 const DescriptionSwiper = () => {
 
   const { mode, theme } = useThemeContext();
-  const isSmallScreen = useMediaQuery('(max-width: 900px');
-  const isXtraSmallScreen = useMediaQuery('(max-width: 700px');
+  const isSmallScreen = useMediaQuery('(max-width: 1000px');
+  const isXtraSmallScreen = useMediaQuery('(max-width: 600px');
   const isMobileScreen = useMediaQuery('(max-width: 420px)');
 
   return (
     <Box
       sx={{
-         width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', marginLeft:isXtraSmallScreen ? '20px' : ''
+         width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', marginLeft:isXtraSmallScreen ? '5px' : isSmallScreen ? '-10px' : '10px'
       }}
     >
       <Swiper
@@ -35,12 +35,12 @@ const DescriptionSwiper = () => {
         className="mySwiper"
         style={{ alignItems: 'center' }}
       >
-        <SwiperSlide style={{height:isSmallScreen ? '200px' : '250px'}}>
+        <SwiperSlide style={{height:isSmallScreen ? '220px' : '250px'}}>
         <Grid container >
-              <Grid item xs={6} md={4} sx={{paddingLeft:'20px'}}>
+              <Grid item xs={6} sm={4} sx={{paddingLeft:isXtraSmallScreen ? '' : '20px'}}>
                 <JamLivestream/>
               </Grid>
-              <Grid item xs={6} md={8}>
+              <Grid item xs={6} sm={8}>
               <Card >
                <Typography variant={isMobileScreen ? 'caption' : isSmallScreen ? 'subtitle2' : 'h6'} sx={{fontFamily:`'Roboto mono', monospace`, fontWeight: 700, position:'absolute', color: mode === 'light' ? 'white' : theme.palette.text.primary, textShadow: '0 0 2px black, 0 0 2px black, 0 0 2px black, 0 0 2px black'}}>
                 Welcome to a comprehensive social ecosystem designed to cater to all your networking needs! Embrace the power of connection by following others and building a network of friends, colleagues, and influencers.
@@ -49,12 +49,12 @@ const DescriptionSwiper = () => {
               </Grid>
             </Grid>
         </SwiperSlide>
-          <SwiperSlide style={{height:'250px'}}>
+          <SwiperSlide style={{height:isSmallScreen ? '220px' : '250px'}}>
         <Grid container >
-              <Grid item xs={6} md={4} sx={{paddingLeft:'20px'}}>
+              <Grid item xs={6} sm={4} sx={{paddingLeft:'20px'}}>
                 <SkateboardStream/>
               </Grid>
-              <Grid item xs={6} md={8}>
+              <Grid item xs={6} sm={8}>
               <Card >
                <Typography variant={isMobileScreen ? 'caption' : isSmallScreen ? 'subtitle2' : 'h6'} sx={{fontFamily:`'Roboto mono', monospace`, fontWeight: 700, position:'absolute', color: mode === 'light' ? 'white' : theme.palette.text.primary, textShadow: '0 0 2px black, 0 0 2px black, 0 0 2px black, 0 0 2px black'}}>
                Livestream your passions and interests to a captivated audience or join exciting livestreams hosted by others. Follow friends and favorite creators to build your network and never miss a moment of their content. 
@@ -63,12 +63,12 @@ const DescriptionSwiper = () => {
               </Grid>
             </Grid>
         </SwiperSlide>
-        <SwiperSlide style={{height:'250px'}}>
+        <SwiperSlide style={{height:isSmallScreen ? '220px' : '250px'}}>
         <Grid container >
-              <Grid item xs={6} md={4} sx={{paddingLeft:'20px'}}>
+              <Grid item xs={6} sm={4} sx={{paddingLeft:'20px'}}>
                 <BusinessMeeting/>
               </Grid>
-              <Grid item xs={6} md={8}>
+              <Grid item xs={6} sm={8}>
               <Card >
                 <Typography variant={isMobileScreen ? 'caption' : isSmallScreen ? 'subtitle2' : 'h6'} sx={{fontFamily:`'Roboto mono', monospace`, fontWeight: 700, position:'absolute', color: mode === 'light' ? 'white' : theme.palette.text.primary, textShadow: '0 0 2px black, 0 0 2px black, 0 0 2px black, 0 0 2px black'}}>
                Experience the world in your preferred language with instant message translation, transcending borders and making meaningful connections. Now you can break language barriers, ensuring seamless communication and understanding between users worldwide.
@@ -77,12 +77,12 @@ const DescriptionSwiper = () => {
               </Grid>
             </Grid>
         </SwiperSlide>
-        <SwiperSlide style={{height:'250px'}}>
+        <SwiperSlide style={{height:isSmallScreen ? '220px' : '250px'}}>
         <Grid container >
-              <Grid item xs={6} md={4} sx={{paddingLeft:'20px'}}>
+              <Grid item xs={6} sm={4} sx={{paddingLeft:'20px'}}>
                 <CoolStream/>
               </Grid>
-              <Grid item xs={6} md={8} >
+              <Grid item xs={6} sm={8} >
               <Card >
                <Typography variant={isMobileScreen ? 'caption' : isSmallScreen ? 'subtitle2' : 'h6'} sx={{fontFamily:`'Roboto mono', monospace`, fontWeight: 700, position:'absolute', color: mode === 'light' ? 'white' : theme.palette.text.primary, textShadow: '0 0 2px black, 0 0 2px black, 0 0 2px black, 0 0 2px black'}}>
                Relive memorable moments by accessing past livestreams of the users you follow. The possibilities are boundless on this platform built for enriching social interactions. Welcome to a world where connection, expression, and exploration thrive!
