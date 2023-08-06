@@ -51,14 +51,15 @@ const Home = () => {
     {isMobileScreen ? (
       <Box
         id={mode === 'light' ? 'mobile-home-light' : 'mobile-home-dark'}
-        sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: user ? '50px' : '', position:'absolute' }}
+        sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: user ? '15px' : '-50px', position:'absolute', zIndex:-1}}
       >
-        <Stack sx={{ alignItems: 'center', justifyContent:'center' }} spacing={3}>
+        <Stack sx={{ alignItems: 'center', justifyContent:'center'}} spacing={3}>
         <motion.div
           variants={avatarVariants}
         initial="hidden"
         animate="visible"
         transition= {{ type: 'spring', delay: 0.5}}
+        style={{justifyContent:'center', alignItems:'center'}}
         
         >
           <Slogan />
