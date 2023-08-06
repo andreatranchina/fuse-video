@@ -19,6 +19,7 @@ const Alert = forwardRef(function Alert(props, ref) {
 });
 
 const LoginPage = () => {
+  const isMobileScreen = useMediaQuery("(max-width: 414px");
   const isXtraSmallScreen = useMediaQuery("(max-width: 500px");
   const isSmallScreen = useMediaQuery("(max-width: 700px");
   const { mode } = useThemeContext();
@@ -201,15 +202,15 @@ const handleLoginWithFacebook = async () => {
                 </TextField>
 
             <div>
-              <div className="first-party-buttons-container">
-                <Button style= {{margin: "10px" }} className="signup-button" type="submit"><Typography sx={{fontFamily:`'Bungee Hairline',cursive`, fontWeight:700, WebkitTextStrokeWidth: '2px', 
+              <div>
+                <Button style= {{width: isMobileScreen ? '200px' : isXtraSmallScreen ? '280px' : isSmallScreen ? '300px' : ' ', marginTop: "10px", marginBottom: "10px" }} className="signup-button" type="submit"><Typography sx={{fontFamily:`'Bungee Hairline',cursive`, fontWeight:700, WebkitTextStrokeWidth: '2px', 
 								WebkitTextStrokeColor:'white'}}>Login</Typography></Button>
                 {/* <Button style= {{margin: "10px" }} className="forgot-password-button" type="button" onClick = {handleSendResetPasswordEmail}>
                    <Typography sx={{fontFamily:`'Bungee Hairline',cursive`, fontWeight:700, 
                 color:'#D97D54', WebkitTextStrokeWidth: '2px', 
 								WebkitTextStrokeColor: mode === 'light'? 'var(--teal)' :'white'}}>Forgot Password?</Typography>
                 </Button> */}
-                <Button style= {{margin: isSmallScreen ? '2px' : "10px"}} className="forgot-password-button-login"><Typography sx={{fontFamily:`'Bungee Hairline',cursive`, fontWeight:700, WebkitTextStrokeWidth: '2px', 
+                <Button style= {{ width: isMobileScreen ? '200px' :  isXtraSmallScreen ? '280px' : isSmallScreen ? '300px' : ' ', margin: isSmallScreen ? '2px' : "10px"}} className="forgot-password-button-login"><Typography variant= {isXtraSmallScreen ? 'subtitle2' : ''}  sx={{fontFamily:`'Bungee Hairline',cursive`, fontWeight:700, WebkitTextStrokeWidth: '2px', 
 								WebkitTextStrokeColor:'color: rgb(88, 87, 165) !important', ':&hover': {
                   WebkitTextStrokeColor:'white',
                 }}}>Forgot Password?</Typography></Button>
