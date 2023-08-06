@@ -9,7 +9,7 @@ const MobileAvatarSlogan = () => {
       <Avatar variant='circle' src={WavyBackground} sx={{width: '180px',height:'180px',alignItems:'center', position:'absolute'}}>
       </Avatar>
       
-      <Box sx={{display:'flex', justifyContent:'center', width:'320px', position: 'absolute', zIndex:1, alignItems:'center', transform:'translateY(120px)'}}>
+      <Box sx={{display:'flex', justifyContent:'center', width:'320px', position: 'absolute', zIndex:1, alignItems:'center', transform:'translate(-80px,120px)'}}>
         <Typography variant = 'h6' sx={{fontFamily:`'Kalam', cursive`, fontWeight: 700, color:'black', textShadow: '0 0 12px white, 0 0 12px white, 0 0 12px white, 0 0 12px white'}}>
           Your Social Fusion Starts Here!
         </Typography>

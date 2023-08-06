@@ -13,14 +13,14 @@ const MobileDescription = () => {
 
   return (
     <Box
-      sx={{width:'300px'}}
+      sx={{width:'320px', transform:'translateY(10px)'}}
     >
       <Swiper
         cssMode={true}
         pagination={true}
         modules={[Pagination]}
         className="mySwiper"
-        style={{ alignItems: 'center'}}
+        style={{ alignItems: 'center', textAlign:'center'}}
       >
         <SwiperSlide>
             <Typography variant='subtitle2' sx={{ fontFamily: `'Roboto mono', monospace`, fontWeight: 700, color: mode === 'light' ? 'white' : theme.palette.text.primary, textShadow: '0 0 2px black, 0 0 2px black, 0 0 2px black, 0 0 2px black' }}>

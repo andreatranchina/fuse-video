@@ -15,7 +15,7 @@ const MobileSwiper = () => {
   return (
     <Box
       sx={{
-         width: '320px', display: 'flex', justifyContent: 'center', alignItems: 'center'
+         width: '340px', display: 'flex', justifyContent: 'center', alignItems: 'center'
       }}
     >
       <Swiper
