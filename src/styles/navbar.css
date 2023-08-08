@@ -36,19 +36,6 @@ cursive; */
     align-items: center;
     padding: 5px;
 }
-
-#navbar {
-    display: flex;
-    margin: 0 auto;
-    z-index: 10;
-    border-width: 0.5rem;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 414px;
-    align-items: center;
-    padding: 5px;
-}
 .night-toggle {
     width: 20%;
     display: flex;
