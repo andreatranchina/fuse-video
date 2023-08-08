@@ -2,7 +2,7 @@
     background-image: url('.././assets/light-background.webp');
     background-size: cover;
     background-position: center;
-    width: 100%;
+    width: '100%';
     height: 100vh;
 }
 
@@ -10,7 +10,7 @@
     background-image: url('.././assets/dark-background.webp');
     background-size: cover;
     background-position: center;
-    width: 100%;
+    width: '100%';
     height:100vh;
 }
 
@@ -19,6 +19,7 @@
     background-size:cover;
     background-position: center;
     background-repeat: repeat-y;
+    width:'100%';
     min-height: 100vh;
 }
 
@@ -27,5 +28,6 @@
     background-size: cover;
     background-position: center;
     background-repeat: repeat-y;
+    width: '100%';
     min-height: 100vh;
 }
