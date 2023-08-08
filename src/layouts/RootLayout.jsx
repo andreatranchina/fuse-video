@@ -91,7 +91,7 @@ const RootLayout = () => {
         <meta name="description" content="Fuse video" />
       </Helmet>
       <header>
-        <nav id="navbar" style={navbarStyle}>
+        <nav id={isMobileScreen ? "navbar-mobile" : "navbar"} style={navbarStyle}>
             <div className="home-navlink">
               <NavLink to="/">
                 <FuseLogo />
