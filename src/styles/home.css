@@ -21,6 +21,7 @@
     background-repeat: repeat-y;
     width:'100%';
     min-height: 100vh;
+    overflow-x: hidden;
 }
 
 #mobile-home-dark {
@@ -30,4 +31,5 @@
     background-repeat: repeat-y;
     width: '100%';
     min-height: 100vh;
+    overflow-x: hidden;
 }
