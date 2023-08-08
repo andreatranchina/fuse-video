@@ -19,7 +19,6 @@
     background-size:cover;
     background-position: center;
     background-repeat: repeat-y;
-    width:100%;
     min-height: 100vh;
     overflow-x: hidden;
 }
@@ -29,7 +28,6 @@
     background-size: cover;
     background-position: center;
     background-repeat: repeat-y;
-    width: 100%;
     min-height: 100vh;
     overflow-x: hidden;
 }
